@@ -38,6 +38,7 @@ def film_edit_form(request):
 
 def film_list(request):
     film = Film.objects.all()
+
     return render(request, 'adminLte/film/film_list.html', {'film':film})
 
 
