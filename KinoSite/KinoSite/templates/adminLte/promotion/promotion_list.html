@@ -1,0 +1,16 @@
+{% extends 'adminLte/base.html' %}
+{% block promotion %}
+    <li class="nav-item">
+        <a href="{% url 'promotion_list' %}" class="nav-link active">
+              <i class="fas fa-percent"></i>
+              <p>
+                  Акции
+              </p>
+        </a>
+    </li>
+{% endblock %}
+{% block content_title %}
+    <h1 class="m-0">Promotion list</h1>
+{% endblock %}
+{% block main_content %}
+{% endblock %}

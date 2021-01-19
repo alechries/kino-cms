@@ -1,0 +1,89 @@
+    <div class="features flex-fill">
+        <div class="row m-3">
+            <div class="container">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.title }}<br>
+                    {{ form.description }}<br>
+                    {{ form.main_image }}<br>
+                    {{ form.image1 }}<br>
+                    {{ form.image2 }}<br>
+                    {{ form.image3 }}<br>
+                    {{ form.image4 }}<br>
+                    {{ form.image5 }}<br>
+                    {{ form.two_d }}<br>
+                    {{ form.three_d }}<br>
+                    {{ form.i_max }}<br>
+                    {{ form.duration }}<br>
+                    {{ form.trailer_link }}<br>
+                    {{ form.first_night }}<br>
+                    <label for="FilmTextInput"><h4>Название фильма</h4></label>
+                    <input type="text" placeholder="Введите название фильма" class="form-control" id="FilmNameInput"><br>
+                    <div class="form-group">
+                        <label for="FilmTextInput"><h4>Описание фильма</h4></label>
+                        <textarea class="form-control" id="FilmTextInput" rows="5" placeholder="Введите описание фильма"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="FilmPoster"><h4>Постер фильма</h4></label>
+                        <input type="file" class="form-control-file" id="FilmPoster">
+                    </div>
+                    <label for="FilmPoster"><h4>Галерея фильма</h4></label>
+                        <div class="row" id="FilmPoster">
+                            <div class="col">
+                                <input type="file" class="form-control-file col-md-3 pl-0">
+                            </div>
+                            <div class="col">
+                                <input type="file" class="form-control-file col-md-3">
+                            </div>
+                            <div class="col">
+                                <input type="file" class="form-control-file col-md-3">
+                            </div>
+                            <div class="col">
+                                <input type="file" class="form-control-file col-md-3">
+                            </div>
+                            <div class="col">
+                                <input type="file" class="form-control-file col-md-3">
+                            </div>
+                        </div>
+                    <div class="container my-3 pl-0">
+                        <h4>Тип фильма:</h4>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox1">2D</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <label class="form-check-label" for="inlineCheckbox2">3D</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                            <label class="form-check-label" for="inlineCheckbox2">IMAX</label>
+                        </div>
+                    </div>
+                    <!-- Ввод слаг-филда
+                    <div class="col-lg-4 my-3 pl-0">
+                        <label for="SlugName"><h4>Отображение ссылки</h4></label>
+                        <input type="text" placeholder="введите slug" class="form-control" id="SlugName">
+                    </div>
+                    -->
+                    <div class="col-lg-4 my-3 pl-0">
+                        <label for="FilmDuration"><h4>Продолжительность сеанса</h4></label>
+                        <input type="text" placeholder="Пример: 1 час 53 минуты" class="form-control" id="FilmDuration">
+                    </div>
+                    <div class="col-lg-6 my-3 pl-0">
+                        <label for="TrailerName"><h4>Ссылка на youtube трейлер</h4></label>
+                        <input type="text" placeholder="Введите ссылку. Пример: https://www.youtube.com/watch..." class="form-control" id="TrailerName">
+                    </div>
+                    <div class="col-lg-6 my-3 pl-0">
+                        <label for="FilmFirstNightDate"><h4>Дата премьеры</h4></label>
+                        <input type="date" placeholder="Введите дату премьеры" class="form-control" id="FilmFirstNightDate">
+                    </div>
+                    <div class="container my-5">
+                        <a class="btn btn-success" type="success">Сохранить</a>
+                        <a class="btn btn-danger" href="#" role="button">Отмена</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
