@@ -1,6 +1,5 @@
-from django.shortcuts import render
 from .models import Film
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import FilmForm
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.views.generic import DeleteView, CreateView
@@ -17,20 +16,27 @@ def banner(request):
 
 def film_edit_form_post(request):
     form = FilmForm(request.POST, request.FILES)
+
     if form.is_valid():
         form.save()
         return redirect('film_list')
 
 
-def film_edit_form_get(request):
-    return render(request, 'adminLte/film/film_form.html', {'form': FilmForm()})
+def film_edit_form_get(request, pk=None):
+    if pk is not None:
+        film = get_object_or_404(Film, pk=pk)
+        form = FilmForm(instance=film)
+    else:
+        form = FilmForm()
+
+    return render(request, 'adminLte/film/film_form.html', {'form': form})
 
 
-def film_edit_form(request):
+def film_edit_form(request, pk=None):
     if request.method == 'POST':
         response = film_edit_form_post(request)
     elif request.method == 'GET':
-        response = film_edit_form_get(request)
+        response = film_edit_form_get(request,pk)
     else:
         response = redirect('film_list')
     return response
@@ -39,7 +45,7 @@ def film_edit_form(request):
 def film_list(request):
     film = Film.objects.all()
 
-    return render(request, 'adminLte/film/film_list.html', {'film':film})
+    return render(request, 'adminLte/film/film_list.html', {'film': film})
 
 
 def film_delete(request, pk):

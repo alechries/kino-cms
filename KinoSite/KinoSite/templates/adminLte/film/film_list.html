@@ -22,11 +22,11 @@
             <div class="card-footer  ml-0 ">
                 <div class="row mx-auto">
                     <form method="get">
-                        <a href="#" class="btn btn-primary">Редактировать</a>
+                        <a href="{% url 'film_form_edit' pk=el.pk %}" class="btn btn-primary">Редактировать</a>
                     </form>
                     <div class="ml-auto">
                         <form method="post">
-                            <a href="{% url 'film_delete' pk=el.pk%}" class="btn btn-danger">Удалить</a>
+                            <a href="{% url 'film_delete' pk=el.pk %}" class="btn btn-danger">Удалить</a>
                         </form>
                     </div>
                 </div>
