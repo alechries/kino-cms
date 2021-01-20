@@ -9,9 +9,6 @@
         </a>
     </li>
 {% endblock %}
-{% block navbar_item %}
-<a class="btn btn-success" href="{% url 'film_form' %}">Добавить фильм</a>
-{% endblock %}
 {% block content_title %}
     <h1 class="m-0">Форма добавления фильма</h1>
 {% endblock %}
@@ -87,7 +84,7 @@
                     </div>
                     <div class="container my-5">
                         <button class="btn btn-success" type="submit">Сохранить</button>
-                        <a class="btn btn-danger" href="#" role="button">Отмена</a>
+                        <a class="btn btn-danger" href="{% url 'film_list' %}" role="button">Отмена</a>
                     </div>
                 </form>
             </div>
