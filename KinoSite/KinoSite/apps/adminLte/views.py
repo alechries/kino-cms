@@ -36,7 +36,7 @@ def film_edit_form(request, pk=None):
     if request.method == 'POST':
         response = film_edit_form_post(request)
     elif request.method == 'GET':
-        response = film_edit_form_get(request,pk)
+        response = film_edit_form_get(request, pk)
     else:
         response = redirect('film_list')
     return response
