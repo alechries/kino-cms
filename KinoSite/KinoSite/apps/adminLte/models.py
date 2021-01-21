@@ -4,7 +4,6 @@ import os
 
 class Film(models.Model):
     title = models.CharField('Название фильма', max_length=255)
-    slug = models.SlugField(unique=True, max_length=55)
     description = models.TextField('Описание фильма')
     main_image = models.ImageField(upload_to='media/images/film_poster')
     image1 = models.ImageField('Первое изображение', upload_to='images/film_images')
@@ -24,3 +23,6 @@ class Film(models.Model):
 
     def get_absolute_image(self):
         return os.path.join('/media', self.main_image.name)
+
+    def get_absolute_url(self):
+        return f'film/list'

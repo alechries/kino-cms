@@ -2,7 +2,7 @@ from .models import Film
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import FilmForm
 from django.http import HttpResponseNotFound, HttpResponseRedirect
-from django.views.generic import DeleteView, CreateView
+from django.views.generic import DeleteView, CreateView, UpdateView
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
 
