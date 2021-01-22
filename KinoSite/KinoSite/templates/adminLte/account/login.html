@@ -19,9 +19,11 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
-
+      {% if message %}
+      <p class="login-box-msg">{{ message }}</p>
+      {% endif %}
       <form action="/adminLte/" method="post">
+         {% csrf_token %}
         <div class="input-group mb-3">
           {{ form.username }}
           <div class="input-group-append">
@@ -31,7 +33,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          {{ form.password }}
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
