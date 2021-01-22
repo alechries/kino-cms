@@ -126,5 +126,6 @@ MEDIA_URL = '/media/'
 
 # LOGIN_REDIRECT_URL = 'home'
 # LOGOUT_REDIRECT_URL = 'home'
+# TEST COMMENT
 
 APPEND_SLASH = False
