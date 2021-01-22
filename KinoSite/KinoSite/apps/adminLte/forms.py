@@ -5,24 +5,20 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
-class LoginForm(ModelForm):
+class LoginForm(Form):
     class Meta:
         model = User
-        fields = ['username', 'password']
-        widgets = {
-            'username': TextInput(attrs={
+
+    username = CharField(widget=TextInput(attrs={
                 'type': 'text',
-                'id': 'username',
                 'class': 'form-control',
                 'placeholder': 'Username',
-            }),
-            'password': TextInput(attrs={
+            }))
+    password = CharField(widget=TextInput(attrs={
                 'type': 'password',
-                'id': 'password',
                 'class': 'form-control',
                 'placeholder': 'Password',
-            }),
-        }
+            }))
 
 
 class RegisterForm(UserCreationForm):

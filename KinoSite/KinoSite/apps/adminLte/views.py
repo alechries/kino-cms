@@ -1,6 +1,6 @@
 from .models import Film
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import FilmForm, RegisterForm, LoginForm
@@ -33,6 +33,12 @@ def account_login(request):
     else:
         _message = 'Please, Sign in'
     return render(request, 'adminLte/account/login.html', {'form': LoginForm(), 'message': _message})
+
+
+@login_required(login_url='/adminLte/account/login')
+def account_logout(request):
+    logout(request)
+    return redirect('admin_index')
 
 
 def account_register(request):

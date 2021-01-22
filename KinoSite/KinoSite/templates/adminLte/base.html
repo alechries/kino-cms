@@ -56,16 +56,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <div class="user-panel d-flex">
+          <!-- User image
         <div class="image">
           <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
         </div>
-        <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
-        </div>
+        -->
+          <div class="info">
+              <a class="d-block text-uppercase text-secondary"><strong>{{ user.username }}</strong></a>
+
+          </div>
+          <div class="info">
+              <a href="{% url 'admin_logout' %}" class="fas fa fa-sign-in-alt mr-2 text-danger"></a>
+          </div>
       </div>
     </ul>
   </nav>
-  <!-- /.navbar -->
+    <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
