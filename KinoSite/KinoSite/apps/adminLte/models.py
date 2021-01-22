@@ -35,3 +35,6 @@ class ImageGallery(models.Model):
     third_image = models.ImageField('Третье изображение', upload_to='media/images/film_images')
     fourth_image = models.ImageField('Четвёртое изображение', upload_to='media/images/film_images')
     fifth_image = models.ImageField('Пятое изображение', upload_to='media/images/film_images')
+
+
+#add a comment
