@@ -8,33 +8,31 @@ from .models import Film
 
 
 @login_required(login_url='/adminLte/account/login')
-def index(request):
+def admin_index(request):
     return render(request, 'adminLte/index.html')
 
 
 def account_login(request):
-    if request.POST.get:
+    if request.method == 'POST':
         form = LoginForm(request.POST)
-        _message = 'Please sign in :)'
+        print(request.POST)
         if form.is_valid():
-            cleaned_data: dict = form.cleaned_data
-            if len(cleaned_data) > 0:
-                username = cleaned_data['username']
-                password = cleaned_data['password']
-                user = authenticate(username=username, password=password)
-                if user is not None:
-                    if user.is_active:
-                        login(request, user)
-                        return redirect('admin_index')
-                    else:
-                        _message = 'Your account is not activated'
+            user = authenticate(request,
+                                username=form.cleaned_data['username'],
+                                password=form.cleaned_data['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('admin_index')
                 else:
-                    _message = 'Invalid login, please try again'
+                    _message = 'User is not active'
+            else:
+                _message = 'User does not exist'
+        else:
+            _message = 'Data is incorrect'
     else:
-        form = LoginForm()
-        _message = 'Please sign in'
-    context = {'message': _message, 'form': form}
-    return render(request, 'adminLte/account/login.html', context)
+        _message = 'Please, Sign in'
+    return render(request, 'adminLte/account/login.html', {'form': LoginForm(), 'message': _message})
 
 
 def account_register(request):

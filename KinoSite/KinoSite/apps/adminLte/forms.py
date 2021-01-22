@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
-class LoginForm(Form):
+class LoginForm(ModelForm):
     class Meta:
         model = User
         fields = ['username', 'password']
@@ -16,7 +16,7 @@ class LoginForm(Form):
                 'class': 'form-control',
                 'placeholder': 'Username',
             }),
-            'password': Textarea(attrs={
+            'password': TextInput(attrs={
                 'type': 'password',
                 'id': 'password',
                 'class': 'form-control',

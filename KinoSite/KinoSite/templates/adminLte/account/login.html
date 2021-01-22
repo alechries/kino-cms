@@ -22,7 +22,7 @@
       {% if message %}
       <p class="login-box-msg">{{ message }}</p>
       {% endif %}
-      <form action="/adminLte/" method="post">
+      <form action="/adminLte/account/login" method="post">
          {% csrf_token %}
         <div class="input-group mb-3">
           {{ form.username }}
@@ -70,10 +70,10 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
 </body>
 </html>
