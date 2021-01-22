@@ -53,6 +53,8 @@ def film_edit_form_post(request):
     if form.is_valid():
         form.save()
         return redirect('film_list')
+    else:
+        return redirect('film_edit')
 
 
 @login_required(login_url='/adminLte/account/login')
