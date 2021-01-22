@@ -41,11 +41,6 @@ def account_logout(request):
     return redirect('admin_index')
 
 
-def account_register(request):
-    form = RegisterForm()
-    return render(request, 'adminLte/account/register.html', {'form': form})
-
-
 @login_required(login_url='/adminLte/account/login')
 def banner(request):
     return render(request, 'adminLte/banner.html')
