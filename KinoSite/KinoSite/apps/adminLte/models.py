@@ -26,3 +26,15 @@ class Film(models.Model):
 
     def get_absolute_url(self):
         return f'film/list'
+
+
+class ImageGallery(models.Model):
+    main_image = models.ImageField('Главное изображение', upload_to='media/images/film_poster')
+    first_image = models.ImageField('Первое изображение', upload_to='media/images/film_images')
+    second_image = models.ImageField('Второе изображение', upload_to='media/images/film_images')
+    third_image = models.ImageField('Третье изображение', upload_to='media/images/film_images')
+    fourth_image = models.ImageField('Четвёртое изображение', upload_to='media/images/film_images')
+    fifth_image = models.ImageField('Пятое изображение', upload_to='media/images/film_images')
+
+
+#add a comment
