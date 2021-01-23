@@ -26,7 +26,7 @@ urlpatterns = [
     path('child_room', views.child_room, name='child_room'),
     path('contact', views.contact, name='contact'),
     path('users_list', views.users_list, name='users_list'),
-    path('redact', views.redact, name='redact'),
+    path('redact', views.redact, name='users_edit'),
     path('user_choose', views.user_choose, name='user_choose'),
     path('mailing', views.mailing, name='mailing'),
 
