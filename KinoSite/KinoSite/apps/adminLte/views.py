@@ -90,7 +90,7 @@ def film_list(request):
 def film_delete(request, pk):
     film = Film.objects.filter(id=pk)
     film.delete()
-    return redirect('film_list')
+    return redirect('admin_film_list')
 
 
 @login_required(login_url='/adminLte/account/login')
