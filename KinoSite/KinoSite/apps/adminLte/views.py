@@ -52,9 +52,9 @@ def film_edit_form_post(request):
 
     if form.is_valid():
         form.save()
-        return redirect('film_list')
+        return redirect('admin_film_list')
     else:
-        return redirect('film_edit')
+        return redirect('admin_film_edit')
 
 
 @login_required(login_url='/adminLte/account/login')
@@ -75,7 +75,7 @@ def film_edit_form(request, pk=None):
     elif request.method == 'GET':
         response = film_edit_form_get(request, pk)
     else:
-        response = redirect('film_list')
+        response = redirect('admin_film_list')
     return response
 
 

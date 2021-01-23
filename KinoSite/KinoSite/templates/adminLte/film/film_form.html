@@ -1,7 +1,7 @@
 {% extends 'adminLte/base.html' %}
 {% block film %}
     <li class="nav-item">
-        <a href="{% url 'film_list' %}" class="nav-link active">
+        <a href="{% url 'admin_film_list' %}" class="nav-link active">
               <i class="fas fa-film"></i>
               <p>
                   Фильмы
@@ -84,7 +84,7 @@
                     </div>
                     <div class="container my-5">
                         <button class="btn btn-success" type="submit">Сохранить</button>
-                        <a class="btn btn-danger" href="{% url 'film_list' %}" role="button">Отмена</a>
+                        <a class="btn btn-danger" href="{% url 'admin_film_list' %}" role="button">Отмена</a>
                     </div>
                 </form>
             </div>

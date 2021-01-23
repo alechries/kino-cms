@@ -10,7 +10,7 @@
     </li>
 {% endblock %}
 {% block navbar_item %}
-<a class="btn btn-success" href="{% url 'film_form' %}">Добавить фильм</a>
+<a class="btn btn-success" href="{% url 'admin_film_form' %}">Добавить фильм</a>
 {% endblock %}
 {% block content_title %}
     <h1 class="m-0">Премьеры</h1>
@@ -25,11 +25,11 @@
             <div class="card-footer  ml-0 ">
                 <div class="row mx-auto">
                     <form method="get">
-                        <a href="{% url 'film_form_edit' pk=el.pk %}" class="btn btn-primary">Редактировать</a>
+                        <a href="{% url 'admin_film_edit' pk=el.pk %}" class="btn btn-primary">Редактировать</a>
                     </form>
                     <div class="ml-auto">
                         <form method="post">
-                            <a href="{% url 'film_delete' pk=el.pk %}" class="btn btn-danger">Удалить</a>
+                            <a href="{% url 'admin_film_delete' pk=el.pk %}" class="btn btn-danger">Удалить</a>
                         </form>
                     </div>
                 </div>

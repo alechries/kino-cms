@@ -126,7 +126,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           {% endblock %}
           {% block banner %}
           <li class="nav-item">
-            <a href="{% url 'banner' %}" class="nav-link">
+            <a href="{% url 'admin_banner' %}" class="nav-link">
               <i class="fas fa-sliders-h"></i>
               <p>
                 Баннеры \ Слайды
@@ -136,7 +136,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           {% endblock %}
           {% block film %}
           <li class="nav-item">
-            <a href="{% url 'film_list' %}" class="nav-link">
+            <a href="{% url 'admin_film_list' %}" class="nav-link">
               <i class="fas fa-film"></i>
               <p>
                 Фильмы
@@ -146,7 +146,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           {% endblock %}
           {% block cinema %}
           <li class="nav-item">
-            <a href="{% url 'cinema_list' %}" class="nav-link">
+            <a href="{% url 'admin_cinema_list' %}" class="nav-link">
               <i class="fas fa-video"></i>
               <p>
                 Кинотеатры
@@ -156,7 +156,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             {% endblock %}
             {% block news %}
             <li class="nav-item">
-            <a href="{% url 'news_list' %}" class="nav-link">
+            <a href="{% url 'admin_news_list' %}" class="nav-link">
               <i class="far fa-newspaper"></i>
               <p>
                 Новости
@@ -166,7 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             {% endblock %}
             {% block promotion %}
            <li class="nav-item">
-            <a href="{% url 'promotion_list' %}" class="nav-link">
+            <a href="{% url 'admin_promotion_list' %}" class="nav-link">
               <i class="fas fa-percent"></i>
               <p>
                 Акции
@@ -176,7 +176,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             {% endblock %}
             {% block page %}
             <li class="nav-item">
-            <a href="{% url 'pages_list' %}" class="nav-link">
+            <a href="{% url 'admin_pages_list' %}" class="nav-link">
               <i class="fas fa-pager"></i>
               <p>
                 Страницы
@@ -186,7 +186,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             {% endblock %}
             {% block users %}
             <li class="nav-item">
-            <a href="{% url 'users_list' %}" class="nav-link">
+            <a href="{% url 'admin_users_list' %}" class="nav-link">
               <i class="fas fa-users"></i>
               <p>
                 Пользователи
@@ -196,7 +196,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             {% endblock %}
             {% block mailing %}
             <li class="nav-item">
-            <a href="{% url 'mailing' %}" class="nav-link">
+            <a href="{% url 'admin_mailing' %}" class="nav-link">
               <i class="fas fa-envelope"></i>
               <p>
                 Рассылка
