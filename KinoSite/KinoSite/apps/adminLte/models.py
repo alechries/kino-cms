@@ -37,4 +37,19 @@ class ImageGallery(models.Model):
     fifth_image = models.ImageField('Пятое изображение', upload_to='media/images/film_images')
 
 
+class BannerImage(models.Model):
+    banner_image = models.ImageField('Изображение баннера')
+    banner_url = models.URLField('Ссылка под изображением')
+    banner_text = models.CharField('Описание изображения', null=True)
+
+
+class UpperBanner(models.Model):
+    upper_banner_image = models.ForeignKey(BannerImage, on_delete=models.CASCADE)
+
+
+
+
+
+
+
 #add a comment

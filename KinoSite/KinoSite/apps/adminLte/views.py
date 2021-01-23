@@ -175,7 +175,7 @@ def users_list(request):
 
 @login_required(login_url='/adminLte/account/login')
 def redact(request):
-    return render(request, 'adminLte/users/redact.html')
+    return render(request, 'adminLte/users/users_edit.html')
 
 
 @login_required(login_url='/adminLte/account/login')
