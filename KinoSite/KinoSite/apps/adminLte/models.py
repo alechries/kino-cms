@@ -28,14 +28,6 @@ class Film(models.Model):
         return f'film/list'
 
 
-class ImageGallery(models.Model):
-    main_image = models.ImageField('Главное изображение', upload_to='media/images/film_poster')
-    first_image = models.ImageField('Первое изображение', upload_to='media/images/film_images')
-    second_image = models.ImageField('Второе изображение', upload_to='media/images/film_images')
-    third_image = models.ImageField('Третье изображение', upload_to='media/images/film_images')
-    fourth_image = models.ImageField('Четвёртое изображение', upload_to='media/images/film_images')
-    fifth_image = models.ImageField('Пятое изображение', upload_to='media/images/film_images')
-
 
 class BannerImage(models.Model):
     banner_image = models.ImageField('Изображение баннера')
@@ -44,6 +36,109 @@ class BannerImage(models.Model):
 
 
 class UpperBanner(models.Model):
-    upper_banner_image = models.ForeignKey(BannerImage, on_delete=models.CASCADE)
+    upper_banner_image = models.ImageField('Верхний баннер', upload_to='media/images/upper_banner')
 
-#add a comment
+
+class Cinema(models.Model):
+    cinema_name = models.CharField(max_length=255, verbose_name='Название кинотеатра')
+    cinema_description = models.TextField(verbose_name='Описание конотеатра')
+    cinema_condition = models.TextField(verbose_name='Условия кинотеатра')
+    cinema_logo = models.ImageField(verbose_name='Логотип кинотеатра', upload_to='media/images/cinema/logo/')
+    cinema_upper_banner = models.ImageField('Верхний баннер кинотеатра', upload_to='media/images/cinema/upper_banner/')
+    cinema_image1 = models.ImageField('Первое изображение', upload_to='media/images/cinema/')
+    cinema_image2 = models.ImageField('Второе изображение', upload_to='media/images/cinema/')
+    cinema_image3 = models.ImageField('Третее изображение', upload_to='media/images/cinema/')
+    cinema_image4 = models.ImageField('Четвёртое изображение', upload_to='media/images/cinema/')
+    cinema_image5 = models.ImageField('Пятое изображение', upload_to='media/images/cinema/')
+
+
+class CinemaHall(models.Model):
+    cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE)
+    hall_name = models.CharField(max_length=255, verbose_name='Название зала')
+    hall_description = models.TextField(verbose_name='Описание зала')
+    cinema_scheme = models.ImageField(verbose_name='Схема зала', upload_to='media/images/hall/logo/')
+    hall_upper_banner = models.ImageField('Верхний баннер кинотеатра', upload_to='media/images/hall/upper_banner/')
+    hall_image1 = models.ImageField('Первое изображение', upload_to='media/images/hall/')
+    hall_image2 = models.ImageField('Второе изображение', upload_to='media/images/hall/')
+    hall_image3 = models.ImageField('Третее изображение', upload_to='media/images/hall/')
+    hall_image4 = models.ImageField('Четвёртое изображение', upload_to='media/images/hall/')
+    hall_image5 = models.ImageField('Пятое изображение', upload_to='media/images/hall/')
+
+
+class News(models.Model):
+    news_name = models.CharField(max_length=255, verbose_name='Название новости')
+    news_description = models.TextField(verbose_name='Описание новости')
+    news_main_image = models.ImageField(verbose_name='Логотип новости', upload_to='media/images/news/logo/')
+    news_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='media/images/news/')
+    news_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='media/images/news/')
+    news_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='media/images/news/')
+    news_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='media/images/news/')
+    news_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='media/images/news/')
+    news_url = models.URLField(verbose_name='Ссылка на видео', null=True)
+    news_published_date = models.DateField(verbose_name='Дата публикации новости')
+    news_status = models.BooleanField(verbose_name='Статус новости', default=False)
+
+
+class Promotion(models.Model):
+    promo_name = models.CharField(max_length=255, verbose_name='Название акции')
+    promo_description = models.TextField(verbose_name='Описание акции')
+    promo_main_image = models.ImageField(verbose_name='Логотип акции', upload_to='media/images/promotion/logo/')
+    promo_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='media/images/promotion/')
+    promo_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='media/images/promotion/')
+    promo_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='media/images/promotion/')
+    promo_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='media/images/promotion/')
+    promo_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='media/images/promotion/')
+    promo_url = models.URLField(verbose_name='Ссылка на видео', null=True)
+    promo_published_date = models.DateField(verbose_name='Дата публикации акции')
+    promo_status = models.BooleanField(verbose_name='Статус акции', default=False)
+
+
+class Page(models.Model):
+    class Meta:
+        abstract = True
+
+    page_name = models.CharField(max_length=255, verbose_name='Название страницы')
+    page_description = models.TextField(verbose_name='Описание страницы')
+    page_main_image = models.ImageField(verbose_name='Логотип страницы', upload_to='media/images/pages/logo')
+    page_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='media/images/pages/')
+    page_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='media/images/pages/')
+    page_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='media/images/pages/')
+    page_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='media/images/pages/')
+    page_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='media/images/pages/')
+    page_status = models.BooleanField(verbose_name='Статус страницы', default=False)
+
+
+class Contact(models.Model):
+    contact_name = models.CharField(verbose_name='Название кинотеатра', max_length=255)
+    contact_address = models.TextField(verbose_name='Адрес кинотеатра')
+    contact_location = models.CharField(verbose_name='Координаты для карты', max_length=255)
+    contact_logo = models.ImageField(verbose_name='Лого', upload_to='media/images/contact/logo/')
+
+
+class User(models.Model):
+    LANGUAGE = (
+        ('R', 'Rus'),
+        ('U', 'Ukr'),
+    )
+    GENDER = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+
+    CITY = (
+        ('OD', 'Odessa'),
+        ('KY', 'Kyiv'),
+        ('KHAR', 'Kharkiv'),
+    )
+
+    name = models.CharField(verbose_name='Имя', max_length=255)
+    surname = models.CharField(verbose_name='Фамиоия', max_length=255)
+    username = models.CharField(verbose_name='Юзернейм', max_length=255)
+    email = models.EmailField(verbose_name='Емаил')
+    address = models.TextField(verbose_name='Адрес', max_length=255)
+    password = models.CharField(verbose_name='Пароль', max_length=255)
+    password2 = models.CharField(verbose_name='Пароль 2', max_length=255)
+    card_number = models.CharField(verbose_name='Номер карты', max_length=255)
+    language = models.CharField(verbose_name='Язык', max_length=1, choices=LANGUAGE)
+    gender = models.CharField(verbose_name='Пол', max_length=1, choices=GENDER)
+    city = models.CharField(verbose_name='Город', choices=CITY, max_length=4)
