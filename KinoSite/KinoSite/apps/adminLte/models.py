@@ -40,7 +40,7 @@ class ImageGallery(models.Model):
 class BannerImage(models.Model):
     banner_image = models.ImageField('Изображение баннера')
     banner_url = models.URLField('Ссылка под изображением')
-    banner_text = models.CharField('Описание изображения', null=True)
+    banner_text = models.CharField('Описание изображения', null=True, max_length=255)
 
 
 class UpperBanner(models.Model):
