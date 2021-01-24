@@ -4,10 +4,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import FilmForm, RegisterForm, LoginForm
-from .models import Film
+from . import models, forms
+
+ADMIN_LOGIN_REDIRECT_URL = '/adminLte/account/login'
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def admin_index(request):
     return render(request, 'adminLte/index.html')
 
@@ -15,7 +17,6 @@ def admin_index(request):
 def account_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
-        print(request.POST)
         if form.is_valid():
             user = authenticate(request,
                                 username=form.cleaned_data['username'],
@@ -35,154 +36,171 @@ def account_login(request):
     return render(request, 'adminLte/account/login.html', {'form': LoginForm(), 'message': _message})
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def account_logout(request):
     logout(request)
     return redirect('admin_index')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def banner(request):
     return render(request, 'adminLte/banner.html')
 
 
-@login_required(login_url='/adminLte/account/login')
-def film_edit_form_post(request):
-    form = FilmForm(request.POST, request.FILES)
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
+def film_edit_form(request, pk=None):
+    if pk:
+        film = get_object_or_404(models.Film, pk=pk)
+        form = FilmForm(request.POST or None, instance=film)
+    else:
+        form = FilmForm(request.POST or None)
 
-    if form.is_valid():
+    if request.POST and form.is_valid():
         form.save()
         return redirect('admin_film_list')
-    else:
-        return redirect('admin_film_edit')
-
-
-@login_required(login_url='/adminLte/account/login')
-def film_edit_form_get(request, pk=None):
-    if pk is not None:
-        film = get_object_or_404(Film, pk=pk)
-        form = FilmForm(instance=film)
-    else:
-        form = FilmForm()
-
     return render(request, 'adminLte/film/film_form.html', {'form': form})
 
 
-@login_required(login_url='/adminLte/account/login')
-def film_edit_form(request, pk=None):
-    if request.method == 'POST':
-        response = film_edit_form_post(request)
-    elif request.method == 'GET':
-        response = film_edit_form_get(request, pk)
-    else:
-        response = redirect('admin_film_list')
-    return response
-
-
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def film_list(request):
-    film = Film.objects.all()
+    films = models.Film.objects.all()
 
-    return render(request, 'adminLte/film/film_list.html', {'film': film})
+    return render(request, 'adminLte/film/film_list.html', {'film': films})
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def film_delete(request, pk):
-    film = Film.objects.filter(id=pk)
-    film.delete()
+    films = models.Film.objects.filter(id=pk)
+    films.delete()
     return redirect('admin_film_list')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def cinema_list(request):
-    return render(request, 'adminLte/cinema/cinema_list.html')
+    cinemas = models.Film.objects.all()
+    return render(request, 'adminLte/cinema/cinema_list.html', {'cinemas': cinemas})
 
 
-@login_required(login_url='/adminLte/account/login')
-def cinema_page(request):
-    return redirect(request, 'adminLte/cinema/cinema_page.html')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
+def cinema_form(request, pk=None):
+    # TODO Alexander - Ожидает создание CinemaForm
+    if pk:
+        cinema = get_object_or_404(models.Cinema, pk=pk)
+        form = FilmForm(request.POST or None, instance=cinema)
+    else:
+        form = FilmForm(request.POST or None)
+
+    if request.POST and form.is_valid():
+        form.save()
+        return redirect('admin_film_list')
+    return render(request, 'adminLte/film/film_form.html', {'form': form})
 
 
-@login_required(login_url='/adminLte/account/login')
-def hall_page(request):
-    return render(request, 'adminLte/cinema/hall_page.html')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
+def cinema_delete(request, pk):
+    cinema = models.Cinema.objects.filter(id=pk)
+    cinema.delete()
+    return redirect('admin_cinema_list')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
+def hall_form(request, pk=None):
+    # TODO Alexander - Ожидает создание HallForm
+    if pk:
+        cinema = get_object_or_404(models.Cinema, pk=pk)
+        form = FilmForm(request.POST or None, instance=cinema)
+    else:
+        form = FilmForm(request.POST or None)
+
+    if request.POST and form.is_valid():
+        form.save()
+        return redirect('admin_film_list')
+    return render(request, 'adminLte/film/film_form.html', {'form': form})
+    return render(request, 'adminLte/cinema/hall_form.html')
+
+
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
+def hall_delete(request, pk):
+    hall = models.CinemaHall.objects.filter(id=pk)
+    hall.delete()
+    return redirect('admin_cinema_list')
+
+
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def news_list(request):
     return render(request, 'adminLte/news/news_list.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def news_page(request):
     return render(request, 'adminLte/news/news_page.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def promotion_list(request):
     return render(request, 'adminLte/promotion/promotion_list.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def promotion_page(request):
     return render(request, 'adminLte/promotion/promotion_page.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def pages_list(request):
     return render(request, 'adminLte/pages/pages_list.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def main_pages(request):
     return render(request, 'adminLte/pages/main_page.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def about_cinema(request):
     return render(request, 'adminLte/pages/about_cinema.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def cafe_bar(request):
     return render(request, 'adminLte/pages/cafe_bar.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def vip_room(request):
     return render(request, 'adminLte/pages/vip_room.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def ads(request):
     return render(request, 'adminLte/pages/ads.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def child_room(request):
     return render(request, 'adminLte/pages/child_room.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def contact(request):
     return render(request, 'adminLte/pages/contact.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def users_list(request):
     return render(request, 'adminLte/users/users_list.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def redact(request):
     return render(request, 'adminLte/users/users_edit.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def user_choose(request):
     return render(request, 'adminLte/mailing/user_choose.html')
 
 
-@login_required(login_url='/adminLte/account/login')
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def mailing(request):
     return render(request, 'adminLte/mailing/mailing.html')
