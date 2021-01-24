@@ -10,7 +10,31 @@
     </li>
 {% endblock %}
 {% block content_title %}
-    <h1 class="m-0">Cinema list</h1>
+    <h1 class="m-0">Кинотеатры</h1>
+{% endblock %}
+{% block navbar_item %}
+<a class="btn btn-success" href="{% url 'admin_cinema_form' %}">Добавить кинотеатр</a>
+<a class="btn btn-success" href="{% url 'admin_hall_form' %}">Добавить зал</a>
 {% endblock %}
 {% block main_content %}
+    {% for cinema in cinemas %}
+        <div class="card m-3" style="width: 18rem;">
+            <img src="{{ cinema.cinema_logo.url }}" class="card-img-top" alt="cinema_image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cinema.cinema_name }}</h5>
+                </div>
+            <div class="card-footer  ml-0 ">
+                <div class="row mx-auto">
+                    <form method="get">
+                        <a href="{% url 'admin_cinema_edit' pk=cinema.pk %}" class="btn btn-primary">Редактировать</a>
+                    </form>
+                    <div class="ml-auto">
+                        <form method="post">
+                            <a href="{% url 'admin_cinema_delete' pk=cinema.pk %}" class="btn btn-danger">Удалить</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
