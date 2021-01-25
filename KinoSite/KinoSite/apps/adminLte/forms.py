@@ -1,6 +1,6 @@
 from . import models
 from django.forms import Form, ModelForm, TextInput, DateInput, FileInput, URLInput, CheckboxInput, Textarea, \
-    EmailField, CharField, PasswordInput, ImageField, URLField, ChoiceField, TimeField, BooleanField
+    EmailField, CharField, PasswordInput, ImageField, URLField, ChoiceField, TimeField, BooleanField, RadioSelect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -114,3 +114,56 @@ class CinemaForm(Form):
                 'class': 'form-control',
                 'placeholder': 'Password',
             }))
+
+
+class NewsForm(ModelForm):
+    class Meta:
+        model = models.News
+
+        fields = ['news_name', 'news_description', 'news_main_image', 'news_image1', 'news_image2', 'news_image3',
+                  'news_image4', 'news_image5', 'news_url', 'news_published_date', 'news_status']
+
+        widgets = {
+            'news_name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите название новости',
+                'id': 'NewsNameInput',
+            }),
+            'news_description': Textarea(attrs={
+                'class': 'form-control',
+                'id': 'NewsTextInput',
+                'rows': '5',
+                'placeholder': 'Введите описание новости',
+            }),
+            'news_main_image': FileInput(attrs={
+                'class': 'form-control-file',
+                'id': 'NewsMainImage',
+            }),
+            'news_image1': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0'
+            }),
+            'news_image2': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'news_image3': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'news_image4': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'news_image5': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'news_url': URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите ссылку на новость',
+                'id': 'NewsUrl',
+            }),
+            'news_published_date': DateInput(attrs={
+                'type': "date",
+                'placeholder': "Введите дату публикации",
+                'class': "form-control",
+                'id': "NewsPublishedDate",
+            }),
+            'news_status': RadioSelect
+        }

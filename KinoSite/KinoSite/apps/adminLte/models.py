@@ -66,6 +66,11 @@ class CinemaHall(models.Model):
 
 
 class News(models.Model):
+    STATUS = (
+        ('ON', 'Active'),
+        ('OF', 'Inactive'),
+    )
+
     news_name = models.CharField(max_length=255, verbose_name='Название новости')
     news_description = models.TextField(verbose_name='Описание новости')
     news_main_image = models.ImageField(verbose_name='Логотип новости', upload_to='media/images/news/logo/')
@@ -76,7 +81,16 @@ class News(models.Model):
     news_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='media/images/news/')
     news_url = models.URLField(verbose_name='Ссылка на видео', null=True)
     news_published_date = models.DateField(verbose_name='Дата публикации новости')
-    news_status = models.BooleanField(verbose_name='Статус новости', default=False)
+    news_status = models.CharField(verbose_name='Выбор статуса', max_length=2, choices=STATUS)
+
+    def __str__(self):
+        return self.news_name
+
+    def get_absolute_image(self):
+        return os.path.join('/media', self.news_main_image.name)
+
+    def get_absolute_url(self):
+        return f'news/list'
 
 
 class Promotion(models.Model):
