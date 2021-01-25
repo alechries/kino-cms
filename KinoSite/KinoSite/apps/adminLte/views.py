@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import FilmForm, RegisterForm, LoginForm
+from .forms import FilmForm, LoginForm
 from . import models, forms
 
 ADMIN_LOGIN_REDIRECT_URL = '/adminLte/account/login'
@@ -49,13 +49,9 @@ def banner(request):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def film_edit_form(request, pk=None):
-    if pk:
-        film = get_object_or_404(models.Film, pk=pk)
-        form = FilmForm(request.POST or None, instance=film)
-    else:
-        form = FilmForm(request.POST or None)
-
-    if request.POST and form.is_valid():
+    film = get_object_or_404(models.Film, pk=pk) if pk else None
+    form = FilmForm(request.POST or None, request.FILES or None, instance=film or None)
+    if request.method == 'POST' and form.is_valid():
         form.save()
         return redirect('admin_film_list')
     return render(request, 'adminLte/film/film_form.html', {'form': form})
@@ -77,7 +73,7 @@ def film_delete(request, pk):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def cinema_list(request):
-    cinemas = models.Film.objects.all()
+    cinemas = models.Cinema.objects.all()
     return render(request, 'adminLte/cinema/cinema_list.html', {'cinemas': cinemas})
 
 
@@ -116,7 +112,6 @@ def hall_form(request, pk=None):
         form.save()
         return redirect('admin_film_list')
     return render(request, 'adminLte/film/film_form.html', {'form': form})
-    return render(request, 'adminLte/cinema/hall_form.html')
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)

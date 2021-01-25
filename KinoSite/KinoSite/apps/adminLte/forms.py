@@ -1,6 +1,6 @@
-from .models import Film
+from . import models
 from django.forms import Form, ModelForm, TextInput, DateInput, FileInput, URLInput, CheckboxInput, Textarea, \
-    EmailField, CharField, PasswordInput
+    EmailField, CharField, PasswordInput, ImageField, URLField, ChoiceField, TimeField, BooleanField
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -21,17 +21,9 @@ class LoginForm(Form):
             }))
 
 
-class RegisterForm(UserCreationForm):
-    email = EmailField(required=True)
-
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
-
-
 class FilmForm(ModelForm):
     class Meta:
-        model = Film
+        model = models.Film
         fields = ['title', 'description', 'main_image', 'image1', 'image2', 'image3', 'image4', 'image5', 'trailer_link',
                   'two_d', 'three_d', 'i_max', 'duration', 'first_night']
 
@@ -106,3 +98,19 @@ class FilmForm(ModelForm):
         }),
 
         }
+
+
+class CinemaForm(Form):
+    class Meta:
+        model = models.Cinema
+
+    username = CharField(widget=TextInput(attrs={
+                'type': 'text',
+                'class': 'form-control',
+                'placeholder': 'Username',
+            }))
+    password = CharField(widget=TextInput(attrs={
+                'type': 'password',
+                'class': 'form-control',
+                'placeholder': 'Password',
+            }))
