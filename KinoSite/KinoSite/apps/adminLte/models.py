@@ -5,7 +5,7 @@ import os
 class Film(models.Model):
     title = models.CharField('Название фильма', max_length=255)
     description = models.TextField('Описание фильма')
-    main_image = models.ImageField(upload_to='media/images/film_poster')
+    main_image = models.ImageField(upload_to='images/film_poster')
     image1 = models.ImageField('Первое изображение', upload_to='images/film_images')
     image2 = models.ImageField('Второе изображение', upload_to='images/film_images/')
     image3 = models.ImageField('Третее изображение', upload_to='images/film_images/')
@@ -36,52 +36,52 @@ class BannerImage(models.Model):
 
 
 class UpperBanner(models.Model):
-    upper_banner_image = models.ImageField('Верхний баннер', upload_to='media/images/upper_banner')
+    upper_banner_image = models.ImageField('Верхний баннер', upload_to='images/upper_banner')
 
 
 class Cinema(models.Model):
     cinema_name = models.CharField(max_length=255, verbose_name='Название кинотеатра')
     cinema_description = models.TextField(verbose_name='Описание конотеатра')
     cinema_condition = models.TextField(verbose_name='Условия кинотеатра')
-    cinema_logo = models.ImageField(verbose_name='Логотип кинотеатра', upload_to='media/images/cinema/logo/')
-    cinema_upper_banner = models.ImageField('Верхний баннер кинотеатра', upload_to='media/images/cinema/upper_banner/')
-    cinema_image1 = models.ImageField('Первое изображение', upload_to='media/images/cinema/')
-    cinema_image2 = models.ImageField('Второе изображение', upload_to='media/images/cinema/')
-    cinema_image3 = models.ImageField('Третее изображение', upload_to='media/images/cinema/')
-    cinema_image4 = models.ImageField('Четвёртое изображение', upload_to='media/images/cinema/')
-    cinema_image5 = models.ImageField('Пятое изображение', upload_to='media/images/cinema/')
+    cinema_logo = models.ImageField(verbose_name='Логотип кинотеатра', upload_to='images/cinema/logo/')
+    cinema_upper_banner = models.ImageField('Верхний баннер кинотеатра', upload_to='images/cinema/upper_banner/')
+    cinema_image1 = models.ImageField('Первое изображение', upload_to='images/cinema/')
+    cinema_image2 = models.ImageField('Второе изображение', upload_to='images/cinema/')
+    cinema_image3 = models.ImageField('Третее изображение', upload_to='images/cinema/')
+    cinema_image4 = models.ImageField('Четвёртое изображение', upload_to='images/cinema/')
+    cinema_image5 = models.ImageField('Пятое изображение', upload_to='images/cinema/')
 
 
 class CinemaHall(models.Model):
     cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE)
     hall_name = models.CharField(max_length=255, verbose_name='Название зала')
     hall_description = models.TextField(verbose_name='Описание зала')
-    cinema_scheme = models.ImageField(verbose_name='Схема зала', upload_to='media/images/hall/logo/')
-    hall_upper_banner = models.ImageField('Верхний баннер кинотеатра', upload_to='media/images/hall/upper_banner/')
-    hall_image1 = models.ImageField('Первое изображение', upload_to='media/images/hall/')
-    hall_image2 = models.ImageField('Второе изображение', upload_to='media/images/hall/')
-    hall_image3 = models.ImageField('Третее изображение', upload_to='media/images/hall/')
-    hall_image4 = models.ImageField('Четвёртое изображение', upload_to='media/images/hall/')
-    hall_image5 = models.ImageField('Пятое изображение', upload_to='media/images/hall/')
+    cinema_scheme = models.ImageField(verbose_name='Схема зала', upload_to='images/hall/logo/')
+    hall_upper_banner = models.ImageField('Верхний баннер кинотеатра', upload_to='images/hall/upper_banner/')
+    hall_image1 = models.ImageField('Первое изображение', upload_to='images/hall/')
+    hall_image2 = models.ImageField('Второе изображение', upload_to='images/hall/')
+    hall_image3 = models.ImageField('Третее изображение', upload_to='images/hall/')
+    hall_image4 = models.ImageField('Четвёртое изображение', upload_to='images/hall/')
+    hall_image5 = models.ImageField('Пятое изображение', upload_to='images/hall/')
 
 
 class News(models.Model):
     STATUS = (
         ('ON', 'Active'),
-        ('OF', 'Inactive'),
+        ('OFF', 'Inactive'),
     )
 
     news_name = models.CharField(max_length=255, verbose_name='Название новости')
     news_description = models.TextField(verbose_name='Описание новости')
-    news_main_image = models.ImageField(verbose_name='Логотип новости', upload_to='media/images/news/logo/')
-    news_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='media/images/news/')
-    news_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='media/images/news/')
-    news_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='media/images/news/')
-    news_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='media/images/news/')
-    news_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='media/images/news/')
+    news_main_image = models.ImageField(verbose_name='Логотип новости', upload_to='images/news/logo/')
+    news_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/news/')
+    news_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/news/')
+    news_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/news/')
+    news_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/news/')
+    news_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/news/')
     news_url = models.URLField(verbose_name='Ссылка на видео', null=True)
     news_published_date = models.DateField(verbose_name='Дата публикации новости')
-    news_status = models.CharField(verbose_name='Выбор статуса', max_length=2, choices=STATUS)
+    news_status = models.CharField(verbose_name='Выбор статуса', max_length=3, choices=STATUS)
 
     def __str__(self):
         return self.news_name
@@ -96,12 +96,12 @@ class News(models.Model):
 class Promotion(models.Model):
     promo_name = models.CharField(max_length=255, verbose_name='Название акции')
     promo_description = models.TextField(verbose_name='Описание акции')
-    promo_main_image = models.ImageField(verbose_name='Логотип акции', upload_to='media/images/promotion/logo/')
-    promo_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='media/images/promotion/')
-    promo_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='media/images/promotion/')
-    promo_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='media/images/promotion/')
-    promo_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='media/images/promotion/')
-    promo_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='media/images/promotion/')
+    promo_main_image = models.ImageField(verbose_name='Логотип акции', upload_to='promotion/logo/')
+    promo_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='promotion/')
+    promo_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='promotion/')
+    promo_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='promotion/')
+    promo_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='promotion/')
+    promo_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='promotion/')
     promo_url = models.URLField(verbose_name='Ссылка на видео', null=True)
     promo_published_date = models.DateField(verbose_name='Дата публикации акции')
     promo_status = models.BooleanField(verbose_name='Статус акции', default=False)
@@ -113,12 +113,12 @@ class Page(models.Model):
 
     page_name = models.CharField(max_length=255, verbose_name='Название страницы')
     page_description = models.TextField(verbose_name='Описание страницы')
-    page_main_image = models.ImageField(verbose_name='Логотип страницы', upload_to='media/images/pages/logo')
-    page_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='media/images/pages/')
-    page_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='media/images/pages/')
-    page_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='media/images/pages/')
-    page_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='media/images/pages/')
-    page_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='media/images/pages/')
+    page_main_image = models.ImageField(verbose_name='Логотип страницы', upload_to='images/pages/logo')
+    page_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/pages/')
+    page_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/pages/')
+    page_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/pages/')
+    page_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/pages/')
+    page_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/pages/')
     page_status = models.BooleanField(verbose_name='Статус страницы', default=False)
 
 
@@ -126,7 +126,7 @@ class Contact(models.Model):
     contact_name = models.CharField(verbose_name='Название кинотеатра', max_length=255)
     contact_address = models.TextField(verbose_name='Адрес кинотеатра')
     contact_location = models.CharField(verbose_name='Координаты для карты', max_length=255)
-    contact_logo = models.ImageField(verbose_name='Лого', upload_to='media/images/contact/logo/')
+    contact_logo = models.ImageField(verbose_name='Лого', upload_to='images/contact/logo/')
 
 
 class User(models.Model):
