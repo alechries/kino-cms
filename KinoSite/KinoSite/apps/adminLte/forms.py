@@ -24,9 +24,9 @@ class LoginForm(Form):
 class FilmForm(ModelForm):
     class Meta:
         model = models.Film
-        fields = ['title', 'description', 'main_image', 'image1', 'image2', 'image3', 'image4', 'image5', 'trailer_link',
+        fields = ['title', 'description', 'main_image', 'image1',
+                  'image2', 'image3', 'image4', 'image5', 'trailer_link',
                   'two_d', 'three_d', 'i_max', 'duration', 'first_night']
-
 
         widgets = {
             'title': TextInput(attrs={
@@ -104,12 +104,42 @@ class CinemaForm(Form):
     class Meta:
         model = models.Cinema
 
-    username = CharField(widget=TextInput(attrs={
+    cinema_name = CharField(widget=TextInput(attrs={
                 'type': 'text',
                 'class': 'form-control',
                 'placeholder': 'Username',
             }))
-    password = CharField(widget=TextInput(attrs={
+    cinema_description = CharField(widget=TextInput(attrs={
+                'type': 'password',
+                'class': 'form-control',
+                'placeholder': 'Password',
+            }))
+    cinema_condition = CharField(widget=TextInput(attrs={
+                'type': 'text',
+                'class': 'form-control',
+                'placeholder': 'Username',
+            }))
+    cinema_logo = CharField(widget=TextInput(attrs={
+                'type': 'password',
+                'class': 'form-control',
+                'placeholder': 'Password',
+            }))
+    cinema_upper_banner = CharField(widget=TextInput(attrs={
+                'type': 'text',
+                'class': 'form-control',
+                'placeholder': 'Username',
+            }))
+    cinema_image1 = CharField(widget=TextInput(attrs={
+                'type': 'password',
+                'class': 'form-control',
+                'placeholder': 'Password',
+            }))
+    cinema_image2 = CharField(widget=TextInput(attrs={
+                'type': 'text',
+                'class': 'form-control',
+                'placeholder': 'Username',
+            }))
+    cinema_description = CharField(widget=TextInput(attrs={
                 'type': 'password',
                 'class': 'form-control',
                 'placeholder': 'Password',
