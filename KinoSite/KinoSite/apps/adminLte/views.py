@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import FilmForm, LoginForm
+from .forms import FilmForm, LoginForm, NewsForm
 from . import models, forms
 
 ADMIN_LOGIN_REDIRECT_URL = '/adminLte/account/login'
@@ -112,13 +112,27 @@ def hall_delete(request, pk):
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
-def news_list(request):
-    return render(request, 'adminLte/news/news_list.html')
+def news_page(request, pk=None):
+    news = get_object_or_404(models.News, pk=pk) if pk else None
+    form = NewsForm(request.POST or None, request.FILES or None, instance=news or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('admin_news_list')
+    return render(request, 'adminLte/news/news_page.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
-def news_page(request):
-    return render(request, 'adminLte/news/news_page.html')
+def news_list(request):
+    news = models.News.objects.all()
+
+    return render(request, 'adminLte/news/news_list.html', {'news': news})
+
+
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
+def news_delete(request, pk):
+    news = models.News.objects.filter(id=pk)
+    news.delete()
+    return redirect('admin_news_list')
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)

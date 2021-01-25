@@ -13,4 +13,24 @@
     <h1 class="m-0">News list</h1>
 {% endblock %}
 {% block main_content %}
+{% for el in news %}
+        <div class="card m-3" style="width: 18rem;">
+            <img src="{{ el.get_absolute_image }}" class="card-img-top" alt="film_image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ el.news_title }}</h5>
+                </div>
+            <div class="card-footer  ml-0 ">
+                <div class="row mx-auto">
+                    <form method="get">
+                        <a href="{% url 'admin_film_edit' pk=el.pk %}" class="btn btn-primary">Редактировать</a>
+                    </form>
+                    <div class="ml-auto">
+                        <form method="post">
+                            <a href="{% url 'admin_film_delete' pk=el.pk %}" class="btn btn-danger">Удалить</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
