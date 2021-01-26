@@ -1,5 +1,6 @@
 from django.db import models
 import os
+from solo.models import SingletonModel
 
 
 class Film(models.Model):
@@ -26,7 +27,6 @@ class Film(models.Model):
 
     def get_absolute_url(self):
         return f'film/list'
-
 
 
 class BannerImage(models.Model):
@@ -135,6 +135,66 @@ class Page(models.Model):
     page_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/pages/')
     page_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/pages/')
     page_status = models.BooleanField(verbose_name='Статус страницы', default=False)
+
+
+class MainPage(SingletonModel):
+    tel_number1 = models.IntegerField(verbose_name='Номер телефона')
+    tel_number2 = models.IntegerField(verbose_name='Номер телефона')
+
+
+class AboutCinema(SingletonModel):
+    cinema_name = models.CharField(max_length=255, verbose_name='Название сети кинотеатров')
+    cinema_description = models.TextField(verbose_name='Описание сети кинотеатров')
+    cinema_main_image = models.ImageField(verbose_name='Логотип сети кинотеатров', upload_to='images/about/logo/')
+    cinema_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/about/')
+    cinema_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/about/')
+    cinema_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/about/')
+    cinema_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/about/')
+    cinema_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/about/')
+
+
+class CafeBar(SingletonModel):
+    cafebar_name = models.CharField(max_length=255, verbose_name='Название кафе-бара')
+    cafebar_description = models.TextField(verbose_name='Описание кафе-бара')
+    cafebar_main_image = models.ImageField(verbose_name='Логотип кафе-бара', upload_to='images/cafe_bar/logo/')
+    cafebar_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/cafe_bar/')
+    cafebar_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/cafe_bar/')
+    cafebar_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/cafe_bar/')
+    cafebar_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/cafe_bar/')
+    cafebar_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/cafe_bar/')
+
+
+class VipHall(SingletonModel):
+    hall_name = models.CharField(max_length=255, verbose_name='Название VIP-зала')
+    hall_description = models.TextField(verbose_name='Описание VIP-зала')
+    hall_main_image = models.ImageField(verbose_name='Логотип VIP-зала', upload_to='images/vip_hall/logo/')
+    hall_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/vip_hall/')
+    hall_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/vip_hall/')
+    hall_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/vip_hall/')
+    hall_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/vip_hall/')
+    hall_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/vip_hall/')
+
+
+class Advertising(SingletonModel):
+    adv_name = models.CharField(max_length=255, verbose_name='Название рекламы')
+    adv_description = models.TextField(verbose_name='Описание рекламы')
+    adv_main_image = models.ImageField(verbose_name='Логотип рекламы', upload_to='images/adv/logo/')
+    adv_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/adv/')
+    adv_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/adv/')
+    adv_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/adv/')
+    adv_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/adv/')
+    adv_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/adv/')
+
+
+class ChildRoom(SingletonModel):
+    room_name = models.CharField(max_length=255, verbose_name='Название детской комнаты')
+    room_description = models.TextField(verbose_name='Описание детской комнаты')
+    room_main_image = models.ImageField(verbose_name='Логотип детской комнаты', upload_to='images/child_room/logo/')
+    room_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/child_room/')
+    room_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/child_room/')
+    room_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/child_room/')
+    room_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/child_room/')
+    room_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/child_room/')
 
 
 class Contact(models.Model):

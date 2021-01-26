@@ -5,3 +5,4 @@ pytz==2020.5
 sqlparse==0.4.1
 Pillow>=8.1.0
 django-grappelli >= 2.14.3
+django-solo >= 1.1.5
