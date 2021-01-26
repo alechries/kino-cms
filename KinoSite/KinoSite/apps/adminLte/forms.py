@@ -242,5 +242,4 @@ class NewsForm(ModelForm):
                 'class': "form-control",
                 'id': "NewsPublishedDate",
             }),
-            'news_status': RadioSelect
         }
