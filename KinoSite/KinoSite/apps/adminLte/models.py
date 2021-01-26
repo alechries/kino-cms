@@ -59,7 +59,7 @@ class CinemaHall(models.Model):
     cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE)
     hall_name = models.CharField(max_length=255, verbose_name='Название зала')
     hall_description = models.TextField(verbose_name='Описание зала')
-    cinema_scheme = models.ImageField(verbose_name='Схема зала', upload_to='images/hall/logo/')
+    cinema_scheme = models.ImageField(verbose_name='Схема кинотеатра', upload_to='images/hall/logo/')
     hall_upper_banner = models.ImageField('Верхний баннер кинотеатра', upload_to='images/hall/upper_banner/')
     hall_image1 = models.ImageField('Первое изображение', upload_to='images/hall/')
     hall_image2 = models.ImageField('Второе изображение', upload_to='images/hall/')

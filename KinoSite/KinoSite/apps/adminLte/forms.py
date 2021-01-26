@@ -546,7 +546,8 @@ class ContactForm(ModelForm):
             'contact_logo': FileInput(attrs={
                 'class': 'form-control-file',
                 'id': 'ContactMainImage',
-            }),
+            })
+        }
 
 
 class UserForm(ModelForm):
