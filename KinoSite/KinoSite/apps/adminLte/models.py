@@ -66,7 +66,7 @@ class CinemaHall(models.Model):
     hall_image3 = models.ImageField('Третее изображение', upload_to='images/hall/')
     hall_image4 = models.ImageField('Четвёртое изображение', upload_to='images/hall/')
     hall_image5 = models.ImageField('Пятое изображение', upload_to='images/hall/')
-    hall_scheme = models.ImageField(verbose_name='Схема зала', upload_to='media/images/hall/logo/')
+    hall_scheme = models.ImageField(verbose_name='Схема зала', upload_to='images/hall/logo/')
 
     def __str__(self):
         return self.hall_name
