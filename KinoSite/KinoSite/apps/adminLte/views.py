@@ -3,10 +3,24 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import FilmForm, LoginForm, NewsForm
+from .forms import FilmForm, LoginForm, NewsForm, UserForm
 from . import models, forms
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 ADMIN_LOGIN_REDIRECT_URL = '/adminLte/account/login'
+
+
+def content_page(request, posts_key, posts, limit: int, template: str):
+    paginator = Paginator(posts, limit)
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    return render(request, template, {posts_key: posts, 'page': page})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
@@ -188,12 +202,29 @@ def contact(request):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def users_list(request):
-    return render(request, 'adminLte/users/users_list.html')
+    users = models.User.objects.all()
+    return content_page(request=request,
+            posts_key='users',
+            posts=users,
+            limit=6,
+            template='adminLte/users/users_list.html',
+  )
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
-def redact(request):
-    return render(request, 'adminLte/users/users_page.html')
+def user_form(request, pk=None):
+    user = get_object_or_404(models.User, pk=pk) if pk else None
+    form = UserForm(request.POST or None, instance=user or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('admin_users_list')
+    return render(request, 'adminLte/users/user_form.html', {'form': form})
+
+
+def user_delete(request, pk):
+    user = models.User.objects.filter(id=pk)
+    user.delete()
+    return redirect('admin_users_list')
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
