@@ -101,6 +101,11 @@ class News(models.Model):
 
 
 class Promotion(models.Model):
+    STATUS = (
+        ('ON', 'Active'),
+        ('OFF', 'Inactive'),
+    )
+
     promo_name = models.CharField(max_length=255, verbose_name='Название акции')
     promo_description = models.TextField(verbose_name='Описание акции')
     promo_main_image = models.ImageField(verbose_name='Логотип акции', upload_to='images/promotion/logo/')
@@ -109,9 +114,12 @@ class Promotion(models.Model):
     promo_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/promotion/')
     promo_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/promotion/')
     promo_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/promotion/')
-    promo_url = models.URLField(verbose_name='Ссылка на видео', null=True)
+    promo_url = models.URLField(verbose_name='Ссылка на акцию', null=True)
     promo_published_date = models.DateField(verbose_name='Дата публикации акции')
-    promo_status = models.BooleanField(verbose_name='Статус акции', default=False)
+    promo_status = models.CharField(verbose_name='Выбор статуса',  max_length=3, choices=STATUS)
+
+    def __str__(self):
+        return self.promo_name
 
 
 class Page(models.Model):

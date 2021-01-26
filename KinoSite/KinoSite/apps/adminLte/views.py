@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import FilmForm, LoginForm, NewsForm
 from . import models, forms
 
 ADMIN_LOGIN_REDIRECT_URL = '/adminLte/account/login'
@@ -16,7 +15,7 @@ def admin_index(request):
 
 def account_login(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = forms.LoginForm(request.POST)
         if form.is_valid():
             user = authenticate(request,
                                 username=form.cleaned_data['username'],
@@ -33,7 +32,7 @@ def account_login(request):
             _message = 'Data is incorrect'
     else:
         _message = 'Please, Sign in'
-    return render(request, 'adminLte/account/login.html', {'form': LoginForm(), 'message': _message})
+    return render(request, 'adminLte/account/login.html', {'form': forms.LoginForm(), 'message': _message})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
@@ -50,7 +49,7 @@ def banner(request):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def film_edit_form(request, pk=None):
     film = get_object_or_404(models.Film, pk=pk) if pk else None
-    form = FilmForm(request.POST or None, request.FILES or None, instance=film or None)
+    form = forms.FilmForm(request.POST or None, request.FILES or None, instance=film or None)
     if request.method == 'POST' and form.is_valid():
         form.save()
         return redirect('admin_film_list')
@@ -115,7 +114,7 @@ def hall_delete(request, pk):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def news_form(request, pk=None):
     news = get_object_or_404(models.News, pk=pk) if pk else None
-    form = NewsForm(request.POST or None, request.FILES or None, instance=news or None)
+    form = forms.NewsForm(request.POST or None, request.FILES or None, instance=news or None)
     if request.method == 'POST' and form.is_valid():
         form.save()
         return redirect('admin_news_list')
@@ -125,7 +124,6 @@ def news_form(request, pk=None):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def news_list(request):
     news = models.News.objects.all()
-
     return render(request, 'adminLte/news/news_list.html', {'news': news})
 
 
@@ -138,12 +136,25 @@ def news_delete(request, pk):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def promotion_list(request):
-    return render(request, 'adminLte/promotion/promotion_list.html')
+    promotions = models.Promotion.objects.all()
+    return render(request, 'adminLte/promotion/promotion_list.html', {'promotions': promotions})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
-def promotion_page(request):
-    return render(request, 'adminLte/promotion/promotion_page.html')
+def promotion_form(request, pk=None):
+    promotion = get_object_or_404(models.Promotion, pk=pk) if pk else None
+    form = forms.PromotionForm(request.POST or None, request.FILES or None, instance=promotion or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('admin_promotion_list')
+    return render(request, 'adminLte/promotion/promotion_form.html', {'form': form})
+
+
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
+def promotion_delete(request, pk):
+    news = models.Promotion.objects.filter(id=pk)
+    news.delete()
+    return redirect('admin_promotion_list')
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
