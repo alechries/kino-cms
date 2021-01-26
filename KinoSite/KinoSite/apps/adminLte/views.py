@@ -113,13 +113,13 @@ def hall_delete(request, pk):
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
-def news_page(request, pk=None):
+def news_form(request, pk=None):
     news = get_object_or_404(models.News, pk=pk) if pk else None
     form = NewsForm(request.POST or None, request.FILES or None, instance=news or None)
     if request.method == 'POST' and form.is_valid():
         form.save()
         return redirect('admin_news_list')
-    return render(request, 'adminLte/news/news_page.html', {'form': form})
+    return render(request, 'adminLte/news/news_form.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
