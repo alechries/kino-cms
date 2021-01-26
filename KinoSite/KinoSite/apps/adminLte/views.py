@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import FilmForm, LoginForm, NewsForm
+from .forms import FilmForm, LoginForm, NewsForm, UserForm
 from . import models, forms
 
 ADMIN_LOGIN_REDIRECT_URL = '/adminLte/account/login'
@@ -192,8 +192,13 @@ def users_list(request):
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
-def redact(request):
-    return render(request, 'adminLte/users/users_page.html')
+def user_form(request, pk=None):
+    user = get_object_or_404(models.User, pk=pk) if pk else None
+    form = UserForm(request.POST or None, instance=user or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('admin_users_list')
+    return render(request, 'adminLte/users/user_form.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
