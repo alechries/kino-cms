@@ -1,6 +1,6 @@
 from . import models
 from django.forms import Form, ModelForm, TextInput, DateInput, FileInput, URLInput, CheckboxInput, Textarea, \
-    EmailField, CharField, PasswordInput, ImageField, URLField, ChoiceField, TimeField, BooleanField, RadioSelect
+    EmailField, CharField, PasswordInput, ImageField, ModelChoiceField, URLField, ChoiceField, TimeField, BooleanField, RadioSelect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -100,50 +100,97 @@ class FilmForm(ModelForm):
         }
 
 
-class CinemaForm(Form):
+class CinemaForm(ModelForm):
     class Meta:
         model = models.Cinema
+        fields = ['cinema_name', 'cinema_description', 'cinema_condition', 'cinema_logo', 'cinema_upper_banner',
+                  'cinema_image1', 'cinema_image2', 'cinema_image3', 'cinema_image4', 'cinema_image5']
 
-    cinema_name = CharField(widget=TextInput(attrs={
-                'type': 'text',
+        widgets = {
+            'cinema_name': TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Username',
-            }))
-    cinema_description = CharField(widget=TextInput(attrs={
-                'type': 'password',
+                'placeholder': 'Введите название кинотеатра',
+                'id': 'CinemaNameInput',
+            }),
+            'cinema_description': Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Password',
-            }))
-    cinema_condition = CharField(widget=TextInput(attrs={
-                'type': 'text',
+                'id': 'CinemaDescriptionInput',
+                'rows': '5',
+                'placeholder': 'Введите описание кинотеатра',
+            }),
+            'cinema_condition': Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Username',
-            }))
-    cinema_logo = CharField(widget=TextInput(attrs={
-                'type': 'password',
+                'id': 'CinemaConditionInput',
+                'rows': '5',
+                'placeholder': 'Введите условия кинотеатра',
+            }),
+            'cinema_logo': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0',
+                'id': 'CinemaLogoInput',
+            }),
+            'cinema_upper_banner': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0',
+                'id': 'CinemaUpperBannerInput',
+            }),
+            'cinema_image1': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0'
+            }),
+            'cinema_image2': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'cinema_image3': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'cinema_image4': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'cinema_image5': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            })}
+
+
+class CinemaHallForm(ModelForm):
+    class Meta:
+        model = models.CinemaHall
+        cinema = ModelChoiceField(queryset=models.Cinema.objects.all(), empty_label=None, to_field_name="cinema_name")
+        fields = ['cinema', 'hall_name', 'hall_description', 'hall_scheme', 'hall_upper_banner',
+                  'hall_image1', 'hall_image2', 'hall_image3', 'hall_image4', 'hall_image5']
+
+        widgets = {
+            'hall_name': TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Password',
-            }))
-    cinema_upper_banner = CharField(widget=TextInput(attrs={
-                'type': 'text',
+                'placeholder': 'Введите название кинотеатра',
+                'id': 'HallNameInput',
+            }),
+            'hall_description': Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Username',
-            }))
-    cinema_image1 = CharField(widget=TextInput(attrs={
-                'type': 'password',
-                'class': 'form-control',
-                'placeholder': 'Password',
-            }))
-    cinema_image2 = CharField(widget=TextInput(attrs={
-                'type': 'text',
-                'class': 'form-control',
-                'placeholder': 'Username',
-            }))
-    cinema_description = CharField(widget=TextInput(attrs={
-                'type': 'password',
-                'class': 'form-control',
-                'placeholder': 'Password',
-            }))
+                'id': 'HallDescriptionInput',
+                'rows': '5',
+                'placeholder': 'Введите описание кинотеатра',
+            }),
+            'hall_scheme': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0',
+                'id': 'HallSchemeInput',
+            }),
+            'hall_upper_banner': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0',
+                'id': 'HallUpperBannerInput',
+            }),
+            'hall_image1': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0'
+            }),
+            'hall_image2': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'hall_image3': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'hall_image4': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'hall_image5': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            })}
 
 
 class NewsForm(ModelForm):

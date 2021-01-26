@@ -1,10 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'adminLte/base.html' %}
+{% block cinema %}
+    <li class="nav-item">
+        <a href="{% url 'admin_cinema_list' %}" class="nav-link active">
+              <i class="fas fa-video"></i>
+              <p>
+                  Кинотеатры
+              </p>
+        </a>
+    </li>
+{% endblock %}
+{% block content_title %}
+    <h1 class="m-0">Форма добавления кинотеатра</h1>
+{% endblock %}
+{% block main_content %}
+    <div class="features flex-fill">
+        <div class="row m-3">
+            <div class="container">
 
-</body>
-</html>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="CinemaNameInput"><h4>Название кинотеатра</h4></label>
+                        {{ form.cinema_name }}
+                    </div>
+                    <div class="form-group">
+                        <label for="CinemaDescriptionInput"><h4>Описание кинотеатра</h4></label>
+                        {{ form.cinema_description }}
+                    </div>
+                    <div class="form-group">
+                        <label for="CinemaConditionInput"><h4>Условие кинотеатра</h4></label>
+                        {{ form.cinema_condition }}
+                    </div>
+                    <div class="form-group">
+                        <label for="CinemaLogoInput"><h4>Логотип кинотеатра</h4></label>
+                        {{ form.cinema_logo }}
+                    </div>
+                    <div class="form-group">
+                        <label for="CinemaUpperBannerInput"><h4>Верхний баннер кинотеатра</h4></label>
+                        {{ form.cinema_upper_banner }}
+                    </div>
+                    <label for="FilmGallery"><h4>Галерея кинотеатра</h4></label>
+                    <div class="row" id="FilmGallery">
+                        <div class="col">
+                            {{ form.cinema_image1 }}
+                        </div>
+                        <div class="col">
+                            {{ form.cinema_image2 }}
+                        </div>
+                        <div class="col">
+                            {{ form.cinema_image3 }}
+                        </div>
+                        <div class="col">
+                            {{ form.cinema_image4 }}
+                        </div>
+                        <div class="col">
+                            {{ form.cinema_image5 }}
+                        </div>
+                    </div>
+                    {% for hall in halls %}
+                    <div class="card m-3" style="width: 10rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ cinema.hall_name }}</h5>
+                        </div>
+                        <div class="card-footer  ml-0 ">
+                            <div class="row mx-auto">
+                                <form method="get">
+                                    <a href="{% url 'admin_cinema_edit' pk=cinema.pk %}" class="btn btn-primary">Редактировать</a>
+                                </form>
+                                <div class="ml-auto">
+                                    <form method="post">
+                                        <a href="{% url 'admin_cinema_delete' pk=cinema.pk %}" class="btn btn-danger">Удалить</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- Ввод слаг-филда
+                    <div class="col-lg-4 my-3 pl-0">
+                        <label for="SlugName"><h4>Отображение ссылки</h4></label>
+                        <input type="text" placeholder="введите slug" class="form-control" id="SlugName">
+                    </div>
+                    -->
+                    <div class="container my-5">
+                        <button class="btn btn-success" type="submit">Сохранить</button>
+                        <a class="btn btn-danger" href="{% url 'admin_cinema_list' %}" role="button">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

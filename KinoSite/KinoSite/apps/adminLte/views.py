@@ -79,12 +79,13 @@ def cinema_list(request):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def cinema_form(request, pk=None):
-    film = get_object_or_404(models.Cinema, pk=pk) if pk else None
-    form = FilmForm(request.POST or None, request.FILES or None, instance=film or None)
+    cinema = get_object_or_404(models.Cinema, pk=pk) if pk else None
+    halls = models.CinemaHall.objects.filter(cinema=cinema)
+    form = forms.CinemaForm(request.POST or None, request.FILES or None, instance=cinema or None)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        return redirect('admin_film_list')
-    return render(request, 'adminLte/film/film_form.html', {'form': form})
+        return redirect('admin_cinema_list')
+    return render(request, 'adminLte/cinema/cinema_form.html', {'form': form, 'halls': halls})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
@@ -96,12 +97,12 @@ def cinema_delete(request, pk):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def hall_form(request, pk=None):
-    film = get_object_or_404(models.CinemaHall, pk=pk) if pk else None
-    form = FilmForm(request.POST or None, request.FILES or None, instance=film or None)
+    cinema_hall = get_object_or_404(models.CinemaHall, pk=pk) if pk else None
+    form = forms.CinemaHallForm(request.POST or None, request.FILES or None, instance=cinema_hall or None)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        return redirect('admin_film_list')
-    return render(request, 'adminLte/film/film_form.html', {'form': form})
+        return redirect('admin_cinema_list')
+    return render(request, 'adminLte/cinema/hall_form.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)

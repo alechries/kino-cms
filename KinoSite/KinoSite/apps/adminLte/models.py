@@ -51,6 +51,9 @@ class Cinema(models.Model):
     cinema_image4 = models.ImageField('Четвёртое изображение', upload_to='images/cinema/')
     cinema_image5 = models.ImageField('Пятое изображение', upload_to='images/cinema/')
 
+    def __str__(self):
+        return self.cinema_name
+
 
 class CinemaHall(models.Model):
     cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE)
@@ -63,6 +66,10 @@ class CinemaHall(models.Model):
     hall_image3 = models.ImageField('Третее изображение', upload_to='images/hall/')
     hall_image4 = models.ImageField('Четвёртое изображение', upload_to='images/hall/')
     hall_image5 = models.ImageField('Пятое изображение', upload_to='images/hall/')
+    hall_scheme = models.ImageField(verbose_name='Схема зала', upload_to='media/images/hall/logo/')
+
+    def __str__(self):
+        return self.hall_name
 
 
 class News(models.Model):
