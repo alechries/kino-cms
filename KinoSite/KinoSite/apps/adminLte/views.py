@@ -193,7 +193,7 @@ def users_list(request):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def redact(request):
-    return render(request, 'adminLte/users/users_edit.html')
+    return render(request, 'adminLte/users/users_page.html')
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
