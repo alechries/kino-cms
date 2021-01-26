@@ -1,6 +1,6 @@
 from . import models
 from django.forms import Form, ModelForm, TextInput, DateInput, FileInput, URLInput, CheckboxInput, Textarea, \
-    EmailField, CharField, PasswordInput, ImageField, ModelChoiceField, URLField, ChoiceField, TimeField, BooleanField, RadioSelect
+    EmailField, CharField, PasswordInput, ImageField, ModelChoiceField, URLField, ChoiceField, TimeField, BooleanField, RadioSelect, NumberInput
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -547,4 +547,65 @@ class ContactForm(ModelForm):
                 'class': 'form-control-file',
                 'id': 'ContactMainImage',
             }),
+
+
+class UserForm(ModelForm):
+    class Meta:
+        model = models.User
+        fields = ['name', 'surname', 'phone', 'username', 'email', 'address', 'password', 'password2', 'card_number',
+                  'language', 'gender', 'city', 'date_of_birth', 'gender']
+
+        widgets = {
+            'name': TextInput(attrs={
+                'class': "form-control",
+                'id': "InputName",
+            }),
+            'surname': TextInput(attrs={
+                'class': "form-control",
+                'id': "InputSurname",
+            }),
+            'username': TextInput(attrs={
+                'class': "form-control",
+                'id': "InputUsername",
+            }),
+            'phone': TextInput(attrs={
+                'class': "form-control",
+                'id': "InputPhone",
+            }),
+            'email': TextInput(attrs={
+                'class': "form-control",
+                'id': "InputEmail",
+                'type': "email",
+            }),
+            'date_of_birth': DateInput(attrs={
+                'type': "date",
+                'placeholder': "Введите дату рождения",
+                'class': "form-control",
+                'id': "InputDate",
+            }),
+            'address': TextInput(attrs={
+                'class': "form-control",
+                'id': "InputAddress",
+            }),
+            'password': TextInput(attrs={
+                'class': "form-control",
+                'id': "InputPassword",
+                'placeholder': "Введите пароль",
+            }),
+            'password2': TextInput(attrs={
+                'class': "form-control",
+                'id': "InputPassword2",
+                'placeholder': "Введите пароль",
+            }),
+            'card_number': TextInput(attrs={
+                'class': "form-control",
+                'id': "InputCardNumber",
+                'placeholder': "Пример: 1234 5678 9012 3456"
+            }),
+            'gender': RadioSelect(attrs={
+                'class': 'custom-control-input  custom-control-label',
+            }),
+            'language': RadioSelect(attrs={
+                'class': 'custom-control-input  custom-control-label',
+            })
         }
