@@ -34,6 +34,7 @@ urlpatterns = [
     path('users/list', views.users_list, name='admin_users_list'),
     path('user/form', views.user_form, name='admin_user_form'),
     path('user/form/<int:pk>', views.user_form, name='admin_user_edit'),
+    path('user/delete/<int:pk>', views.user_delete, name='admin_user_delete'),
     path('mailing/choose', views.user_choose, name='admin_user_choose'),
     path('mailing', views.mailing, name='admin_mailing'),
 

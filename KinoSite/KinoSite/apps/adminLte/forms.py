@@ -264,10 +264,9 @@ class UserForm(ModelForm):
                 'class': "form-control",
                 'id': "InputUsername",
             }),
-            'phone': NumberInput(attrs={
+            'phone': TextInput(attrs={
                 'class': "form-control",
                 'id': "InputPhone",
-                'type': "tel",
             }),
             'email': TextInput(attrs={
                 'class': "form-control",

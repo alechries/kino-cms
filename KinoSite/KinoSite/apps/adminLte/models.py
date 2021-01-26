@@ -169,3 +169,4 @@ class User(models.Model):
     gender = models.CharField(verbose_name='Пол', max_length=1, choices=GENDER, default=M)
     city = models.CharField(verbose_name='Город', choices=CITY, max_length=4)
     date_of_birth = models.DateField(verbose_name='Дата рождения', null=True)
+    register_date = models.DateField(verbose_name='дата регистрации', auto_created=True, null=True)

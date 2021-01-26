@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import FilmForm, LoginForm, NewsForm, UserForm
 from . import models, forms
 
+
 ADMIN_LOGIN_REDIRECT_URL = '/adminLte/account/login'
 
 
@@ -188,7 +189,9 @@ def contact(request):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def users_list(request):
-    return render(request, 'adminLte/users/users_list.html')
+    user = models.User.objects.all()
+
+    return render(request, 'adminLte/users/users_list.html', {'user': user})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
@@ -199,6 +202,12 @@ def user_form(request, pk=None):
         form.save()
         return redirect('admin_users_list')
     return render(request, 'adminLte/users/user_form.html', {'form': form})
+
+
+def user_delete(request, pk):
+    user = models.User.objects.filter(id=pk)
+    user.delete()
+    return redirect('admin_users_list')
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
