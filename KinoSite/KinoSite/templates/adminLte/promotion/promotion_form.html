@@ -1,0 +1,77 @@
+{% extends 'adminLte/base.html' %}
+{% block promotion %}
+    <li class="nav-item">
+        <a href="{% url 'admin_promotion_list' %}" class="nav-link active">
+              <i class="fas fa-percent"></i>
+              <p>
+                  Акции
+              </p>
+        </a>
+    </li>
+{% endblock %}
+{% block content_title %}
+{% endblock %}
+{% block main_content %}
+ <div class="features flex-fill">
+        <div class="row m-3">
+            <div class="container">
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="PromotionNameInput"><h4>Название акции</h4></label>
+                            <div class="col-md-6" id="promotionNameInput">
+                                {{ form.promo_name }}
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="PromotionStatus"><h4>Статус акции</h4></label>
+                            <div class=" col-md-4" id="promotionStatus" >
+                                {{ form.promo_status }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="PromotionTextInput"><h4>Описание акции</h4></label>
+                        {{ form.promo_description }}
+                    </div>
+                    <div class="form-group">
+                        <label for="PromotionMainImage"><h4>Главная акции</h4></label>
+                        {{ form.promo_main_image }}
+                    </div>
+                    <label for="PromotionGallery"><h4>Галерея картинок</h4></label>
+                        <div class="row" id="PromotionGallery">
+                            <div class="col">
+                                {{ form.promo_image1 }}
+                            </div>
+                            <div class="col">
+                                 {{ form.promo_image2 }}
+                            </div>
+                            <div class="col">
+                                 {{ form.promo_image3 }}
+                            </div>
+                            <div class="col">
+                                 {{ form.promo_image4 }}
+                            </div>
+                            <div class="col">
+                                 {{ form.promo_image5 }}
+                            </div>
+                        </div>
+                    <div class="col-lg-6 my-3 pl-0">
+                        <label for="PromotionUrl"><h4>Ссылка на новость</h4></label>
+                        {{ form.promo_url }}
+                    </div>
+                    <div class="col-lg-6 my-3 pl-0">
+                        <label for="PromotionPublishedDate"><h4>Дата публикации</h4></label>
+                        {{ form.promo_published_date }}
+                    </div>
+                    <div class="container my-5">
+                        <button class="btn btn-success" type="submit">Сохранить</button>
+                        <a class="btn btn-danger" href="{% url 'admin_promotion_list' %}" role="button">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+ </div>
+{% endblock %}

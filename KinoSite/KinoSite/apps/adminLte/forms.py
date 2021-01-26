@@ -243,3 +243,55 @@ class NewsForm(ModelForm):
                 'id': "NewsPublishedDate",
             }),
         }
+
+
+class PromotionForm(ModelForm):
+    class Meta:
+        model = models.Promotion
+
+        fields = ['promo_name', 'promo_description', 'promo_main_image', 'promo_image1', 'promo_image2', 'promo_image3',
+                  'promo_image4', 'promo_image5', 'promo_url', 'promo_published_date', 'promo_status']
+
+        widgets = {
+            'promo_name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите название акции',
+                'id': 'PromotionNameInput',
+            }),
+            'promo_description': Textarea(attrs={
+                'class': 'form-control',
+                'id': 'PromotionTextInput',
+                'rows': '5',
+                'placeholder': 'Введите описание акции',
+            }),
+            'promo_main_image': FileInput(attrs={
+                'class': 'form-control-file',
+                'id': 'PromotionMainImage',
+            }),
+            'promo_image1': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0'
+            }),
+            'promo_image2': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'promo_image3': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'promo_image4': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'promo_image5': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'promo_url': URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите ссылку на акцию',
+                'id': 'PromotionUrl',
+            }),
+            'promo_published_date': DateInput(attrs={
+                'type': "date",
+                'placeholder': "Введите дату публикации",
+                'class': "form-control",
+                'id': "PromotionPublishedDate",
+            }),
+        }
