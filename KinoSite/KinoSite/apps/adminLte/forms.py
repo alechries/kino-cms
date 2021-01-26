@@ -195,5 +195,4 @@ class NewsForm(ModelForm):
                 'class': "form-control",
                 'id': "NewsPublishedDate",
             }),
-
         }

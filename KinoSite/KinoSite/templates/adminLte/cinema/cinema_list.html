@@ -18,7 +18,7 @@
 {% endblock %}
 {% block main_content %}
     {% for cinema in cinemas %}
-        <div class="card m-3" style="width: 18rem;">
+        <div class="card m-3">
             <img src="{{ cinema.cinema_logo.url }}" class="card-img-top" alt="cinema_image">
                 <div class="card-body">
                     <h5 class="card-title">{{ cinema.cinema_name }}</h5>
