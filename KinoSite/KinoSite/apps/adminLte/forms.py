@@ -245,6 +245,310 @@ class NewsForm(ModelForm):
         }
 
 
+class PromotionForm(ModelForm):
+    class Meta:
+        model = models.Promotion
+
+        fields = ['promo_name', 'promo_description', 'promo_main_image', 'promo_image1', 'promo_image2', 'promo_image3',
+                  'promo_image4', 'promo_image5', 'promo_url', 'promo_published_date', 'promo_status']
+
+        widgets = {
+            'promo_name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите название акции',
+                'id': 'PromotionNameInput',
+            }),
+            'promo_description': Textarea(attrs={
+                'class': 'form-control',
+                'id': 'PromotionTextInput',
+                'rows': '5',
+                'placeholder': 'Введите описание акции',
+            }),
+            'promo_main_image': FileInput(attrs={
+                'class': 'form-control-file',
+                'id': 'PromotionMainImage',
+            }),
+            'promo_image1': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0'
+            }),
+            'promo_image2': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'promo_image3': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'promo_image4': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'promo_image5': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'promo_url': URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите ссылку на акцию',
+                'id': 'PromotionUrl',
+            }),
+            'promo_published_date': DateInput(attrs={
+                'type': "date",
+                'placeholder': "Введите дату публикации",
+                'class': "form-control",
+                'id': "PromotionPublishedDate",
+            }),
+        }
+
+
+class MainPageForm(ModelForm):
+    class Meta:
+        model = models.MainPage
+        fields = ['tel_number1', 'tel_number2']
+        widgets = {
+            'tel_number1': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '00000000',
+                'id': 'TelNumber1Input',
+            }),
+            'tel_number2': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '00000000',
+                'id': 'TelNumber2Input',
+            }),
+        }
+
+
+class AboutCinemaForm(ModelForm):
+    class Meta:
+        model = models.AboutCinema
+
+        fields = ['cinema_name', 'cinema_description', 'cinema_main_image', 'cinema_image1', 'cinema_image2',
+                  'cinema_image3', 'cinema_image4', 'cinema_image5']
+
+        widgets = {
+            'cinema_name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите название сети кинотеатров',
+                'id': 'AboutNameInput',
+            }),
+            'cinema_description': Textarea(attrs={
+                'class': 'form-control',
+                'id': 'AboutTextInput',
+                'rows': '5',
+                'placeholder': 'Введите описание сети кинотеатров',
+            }),
+            'cinema_main_image': FileInput(attrs={
+                'class': 'form-control-file',
+                'id': 'AboutMainImage',
+            }),
+            'cinema_image1': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0'
+            }),
+            'cinema_image2': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'cinema_image3': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'cinema_image4': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'cinema_image5': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+        }
+
+
+class CafeBarForm(ModelForm):
+    class Meta:
+        model = models.CafeBar
+
+        fields = ['cafebar_name', 'cafebar_description', 'cafebar_main_image', 'cafebar_image1', 'cafebar_image2',
+                  'cafebar_image3', 'cafebar_image4', 'cafebar_image5']
+
+        widgets = {
+            'cafebar_name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите название кафе-бара',
+                'id': 'CafeBarNameInput',
+            }),
+            'cafebar_description': Textarea(attrs={
+                'class': 'form-control',
+                'id': 'CafeBarTextInput',
+                'rows': '5',
+                'placeholder': 'Введите описание кафе-бара',
+            }),
+            'cafebar_main_image': FileInput(attrs={
+                'class': 'form-control-file',
+                'id': 'CafeBarMainImage',
+            }),
+            'cafebar_image1': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0'
+            }),
+            'cafebar_image2': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'cafebar_image3': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'cafebar_image4': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'cafebar_image5': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+        }
+
+
+class VipHallForm(ModelForm):
+    class Meta:
+        model = models.VipHall
+
+        fields = ['hall_name', 'hall_description', 'hall_main_image', 'hall_image1', 'hall_image2',
+                  'hall_image3', 'hall_image4', 'hall_image5']
+
+        widgets = {
+            'hall_name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите название VIP-зала',
+                'id': 'VipHallNameInput',
+            }),
+            'hall_description': Textarea(attrs={
+                'class': 'form-control',
+                'id': 'VipHallTextInput',
+                'rows': '5',
+                'placeholder': 'Введите описание VIP-зала',
+            }),
+            'hall_main_image': FileInput(attrs={
+                'class': 'form-control-file',
+                'id': 'VipHallMainImage',
+            }),
+            'hall_image1': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0'
+            }),
+            'hall_image2': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'hall_image3': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'hall_image4': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'hall_image5': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+        }
+
+
+class AdvertisingForm(ModelForm):
+    class Meta:
+        model = models.Advertising
+
+        fields = ['adv_name', 'adv_description', 'adv_main_image', 'adv_image1', 'adv_image2',
+                  'adv_image3', 'adv_image4', 'adv_image5']
+
+        widgets = {
+            'adv_name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите название рекламы',
+                'id': 'AdvNameInput',
+            }),
+            'adv_description': Textarea(attrs={
+                'class': 'form-control',
+                'id': 'AdvTextInput',
+                'rows': '5',
+                'placeholder': 'Введите описание рекламы',
+            }),
+            'adv_main_image': FileInput(attrs={
+                'class': 'form-control-file',
+                'id': 'AdvMainImage',
+            }),
+            'adv_image1': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0'
+            }),
+            'adv_image2': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'adv_image3': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'adv_image4': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'adv_image5': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+        }
+
+
+class ChildRoomForm(ModelForm):
+    class Meta:
+        model = models.ChildRoom
+
+        fields = ['room_name', 'room_description', 'room_main_image', 'room_image1', 'room_image2',
+                  'room_image3', 'room_image4', 'room_image5']
+
+        widgets = {
+            'room_name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите название детской комнаты',
+                'id': 'RoomNameInput',
+            }),
+            'room_description': Textarea(attrs={
+                'class': 'form-control',
+                'id': 'RoomTextInput',
+                'rows': '5',
+                'placeholder': 'Введите описание детской комнаты',
+            }),
+            'room_main_image': FileInput(attrs={
+                'class': 'form-control-file',
+                'id': 'RoomMainImage',
+            }),
+            'room_image1': FileInput(attrs={
+                'class': 'form-control-file col-md-3 pl-0'
+            }),
+            'room_image2': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'room_image3': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'room_image4': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+            'room_image5': FileInput(attrs={
+                'class': 'form-control-file col-md-3'
+            }),
+        }
+
+
+class ContactForm(ModelForm):
+    class Meta:
+        model = models.Contact
+
+        fields = ['contact_name', 'contact_address', 'contact_location', 'contact_logo']
+
+        widgets = {
+            'contact_name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите название кинотеатра',
+                'id': 'ContactNameInput',
+            }),
+            'contact_address': Textarea(attrs={
+                'class': 'form-control',
+                'id': 'ContactAddressInput',
+                'rows': '5',
+                'placeholder': 'Введите адрес кинотеатра',
+            }),
+            'contact_location': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите координаты карты',
+                'id': 'ContactCoordInput',
+            }),
+            'contact_logo': FileInput(attrs={
+                'class': 'form-control-file',
+                'id': 'ContactMainImage',
+            }),
+
+
 class UserForm(ModelForm):
     class Meta:
         model = models.User

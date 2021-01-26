@@ -30,7 +30,7 @@ def admin_index(request):
 
 def account_login(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = forms.LoginForm(request.POST)
         if form.is_valid():
             user = authenticate(request,
                                 username=form.cleaned_data['username'],
@@ -47,7 +47,7 @@ def account_login(request):
             _message = 'Data is incorrect'
     else:
         _message = 'Please, Sign in'
-    return render(request, 'adminLte/account/login.html', {'form': LoginForm(), 'message': _message})
+    return render(request, 'adminLte/account/login.html', {'form': forms.LoginForm(), 'message': _message})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
@@ -64,7 +64,7 @@ def banner(request):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def film_edit_form(request, pk=None):
     film = get_object_or_404(models.Film, pk=pk) if pk else None
-    form = FilmForm(request.POST or None, request.FILES or None, instance=film or None)
+    form = forms.FilmForm(request.POST or None, request.FILES or None, instance=film or None)
     if request.method == 'POST' and form.is_valid():
         form.save()
         return redirect('admin_film_list')
@@ -129,7 +129,7 @@ def hall_delete(request, pk):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def news_form(request, pk=None):
     news = get_object_or_404(models.News, pk=pk) if pk else None
-    form = NewsForm(request.POST or None, request.FILES or None, instance=news or None)
+    form = forms.NewsForm(request.POST or None, request.FILES or None, instance=news or None)
     if request.method == 'POST' and form.is_valid():
         form.save()
         return redirect('admin_news_list')
@@ -139,7 +139,6 @@ def news_form(request, pk=None):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def news_list(request):
     news = models.News.objects.all()
-
     return render(request, 'adminLte/news/news_list.html', {'news': news})
 
 
@@ -152,12 +151,25 @@ def news_delete(request, pk):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def promotion_list(request):
-    return render(request, 'adminLte/promotion/promotion_list.html')
+    promotions = models.Promotion.objects.all()
+    return render(request, 'adminLte/promotion/promotion_list.html', {'promotions': promotions})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
-def promotion_page(request):
-    return render(request, 'adminLte/promotion/promotion_page.html')
+def promotion_form(request, pk=None):
+    promotion = get_object_or_404(models.Promotion, pk=pk) if pk else None
+    form = forms.PromotionForm(request.POST or None, request.FILES or None, instance=promotion or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('admin_promotion_list')
+    return render(request, 'adminLte/promotion/promotion_form.html', {'form': form})
+
+
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
+def promotion_delete(request, pk):
+    news = models.Promotion.objects.filter(id=pk)
+    news.delete()
+    return redirect('admin_promotion_list')
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
@@ -167,37 +179,91 @@ def pages_list(request):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def main_pages(request):
-    return render(request, 'adminLte/pages/main_page.html')
+    solo: models.MainPage = models.MainPage.get_solo()
+    form = forms.MainPageForm(request.POST or None, instance=solo or None)
+    if request.method == 'POST' and form.is_valid():
+        mp: models.MainPage = form.save(commit=False)
+        mp.save()
+        return redirect('admin_pages_list')
+    return render(request, 'adminLte/pages/main_page.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def about_cinema(request):
-    return render(request, 'adminLte/pages/about_cinema.html')
+    solo: models.AboutCinema = models.AboutCinema.get_solo()
+    form = forms.AboutCinemaForm(request.POST or None, instance=solo or None)
+    if request.method == 'POST' and form.is_valid():
+        mp: models.AboutCinema = form.save(commit=False)
+        mp.save()
+        return redirect('admin_pages_list')
+    return render(request, 'adminLte/pages/about_cinema.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def cafe_bar(request):
-    return render(request, 'adminLte/pages/cafe_bar.html')
+    solo: models.CafeBar = models.CafeBar.get_solo()
+    form = forms.CafeBarForm(request.POST or None, instance=solo or None)
+    if request.method == 'POST' and form.is_valid():
+        mp: models.CafeBar = form.save(commit=False)
+        mp.save()
+        return redirect('admin_pages_list')
+    return render(request, 'adminLte/pages/cafe_bar.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
-def vip_room(request):
-    return render(request, 'adminLte/pages/vip_room.html')
+def vip_hall(request):
+    solo: models.VipHall = models.VipHall.get_solo()
+    form = forms.VipHallForm(request.POST or None, instance=solo or None)
+    if request.method == 'POST' and form.is_valid():
+        mp: models.AboutCinema = form.save(commit=False)
+        mp.save()
+        return redirect('admin_pages_list')
+    return render(request, 'adminLte/pages/vip_room.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def ads(request):
-    return render(request, 'adminLte/pages/ads.html')
+    solo: models.Advertising = models.Advertising.get_solo()
+    form = forms.AdvertisingForm(request.POST or None, instance=solo or None)
+    if request.method == 'POST' and form.is_valid():
+        mp: models.Advertising = form.save(commit=False)
+        mp.save()
+        return redirect('admin_pages_list')
+    return render(request, 'adminLte/pages/ads.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def child_room(request):
-    return render(request, 'adminLte/pages/child_room.html')
+    solo: models.ChildRoom = models.ChildRoom.get_solo()
+    form = forms.ChildRoomForm(request.POST or None, instance=solo or None)
+    if request.method == 'POST' and form.is_valid():
+        mp: models.ChildRoom = form.save(commit=False)
+        mp.save()
+        return redirect('admin_pages_list')
+    return render(request, 'adminLte/pages/child_room.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
-def contact(request):
-    return render(request, 'adminLte/pages/contact.html')
+def contact_list(request):
+    contacts = models.Contact.objects.all()
+    return render(request, 'adminLte/pages/contact_list.html', {'contacts': contacts})
+
+
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
+def contact_form(request, pk=None):
+    contact = get_object_or_404(models.Contact, pk=pk) if pk else None
+    form = forms.ContactForm(request.POST or None, request.FILES or None, instance=contact or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('admin_contact_list')
+    return render(request, 'adminLte/pages/contact_form.html', {'form': form})
+
+
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
+def contact_delete(request, pk):
+    contacts = models.Contact.objects.filter(id=pk)
+    contacts.delete()
+    return redirect('admin_page_list')
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)

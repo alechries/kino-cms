@@ -26,6 +26,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'grappelli',
+    'solo',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,6 +128,3 @@ MEDIA_URL = '/media/'
 # LOGIN_REDIRECT_URL = 'home'
 # LOGOUT_REDIRECT_URL = 'home'
 # TEST COMMENT
-
-
-APPEND_SLASH = False
