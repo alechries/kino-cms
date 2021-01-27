@@ -133,5 +133,5 @@ MEDIA_URL = '/media/'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'dimadjangosendemail@gmail.com'
-EMAIL_HOST_PASSWORD = '42640987Asd'
+EMAIL_HOST_PASSWORD = '15s1s45f2s21te'
 EMAIL_USE_TLS = True
