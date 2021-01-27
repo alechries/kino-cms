@@ -138,8 +138,8 @@ class Page(models.Model):
 
 
 class MainPage(SingletonModel):
-    tel_number1 = models.IntegerField(verbose_name='Номер телефона')
-    tel_number2 = models.IntegerField(verbose_name='Номер телефона')
+    tel_number1 = models.IntegerField(verbose_name='Номер телефона', null=True)
+    tel_number2 = models.IntegerField(verbose_name='Номер телефона', null=True)
 
 
 class AboutCinema(SingletonModel):
