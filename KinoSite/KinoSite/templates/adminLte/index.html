@@ -10,7 +10,87 @@
           </li>
 {% endblock %}
 {% block content_title %}
-    <h1 class="m-0">Statistic</h1>
+<h1 class="m-0">Статистика</h1>
 {% endblock %}
 {% block main_content %}
+<div class="row">
+    <div class="col-lg-5 col-6">
+        <!-- small card -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>{{ films_count }}</h3>
+                <p>Фильмы</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-film"></i>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-5 col-6">
+        <!-- small card -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>{{ cinema_count }}</h3>
+                <p>Кинотеатры</p>
+            </div>
+            <div class="icon">
+                <i class="ion fa-video"></i>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-5 col-6">
+        <!-- small card -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>{{ cinema_hall_count }}</h3>
+                <p>Залы</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-video"></i>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-5 col-6">
+        <!-- small card -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>{{ news_count }}</h3>
+                <p>Новости</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-newspaper"></i>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-5 col-6">
+        <!-- small card -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>{{ promo_count }}</h3>
+                <p>Акции</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-percent"></i>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-5 col-6">
+        <!-- small card -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>{{ user_count }}</h3>
+                <p>Пользователи</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-users"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
 {% endblock %}

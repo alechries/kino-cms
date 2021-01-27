@@ -10,7 +10,7 @@
     </li>
 {% endblock %}
 {% block content_title %}
-    <h1 class="m-0">Форма добавления кинотеатра</h1>
+    <h1 class="m-0">Форма кинотеатра</h1>
 {% endblock %}
 {% block main_content %}
     <div class="features flex-fill">
@@ -57,25 +57,28 @@
                             {{ form.cinema_image5 }}
                         </div>
                     </div>
-                    {% for hall in halls %}
-                    <div class="card m-3" style="width: 10rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ cinema.hall_name }}</h5>
-                        </div>
-                        <div class="card-footer  ml-0 ">
-                            <div class="row mx-auto">
-                                <form method="get">
-                                    <a href="{% url 'admin_cinema_edit' pk=cinema.pk %}" class="btn btn-primary">Редактировать</a>
-                                </form>
-                                <div class="ml-auto">
-                                    <form method="post">
-                                        <a href="{% url 'admin_cinema_delete' pk=cinema.pk %}" class="btn btn-danger">Удалить</a>
+                    <label for="HallsList"><h4>Залы кинотеатра</h4></label>
+                    <div class="form-group" id="HallsList">
+                        {% for hall in halls %}
+                        <div class="card m-3" style="width: 10rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ hall.hall_name }}</h5>
+                            </div>
+                            <div class="card-footer  ml-0 ">
+                                <div class="row mx-auto">
+                                    <form method="get">
+                                        <a href="{% url 'admin_hall_edit' pk=hall.pk %}" class="btn btn-primary">Редактировать</a>
                                     </form>
+                                    <div class="ml-auto">
+                                        <form method="post">
+                                            <a href="{% url 'admin_hall_delete' pk=hall.pk %}" class="btn btn-danger">Удалить</a>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                     <!-- Ввод слаг-филда
                     <div class="col-lg-4 my-3 pl-0">
                         <label for="SlugName"><h4>Отображение ссылки</h4></label>
