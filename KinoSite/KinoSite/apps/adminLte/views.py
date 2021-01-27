@@ -25,7 +25,15 @@ def content_page(request, posts_key, posts, limit: int, template: str):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def admin_index(request):
-    return render(request, 'adminLte/index.html')
+    context = {
+        'films_count': models.Film.objects.count(),
+        'cinema_count': models.Cinema.objects.count(),
+        'cinema_hall_count': models.CinemaHall.objects.count(),
+        'news_count': models.News.objects.count(),
+        'promo_count': models.Promotion.objects.count(),
+        'user_count': models.User.objects.count(),
+    }
+    return render(request, 'adminLte/index.html', context)
 
 
 def account_login(request):
