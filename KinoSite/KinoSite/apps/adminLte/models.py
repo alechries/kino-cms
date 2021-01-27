@@ -239,3 +239,18 @@ class User(models.Model):
     date_of_birth = models.DateField(verbose_name='Дата рождения', null=True)
     register_date = models.DateField(verbose_name='дата регистрации', auto_now_add=True, null=True)
 
+
+class MainSlide(models.Model):
+    slide_text = models.TextField(verbose_name='Текст слайда')
+    slide_image = models.ImageField(verbose_name='Изображение слайда', upload_to='images/news_promo_posts/')
+    slide_url = models.URLField(verbose_name='Ссылка слайда')
+
+
+class NewsPromoSlide(models.Model):
+    slide_text = models.TextField(verbose_name='Текст слайда')
+    slide_image = models.ImageField(verbose_name='Изображение слайда', upload_to='images/news_promo_posts/')
+    slide_url = models.URLField(verbose_name='Ссылка слайда')
+
+
+class BackgroundBanner(SingletonModel):
+    banner_image = models.ImageField(verbose_name='Изображение фона', upload_to='images/background/')
