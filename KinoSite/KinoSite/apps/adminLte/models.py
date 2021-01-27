@@ -246,14 +246,16 @@ class User(models.Model):
 
 class MainSlide(models.Model):
     slide_text = models.TextField(verbose_name='Текст слайда')
-    slide_image = models.ImageField(verbose_name='Изображение слайда', upload_to='images/news_promo_posts/')
+    slide_image = models.ImageField(verbose_name='Изображение слайда', upload_to='images/main_slide/')
     slide_url = models.URLField(verbose_name='Ссылка слайда')
+    slide_timer = models.IntegerField(verbose_name='Скорость вращения')
 
 
 class NewsPromoSlide(models.Model):
     slide_text = models.TextField(verbose_name='Текст слайда')
-    slide_image = models.ImageField(verbose_name='Изображение слайда', upload_to='images/news_promo_posts/')
+    slide_image = models.ImageField(verbose_name='Изображение слайда', upload_to='images/news_promo/')
     slide_url = models.URLField(verbose_name='Ссылка слайда')
+    slide_timer = models.IntegerField(verbose_name='Скорость вращения')
 
 
 class BackgroundBanner(SingletonModel):
