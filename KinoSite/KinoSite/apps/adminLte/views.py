@@ -321,3 +321,20 @@ def user_choose(request):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def mailing(request):
     return render(request, 'adminLte/mailing/mailing.html')
+
+
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
+def main_slide_form(request, pk=None):
+    slide = get_object_or_404(models.MainSlide, pk=pk) if pk else None
+    form = forms.MainSlideForm(request.POST or None, instance=slide or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('admin_banner_list')
+    return render(request, 'adminLte/users/user_form.html', {'form': form})
+
+
+@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
+def main_slide(request, pk):
+    slide = models.MainSlide.objects.filter(id=pk)
+    slide.delete()
+    return redirect('admin_banner_list')
