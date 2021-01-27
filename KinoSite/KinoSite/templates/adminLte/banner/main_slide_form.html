@@ -1,0 +1,53 @@
+{% extends 'adminLte/base.html' %}
+{% block film %}
+<li class="nav-item">
+    <a href="{% url 'admin_banner' %}" class="nav-link">
+        <i class="fas fa-sliders-h"></i>
+        <p>
+            Баннеры \ Слайды
+        </p>
+    </a>
+</li>
+{% endblock %}
+{% block content_title %}
+    <h1 class="m-0">Форма добавления слайдов на главную страницу</h1>
+{% endblock %}
+{% block main_content %}
+    <div class="features flex-fill">
+        <div class="row m-3">
+            <div class="container">
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="MainSlideImage"><h4>Изображение слайда</h4></label>
+                        {{ form.slide_image }}
+                    </div>
+                    <div class="form-group">
+                        <label for="MainSlideURL"><h4>Ссылка слайда</h4></label>
+                        {{ form.slide_url }}
+                    </div>
+                    <div class="form-group">
+                        <label for="MainSlideText"><h4>Текст слайда</h4></label>
+                        {{ form.slide_text }}
+                    </div>
+                    <div class="form-group">
+                        <label for="NewsPromoNumber"><h4>Скорость вращения (сек)</h4></label>
+                        {{ form.slide_timer }}
+                    </div>
+                    <!-- Ввод слаг-филда
+                    <div class="col-lg-4 my-3 pl-0">
+                        <label for="SlugName"><h4>Отображение ссылки</h4></label>
+                        <input type="text" placeholder="введите slug" class="form-control" id="SlugName">
+                    </div>
+                    -->
+                    <div class="container my-5">
+                        <button class="btn btn-success" type="submit">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

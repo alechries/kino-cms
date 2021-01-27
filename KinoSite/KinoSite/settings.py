@@ -26,6 +26,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'grappelli',
+    'solo',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,5 +129,9 @@ MEDIA_URL = '/media/'
 # LOGOUT_REDIRECT_URL = 'home'
 # TEST COMMENT
 
-
-APPEND_SLASH = False
+#smtp
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'dimadjangosendemail@gmail.com'
+EMAIL_HOST_PASSWORD = '42640987Asd'
+EMAIL_USE_TLS = True

@@ -13,12 +13,12 @@
     <h1 class="m-0">Кинотеатры</h1>
 {% endblock %}
 {% block navbar_item %}
-<a class="btn btn-success" href="{% url 'admin_cinema_form' %}">Добавить кинотеатр</a>
+<a class="btn btn-success" href="{% url 'admin_cinema_form' %}" style="margin-right: 20px;">Добавить кинотеатр</a>
 <a class="btn btn-success" href="{% url 'admin_hall_form' %}">Добавить зал</a>
 {% endblock %}
 {% block main_content %}
     {% for cinema in cinemas %}
-        <div class="card m-3" style="width: 18rem;">
+        <div class="card m-3" style="width: 18rem">
             <img src="{{ cinema.cinema_logo.url }}" class="card-img-top" alt="cinema_image">
                 <div class="card-body">
                     <h5 class="card-title">{{ cinema.cinema_name }}</h5>

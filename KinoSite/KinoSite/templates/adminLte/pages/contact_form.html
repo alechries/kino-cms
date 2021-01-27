@@ -1,0 +1,90 @@
+{% extends 'adminLte/base.html' %}
+{% block page %}
+<li class="nav-item menu-open">
+    <a href="#" class="nav-link active">
+        <i class="fas fa-pager"></i>
+        <p>
+            Страницы
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{% url 'admin_main_info' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Главная страница</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'admin_about_cinema' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>О сети кинотеатров</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'admin_cafe_bar' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Кафе-бар</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'admin_vip_hall' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>VIP-зал</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'admin_ads' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Реклама</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'admin_child_room' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Детская комната</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'admin_contact_list' %}" class="nav-link active">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Контакты кинотеатров</p>
+            </a>
+        </li>
+    </ul>
+</li>
+{% endblock %}
+{% block content_title %}
+<h1 class="m-0">Форма контактов</h1>
+{% endblock %}
+{% block main_content %}
+ <div class="features flex-fill">
+        <div class="row m-3">
+            <div class="container">
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="ContactNameInput"><h4>Название кинотеатра</h4></label>
+                        {{ form.contact_name }}
+                    </div>
+                    <div class="form-group">
+                        <label for="ContactAddressInput"><h4>Адрес кинотеатра</h4></label>
+                        {{ form.contact_address }}
+                    </div>
+                    <div class="form-group">
+                        <label for="ContactCoordInput"><h4>Координаты кинотеатра на карте</h4></label>
+                        {{ form.contact_location }}
+                    </div>
+                    <div class="form-group">
+                        <label for="ContactMainImage"><h4>Главная картинка</h4></label>
+                        {{ form.contact_logo }}
+                    </div>
+                    <div class="container my-5">
+                        <button class="btn btn-success" type="submit">Сохранить</button>
+                        <a class="btn btn-danger" href="{% url 'admin_contact_list' %}" role="button">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+ </div>
+{% endblock %}
