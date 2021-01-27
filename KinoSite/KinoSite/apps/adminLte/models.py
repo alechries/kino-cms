@@ -239,3 +239,6 @@ class User(models.Model):
     date_of_birth = models.DateField(verbose_name='Дата рождения', null=True)
     register_date = models.DateField(verbose_name='дата регистрации', auto_now_add=True, null=True)
 
+    def __str__(self):
+        return self.username
+

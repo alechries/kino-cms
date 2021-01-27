@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import FilmForm, LoginForm, NewsForm, UserForm
 from . import models, forms
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
 
 
 ADMIN_LOGIN_REDIRECT_URL = '/adminLte/account/login'
@@ -308,4 +309,11 @@ def user_choose(request):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def mailing(request):
+    user = models.User.objects.values('email')
+    print(user)
+    for el in user:
+        user_email = el['email']
+        print(user_email)
+        send_mail('Subject here', 'Here is the message.', 'dimadjangosendemail@gmail.com',
+        [user_email])
     return render(request, 'adminLte/mailing/mailing.html')
