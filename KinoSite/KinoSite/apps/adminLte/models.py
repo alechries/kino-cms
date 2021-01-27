@@ -36,7 +36,7 @@ class BannerImage(models.Model):
 
 
 class UpperBanner(models.Model):
-    upper_banner_image = models.ImageField('Верхний баннер', upload_to='images/upper_banner')
+    upper_banner_image1 = models.ImageField('Верхний баннер', upload_to='images/upper_banner')
 
 
 class Cinema(models.Model):

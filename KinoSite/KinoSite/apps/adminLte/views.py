@@ -184,10 +184,8 @@ def main_pages(request):
     if request.method == 'POST' and form.is_valid():
         mp: models.MainPage = form.save(commit=False)
         mp.save()
-        context = {'form': form, 'messages': 'Сохранено'}
-    else:
-        context = {'form': form}
-    return render(request, 'adminLte/pages/main_page.html', context)
+        return redirect('admin_pages_list')
+    return render(request, 'adminLte/pages/main_page.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
@@ -197,10 +195,8 @@ def about_cinema(request):
     if request.method == 'POST' and form.is_valid():
         mp: models.AboutCinema = form.save(commit=False)
         mp.save()
-        context = {'form': form, 'messages': 'Сохранено'}
-    else:
-        context = {'form': form}
-    return render(request, 'adminLte/pages/about_cinema.html', context)
+        return redirect('admin_pages_list')
+    return render(request, 'adminLte/pages/about_cinema.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
@@ -210,10 +206,8 @@ def cafe_bar(request):
     if request.method == 'POST' and form.is_valid():
         mp: models.CafeBar = form.save(commit=False)
         mp.save()
-        context = {'form': form, 'messages': 'Сохранено'}
-    else:
-        context = {'form': form}
-    return render(request, 'adminLte/pages/cafe_bar.html', context)
+        return redirect('admin_pages_list')
+    return render(request, 'adminLte/pages/cafe_bar.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
@@ -223,10 +217,8 @@ def vip_hall(request):
     if request.method == 'POST' and form.is_valid():
         mp: models.AboutCinema = form.save(commit=False)
         mp.save()
-        context = {'form': form, 'messages': 'Сохранено'}
-    else:
-        context = {'form': form}
-    return render(request, 'adminLte/pages/vip_room.html', context)
+        return redirect('admin_pages_list')
+    return render(request, 'adminLte/pages/vip_room.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
@@ -236,10 +228,8 @@ def ads(request):
     if request.method == 'POST' and form.is_valid():
         mp: models.Advertising = form.save(commit=False)
         mp.save()
-        context = {'form': form, 'messages': 'Сохранено'}
-    else:
-        context = {'form': form}
-    return render(request, 'adminLte/pages/ads.html', context)
+        return redirect('admin_pages_list')
+    return render(request, 'adminLte/pages/ads.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
@@ -249,10 +239,8 @@ def child_room(request):
     if request.method == 'POST' and form.is_valid():
         mp: models.ChildRoom = form.save(commit=False)
         mp.save()
-        context = {'form': form, 'messages': 'Сохранено'}
-    else:
-        context = {'form': form}
-    return render(request, 'adminLte/pages/child_room.html', context)
+        return redirect('admin_pages_list')
+    return render(request, 'adminLte/pages/child_room.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
