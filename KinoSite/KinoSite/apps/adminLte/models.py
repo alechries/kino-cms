@@ -242,3 +242,20 @@ class User(models.Model):
     def __str__(self):
         return self.username
 
+
+
+class MainSlide(models.Model):
+    slide_text = models.TextField(verbose_name='Текст слайда')
+    slide_image = models.ImageField(verbose_name='Изображение слайда', upload_to='images/news_promo_posts/')
+    slide_url = models.URLField(verbose_name='Ссылка слайда')
+
+
+class NewsPromoSlide(models.Model):
+    slide_text = models.TextField(verbose_name='Текст слайда')
+    slide_image = models.ImageField(verbose_name='Изображение слайда', upload_to='images/news_promo_posts/')
+    slide_url = models.URLField(verbose_name='Ссылка слайда')
+
+
+class BackgroundBanner(SingletonModel):
+    banner_image = models.ImageField(verbose_name='Изображение фона', upload_to='images/background/')
+
