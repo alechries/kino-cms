@@ -610,3 +610,71 @@ class UserForm(ModelForm):
                 'class': 'custom-control-input  custom-control-label',
             })
         }
+
+
+class MainSlideForm(ModelForm):
+    class Meta:
+        model = models.MainSlide
+        fields = ['slide_text', 'slide_image', 'slide_url']
+
+        widgets = {
+            'slide_image': FileInput(attrs={
+                'class': 'form-control-file',
+                'id': 'MainSlideImage',
+            }),
+            'slide_text': TextInput(attrs={
+                'class': "form-control",
+                'id': "MainSlideText",
+            }),
+            'slide_url': Textarea(attrs={
+                'class': 'form-control',
+                'id': 'MainSlideURL',
+                'rows': '5',
+                'placeholder': 'Введите ссылку слайда',
+            }),
+            'slide_timer': NumberInput(attrs={
+                'class': 'form-control',
+                'id': 'NewsPromoNumber',
+            }),
+
+        }
+
+
+class NewsPromoSlideForm(ModelForm):
+    class Meta:
+        model = models.NewsPromoSlide
+        fields = ['slide_text', 'slide_image', 'slide_url']
+
+        widgets = {
+            'slide_image': FileInput(attrs={
+                'class': 'form-control-file',
+                'id': 'NewsPromoImage',
+            }),
+            'slide_text': TextInput(attrs={
+                'class': "form-control",
+                'id': "NewsPromoText",
+            }),
+            'slide_url': Textarea(attrs={
+                'class': 'form-control',
+                'id': 'NewsPromoURL',
+                'rows': '5',
+                'placeholder': 'Введите ссылку слайда',
+            }),
+            'slide_timer': NumberInput(attrs={
+                'class': 'form-control',
+                'id': 'NewsPromoNumber',
+            }),
+        }
+
+
+class BackgroundBannerForm(ModelForm):
+    class Meta:
+        model = models.BackgroundBanner
+        fields = ['banner_image', ]
+
+        widgets = {
+            'banner_image': FileInput(attrs={
+                'class': 'form-control-file',
+                'id': 'BannerImage',
+            }),
+        }
