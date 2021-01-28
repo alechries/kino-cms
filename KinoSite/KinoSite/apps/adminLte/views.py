@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import FilmForm, LoginForm, NewsForm, UserForm
+from .forms import FilmForm, LoginForm, NewsForm, UserForm, MainSlideForm
 from . import models, forms
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
@@ -67,7 +67,10 @@ def account_logout(request):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def banner(request):
-    return render(request, 'adminLte/banner.html')
+    main_slide = models.MainSlide.objects.all()
+    news_promo = models.NewsPromoSlide.objects.all()
+    background_banner = models.BackgroundBanner.get_solo()
+    return render(request, 'adminLte/banner/banner.html', {'main_slide': main_slide, 'news_promo': news_promo, 'background_banner': background_banner})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
@@ -316,22 +319,23 @@ def mailing(request):
         print(user_email)
         send_mail('Subject here', 'Here is the message.', 'dimadjangosendemail@gmail.com',
         [user_email])
-    return render(request, 'adminLte/mailing/mailing.html')
 
+    return render(request, 'adminLte/mailing/mailing.html')
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def main_slide_form(request, pk=None):
     slide = get_object_or_404(models.MainSlide, pk=pk) if pk else None
-    form = forms.MainSlideForm(request.POST or None, instance=slide or None)
+    form = MainSlideForm(request.POST or None, request.FILES or None, instance=slide or None)
+    print(form.is_valid())
     if request.method == 'POST' and form.is_valid():
         form.save()
         return redirect('admin_banner_list')
-    return render(request, 'adminLte/users/user_form.html', {'form': form})
+    return render(request, 'adminLte/banner/main_slide_form.html', {'form': form})
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
-def main_slide(request, pk):
+def main_slide_delete(request, pk):
     slide = models.MainSlide.objects.filter(id=pk)
     slide.delete()
     return redirect('admin_banner_list')

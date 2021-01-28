@@ -615,26 +615,27 @@ class UserForm(ModelForm):
 class MainSlideForm(ModelForm):
     class Meta:
         model = models.MainSlide
-        fields = ['slide_text', 'slide_image', 'slide_url']
+        fields = ['slide_text', 'slide_image', 'slide_url', 'slide_timer']
 
         widgets = {
             'slide_image': FileInput(attrs={
                 'class': 'form-control-file',
                 'id': 'MainSlideImage',
             }),
-            'slide_text': TextInput(attrs={
+            'slide_text': Textarea(attrs={
                 'class': "form-control",
+                'rows': '5',
                 'id': "MainSlideText",
             }),
-            'slide_url': Textarea(attrs={
+            'slide_url': URLInput(attrs={
                 'class': 'form-control',
                 'id': 'MainSlideURL',
-                'rows': '5',
                 'placeholder': 'Введите ссылку слайда',
             }),
-            'slide_timer': NumberInput(attrs={
+            'slide_timer': TextInput(attrs={
                 'class': 'form-control',
                 'id': 'NewsPromoNumber',
+                'placeholder': 'Введите cкорость',
             }),
 
         }
@@ -652,12 +653,12 @@ class NewsPromoSlideForm(ModelForm):
             }),
             'slide_text': TextInput(attrs={
                 'class': "form-control",
+                'rows': '5',
                 'id': "NewsPromoText",
             }),
-            'slide_url': Textarea(attrs={
+            'slide_url': URLInput(attrs={
                 'class': 'form-control',
                 'id': 'NewsPromoURL',
-                'rows': '5',
                 'placeholder': 'Введите ссылку слайда',
             }),
             'slide_timer': NumberInput(attrs={

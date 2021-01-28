@@ -1,0 +1,40 @@
+{% extends 'adminLte/base.html' %}
+{% block banner %}
+<li class="nav-item">
+    <a href="{% url 'admin_banner_list' %}" class="nav-link active">
+        <i class="fas fa-sliders-h"></i>
+        <p>
+            Баннеры \ Слайды
+        </p>
+    </a>
+</li>
+{% endblock %}
+{% block content_title %}
+    <h1 class="m-0">Список всех баннеров</h1>
+{% endblock %}
+{% block main_content %}
+<div class="card">
+    <h4 style="margin-left: 10px">Список баннеров на главной</h4>
+    {% for el in main_slide %}
+        <div class="card m-3" style="width: 18rem">
+            <img src="{{ el.get_absolute_image }}" class="card-img-top" alt="main banner image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ el.slide_url }}</h5>
+                    <h5 class="card-title">{{ el.slide_text }}</h5>
+                </div>
+            <div class="card-footer  ml-0 ">
+                <div class="row mx-auto">
+                    <form method="get">
+                        <a href="#" class="btn btn-primary">Редактировать</a>
+                    </form>
+                    <div class="ml-auto">
+                        <form method="post">
+                            <a href="#" class="btn btn-danger">Удалить</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

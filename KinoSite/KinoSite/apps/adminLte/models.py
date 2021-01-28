@@ -35,9 +35,6 @@ class BannerImage(models.Model):
     banner_text = models.CharField('Описание изображения', null=True, max_length=255)
 
 
-class UpperBanner(models.Model):
-    upper_banner_image1 = models.ImageField('Верхний баннер', upload_to='images/upper_banner')
-
 
 class Cinema(models.Model):
     cinema_name = models.CharField(max_length=255, verbose_name='Название кинотеатра')
@@ -243,12 +240,15 @@ class User(models.Model):
         return self.username
 
 
-
 class MainSlide(models.Model):
     slide_text = models.TextField(verbose_name='Текст слайда')
     slide_image = models.ImageField(verbose_name='Изображение слайда', upload_to='images/main_slide/')
     slide_url = models.URLField(verbose_name='Ссылка слайда')
-    slide_timer = models.IntegerField(verbose_name='Скорость вращения')
+    slide_timer = models.TextField(verbose_name='Скорость вращения')
+
+    def get_absolute_image(self):
+        return os.path.join('/media', self.slide_image.name)
+
 
 
 class NewsPromoSlide(models.Model):

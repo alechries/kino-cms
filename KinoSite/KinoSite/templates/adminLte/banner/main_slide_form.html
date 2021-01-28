@@ -1,7 +1,7 @@
 {% extends 'adminLte/base.html' %}
-{% block film %}
+{% block banner %}
 <li class="nav-item">
-    <a href="{% url 'admin_banner' %}" class="nav-link">
+    <a href="{% url 'admin_banner_list' %}" class="nav-link active">
         <i class="fas fa-sliders-h"></i>
         <p>
             Баннеры \ Слайды
@@ -16,7 +16,6 @@
     <div class="features flex-fill">
         <div class="row m-3">
             <div class="container">
-
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
