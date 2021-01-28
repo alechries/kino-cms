@@ -1,15 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db import models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-
+from django.contrib.auth.decorators import login_required
 import os
-import uuid
-
-from django.db import models
-from . import models as c_models
-from django.dispatch import receiver
-from django.utils.translation import ugettext_lazy as _
 
 
 def delete_file_with_path(path: str):
@@ -43,3 +36,17 @@ def content_page(request, posts_key, posts, limit: int, template: str):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
     return render(request, template, {posts_key: posts, 'page': page})
+
+
+def admin_views_proxy(func):
+    def proxy(request):
+        u = request.user
+        if u.is_authenticated:
+            if u.is_superuser:
+                return func(request)
+            else:
+                return redirect('public_index')
+        else:
+            return redirect('admin_login')
+    return proxy
+    # login_required(func, login_url=admin_login_redirect_url)
