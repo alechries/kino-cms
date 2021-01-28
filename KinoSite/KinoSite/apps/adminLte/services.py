@@ -3,6 +3,25 @@ from django.db import models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
+import os
+import uuid
+
+from django.db import models
+from . import models as c_models
+from django.dispatch import receiver
+from django.utils.translation import ugettext_lazy as _
+
+
+def delete_file_with_path(path: str):
+    if os.path.isfile(path):
+        os.remove(path)
+
+
+def delete_file_with_instance(instance):
+    if instance:
+        delete_file_with_path(instance.path)
+
+
 def form_template(request, instance: models.Model, form_class, redirect_url_name: str, template_file_name: str, context=None):
     if context is None:
         context = {}

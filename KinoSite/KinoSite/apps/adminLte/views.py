@@ -6,7 +6,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserForm
 from . import models, forms
 from django.core.mail import send_mail
-from . import patterns
+from . import services
+from os import remove as remove_file
 
 ADMIN_LOGIN_REDIRECT_URL = '/adminLte/account/login'
 
@@ -60,7 +61,7 @@ def banner(request):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def film_edit_form(request, pk=None):
     instance = get_object_or_404(models.Film, pk=pk) if pk else None
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=instance,
         form_class=forms.FilmForm,
@@ -77,7 +78,7 @@ def film_list(request):
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def film_delete(request, pk):
-    films = models.Film.objects.filter(id=pk)
+    films: models.Film = models.Film.objects.filter(id=pk)
     films.delete()
     return redirect('admin_film_list')
 
@@ -92,7 +93,7 @@ def cinema_list(request):
 def cinema_form(request, pk=None):
     cinema = get_object_or_404(models.Cinema, pk=pk) if pk else None
     halls = models.CinemaHall.objects.filter(cinema=cinema)
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=cinema,
         context={'halls': halls},
@@ -112,7 +113,7 @@ def cinema_delete(request, pk):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def hall_form(request, pk=None):
     cinema_hall = get_object_or_404(models.CinemaHall, pk=pk) if pk else None
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=cinema_hall,
         form_class=forms.CinemaHallForm,
@@ -131,7 +132,7 @@ def hall_delete(request, pk):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def news_form(request, pk=None):
     news = get_object_or_404(models.News, pk=pk) if pk else None
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=news,
         form_class=forms.NewsForm,
@@ -162,7 +163,7 @@ def promotion_list(request):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def promotion_form(request, pk=None):
     promotion = get_object_or_404(models.Promotion, pk=pk) if pk else None
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=promotion,
         form_class=forms.PromotionForm,
@@ -186,7 +187,7 @@ def pages_list(request):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def main_pages(request):
     solo: models.MainPage = models.MainPage.get_solo()
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=solo,
         form_class=forms.MainPageForm,
@@ -198,7 +199,7 @@ def main_pages(request):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def about_cinema(request):
     solo: models.AboutCinema = models.AboutCinema.get_solo()
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=solo,
         form_class=forms.AboutCinemaForm,
@@ -210,7 +211,7 @@ def about_cinema(request):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def cafe_bar(request):
     solo: models.CafeBar = models.CafeBar.get_solo()
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=solo,
         form_class=forms.CafeBarForm,
@@ -222,7 +223,7 @@ def cafe_bar(request):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def vip_hall(request):
     solo: models.VipHall = models.VipHall.get_solo()
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=solo,
         form_class=forms.VipHallForm,
@@ -234,7 +235,7 @@ def vip_hall(request):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def ads(request):
     solo: models.Advertising = models.Advertising.get_solo()
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=solo,
         form_class=forms.AdvertisingForm,
@@ -246,7 +247,7 @@ def ads(request):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def child_room(request):
     solo: models.ChildRoom = models.ChildRoom.get_solo()
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=solo,
         form_class=forms.ChildRoomForm,
@@ -264,7 +265,7 @@ def contact_list(request):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def contact_form(request, pk=None):
     contact = get_object_or_404(models.Contact, pk=pk) if pk else None
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=contact,
         form_class=forms.ContactForm,
@@ -283,12 +284,12 @@ def contact_delete(request, pk):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def users_list(request):
     users = models.User.objects.all()
-    return patterns.content_page(request=request,
-            posts_key='users',
-            posts=users,
-            limit=6,
-            template='adminLte/users/users_list.html',
-    )
+    return services.content_page(request=request,
+                                 posts_key='users',
+                                 posts=users,
+                                 limit=6,
+                                 template='adminLte/users/users_list.html',
+                                 )
 
 
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
@@ -326,7 +327,7 @@ def mailing(request):
 @login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def main_slide_form(request, pk=None):
     slide = get_object_or_404(models.MainSlide, pk=pk) if pk else None
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=slide,
         form_class=forms.MainSlideForm,
