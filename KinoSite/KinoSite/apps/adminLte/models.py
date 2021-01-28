@@ -11,25 +11,32 @@ from . import services
 
 @receiver(models.signals.post_delete)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
-    for file in instance.file_list():
-        if file:
-            services.delete_file_with_instance(file)
+    try:
+        for file in instance.file_list():
+            if file:
+                services.delete_file_with_instance(file)
+    except AttributeError:
+        pass
 
 
 @receiver(models.signals.pre_save)
 def auto_delete_file_on_change(sender, instance, **kwargs):
-    if not instance.pk:
-        return False
-
     try:
-        old_files = sender.objects.get(pk=instance.pk).file_list()
-    except sender.DoesNotExist:
-        return False
+        if not instance.pk:
+            return False
 
-    new_files = instance.file_list()
-    for index, new_file in enumerate(new_files):
-        if not new_file == old_files[index]:
-            services.delete_file_with_instance(old_files[index])
+        try:
+            old_files = sender.objects.get(pk=instance.pk).file_list()
+        except sender.DoesNotExist:
+            return False
+
+        new_files = instance.file_list()
+        for index, new_file in enumerate(new_files):
+            if not new_file == old_files[index]:
+                services.delete_file_with_instance(old_files[index])
+    except AttributeError:
+        pass
+
 
 ############################################################
 # MODELS
