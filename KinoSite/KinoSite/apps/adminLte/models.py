@@ -1,6 +1,7 @@
 from django.db import models
 import os
 from solo.models import SingletonModel
+from . import services
 
 
 class Film(models.Model):
@@ -28,11 +29,17 @@ class Film(models.Model):
     def get_absolute_url(self):
         return f'film/list'
 
+    def file_list(self):
+        return [self.main_image, self.image1, self.image2, self.image3, self.image4, self.image5]
+
 
 class BannerImage(models.Model):
     banner_image = models.ImageField('Изображение баннера')
     banner_url = models.URLField('Ссылка под изображением')
     banner_text = models.CharField('Описание изображения', null=True, max_length=255)
+
+    def file_list(self):
+        return [self.banner_image, ]
 
 
 class UpperBanner(models.Model):
@@ -54,6 +61,9 @@ class Cinema(models.Model):
     def __str__(self):
         return self.cinema_name
 
+    def file_list(self):
+        return [self.cinema_logo, self.cinema_upper_banner, self.cinema_image1, self.cinema_image2, self.cinema_image3, self.cinema_image4, self.cinema_image5]
+
 
 class CinemaHall(models.Model):
     cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE)
@@ -70,6 +80,9 @@ class CinemaHall(models.Model):
 
     def __str__(self):
         return self.hall_name
+
+    def file_list(self):
+        return [self.hall_upper_banner, self.hall_image1, self.hall_image2, self.hall_image3, self.hall_image4, self.hall_image5, self.hall_scheme]
 
 
 class News(models.Model):
@@ -99,6 +112,9 @@ class News(models.Model):
     def get_absolute_url(self):
         return f'news/list'
 
+    def file_list(self):
+        return [self.news_main_image, self.news_image1, self.news_image2, self.news_image3, self.news_image4, self.news_image5]
+
 
 class Promotion(models.Model):
     STATUS = (
@@ -121,6 +137,9 @@ class Promotion(models.Model):
     def __str__(self):
         return self.promo_name
 
+    def file_list(self):
+        return [self.promo_main_image, self.promo_image1, self.promo_image2, self.promo_image3, self.promo_image4, self.promo_image5]
+
 
 class Page(models.Model):
     class Meta:
@@ -135,6 +154,9 @@ class Page(models.Model):
     page_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/pages/')
     page_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/pages/')
     page_status = models.BooleanField(verbose_name='Статус страницы', default=False)
+
+    def file_list(self):
+        return [self.page_main_image, self.page_image1, self.page_image2, self.page_image3, self.page_image4, self.page_image5]
 
 
 class MainPage(SingletonModel):
@@ -152,6 +174,9 @@ class AboutCinema(SingletonModel):
     cinema_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/about/')
     cinema_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/about/')
 
+    def file_list(self):
+        return [self.cinema_main_image, self.cinema_image1, self.cinema_image2, self.cinema_image3, self.cinema_image4, self.cinema_image5]
+
 
 class CafeBar(SingletonModel):
     cafebar_name = models.CharField(max_length=255, verbose_name='Название кафе-бара')
@@ -162,6 +187,9 @@ class CafeBar(SingletonModel):
     cafebar_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/cafe_bar/')
     cafebar_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/cafe_bar/')
     cafebar_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/cafe_bar/')
+
+    def file_list(self):
+        return [self.cafebar_main_image, self.cafebar_image1, self.cafebar_image2, self.cafebar_image3, self.cafebar_image4, self.cafebar_image5]
 
 
 class VipHall(SingletonModel):
@@ -174,6 +202,9 @@ class VipHall(SingletonModel):
     hall_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/vip_hall/')
     hall_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/vip_hall/')
 
+    def file_list(self):
+        return [self.hall_main_image, self.hall_image1, self.hall_image2, self.hall_image3, self.hall_image4, self.hall_image5]
+
 
 class Advertising(SingletonModel):
     adv_name = models.CharField(max_length=255, verbose_name='Название рекламы')
@@ -184,6 +215,9 @@ class Advertising(SingletonModel):
     adv_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/adv/')
     adv_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/adv/')
     adv_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/adv/')
+
+    def file_list(self):
+        return [self.adv_main_image, self.adv_image1, self.adv_image2, self.adv_image3, self.adv_image4, self.adv_image5]
 
 
 class ChildRoom(SingletonModel):
@@ -196,12 +230,18 @@ class ChildRoom(SingletonModel):
     room_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/child_room/')
     room_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/child_room/')
 
+    def file_list(self):
+        return [self.room_main_image, self.room_image1, self.room_image1, self.room_image2, self.room_image3, self.room_image4, self.room_image5]
+
 
 class Contact(models.Model):
     contact_name = models.CharField(verbose_name='Название кинотеатра', max_length=255)
     contact_address = models.TextField(verbose_name='Адрес кинотеатра')
     contact_location = models.CharField(verbose_name='Координаты для карты', max_length=255)
     contact_logo = models.ImageField(verbose_name='Лого', upload_to='images/contact/logo/')
+
+    def file_list(self):
+        return [self.contact_logo, ]
 
 
 class User(models.Model):
@@ -243,12 +283,14 @@ class User(models.Model):
         return self.username
 
 
-
 class MainSlide(models.Model):
     slide_text = models.TextField(verbose_name='Текст слайда')
     slide_image = models.ImageField(verbose_name='Изображение слайда', upload_to='images/main_slide/')
     slide_url = models.URLField(verbose_name='Ссылка слайда')
     slide_timer = models.IntegerField(verbose_name='Скорость вращения')
+
+    def file_list(self):
+        return [self.slide_image, ]
 
 
 class NewsPromoSlide(models.Model):
@@ -257,7 +299,13 @@ class NewsPromoSlide(models.Model):
     slide_url = models.URLField(verbose_name='Ссылка слайда')
     slide_timer = models.IntegerField(verbose_name='Скорость вращения')
 
+    def file_list(self):
+        return [self.slide_image, ]
+
 
 class BackgroundBanner(SingletonModel):
     banner_image = models.ImageField(verbose_name='Изображение фона', upload_to='images/background/')
+
+    def file_list(self):
+        return [self.banner_image, ]
 
