@@ -1,3 +1,6 @@
 __pycache__/
-KinoSite/media/images/film_images/
-KinoSite/media/media/images/film_poster/
+**/migrations/
+!**/migrations/0001_initial.py
+!**/migrations/__init__.py
+**/media/
+db.sqlite3
