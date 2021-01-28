@@ -2,6 +2,40 @@ from django.db import models
 import os
 from solo.models import SingletonModel
 from . import services
+import os
+import uuid
+from django.db import models
+from django.dispatch import receiver
+from . import services
+
+############################################################
+# EVENTS
+
+
+@receiver(models.signals.post_delete)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    for file in instance.file_list():
+        if file:
+            services.delete_file_with_instance(file)
+
+
+@receiver(models.signals.pre_save)
+def auto_delete_file_on_change(sender, instance, **kwargs):
+    if not instance.pk:
+        return False
+
+    try:
+        old_files = sender.objects.get(pk=instance.pk).file_list()
+    except sender.DoesNotExist:
+        return False
+
+    new_files = instance.file_list()
+    for index, new_file in enumerate(new_files):
+        if not new_file == old_files[index]:
+            services.delete_file_with_instance(old_files[index])
+
+############################################################
+# MODELS
 
 
 class Film(models.Model):
