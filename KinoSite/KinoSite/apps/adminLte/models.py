@@ -1,11 +1,8 @@
-from django.db import models
-import os
 from solo.models import SingletonModel
-from . import services
 import os
-import uuid
 from django.db import models
 from django.dispatch import receiver
+from django.contrib.auth.models import User as DjangoUser
 from . import services
 
 ############################################################
@@ -36,6 +33,45 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 
 ############################################################
 # MODELS
+
+
+class User(models.Model):
+    R = 1
+    U = 2
+    LANGUAGE = (
+        ('R', 'Rus'),
+        ('U', 'Ukr'),
+    )
+    M = 1
+    F = 2
+    GENDER = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+
+    CITY = (
+        ('OD', 'Одесса'),
+        ('KY', 'Киев'),
+        ('KHAR', 'Харьков'),
+    )
+
+    name = models.CharField(verbose_name='Имя', max_length=255)
+    surname = models.CharField(verbose_name='Фамиоия', max_length=255)
+    username = models.CharField(verbose_name='Юзернейм', max_length=255)
+    email = models.EmailField(verbose_name='Емаил')
+    phone = models.CharField(verbose_name='Номер телефона', max_length=60)
+    address = models.TextField(verbose_name='Адрес', max_length=255)
+    password = models.CharField(verbose_name='Пароль', max_length=255)
+    password2 = models.CharField(verbose_name='Пароль 2', max_length=255)
+    card_number = models.CharField(verbose_name='Номер карты', max_length=255)
+    language = models.CharField(verbose_name='Язык', max_length=1, choices=LANGUAGE, default=R)
+    gender = models.CharField(verbose_name='Пол', max_length=1, choices=GENDER, default=M)
+    city = models.CharField(verbose_name='Город', choices=CITY, max_length=4)
+    date_of_birth = models.DateField(verbose_name='Дата рождения', null=True)
+    register_date = models.DateField(verbose_name='дата регистрации', auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.username
 
 
 class Film(models.Model):
@@ -276,45 +312,6 @@ class Contact(models.Model):
 
     def file_list(self):
         return [self.contact_logo, ]
-
-
-class User(models.Model):
-    R = 1
-    U = 2
-    LANGUAGE = (
-        ('R', 'Rus'),
-        ('U', 'Ukr'),
-    )
-    M = 1
-    F = 2
-    GENDER = (
-        ('M', 'Male'),
-        ('F', 'Female'),
-    )
-
-    CITY = (
-        ('OD', 'Одесса'),
-        ('KY', 'Киев'),
-        ('KHAR', 'Харьков'),
-    )
-
-    name = models.CharField(verbose_name='Имя', max_length=255)
-    surname = models.CharField(verbose_name='Фамиоия', max_length=255)
-    username = models.CharField(verbose_name='Юзернейм', max_length=255)
-    email = models.EmailField(verbose_name='Емаил')
-    phone = models.CharField(verbose_name='Номер телефона', max_length=60)
-    address = models.TextField(verbose_name='Адрес', max_length=255)
-    password = models.CharField(verbose_name='Пароль', max_length=255)
-    password2 = models.CharField(verbose_name='Пароль 2', max_length=255)
-    card_number = models.CharField(verbose_name='Номер карты', max_length=255)
-    language = models.CharField(verbose_name='Язык', max_length=1, choices=LANGUAGE, default=R)
-    gender = models.CharField(verbose_name='Пол', max_length=1, choices=GENDER, default=M)
-    city = models.CharField(verbose_name='Город', choices=CITY, max_length=4)
-    date_of_birth = models.DateField(verbose_name='Дата рождения', null=True)
-    register_date = models.DateField(verbose_name='дата регистрации', auto_now_add=True, null=True)
-
-    def __str__(self):
-        return self.username
 
 
 class MainSlide(models.Model):
