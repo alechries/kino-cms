@@ -8,14 +8,18 @@ from . import models, forms
 from django.core.mail import send_mail
 from . import services
 from os import remove as remove_file
+from datetime import date
 
 
 def admin_index(request):
+    date_now = date.today()
     context = {
-        'films_count': models.Film.objects.count(),
+        'films_will_count': models.Film.objects.filter(first_night__gt=date_now).count(),
+        'films_was_count': models.Film.objects.filter(first_night__lt=date_now).count(),
         'cinema_count': models.Cinema.objects.count(),
         'cinema_hall_count': models.CinemaHall.objects.count(),
-        'news_count': models.News.objects.count(),
+        'news_will_count': models.News.objects.filter(news_published_date__gt=date_now).count(),
+        'news_was_count': models.News.objects.filter(news_published_date__lt=date_now).count(),
         'promo_count': models.Promotion.objects.count(),
         'user_count': models.User.objects.count(),
     }
