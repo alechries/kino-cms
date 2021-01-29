@@ -1,12 +1,13 @@
 {% extends 'adminLte/base.html' %}
-{% block pages %}
+{% load crispy_forms_tags %}
+{% block promotion %}
     <li class="nav-item">
-        <a href="{% url 'admin_pages_list' %}" class="nav-link active">
-              <i class="fas fa-pager"></i>
+        <a href="{% url 'admin_promotion_list' %}" class="nav-link active">
+              <i class="fas fa-percent"></i>
               <p>
-                Страницы
+                  Акции
               </p>
-            </a>
+        </a>
     </li>
 {% endblock %}
 {% block content_title %}
@@ -28,7 +29,7 @@
                         <div class="form-group col-md-4">
                             <label for="PromotionStatus"><h4>Статус акции</h4></label>
                             <div class=" col-md-4" id="promotionStatus" >
-                                {{ form.promo_status }}
+                                {{ form.promo_status|as_crispy_field }}
                             </div>
                         </div>
                     </div>

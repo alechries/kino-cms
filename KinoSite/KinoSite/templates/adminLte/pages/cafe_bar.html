@@ -63,7 +63,7 @@
 
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="form-row">
+                    <div class="form-row col-md-4" style="padding-left: 0px">
                          <label for="CafeBarNameInput"><h4>Название кофе-бара</h4></label>
                         {{ form.cafebar_name }}
                     </div>

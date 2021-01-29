@@ -162,6 +162,7 @@ def promotion_delete(request, pk):
     return redirect('admin_promotion_list')
 
 
+
 def pages_list(request):
     return render(request, 'adminLte/pages/pages_list.html')
 
@@ -233,7 +234,7 @@ def child_room(request):
 
 
 def contact_list(request):
-    contacts = get_list_or_404(models.Contact)
+    contacts = services.Get.model_list(models.Contact)
     return render(request, 'adminLte/pages/contact_list.html', {'contacts': contacts})
 
 

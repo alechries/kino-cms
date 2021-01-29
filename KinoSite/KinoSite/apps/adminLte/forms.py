@@ -3,6 +3,7 @@ from django.forms import Form, ModelForm, TextInput, DateInput, FileInput, URLIn
     EmailField, CharField, PasswordInput, ImageField, ModelChoiceField, URLField, ChoiceField, TimeField, BooleanField, RadioSelect, NumberInput
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from crispy_forms.helper import FormHelper
 
 
 class LoginForm(Form):
@@ -191,6 +192,7 @@ class CinemaHallForm(ModelForm):
             'hall_image5': FileInput(attrs={
                 'class': 'form-control-file col-md-3'
             })}
+
 
 
 class NewsForm(ModelForm):

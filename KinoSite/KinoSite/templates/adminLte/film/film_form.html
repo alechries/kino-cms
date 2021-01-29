@@ -19,7 +19,7 @@
 
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="form-group">
+                    <div class="form-group col-md-4" style="padding-left: 0px">
                         <label for="FilmNameInput"><h4>Название фильма</h4></label>
                         {{ form.title }}
                     </div>

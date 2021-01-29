@@ -1,4 +1,5 @@
 {% extends 'adminLte/base.html' %}
+{% load crispy_forms_tags %}
 {% block users %}
     <li class="nav-item">
         <a href="{% url 'admin_users_list' %}" class="nav-link active">
@@ -104,7 +105,7 @@
                          <div class="col" style="margin-right: 30px">
                              <div class="col-md-10">
                                  <label for="InputCity">Город</label><br/>
-                                 {{form.city}}
+                                 {{form.city|as_crispy_field}}
                              </div>
                          </div>
                     </div>
