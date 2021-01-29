@@ -18,8 +18,21 @@
         <!-- small card -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>{{ films_count }}</h3>
-                <p>Фильмы</p>
+                <h3>{{ films_was_count }}</h3>
+                <p>Фильмы в прокате</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-film"></i>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-5 col-6">
+        <!-- small card -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>{{ films_will_count }}</h3>
+                <p>Фильмы в ожидании</p>
             </div>
             <div class="icon">
                 <i class="fas fa-film"></i>
@@ -57,8 +70,21 @@
         <!-- small card -->
         <div class="small-box bg-danger">
             <div class="inner">
-                <h3>{{ news_count }}</h3>
-                <p>Новости</p>
+                <h3>{{ news_was_count }}</h3>
+                <p>Новости выставленные</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-newspaper"></i>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-5 col-6">
+        <!-- small card -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>{{ news_will_count }}</h3>
+                <p>Новости в ожидании</p>
             </div>
             <div class="icon">
                 <i class="fas fa-newspaper"></i>
@@ -81,7 +107,7 @@
     <!-- ./col -->
     <div class="col-lg-5 col-6">
         <!-- small card -->
-        <div class="small-box bg-danger">
+        <div class="small-box bg-warning">
             <div class="inner">
                 <h3>{{ user_count }}</h3>
                 <p>Пользователи</p>

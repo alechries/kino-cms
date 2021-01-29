@@ -38,15 +38,17 @@ def content_page(request, posts_key, posts, limit: int, template: str):
     return render(request, template, {posts_key: posts, 'page': page})
 
 
-def admin_views_proxy(func):
-    def proxy(request):
+def admin_views_proxy(func, have_pk=False):
+    def proxy(request, pk=None):
         u = request.user
         if u.is_authenticated:
             if u.is_superuser:
-                return func(request)
+                if not have_pk:
+                    return func(request)
+                else:
+                    return func(request, pk)
             else:
                 return redirect('public_index')
         else:
             return redirect('admin_login')
     return proxy
-    # login_required(func, login_url=admin_login_redirect_url)
