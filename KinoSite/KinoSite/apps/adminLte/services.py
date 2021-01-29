@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db import models
+from django.db import models as django_models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 import os
+from datetime import date
+from . import models
 
 
 def delete_file_with_path(path: str):
@@ -15,7 +17,7 @@ def delete_file_with_instance(instance):
         delete_file_with_path(instance.path)
 
 
-def form_template(request, instance: models.Model, form_class, redirect_url_name: str, template_file_name: str, context=None):
+def form_template(request, instance: django_models.Model, form_class, redirect_url_name: str, template_file_name: str, context=None):
     if context is None:
         context = {}
     form = form_class(request.POST or None, request.FILES or None, instance=instance or None)
@@ -52,3 +54,53 @@ def admin_views_proxy(func, have_pk=False):
         else:
             return redirect('admin_login')
     return proxy
+
+
+class Get:
+
+    @staticmethod
+    def model_list(model_sender):
+        return model_sender.objects.all()
+
+
+class Delete:
+
+    @staticmethod
+    def model_object(model_sender, pk=None):
+        result = model_sender.objects.filter(id=pk)
+        result.delete()
+
+
+class Count:
+
+    @staticmethod
+    def cinema_count():
+        return models.Cinema.objects.count()
+
+    @staticmethod
+    def cinema_hall_count():
+        return models.CinemaHall.objects.count()
+
+    @staticmethod
+    def promotion_count():
+        return models.Promotion.objects.count()
+
+    @staticmethod
+    def user_count():
+        return models.User.objects.count()
+
+    @staticmethod
+    def news_count_gt_date(condition_date):
+        return models.News.objects.filter(news_published_date__gt=condition_date).count()
+
+    @staticmethod
+    def news_count_lt_date(condition_date):
+        return models.News.objects.filter(news_published_date__lt=condition_date).count()
+
+    @staticmethod
+    def film_count_gt_date(condition_date):
+        return models.Film.objects.filter(first_night__gt=condition_date).count()
+
+    @staticmethod
+    def film_count_lt_date(condition_date):
+        return models.Film.objects.filter(first_night__lt=condition_date).count()

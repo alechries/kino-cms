@@ -1,7 +1,7 @@
 from .models import Film
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import UserForm
 from . import models, forms
@@ -14,14 +14,14 @@ from datetime import date
 def admin_index(request):
     date_now = date.today()
     context = {
-        'films_will_count': models.Film.objects.filter(first_night__gt=date_now).count(),
-        'films_was_count': models.Film.objects.filter(first_night__lt=date_now).count(),
-        'cinema_count': models.Cinema.objects.count(),
-        'cinema_hall_count': models.CinemaHall.objects.count(),
-        'news_will_count': models.News.objects.filter(news_published_date__gt=date_now).count(),
-        'news_was_count': models.News.objects.filter(news_published_date__lt=date_now).count(),
-        'promo_count': models.Promotion.objects.count(),
-        'user_count': models.User.objects.count(),
+        'films_will_count': services.Count.film_count_gt_date(date_now),
+        'films_was_count': services.Count.film_count_lt_date(date_now),
+        'cinema_count': services.Count.cinema_count(),
+        'cinema_hall_count': services.Count.cinema_hall_count(),
+        'news_will_count': services.Count.news_count_gt_date(date_now),
+        'news_was_count': services.Count.news_count_lt_date(date_now),
+        'promo_count': services.Count.promotion_count(),
+        'user_count': services.Count.user_count(),
     }
     return render(request, 'adminLte/index.html', context)
 
@@ -69,18 +69,17 @@ def film_edit_form(request, pk=None):
 
 
 def film_list(request):
-    films = models.Film.objects.all()
+    films = services.Get.model_list(models.Film)
     return render(request, 'adminLte/film/film_list.html', {'film': films})
 
 
 def film_delete(request, pk):
-    films: models.Film = models.Film.objects.filter(id=pk)
-    films.delete()
+    services.Delete.model_object(models.Film, pk)
     return redirect('admin_film_list')
 
 
 def cinema_list(request):
-    cinemas = models.Cinema.objects.all()
+    cinemas = services.Get.model_list(models.Cinema)
     return render(request, 'adminLte/cinema/cinema_list.html', {'cinemas': cinemas})
 
 
@@ -98,8 +97,7 @@ def cinema_form(request, pk=None):
 
 
 def cinema_delete(request, pk):
-    cinema = models.Cinema.objects.filter(id=pk)
-    cinema.delete()
+    services.Delete.model_object(models.Cinema, pk)
     return redirect('admin_cinema_list')
 
 
@@ -115,8 +113,7 @@ def hall_form(request, pk=None):
 
 
 def hall_delete(request, pk):
-    hall = models.CinemaHall.objects.filter(id=pk)
-    hall.delete()
+    services.Delete.model_object(models.CinemaHall, pk)
     return redirect('admin_cinema_list')
 
 
@@ -132,18 +129,17 @@ def news_form(request, pk=None):
 
 
 def news_list(request):
-    news = models.News.objects.all()
+    news = services.Get.model_list(models.News)
     return render(request, 'adminLte/news/news_list.html', {'news': news})
 
 
 def news_delete(request, pk):
-    news = models.News.objects.filter(id=pk)
-    news.delete()
+    services.Delete.model_object(models.News, pk)
     return redirect('admin_news_list')
 
 
 def promotion_list(request):
-    promotions = models.Promotion.objects.all()
+    promotions = services.Get.model_list(models.Promotion)
     return render(request, 'adminLte/promotion/promotion_list.html', {'promotions': promotions})
 
 
@@ -159,8 +155,7 @@ def promotion_form(request, pk=None):
 
 
 def promotion_delete(request, pk):
-    news = models.Promotion.objects.filter(id=pk)
-    news.delete()
+    services.Delete.model_object(models.Promotion, pk)
     return redirect('admin_promotion_list')
 
 
@@ -235,7 +230,7 @@ def child_room(request):
 
 
 def contact_list(request):
-    contacts = models.Contact.objects.all()
+    contacts = get_list_or_404(models.Contact)
     return render(request, 'adminLte/pages/contact_list.html', {'contacts': contacts})
 
 
@@ -251,13 +246,12 @@ def contact_form(request, pk=None):
 
 
 def contact_delete(request, pk):
-    contacts = models.Contact.objects.filter(id=pk)
-    contacts.delete()
+    services.Delete.model_object(models.Contact, pk)
     return redirect('admin_contact_list')
 
 
 def users_list(request):
-    users = models.User.objects.all()
+    users = services.Get.model_list(models.User)
     return services.content_page(request=request,
                                  posts_key='users',
                                  posts=users,
@@ -268,18 +262,18 @@ def users_list(request):
 
 def user_form(request, pk=None):
     user = get_object_or_404(models.User, pk=pk) if pk else None
-    form = UserForm(request.POST or None, instance=user or None)
-    if request.method == 'POST' and form.is_valid():
-        form.save()
-        return redirect('admin_users_list')
-    return render(request, 'adminLte/users/user_form.html', {'form': form})
+    return services.form_template(
+            request=request,
+            instance=user,
+            form_class=forms.UserForm,
+            redirect_url_name='admin_users_list',
+            template_file_name='adminLte/users/user_form.html',
+        )
 
 
 def user_delete(request, pk):
-    user = models.User.objects.filter(id=pk)
-    user.delete()
+    services.Delete.model_object(models.User, pk)
     return redirect('admin_users_list')
-
 
 
 def user_choose(request):
@@ -290,14 +284,13 @@ def mailing(request):
     user = models.User.objects.values('email')
     for el in user:
         user_email = el['email']
-        print(user_email)
         send_mail('Subject here', 'Here is the message.', 'dimadjangosendemail@gmail.com',
         [user_email])
     return render(request, 'adminLte/mailing/mailing.html')
 
 
 def main_slide_form(request, pk=None):
-    slide = get_object_or_404(models.MainSlide, pk=pk) if pk else None
+    slide = get_object_or_404(models.MainSlide, pk=pk)
     return services.form_template(
         request=request,
         instance=slide,
@@ -308,6 +301,5 @@ def main_slide_form(request, pk=None):
 
 
 def main_slide(request, pk):
-    slide = models.MainSlide.objects.filter(id=pk)
-    slide.delete()
+    services.Delete.model_object(models.MainSlide, pk)
     return redirect('admin_banner_list')
