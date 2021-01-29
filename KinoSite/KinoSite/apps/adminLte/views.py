@@ -1,25 +1,27 @@
 from .models import Film
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import FilmForm, LoginForm, NewsForm, UserForm, MainSlideForm
 from . import models, forms
 from django.core.mail import send_mail
-from . import patterns
+from . import services
+from os import remove as remove_file
+from datetime import date
 
-ADMIN_LOGIN_REDIRECT_URL = '/adminLte/account/login'
 
-
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def admin_index(request):
+    date_now = date.today()
     context = {
-        'films_count': models.Film.objects.count(),
-        'cinema_count': models.Cinema.objects.count(),
-        'cinema_hall_count': models.CinemaHall.objects.count(),
-        'news_count': models.News.objects.count(),
-        'promo_count': models.Promotion.objects.count(),
-        'user_count': models.User.objects.count(),
+        'films_will_count': services.Count.film_count_gt_date(date_now),
+        'films_was_count': services.Count.film_count_lt_date(date_now),
+        'cinema_count': services.Count.cinema_count(),
+        'cinema_hall_count': services.Count.cinema_hall_count(),
+        'news_will_count': services.Count.news_count_gt_date(date_now),
+        'news_was_count': services.Count.news_count_lt_date(date_now),
+        'promo_count': services.Count.promotion_count(),
+        'user_count': services.Count.user_count(),
     }
     return render(request, 'adminLte/index.html', context)
 
@@ -46,13 +48,11 @@ def account_login(request):
     return render(request, 'adminLte/account/login.html', {'form': forms.LoginForm(), 'message': _message})
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def account_logout(request):
     logout(request)
     return redirect('admin_index')
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def banner(request):
     main_slide = models.MainSlide.objects.all()
     news_promo = models.NewsPromoSlide.objects.all()
@@ -60,10 +60,9 @@ def banner(request):
     return render(request, 'adminLte/banner/banner.html', {'main_slide': main_slide, 'news_promo': news_promo, 'background_banner': background_banner})
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def film_edit_form(request, pk=None):
     instance = get_object_or_404(models.Film, pk=pk) if pk else None
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=instance,
         form_class=forms.FilmForm,
@@ -72,30 +71,25 @@ def film_edit_form(request, pk=None):
     )
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def film_list(request):
-    films = models.Film.objects.all()
+    films = services.Get.model_list(models.Film)
     return render(request, 'adminLte/film/film_list.html', {'film': films})
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def film_delete(request, pk):
-    films = models.Film.objects.filter(id=pk)
-    films.delete()
+    services.Delete.model_object(models.Film, pk)
     return redirect('admin_film_list')
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def cinema_list(request):
-    cinemas = models.Cinema.objects.all()
+    cinemas = services.Get.model_list(models.Cinema)
     return render(request, 'adminLte/cinema/cinema_list.html', {'cinemas': cinemas})
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def cinema_form(request, pk=None):
     cinema = get_object_or_404(models.Cinema, pk=pk) if pk else None
     halls = models.CinemaHall.objects.filter(cinema=cinema)
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=cinema,
         context={'halls': halls},
@@ -105,17 +99,14 @@ def cinema_form(request, pk=None):
     )
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def cinema_delete(request, pk):
-    cinema = models.Cinema.objects.filter(id=pk)
-    cinema.delete()
+    services.Delete.model_object(models.Cinema, pk)
     return redirect('admin_cinema_list')
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def hall_form(request, pk=None):
     cinema_hall = get_object_or_404(models.CinemaHall, pk=pk) if pk else None
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=cinema_hall,
         form_class=forms.CinemaHallForm,
@@ -124,17 +115,14 @@ def hall_form(request, pk=None):
     )
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def hall_delete(request, pk):
-    hall = models.CinemaHall.objects.filter(id=pk)
-    hall.delete()
+    services.Delete.model_object(models.CinemaHall, pk)
     return redirect('admin_cinema_list')
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def news_form(request, pk=None):
     news = get_object_or_404(models.News, pk=pk) if pk else None
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=news,
         form_class=forms.NewsForm,
@@ -143,29 +131,24 @@ def news_form(request, pk=None):
     )
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def news_list(request):
-    news = models.News.objects.all()
+    news = services.Get.model_list(models.News)
     return render(request, 'adminLte/news/news_list.html', {'news': news})
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def news_delete(request, pk):
-    news = models.News.objects.filter(id=pk)
-    news.delete()
+    services.Delete.model_object(models.News, pk)
     return redirect('admin_news_list')
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def promotion_list(request):
-    promotions = models.Promotion.objects.all()
+    promotions = services.Get.model_list(models.Promotion)
     return render(request, 'adminLte/promotion/promotion_list.html', {'promotions': promotions})
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def promotion_form(request, pk=None):
     promotion = get_object_or_404(models.Promotion, pk=pk) if pk else None
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=promotion,
         form_class=forms.PromotionForm,
@@ -174,22 +157,18 @@ def promotion_form(request, pk=None):
     )
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def promotion_delete(request, pk):
-    news = models.Promotion.objects.filter(id=pk)
-    news.delete()
+    services.Delete.model_object(models.Promotion, pk)
     return redirect('admin_promotion_list')
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def pages_list(request):
     return render(request, 'adminLte/pages/pages_list.html')
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def main_pages(request):
     solo: models.MainPage = models.MainPage.get_solo()
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=solo,
         form_class=forms.MainPageForm,
@@ -198,10 +177,9 @@ def main_pages(request):
     )
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def about_cinema(request):
     solo: models.AboutCinema = models.AboutCinema.get_solo()
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=solo,
         form_class=forms.AboutCinemaForm,
@@ -210,10 +188,9 @@ def about_cinema(request):
     )
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def cafe_bar(request):
     solo: models.CafeBar = models.CafeBar.get_solo()
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=solo,
         form_class=forms.CafeBarForm,
@@ -222,10 +199,9 @@ def cafe_bar(request):
     )
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def vip_hall(request):
     solo: models.VipHall = models.VipHall.get_solo()
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=solo,
         form_class=forms.VipHallForm,
@@ -234,10 +210,9 @@ def vip_hall(request):
     )
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def ads(request):
     solo: models.Advertising = models.Advertising.get_solo()
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=solo,
         form_class=forms.AdvertisingForm,
@@ -246,10 +221,9 @@ def ads(request):
     )
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def child_room(request):
     solo: models.ChildRoom = models.ChildRoom.get_solo()
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=solo,
         form_class=forms.ChildRoomForm,
@@ -258,16 +232,14 @@ def child_room(request):
     )
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def contact_list(request):
-    contacts = models.Contact.objects.all()
+    contacts = get_list_or_404(models.Contact)
     return render(request, 'adminLte/pages/contact_list.html', {'contacts': contacts})
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def contact_form(request, pk=None):
     contact = get_object_or_404(models.Contact, pk=pk) if pk else None
-    return patterns.form_template(
+    return services.form_template(
         request=request,
         instance=contact,
         form_class=forms.ContactForm,
@@ -276,60 +248,53 @@ def contact_form(request, pk=None):
     )
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def contact_delete(request, pk):
-    contacts = models.Contact.objects.filter(id=pk)
-    contacts.delete()
+    services.Delete.model_object(models.Contact, pk)
     return redirect('admin_contact_list')
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def users_list(request):
-    users = models.User.objects.all()
-    return patterns.content_page(request=request,
-            posts_key='users',
-            posts=users,
-            limit=6,
-            template='adminLte/users/users_list.html',
-    )
+    users = services.Get.model_list(models.User)
+    return services.content_page(request=request,
+                                 posts_key='users',
+                                 posts=users,
+                                 limit=6,
+                                 template='adminLte/users/users_list.html',
+                                 )
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def user_form(request, pk=None):
     user = get_object_or_404(models.User, pk=pk) if pk else None
-    form = UserForm(request.POST or None, instance=user or None)
-    if request.method == 'POST' and form.is_valid():
-        form.save()
-        return redirect('admin_users_list')
-    return render(request, 'adminLte/users/user_form.html', {'form': form})
+    return services.form_template(
+            request=request,
+            instance=user,
+            form_class=forms.UserForm,
+            redirect_url_name='admin_users_list',
+            template_file_name='adminLte/users/user_form.html',
+        )
 
 
 def user_delete(request, pk):
-    user = models.User.objects.filter(id=pk)
-    user.delete()
+    services.Delete.model_object(models.User, pk)
     return redirect('admin_users_list')
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def user_choose(request):
     return render(request, 'adminLte/mailing/user_choose.html')
 
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def mailing(request):
     user = models.User.objects.values('email')
     for el in user:
         user_email = el['email']
-        print(user_email)
         send_mail('Subject here', 'Here is the message.', 'dimadjangosendemail@gmail.com',
         [user_email])
 
     return render(request, 'adminLte/mailing/mailing.html')
 
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
 def main_slide_form(request, pk=None):
-    slide = get_object_or_404(models.MainSlide, pk=pk) if pk else None
-    return patterns.form_template(
+    slide = get_object_or_404(models.MainSlide, pk=pk)
+    return services.form_template(
         request=request,
         instance=slide,
         form_class=forms.MainSlideForm,
@@ -338,9 +303,6 @@ def main_slide_form(request, pk=None):
     )
 
 
-
-@login_required(login_url=ADMIN_LOGIN_REDIRECT_URL)
-def main_slide_delete(request, pk):
-    slide = models.MainSlide.objects.filter(id=pk)
-    slide.delete()
+def main_slide(request, pk):
+    services.Delete.model_object(models.MainSlide, pk)
     return redirect('admin_banner_list')
