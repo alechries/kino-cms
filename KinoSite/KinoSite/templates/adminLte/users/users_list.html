@@ -16,6 +16,7 @@
     <h1 class="m-0">Список пользователей</h1>
 {% endblock %}
 {% block main_content %}
+{% if users %}
 <table class="table table-bordered">
             <thead>
                 <tr>
@@ -62,5 +63,10 @@
 <div class="pagination_block">
 {% include "adminLte/pagination.html" with page=users %}
 </div>
+{% else %}
+<div>
+    <h3>Список пользователей пуст. Вы можете добавить<a href="{%url 'admin_user_form'%}"> здесь</a></h3>
+</div>
+{% endif %}
 
 {% endblock %}

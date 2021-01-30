@@ -118,6 +118,8 @@ class BannerImage(models.Model):
     def file_list(self):
         return [self.banner_image, ]
 
+    def __str__(self):
+        return self.banner_url
 
 
 class Cinema(models.Model):
@@ -232,6 +234,9 @@ class Page(models.Model):
     def file_list(self):
         return [self.page_main_image, self.page_image1, self.page_image2, self.page_image3, self.page_image4, self.page_image5]
 
+    def __str__(self):
+        return self.page_name
+
 
 class MainPage(SingletonModel):
     tel_number1 = models.IntegerField(verbose_name='Номер телефона', null=True)
@@ -251,6 +256,9 @@ class AboutCinema(SingletonModel):
     def file_list(self):
         return [self.cinema_main_image, self.cinema_image1, self.cinema_image2, self.cinema_image3, self.cinema_image4, self.cinema_image5]
 
+    def __str__(self):
+        return self.cinema_name
+
 
 class CafeBar(SingletonModel):
     cafebar_name = models.CharField(max_length=255, verbose_name='Название кафе-бара')
@@ -265,6 +273,8 @@ class CafeBar(SingletonModel):
     def file_list(self):
         return [self.cafebar_main_image, self.cafebar_image1, self.cafebar_image2, self.cafebar_image3, self.cafebar_image4, self.cafebar_image5]
 
+    def __str__(self):
+        return self.cafebar_name
 
 class VipHall(SingletonModel):
     hall_name = models.CharField(max_length=255, verbose_name='Название VIP-зала')
@@ -278,6 +288,9 @@ class VipHall(SingletonModel):
 
     def file_list(self):
         return [self.hall_main_image, self.hall_image1, self.hall_image2, self.hall_image3, self.hall_image4, self.hall_image5]
+
+    def __str__(self):
+        return self.hall_name
 
 
 class Advertising(SingletonModel):
@@ -293,6 +306,9 @@ class Advertising(SingletonModel):
     def file_list(self):
         return [self.adv_main_image, self.adv_image1, self.adv_image2, self.adv_image3, self.adv_image4, self.adv_image5]
 
+    def __str__(self):
+        return self.adv_name
+
 
 class ChildRoom(SingletonModel):
     room_name = models.CharField(max_length=255, verbose_name='Название детской комнаты')
@@ -307,6 +323,8 @@ class ChildRoom(SingletonModel):
     def file_list(self):
         return [self.room_main_image, self.room_image1, self.room_image1, self.room_image2, self.room_image3, self.room_image4, self.room_image5]
 
+    def __str__(self):
+        return self.room_name
 
 class Contact(models.Model):
     contact_name = models.CharField(verbose_name='Название кинотеатра', max_length=255)
@@ -316,6 +334,9 @@ class Contact(models.Model):
 
     def file_list(self):
         return [self.contact_logo, ]
+
+    def __str__(self):
+        return self.contact_name
 
 class MainSlide(models.Model):
     slide_text = models.TextField(verbose_name='Текст слайда')
@@ -330,6 +351,9 @@ class MainSlide(models.Model):
     def file_list(self):
         return [self.slide_image, ]
 
+    def __str__(self):
+        return self.slide_url
+
 
 class NewsPromoSlide(models.Model):
     slide_text = models.TextField(verbose_name='Текст слайда')
@@ -340,10 +364,16 @@ class NewsPromoSlide(models.Model):
     def file_list(self):
         return [self.slide_image, ]
 
+    def __str__(self):
+        return self.slide_url
+
 
 class BackgroundBanner(SingletonModel):
     banner_image = models.ImageField(verbose_name='Изображение фона', upload_to='images/background/')
 
     def file_list(self):
         return [self.banner_image, ]
+
+    def __str__(self):
+        return self.banner_image
 

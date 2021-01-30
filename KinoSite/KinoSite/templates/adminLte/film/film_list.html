@@ -16,6 +16,7 @@
     <h1 class="m-0">Премьеры</h1>
 {% endblock %}
 {% block main_content %}
+{% if film %}
     {% for el in film %}
         <div class="card m-3" style="width: 18rem">
             <img src="{{ el.get_absolute_image }}" class="card-img-top" alt="film_image">
@@ -36,4 +37,9 @@
             </div>
         </div>
     {% endfor %}
+{% else %}
+<div>
+    <h3>Список фильмов пуст. Вы можете добавить<a href="{%url 'admin_film_form'%}"> здесь</a></h3>
+</div>
+{% endif %}
 {% endblock %}

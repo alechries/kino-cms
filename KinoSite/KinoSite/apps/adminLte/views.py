@@ -57,7 +57,7 @@ def banner(request):
     main_slide = models.MainSlide.objects.all()
     news_promo = models.NewsPromoSlide.objects.all()
     background_banner = models.BackgroundBanner.get_solo()
-    return render(request, 'adminLte/banner/banner.html', {'main_slide': main_slide, 'news_promo': news_promo, 'background_banner': background_banner})
+    return render(request, 'adminLte/banner/banner_list.html', {'main_slide': main_slide, 'news_promo': news_promo, 'background_banner': background_banner})
 
 
 def film_edit_form(request, pk=None):

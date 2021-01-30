@@ -60,6 +60,7 @@
     <h1 class="m-0">Список контактов</h1>
 {% endblock %}
 {% block main_content %}
+{% if contacts %}
         <table class="table">
             <thead>
                 <tr>
@@ -94,4 +95,9 @@
 
                 </tbody>
         </table>
+{% else %}
+<div>
+    <h3>Список контактов пуст. Вы можете добавить<a href="{%url 'admin_contact_form'%}"> здесь</a></h3>
+</div>
+{% endif%}
 {% endblock %}

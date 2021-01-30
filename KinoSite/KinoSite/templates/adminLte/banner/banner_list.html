@@ -13,8 +13,6 @@
     <h1 class="m-0">Список всех баннеров</h1>
 {% endblock %}
 {% block main_content %}
-<div class="card">
-    <h4 style="margin-left: 10px">Список баннеров на главной</h4>
     {% for el in main_slide %}
         <div class="card m-3" style="width: 18rem">
             <img src="{{ el.get_absolute_image }}" class="card-img-top" alt="main banner image">
@@ -36,5 +34,4 @@
             </div>
         </div>
     {% endfor %}
-    </div>
 {% endblock %}

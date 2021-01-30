@@ -16,6 +16,7 @@
 <a class="btn btn-success" href="{% url 'admin_promotion_form' %}">Добавить акцию</a>
 {% endblock %}
 {% block main_content %}
+{% if promotions %}
         <table class="table">
             <thead>
                 <tr>
@@ -50,4 +51,9 @@
 
                 </tbody>
         </table>
+{% else %}
+<div>
+    <h3>Список новостей пуст. Вы можете добавить<a href="{%url 'admin_promotion_form'%}"> здесь</a></h3>
+</div>
+{% endif %}
 {% endblock %}
