@@ -68,6 +68,7 @@ def film_edit_form(request, pk=None):
         form_class=forms.FilmForm,
         redirect_url_name='admin_film_list',
         template_file_name='adminLte/film/film_form.html',
+        context= { 'image1': Film.image1}
     )
 
 

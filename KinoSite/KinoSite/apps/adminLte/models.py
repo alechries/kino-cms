@@ -73,7 +73,7 @@ class User(models.Model):
     card_number = models.CharField(verbose_name='Номер карты', max_length=255)
     language = models.CharField(verbose_name='Язык', max_length=1, choices=LANGUAGE, default=R)
     gender = models.CharField(verbose_name='Пол', max_length=1, choices=GENDER, default=M)
-    city = models.CharField(verbose_name='',choices=CITY, max_length=4)
+    city = models.CharField(verbose_name='',choices=CITY, max_length=4) #пустой вербоус нейм, конфликт с crispy forms
     date_of_birth = models.DateField(verbose_name='Дата рождения', null=True)
     register_date = models.DateField(verbose_name='дата регистрации', auto_now_add=True, null=True)
 
@@ -140,7 +140,7 @@ class Cinema(models.Model):
 
 
 class CinemaHall(models.Model):
-    cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, verbose_name='')
+    cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, verbose_name='') #пустой вербоус нейм, конфликт с crispy forms
     hall_name = models.CharField(max_length=255, verbose_name='Название зала')
     hall_description = models.TextField(verbose_name='Описание зала')
     cinema_scheme = models.ImageField(verbose_name='Схема кинотеатра', upload_to='images/hall/logo/')
@@ -175,7 +175,7 @@ class News(models.Model):
     news_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/news/')
     news_url = models.URLField(verbose_name='Ссылка на видео', null=True)
     news_published_date = models.DateField(verbose_name='Дата публикации новости')
-    news_status = models.CharField(verbose_name='', max_length=3, choices=STATUS)
+    news_status = models.CharField(verbose_name='', max_length=3, choices=STATUS) #пустой вербоус нейм, конфликт с crispy forms
 
     def __str__(self):
         return self.news_name
@@ -206,7 +206,7 @@ class Promotion(models.Model):
     promo_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/promotion/')
     promo_url = models.URLField(verbose_name='Ссылка на акцию', null=True)
     promo_published_date = models.DateField(verbose_name='Дата публикации акции')
-    promo_status = models.CharField(verbose_name='',  max_length=3, choices=STATUS)
+    promo_status = models.CharField(verbose_name='',  max_length=3, choices=STATUS) #пустой вербоус нейм, конфликт с crispy forms
 
     def __str__(self):
         return self.promo_name
