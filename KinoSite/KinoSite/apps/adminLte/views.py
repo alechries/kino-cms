@@ -74,7 +74,12 @@ def film_edit_form(request, pk=None):
 
 def film_list(request):
     films = services.Get.model_list(models.Film)
-    return render(request, 'adminLte/film/film_list.html', {'film': films})
+    return services.content_page(request=request,
+                                 posts_key='film',
+                                 posts=films,
+                                 limit=6,
+                                 template='adminLte/film/film_list.html',
+                                 )
 
 
 def film_delete(request, pk):
