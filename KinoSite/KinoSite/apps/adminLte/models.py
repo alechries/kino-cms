@@ -367,6 +367,9 @@ class NewsPromoSlide(models.Model):
     def __str__(self):
         return self.slide_url
 
+    def get_absolute_image(self):
+        return os.path.join('/media', self.slide_image.name)
+
 
 class BackgroundBanner(SingletonModel):
     banner_image = models.ImageField(verbose_name='Изображение фона', upload_to='images/background/')
@@ -376,4 +379,7 @@ class BackgroundBanner(SingletonModel):
 
     def __str__(self):
         return self.banner_image
+
+    def get_absolute_image(self):
+        return os.path.join('/media', self.banner_image.name)
 

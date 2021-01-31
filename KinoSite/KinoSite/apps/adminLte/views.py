@@ -294,17 +294,47 @@ def mailing(request):
 
     return render(request, 'adminLte/mailing/mailing.html')
 
+
 def main_slide_form(request, pk=None):
-    slide = get_object_or_404(models.MainSlide, pk=pk)
+    main_slide = get_object_or_404(models.MainSlide, pk=pk) if pk else None
     return services.form_template(
         request=request,
-        instance=slide,
+        instance=main_slide,
         form_class=forms.MainSlideForm,
         redirect_url_name='admin_banner_list',
-        template_file_name='adminLte/users/user_form.html',
+        template_file_name='adminLte/banner/main_slide_form.html',
+
     )
 
 
-def main_slide(request, pk):
+def main_slide_delete(request, pk):
     services.Delete.model_object(models.MainSlide, pk)
     return redirect('admin_banner_list')
+
+
+def news_promo_slide_form(request, pk=None):
+    promo_slide = get_object_or_404(models.NewsPromoSlide, pk=pk) if pk else None
+    return services.form_template(
+        request=request,
+        instance=promo_slide,
+        form_class=forms.NewsPromoSlideForm,
+        redirect_url_name='admin_banner_list',
+        template_file_name='adminLte/banner/news_promo_slide_form.html',
+
+    )
+
+
+def news_promo_slide_delete(request, pk):
+    services.Delete.model_object(models.NewsPromoSlide, pk)
+    return redirect('admin_banner_list')
+
+
+def background_banner_form(request):
+    solo: models.BackgroundBanner = models.BackgroundBanner.get_solo()
+    return services.form_template(
+        request=request,
+        instance=solo,
+        form_class=forms.BackgroundBannerForm,
+        redirect_url_name='admin_banner_list',
+        template_file_name='adminLte/banner/background_banner_form.html',
+    )
