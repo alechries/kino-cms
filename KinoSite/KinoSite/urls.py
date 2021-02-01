@@ -20,8 +20,6 @@ from .settings import MEDIA_ROOT, MEDIA_URL, STATICFILES_DIRS, STATIC_URL
 
 urlpatterns = [
     path('', include('public.urls')),
-    path('account/', include('account.urls')),
     path('grappelli/', include('grappelli.urls')),
-    path('admin/', admin.site.urls),
-    path('adminLte/', include('adminLte.urls')),
+    path('django_admin/', admin.site.urls),
 ] + static(MEDIA_URL, document_root=MEDIA_ROOT)
