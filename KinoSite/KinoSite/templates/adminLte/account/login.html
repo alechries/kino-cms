@@ -22,7 +22,7 @@
       {% if message %}
       <p class="login-box-msg">{{ message }}</p>
       {% endif %}
-      <form action="/adminLte/account/login" method="post">
+      <form action="{% url 'admin_login' %}" method="post">
          {% csrf_token %}
         <div class="input-group mb-3">
           {{ form.username }}
