@@ -68,7 +68,7 @@ def film_edit_form(request, pk=None):
         form_class=forms.FilmForm,
         redirect_url_name='admin_film_list',
         template_file_name='adminLte/film/film_form.html',
-        context= { 'image1': Film.image1}
+        context={'image1': Film.image1}
     )
 
 
@@ -77,7 +77,7 @@ def film_list(request):
     return services.content_page(request=request,
                                  posts_key='film',
                                  posts=films,
-                                 limit=6,
+                                 limit=8,
                                  template='adminLte/film/film_list.html',
                                  )
 

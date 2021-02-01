@@ -43,3 +43,8 @@
 </div>
 {% endif %}
 {% endblock %}
+{% block pagination %}
+<div class="pagination_block">
+{% include "adminLte/pagination.html" with page=film %}
+</div>
+{% endblock %}
