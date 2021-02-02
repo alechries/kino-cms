@@ -4,7 +4,8 @@ from .. import models
 
 def index(request):
     background_banner = models.BackgroundBanner.get_solo()
-    return render(request, 'public/index.html', {'background_banner': background_banner})
+    films = models.Film.objects.all()
+    return render(request, 'public/index.html', {'background_banner': background_banner, 'films': films})
 
 
 def account_cabinet(request):

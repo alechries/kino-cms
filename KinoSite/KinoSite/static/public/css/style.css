@@ -23,3 +23,11 @@ hr {
     color: #000000;
     height: 4px;
 }
+.row>* {
+    width: auto;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.row{
+    --bs-gutter-x: 0rem;
+}
