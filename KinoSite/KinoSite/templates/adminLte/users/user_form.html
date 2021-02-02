@@ -30,10 +30,10 @@
                             <label for="InputLanguage">Язык</label>
                             <div class="row" id="InputLanguage">
                                  <div class="form-group">
-                                    {% for pk, choice in form.language.field.widget.choices %}
+                                    {% for cho, choice in form.language.field.widget.choices %}
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input id="id_{{form.language.name}}_{{ forloop.counter0 }}" name="{{form.language.name}}" type="{{form.language.field.widget.input_type}}" value="{{pk}}" class="custom-control-input"
-                                        {% ifequal form.language.data pk.0 %}
+                                        <input id="id_{{form.language.name}}_{{ forloop.counter0 }}" name="{{form.language.name}}" type="{{form.language.field.widget.input_type}}" value="{{cho}}" class="custom-control-input"
+                                        {% ifequal form.language.value cho %}
                                             checked="checked"
                                         {% endifequal %}/>
                                         <label for="id_{{form.language.name}}_{{ forloop.counter0 }}" class="custom-control-label">{{ choice }}</label>
@@ -54,10 +54,10 @@
                             <label for="InputGender">Пол</label>
                             <div class="row" id="InputGender">
                                 <div class="form-group">
-                                    {% for pk, choice in form.gender.field.widget.choices %}
+                                    {% for cho, choice in form.gender.field.widget.choices %}
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input id="id_{{form.gender.name}}_{{ forloop.counter0 }}" name="{{form.gender.name}}" type="{{form.gender.field.widget.input_type}}" value="{{pk}}" class="custom-control-input"
-                                        {% ifequal form.gender.data pk.0 %}
+                                        <input id="id_{{form.gender.name}}_{{ forloop.counter0 }}" name="{{form.gender.name}}" type="{{form.gender.field.widget.input_type}}" value="{{cho}}" class="custom-control-input"
+                                        {% ifequal form.gender.value cho %}
                                             checked="checked"
                                         {% endifequal %}/>
                                         <label for="id_{{form.gender.name}}_{{ forloop.counter0 }}" class="custom-control-label">{{ choice }}</label>
