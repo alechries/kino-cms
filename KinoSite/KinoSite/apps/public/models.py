@@ -110,18 +110,6 @@ class Film(models.Model):
         return [self.main_image, self.image1, self.image2, self.image3, self.image4, self.image5]
 
 
-class BannerImage(models.Model):
-    banner_image = models.ImageField('Изображение баннера')
-    banner_url = models.URLField('Ссылка под изображением')
-    banner_text = models.CharField('Описание изображения', null=True, max_length=255)
-
-    def file_list(self):
-        return [self.banner_image, ]
-
-    def __str__(self):
-        return self.banner_url
-
-
 class Cinema(models.Model):
     cinema_name = models.CharField(max_length=255, verbose_name='Название кинотеатра')
     cinema_description = models.TextField(verbose_name='Описание конотеатра')
@@ -215,27 +203,6 @@ class Promotion(models.Model):
 
     def file_list(self):
         return [self.promo_main_image, self.promo_image1, self.promo_image2, self.promo_image3, self.promo_image4, self.promo_image5]
-
-
-class Page(models.Model):
-    class Meta:
-        abstract = True
-
-    page_name = models.CharField(max_length=255, verbose_name='Название страницы')
-    page_description = models.TextField(verbose_name='Описание страницы')
-    page_main_image = models.ImageField(verbose_name='Логотип страницы', upload_to='images/pages/logo')
-    page_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/pages/')
-    page_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/pages/')
-    page_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/pages/')
-    page_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/pages/')
-    page_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/pages/')
-    page_status = models.BooleanField(verbose_name='Статус страницы', default=False)
-
-    def file_list(self):
-        return [self.page_main_image, self.page_image1, self.page_image2, self.page_image3, self.page_image4, self.page_image5]
-
-    def __str__(self):
-        return self.page_name
 
 
 class MainPage(SingletonModel):
