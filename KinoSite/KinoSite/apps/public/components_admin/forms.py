@@ -555,17 +555,22 @@ class ContactForm(ModelForm):
 class UserForm(ModelForm):
     class Meta:
         model = models.User
-        fields = ['name', 'surname', 'phone', 'username', 'email', 'address', 'password', 'password2', 'card_number',
+        password2 = TextInput(attrs={
+                'class': "form-control",
+                'id': "InputPassword2",
+                'placeholder': "Введите пароль",
+            })
+        fields = ['first_name', 'last_name', 'phone', 'username', 'email', 'address', 'password', 'card_number',
                   'language', 'gender', 'city', 'date_of_birth', 'gender']
 
         widgets = {
-            'name': TextInput(attrs={
+            'first_name': TextInput(attrs={
                 'class': "form-control",
-                'id': "InputName",
+                'id': "InputFirstName",
             }),
-            'surname': TextInput(attrs={
+            'last_name': TextInput(attrs={
                 'class': "form-control",
-                'id': "InputSurname",
+                'id': "InputLastName",
             }),
             'username': TextInput(attrs={
                 'class': "form-control",
@@ -593,11 +598,6 @@ class UserForm(ModelForm):
             'password': TextInput(attrs={
                 'class': "form-control",
                 'id': "InputPassword",
-                'placeholder': "Введите пароль",
-            }),
-            'password2': TextInput(attrs={
-                'class': "form-control",
-                'id': "InputPassword2",
                 'placeholder': "Введите пароль",
             }),
             'card_number': TextInput(attrs={
