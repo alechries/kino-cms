@@ -167,7 +167,6 @@ def promotion_delete(request, pk):
     return redirect('admin_promotion_list')
 
 
-
 def pages_list(request):
     return render(request, 'adminLte/pages/pages_list.html')
 
