@@ -91,7 +91,7 @@ class FilmForm(ModelForm):
                 'placeholder': 'Введите ссылку. Пример: https://www.youtube.com/watch...',
                 'id': 'TrailerName',
             }),
-            'first_night': DateInput(attrs={
+            'first_night': DateInput(format=('%Y-%m-%d'), attrs={
                 'type': "date",
                 'placeholder': "Введите дату премьеры",
                 'class': "form-control",
@@ -238,7 +238,7 @@ class NewsForm(ModelForm):
                 'placeholder': 'Введите ссылку на новость',
                 'id': 'NewsUrl',
             }),
-            'news_published_date': DateInput(attrs={
+            'news_published_date': DateInput(format=('%Y-%m-%d'), attrs={
                 'type': "date",
                 'placeholder': "Введите дату публикации",
                 'class': "form-control",
@@ -290,7 +290,7 @@ class PromotionForm(ModelForm):
                 'placeholder': 'Введите ссылку на акцию',
                 'id': 'PromotionUrl',
             }),
-            'promo_published_date': DateInput(attrs={
+            'promo_published_date': DateInput(format=('%Y-%m-%d'), attrs={
                 'type': "date",
                 'placeholder': "Введите дату публикации",
                 'class': "form-control",
@@ -585,7 +585,7 @@ class UserForm(ModelForm):
                 'id': "InputEmail",
                 'type': "email",
             }),
-            'date_of_birth': DateInput(attrs={
+            'date_of_birth': DateInput(format=('%Y-%m-%d'), attrs={
                 'type': "date",
                 'placeholder': "Введите дату рождения",
                 'class': "form-control",
