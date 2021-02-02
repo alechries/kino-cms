@@ -33,10 +33,6 @@ def posters_films_details(request):
     return render(request, 'public/posters/films_details.html')
 
 
-def soon_list(request):
-    return render(request, 'public/soon/list.html')
-
-
 def timetable_films_sessions_list(request):
     return render(request, 'public/timetable/films-sessions-list.html')
 
