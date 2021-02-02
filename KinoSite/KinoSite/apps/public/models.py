@@ -1,9 +1,14 @@
-from solo.models import SingletonModel
-import os
+
 from django.db import models
 from django.dispatch import receiver
-from django.contrib.auth.models import User as DjangoUser
+from django.contrib.auth.models import User as DjangoUser, AbstractBaseUser, PermissionsMixin, AbstractUser
+from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
+from solo.models import SingletonModel
+import os
 from . import services
+from .managers import CustomUserManager
+
 
 ############################################################
 # EVENTS
@@ -42,7 +47,7 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 # MODELS
 
 
-class User(models.Model):
+class User(AbstractUser):
     R = 1
     U = 2
     LANGUAGE = (
@@ -62,20 +67,13 @@ class User(models.Model):
         ('KHAR', 'Харьков'),
     )
 
-    name = models.CharField(verbose_name='Имя', max_length=255)
-    surname = models.CharField(verbose_name='Фамиоия', max_length=255)
-    username = models.CharField(verbose_name='Юзернейм', max_length=255)
-    email = models.EmailField(verbose_name='Емаил')
     phone = models.CharField(verbose_name='Номер телефона', max_length=60)
     address = models.TextField(verbose_name='Адрес', max_length=255)
-    password = models.CharField(verbose_name='Пароль', max_length=255)
-    password2 = models.CharField(verbose_name='Пароль 2', max_length=255)
     card_number = models.CharField(verbose_name='Номер карты', max_length=255)
     language = models.CharField(verbose_name='Язык', max_length=1, choices=LANGUAGE, default=R)
     gender = models.CharField(verbose_name='Пол', max_length=1, choices=GENDER, default=M)
-    city = models.CharField(verbose_name='',choices=CITY, max_length=4) #пустой вербоус нейм, конфликт с crispy forms
+    city = models.CharField(verbose_name='', choices=CITY, max_length=4) #пустой вербоус нейм, конфликт с crispy forms
     date_of_birth = models.DateField(verbose_name='Дата рождения', null=True)
-    register_date = models.DateField(verbose_name='дата регистрации', auto_now_add=True, null=True)
 
     def __str__(self):
         return self.username
