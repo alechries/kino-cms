@@ -1,8 +1,3 @@
- body {
-    background: url(img/62916-film-poster-priklyucheniya-mstiteli_era_altrona-kinovselennaya_marvel-1920x1080.jpg) no-repeat; /* Путь к фоновому изображению */
-    background-attachment: fixed; /* Фиксируем фон веб-страницы */
-    background-size: 100%;
-   }
 
  a {
      color: #000000;

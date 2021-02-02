@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from .. import models
 
 
 def index(request):
-    return render(request, 'public/index.html')
+    background_banner = models.BackgroundBanner.get_solo()
+    return render(request, 'public/index.html', {'background_banner': background_banner})
 
 
 def account_cabinet(request):

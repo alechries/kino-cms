@@ -348,5 +348,5 @@ class BackgroundBanner(SingletonModel):
         return self.banner_image
 
     def get_absolute_image(self):
-        return os.path.join('/media', self.banner_image.name)
+        return os.path.join('/media/', self.banner_image.name)
 
