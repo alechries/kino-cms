@@ -1,5 +1,5 @@
  body {
-    background: url(img/unnamed1.jpg) no-repeat; /* Путь к фоновому изображению */
+    background: url(img/62916-film-poster-priklyucheniya-mstiteli_era_altrona-kinovselennaya_marvel-1920x1080.jpg) no-repeat; /* Путь к фоновому изображению */
     background-attachment: fixed; /* Фиксируем фон веб-страницы */
     background-size: 100%;
    }
@@ -22,4 +22,10 @@
     float:none;
     display:table-cell;
     text-align:center;
+}
+
+hr {
+    border: none;
+    color: #000000;
+    height: 4px;
 }

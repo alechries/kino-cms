@@ -1,6 +1,6 @@
 {% extends 'public/base.html' %}
 {% block content %}
-     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 600px">
+     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 600px; background-color: grey">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -8,7 +8,7 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="../../static/public/css/img/1572020049_terminator-vse-1.jpg alt="Первый слайд">
+          <img class="d-block" src="..." alt="Первый слайд">
         </div>
         <div class="carousel-item">
           <img class="d-block w-100" src="..." alt="Второй слайд">
@@ -26,7 +26,41 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-    <div class="col-md-4">
-        <h1>hello</h1>
+    <div class="col-md d-flex justify-content-center">
+        <div class="row">
+            <h1>Смотрите сегодня, %вставить дату%</h1>
+        </div>
+    </div>
+    <div class="container d-flex justify-content-center" style="height: 500px">
+      <h1>CONTENT</h1>
+    </div>
+    <div class="col-md d-flex justify-content-center">
+        <div class="row">
+            <h1>Смотрите скоро</h1>
+        </div>
+    </div>
+    <div class="container d-flex justify-content-center" style="height: 500px">
+      <h1>CONTENT</h1>
+    </div>
+    <div class="col-md d-flex justify-content-center">
+        <div class="row">
+            <h1>Новости и акции</h1>
+        </div>
+    </div>
+    <div class="container d-flex" style="margin-bottom: 30px">
+        <img src="../../static/public/css/img/wallpaper-298491.jpg" class="img-fluid mx-auto d-block" style="height: 50%; width: 50%">
+    </div>
+    <div class="container d-flex">
+        <img src="../../static/public/css/img/Screenshot_3%20(2).jpg" class="img-fluid mx-auto d-block" style="height: 50%; width: 50%">
+    </div>
+    <div class="col-md d-flex justify-content-center">
+        <div class="row">
+            <h1>CEO текст</h1>
+        </div>
+    </div>
+    <div class="col-md d-flex justify-content-center">
+        <div class="row">
+            <p>CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст    CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст </p>
+        </div>
     </div>
 {% endblock %}
