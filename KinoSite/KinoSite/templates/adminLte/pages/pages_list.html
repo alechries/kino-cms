@@ -1,4 +1,3 @@
-
 {% extends 'adminLte/base.html' %}
 {% block page %}
 <li class="nav-item menu-open">
@@ -10,7 +9,7 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{% url 'admin_main_info' %}" class="nav-link active">
+            <a href="{% url 'admin_main_info' %}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Главная страница</p>
             </a>
@@ -54,33 +53,9 @@
     </ul>
 </li>
 {% endblock %}
-{% block page_main %}
-<a href="{% url 'admin_main_info' %}" class="nav-link active">
-    <i class="far fa-circle nav-icon"></i>
-    <p>Главная страница</p>
-</a>
-{% endblock %}
 {% block content_title %}
-    <h1 class="m-0">Редактирование информации на главной странице</h1>
+<h1 class="m-0">Общая информация страниц сайта</h1>
 {% endblock %}
 {% block main_content %}
- <div class="features flex-fill">
-            <div class="container">
-                <form method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
 
-                    <div class="col-lg-3 my-3 pl-0">
-                        <label for="TelNumber1Input"><h4>Телефоны</h4></label>
-                        {{ form.tel_number1 }}
-                        {{ form.tel_number2 }}
-                    </div>
-                    <div class="container my-5">
-                        <button class="btn btn-success" type="submit">Сохранить</button>
-                        {% for msg in messages %}
-                        {{ msg }}
-                        {% endfor %}
-                    </div>
-                </form>
-            </div>
- </div>
 {% endblock %}
