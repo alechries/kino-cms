@@ -1,0 +1,25 @@
+ body {
+    background: url(img/unnamed1.jpg) no-repeat; /* Путь к фоновому изображению */
+    background-attachment: fixed; /* Фиксируем фон веб-страницы */
+    background-size: 100%;
+   }
+
+ a {
+     color: #000000;
+ }
+
+ nav.navbar .dropdown:hover > .dropdown-menu {
+ display: block;
+}
+.navbar-nav {
+    font-size: large;
+    display: table;
+    width: 100%;
+    margin: 0;
+}
+.navbar-nav > li {
+    font-size: large;
+    float:none;
+    display:table-cell;
+    text-align:center;
+}
