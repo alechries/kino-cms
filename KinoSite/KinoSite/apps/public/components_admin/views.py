@@ -289,11 +289,12 @@ def user_choose(request):
 
 
 def mailing(request):
-    user = models.User.objects.values('email')
-    for el in user:
-        user_email = el['email']
-        send_mail('Subject here', 'Here is the message.', 'dimadjangosendemail@gmail.com',
-        [user_email])
+    if request.method == "POST":
+        user = models.User.objects.values('email')
+        for el in user:
+            user_email = el['email']
+            send_mail('Subject here', 'Here is the message.', 'dimadjangosendemail@gmail.com',
+            [user_email])
 
     return render(request, 'adminLte/mailing/mailing.html')
 
