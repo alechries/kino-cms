@@ -1,6 +1,9 @@
+.idea/
 __pycache__/
 **/migrations/
 !**/migrations/0001_initial.py
 !**/migrations/__init__.py
 **/media/
+**/venv/
 db.sqlite3
+
