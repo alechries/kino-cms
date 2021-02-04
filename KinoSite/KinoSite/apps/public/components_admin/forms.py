@@ -86,7 +86,7 @@ class FilmForm(ModelForm):
                 'class': 'form-control',
                 'id': 'FilmDuration',
             }),
-            'trailer_link': URLInput(attrs={
+            'trailer_link': TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Введите ссылку. Пример: https://www.youtube.com/watch...',
                 'id': 'TrailerName',

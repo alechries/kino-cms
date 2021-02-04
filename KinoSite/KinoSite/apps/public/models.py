@@ -1,13 +1,9 @@
-
 from django.db import models
 from django.dispatch import receiver
 from django.contrib.auth.models import User as DjangoUser, AbstractBaseUser, PermissionsMixin, AbstractUser
-from django.utils.translation import gettext_lazy as _
-from django.utils import timezone
 from solo.models import SingletonModel
 import os
 from . import services
-from .managers import CustomUserManager
 
 
 ############################################################
