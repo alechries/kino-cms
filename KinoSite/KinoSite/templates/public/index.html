@@ -35,7 +35,7 @@
         <div class="row d-flex justify-content-center" style="--bs-gutter-x: 0rem;">
             {% for el in films %}
             <div class="card d-flex" style="width: 16rem">
-                <img src="{{ el.get_absolute_image }}" class="card-img-top" alt="film_image" height="240">
+                <p><a href="{% url 'posters_films_details' %}"><img src="{{ el.get_absolute_image }}" class="card-img-top" alt="film_image" height="240"></a></p>
                 <div class="card-body">
                     <h5 class="card-title">{{ el.title }}</h5>
                 </div>
@@ -56,8 +56,25 @@
             <h1>Смотрите скоро</h1>
         </div>
     </div>
-    <div class="container d-flex justify-content-center" style="height: 500px">
-      <h1>CONTENT</h1>
+    <div class="content-wrapper">
+        <div class="row d-flex justify-content-center" style="--bs-gutter-x: 0rem;">
+            {% for el in films %}
+            <div class="card d-flex" style="width: 16rem">
+                <p><a href="https://www.google.com/"><img src="{{ el.get_absolute_image }}" class="card-img-top" alt="film_image" height="240"></a></p>
+                <div class="card-body">
+                    <h5 class="card-title">{{ el.title }}</h5>
+                </div>
+                <div class="card-footer  d-flex ">
+                    <div class="row mx-auto">
+                        <form method="get">
+                            <a href="#" class="btn btn-primary">Купить билет</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
     </div>
     <div class="col-md d-flex justify-content-center">
         <div class="row">

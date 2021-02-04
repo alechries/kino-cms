@@ -47,6 +47,17 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 # MODELS
 
 
+#class SEO(models.Model):
+#    seo_url = models.URLField(verbose_name='SEO ссылка')
+#    seo_title = models.CharField(verbose_name='Title', max_length=255)
+#    seo_keywords = models.CharField(verbose_name='Keywords', max_length=255)
+#    seo_description = models.TextField(verbose_name='Description')
+#
+#    def __str__(self):
+#        return self.seo_title
+
+
+
 class User(AbstractUser):
     R = 1
     U = 2
@@ -94,6 +105,7 @@ class Film(models.Model):
     i_max = models.BooleanField('I_MAX', null=False)
     duration = models.CharField('Длительность фильма', max_length=55)
     first_night = models.DateField(verbose_name='Дата премьеры')
+#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def __str__(self):
         return self.title
@@ -119,6 +131,7 @@ class Cinema(models.Model):
     cinema_image3 = models.ImageField('Третее изображение', upload_to='images/cinema/')
     cinema_image4 = models.ImageField('Четвёртое изображение', upload_to='images/cinema/')
     cinema_image5 = models.ImageField('Пятое изображение', upload_to='images/cinema/')
+#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def __str__(self):
         return self.cinema_name
@@ -139,6 +152,7 @@ class CinemaHall(models.Model):
     hall_image4 = models.ImageField('Четвёртое изображение', upload_to='images/hall/')
     hall_image5 = models.ImageField('Пятое изображение', upload_to='images/hall/')
     hall_scheme = models.ImageField(verbose_name='Схема зала', upload_to='images/hall/logo/')
+#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def __str__(self):
         return self.hall_name
@@ -164,6 +178,7 @@ class News(models.Model):
     news_url = models.URLField(verbose_name='Ссылка на видео', null=True)
     news_published_date = models.DateField(verbose_name='Дата публикации новости')
     news_status = models.CharField(verbose_name='', max_length=3, choices=STATUS) #пустой вербоус нейм, конфликт с crispy forms
+#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def __str__(self):
         return self.news_name
@@ -195,6 +210,7 @@ class Promotion(models.Model):
     promo_url = models.URLField(verbose_name='Ссылка на акцию', null=True)
     promo_published_date = models.DateField(verbose_name='Дата публикации акции')
     promo_status = models.CharField(verbose_name='',  max_length=3, choices=STATUS) #пустой вербоус нейм, конфликт с crispy forms
+#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def __str__(self):
         return self.promo_name
@@ -206,6 +222,7 @@ class Promotion(models.Model):
 class MainPage(SingletonModel):
     tel_number1 = models.IntegerField(verbose_name='Номер телефона', null=True)
     tel_number2 = models.IntegerField(verbose_name='Номер телефона', null=True)
+#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
 
 class AboutCinema(SingletonModel):
@@ -217,6 +234,7 @@ class AboutCinema(SingletonModel):
     cinema_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/about/')
     cinema_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/about/')
     cinema_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/about/')
+#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def file_list(self):
         return [self.cinema_main_image, self.cinema_image1, self.cinema_image2, self.cinema_image3, self.cinema_image4, self.cinema_image5]
@@ -234,6 +252,7 @@ class CafeBar(SingletonModel):
     cafebar_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/cafe_bar/')
     cafebar_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/cafe_bar/')
     cafebar_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/cafe_bar/')
+#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def file_list(self):
         return [self.cafebar_main_image, self.cafebar_image1, self.cafebar_image2, self.cafebar_image3, self.cafebar_image4, self.cafebar_image5]
@@ -250,6 +269,7 @@ class VipHall(SingletonModel):
     hall_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/vip_hall/')
     hall_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/vip_hall/')
     hall_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/vip_hall/')
+#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def file_list(self):
         return [self.hall_main_image, self.hall_image1, self.hall_image2, self.hall_image3, self.hall_image4, self.hall_image5]
@@ -267,6 +287,7 @@ class Advertising(SingletonModel):
     adv_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/adv/')
     adv_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/adv/')
     adv_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/adv/')
+#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def file_list(self):
         return [self.adv_main_image, self.adv_image1, self.adv_image2, self.adv_image3, self.adv_image4, self.adv_image5]
@@ -284,6 +305,7 @@ class ChildRoom(SingletonModel):
     room_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/child_room/')
     room_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/child_room/')
     room_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/child_room/')
+#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def file_list(self):
         return [self.room_main_image, self.room_image1, self.room_image1, self.room_image2, self.room_image3, self.room_image4, self.room_image5]
@@ -296,6 +318,7 @@ class Contact(models.Model):
     contact_address = models.TextField(verbose_name='Адрес кинотеатра')
     contact_location = models.CharField(verbose_name='Координаты для карты', max_length=255)
     contact_logo = models.ImageField(verbose_name='Лого', upload_to='images/contact/logo/')
+#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def file_list(self):
         return [self.contact_logo, ]
