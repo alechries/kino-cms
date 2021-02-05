@@ -525,15 +525,10 @@ class ChildRoomForm(ModelForm):
 class ContactForm(ModelForm):
     class Meta:
         model = models.Contact
-
-        fields = ['contact_name', 'contact_address', 'contact_location', 'contact_logo']
+        contact_cinema = ModelChoiceField(queryset=models.Cinema.objects.all(), empty_label=None, to_field_name="cinema_name")
+        fields = ['contact_cinema', 'contact_address', 'contact_location', 'contact_logo']
 
         widgets = {
-            'contact_name': TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите название кинотеатра',
-                'id': 'ContactNameInput',
-            }),
             'contact_address': Textarea(attrs={
                 'class': 'form-control',
                 'id': 'ContactAddressInput',

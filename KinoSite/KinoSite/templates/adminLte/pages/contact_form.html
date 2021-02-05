@@ -1,4 +1,5 @@
 {% extends 'adminLte/base.html' %}
+{% load crispy_forms_tags %}
 {% block page %}
 <li class="nav-item menu-open">
     <a href="#" class="nav-link active">
@@ -63,9 +64,9 @@
 
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="form-group col-md-4" style="padding-left: 0px">
-                        <label for="ContactNameInput"><h4>Название кинотеатра</h4></label>
-                        {{ form.contact_name }}
+                    <div class="form-group col-md-3" style="padding-left: 0px">
+                        <label for="CinemaInput"><h4>Название кинотеатра</h4></label>
+                        {{ form.contact_cinema|as_crispy_field }}
                     </div>
                     <div class="form-group">
                         <label for="ContactAddressInput"><h4>Адрес кинотеатра</h4></label>
