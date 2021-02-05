@@ -94,13 +94,13 @@ class Count:
         return models.News.objects.filter(news_published_date__gt=condition_date).count()
 
     @staticmethod
-    def news_count_lt_date(condition_date):
-        return models.News.objects.filter(news_published_date__lt=condition_date).count()
+    def news_count_lte_date(condition_date):
+        return models.News.objects.filter(news_published_date__lte=condition_date).count()
 
     @staticmethod
     def film_count_gt_date(condition_date):
         return models.Film.objects.filter(first_night__gt=condition_date).count()
 
     @staticmethod
-    def film_count_lt_date(condition_date):
-        return models.Film.objects.filter(first_night__lt=condition_date).count()
+    def film_count_lte_date(condition_date):
+        return models.Film.objects.filter(first_night__lte=condition_date).count()
