@@ -124,7 +124,7 @@ class Cinema(models.Model):
 
 
 class CinemaHall(models.Model):
-    cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, verbose_name='') #пустой вербоус нейм, конфликт с crispy forms
+    cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, verbose_name='')  # пустой verbose_name, конфликт с crispy forms
     hall_name = models.CharField(max_length=255, verbose_name='Название зала')
     hall_description = models.TextField(verbose_name='Описание зала')
     cinema_scheme = models.ImageField(verbose_name='Схема кинотеатра', upload_to='images/hall/logo/')
@@ -237,6 +237,7 @@ class CafeBar(SingletonModel):
     def __str__(self):
         return self.cafebar_name
 
+
 class VipHall(SingletonModel):
     hall_name = models.CharField(max_length=255, verbose_name='Название VIP-зала')
     hall_description = models.TextField(verbose_name='Описание VIP-зала')
@@ -287,8 +288,9 @@ class ChildRoom(SingletonModel):
     def __str__(self):
         return self.room_name
 
+
 class Contact(models.Model):
-    contact_name = models.CharField(verbose_name='Название кинотеатра', max_length=255)
+    contact_cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, verbose_name='')  # пустой verbose_name, конфликт с crispy forms
     contact_address = models.TextField(verbose_name='Адрес кинотеатра')
     contact_location = models.CharField(verbose_name='Координаты для карты', max_length=255)
     contact_logo = models.ImageField(verbose_name='Лого', upload_to='images/contact/logo/')
@@ -297,7 +299,8 @@ class Contact(models.Model):
         return [self.contact_logo, ]
 
     def __str__(self):
-        return self.contact_name
+        return self.contact_cinema
+
 
 class MainSlide(models.Model):
     slide_text = models.TextField(verbose_name='Текст слайда')
