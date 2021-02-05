@@ -14,11 +14,11 @@ def admin_index(request):
     date_now = date.today()
     context = {
         'films_will_count': services.Count.film_count_gt_date(date_now),
-        'films_was_count': services.Count.film_count_lt_date(date_now),
+        'films_was_count': services.Count.film_count_lte_date(date_now),
         'cinema_count': services.Count.cinema_count(),
         'cinema_hall_count': services.Count.cinema_hall_count(),
         'news_will_count': services.Count.news_count_gt_date(date_now),
-        'news_was_count': services.Count.news_count_lt_date(date_now),
+        'news_was_count': services.Count.news_count_lte_date(date_now),
         'promo_count': services.Count.promotion_count(),
         'user_count': services.Count.user_count(),
     }
