@@ -84,7 +84,7 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # 'NAME': 'KinoSiteDjango',
         # 'USER': 'KinoSiteDjango',
-        # 'PASSWORD': 'admin',
+        # 'PASSWORD': 'KinoSiteDjango',
         # 'HOST': '188.225.18.86',
         # 'PORT': '5432',
     }
