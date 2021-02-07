@@ -1,11 +1,19 @@
 from django.shortcuts import render
 from .. import models
+import datetime
 
 
 def index(request):
+    now = datetime.date.today()
+    full_date_now = datetime.date.today()
     background_banner = models.BackgroundBanner.get_solo()
-    films = models.Film.objects.all()
-    return render(request, 'public/index.html', {'background_banner': background_banner, 'films': films})
+    films_today = models.Film.objects.filter(first_night__lte=now)
+    future_film = models.Film.objects.filter(first_night__gt=now)
+    return render(request, 'public/index.html', {'background_banner': background_banner,
+                                                 'films_today': films_today,
+                                                 'future_film': future_film,
+                                                 'date_now': full_date_now,
+                                                 })
 
 
 def account_cabinet(request):
@@ -30,7 +38,8 @@ def posters_films_list(request):
 
 
 def posters_films_details(request):
-    return render(request, 'public/posters/films_details.html')
+    background_banner = models.BackgroundBanner.get_solo()
+    return render(request, 'public/posters/film_details.html', {'background_banner': background_banner, })
 
 
 def timetable_films_sessions_list(request):

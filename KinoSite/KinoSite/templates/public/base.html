@@ -1,6 +1,6 @@
 {% load static %}
 <!doctype html>
-<html lang="en">
+<html lang="rus">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../static/public/css/style.css">
+    <link rel="stylesheet" href="{% static 'public/css/style.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <title>Cinema</title>
   </head>
@@ -111,7 +111,7 @@
             <nav role="navigation" class="navbar navbar-fixed-bottom">
               <div class="col-md-4" style="padding-left: 20px">
                 <h2>Мобильные приложения</h2>
-                <img src="../../static/public/css/img/Screenshot_1.jpg">
+                <img src="{% static 'public/css/img/Screenshot_1.jpg' %}">
                 <h5 style="padding-top: 10px">Разработка сайтов AVADA-MEDIA </h5>
               </div>
               <div class="col-md-4">
