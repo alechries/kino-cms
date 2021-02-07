@@ -64,11 +64,11 @@
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-row col-md-4" style="padding-left: 0px">
-                         <label for="VipHallNameInput"><h4>Название сети кинотеатров</h4></label>
+                         <label for="VipHallNameInput"><h4>Название VIP-зала</h4></label>
                         {{ form.hall_name }}
                     </div>
                     <div class="form-group">
-                        <label for="VipHallTextInput"><h4>Описание сети кинотеатров</h4></label>
+                        <label for="VipHallTextInput"><h4>Описание VIP-зала</h4></label>
                         {{ form.hall_description }}
                     </div>
                     <div class="form-group">

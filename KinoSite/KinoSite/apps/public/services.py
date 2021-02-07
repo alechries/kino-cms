@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db import models as django_models
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, UnorderedObjectListWarning
 from django.contrib.auth.decorators import login_required
 import os
 from datetime import date
@@ -60,7 +60,8 @@ class Get:
 
     @staticmethod
     def model_list(model_sender):
-        return model_sender.objects.all()
+        result = model_sender.objects.all().order_by('-id')
+        return result
 
 
 class Delete:
