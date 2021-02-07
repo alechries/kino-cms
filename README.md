@@ -1,4 +1,4 @@
 # KinoSiteDjango
 
-- Creators Alexander Wiese & Dmitry Tishenko
-- Test django project for AVADA Media
+- Creators Alexander Wiese (github.com/alechries) & Dmitry Tishenko (github.com/dimadima5182)
+- Test django project for AVADA Media (avada-media.ua/)

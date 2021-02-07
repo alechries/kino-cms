@@ -34,12 +34,12 @@
     <div class="content-wrapper">
         <div class="row d-flex justify-content-center" style="--bs-gutter-x: 0rem;">
             {% for el in films %}
-            <div class="card d-flex" style="width: 16rem">
-                <img src="{{ el.get_absolute_image }}" class="card-img-top" alt="film_image" height="240">
-                <div class="card-body">
-                    <h5 class="card-title">{{ el.title }}</h5>
+            <div class="card d-flex" style="width: 16rem; height: 25.5rem; margin-bottom: 28px">
+                <p><a href="{% url 'posters_films_details' %}"><img src="{{ el.get_absolute_image }}" class="card-img-top" alt="film_image" height="340"></a></p>
+                <div class="card-body" style="padding: 0px;">
+                    <h5 class="card-title" style="text-align: center">{{ el.title }}</h5>
                 </div>
-                <div class="card-footer  d-flex ">
+                <div class="d-flex ">
                     <div class="row mx-auto">
                         <form method="get">
                             <a href="#" class="btn btn-primary">Купить билет</a>
@@ -56,8 +56,25 @@
             <h1>Смотрите скоро</h1>
         </div>
     </div>
-    <div class="container d-flex justify-content-center" style="height: 500px">
-      <h1>CONTENT</h1>
+    <div class="content-wrapper">
+        <div class="row d-flex justify-content-center" style="--bs-gutter-x: 0rem;">
+            {% for el in films %}
+            <div class="card d-flex" style="width: 16rem; height: 25.5rem; margin-bottom: 28px">
+                <p><a href="{% url 'posters_films_details' %}"><img src="{{ el.get_absolute_image }}" class="card-img-top" alt="film_image" height="340"></a></p>
+                <div class="card-body" style="padding: 0px;">
+                    <h5 class="card-title" style="text-align: center">{{ el.title }}</h5>
+                </div>
+                <div class="d-flex ">
+                    <div class="row mx-auto">
+                        <form method="get">
+                            <a href="#" class="btn btn-primary">Купить билет</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
     </div>
     <div class="col-md d-flex justify-content-center">
         <div class="row">
