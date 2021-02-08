@@ -63,12 +63,17 @@ class Get:
         result = model_sender.objects.all().order_by('-id')
         return result
 
+    @staticmethod
+    def model_object(model_sender, pk):
+        result = model_sender.objects.filter(id=pk)
+        return result
+
 
 class Delete:
 
     @staticmethod
     def model_object(model_sender, pk=None):
-        result = model_sender.objects.filter(id=pk)
+        result = Get.model_object(model_sender, pk)
         result.delete()
 
 
