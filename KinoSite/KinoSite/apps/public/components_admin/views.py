@@ -284,7 +284,18 @@ def user_form(request, pk=None):
             form_class=forms.UserForm,
             redirect_url_name='admin_users_list',
             template_file_name='adminLte/users/user_form.html',
+            context={'user_pk': pk}
         )
+
+
+def user_change_password(request, pk):
+    form = forms.UserPasswordForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        user = services.Get.model_object(models.User, pk)
+        password = form.cleaned_data['password']
+        services.Change.user_password(user, password)
+        return redirect('admin_user_edit', pk=user.pk)
+    return render(request, 'adminLte/users/user_change_password.html', context={'form': form})
 
 
 def user_delete(request, pk):

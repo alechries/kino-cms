@@ -65,8 +65,16 @@ class Get:
 
     @staticmethod
     def model_object(model_sender, pk):
-        result = model_sender.objects.filter(id=pk)
+        result = model_sender.objects.filter(id=pk).first()
         return result
+
+
+class Change:
+
+    @staticmethod
+    def user_password(user, new_password: str):
+        user.set_password(new_password)
+        user.save()
 
 
 class Delete:
