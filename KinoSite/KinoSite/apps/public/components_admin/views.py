@@ -186,7 +186,15 @@ def promotion_delete(request, pk):
 
 
 def pages_list(request):
-    return render(request, 'adminLte/pages/pages_list.html')
+    context = {
+        'main_page': models.MainPage.get_solo(),
+        'about_cinema': models.AboutCinema.get_solo(),
+        'cafe_bar': models.CafeBar.get_solo(),
+        'vip_hall': models.VipHall.get_solo(),
+        'advertising': models.Advertising.get_solo(),
+        'child_room': models.ChildRoom.get_solo(),
+    }
+    return render(request, 'adminLte/pages/pages_list.html', context)
 
 
 def main_pages(request):
@@ -195,7 +203,7 @@ def main_pages(request):
         request=request,
         instance=solo,
         form_class=forms.MainPageForm,
-        redirect_url_name='admin_index',
+        redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/main_page.html',
     )
 
@@ -206,7 +214,7 @@ def about_cinema(request):
         request=request,
         instance=solo,
         form_class=forms.AboutCinemaForm,
-        redirect_url_name='admin_index',
+        redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/about_cinema.html',
     )
 
@@ -217,7 +225,7 @@ def cafe_bar(request):
         request=request,
         instance=solo,
         form_class=forms.CafeBarForm,
-        redirect_url_name='admin_index',
+        redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/cafe_bar.html',
     )
 
@@ -228,7 +236,7 @@ def vip_hall(request):
         request=request,
         instance=solo,
         form_class=forms.VipHallForm,
-        redirect_url_name='admin_index',
+        redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/vip_room.html',
     )
 
@@ -239,7 +247,7 @@ def ads(request):
         request=request,
         instance=solo,
         form_class=forms.AdvertisingForm,
-        redirect_url_name='admin_index',
+        redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/ads.html',
     )
 
@@ -250,7 +258,7 @@ def child_room(request):
         request=request,
         instance=solo,
         form_class=forms.ChildRoomForm,
-        redirect_url_name='admin_index',
+        redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/child_room.html',
     )
 
@@ -294,7 +302,18 @@ def user_form(request, pk=None):
             form_class=forms.UserForm,
             redirect_url_name='admin_users_list',
             template_file_name='adminLte/users/user_form.html',
+            context={'user_pk': pk}
         )
+
+
+def user_change_password(request, pk):
+    form = forms.UserPasswordForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        user = services.Get.model_object(models.User, pk)
+        password = form.cleaned_data['password']
+        services.Change.user_password(user, password)
+        return redirect('admin_user_edit', pk=user.pk)
+    return render(request, 'adminLte/users/user_change_password.html', context={'form': form})
 
 
 def user_delete(request, pk):

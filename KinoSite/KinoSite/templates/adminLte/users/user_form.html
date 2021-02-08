@@ -112,14 +112,16 @@
                     <div class="row">
                          <div class="col" style="margin-right: 30px">
                              <div class="col-md-10">
-                                 <label for="InputPassword">Пароль</label>
-                                 {{form.password}}
+                                 <label for="InputPassword">Пароль</label><br/>
+                                 {% if user_pk %}
+                                    <a class="btn btn-secondary" href="{% url 'admin_user_change_password' pk=user_pk %}" role="button">Поменять пароль</a>
+                                 {% else %}
+                                    {{form.password}}
+                                 {% endif %}
                              </div>
                          </div>
                          <div class="col" style="margin-right: 30px">
                              <div class="col-md-10">
-                                 <label for="InputPassword2">Повторите пароль</label>
-                                 {{form.password2}}
                              </div>
                          </div>
                     </div>

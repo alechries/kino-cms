@@ -195,57 +195,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
                 {% endblock %}
                 {% block page %}
-                <li class="nav-item menu-close">
-                    <a href="#" class="nav-link">
+                <li class="nav-item">
+                    <a href="{% url 'admin_pages_list' %}" class="nav-link">
                         <i class="fas fa-pager"></i>
                         <p>
                             Страницы
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{% url 'admin_main_info' %}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Главная страница</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'admin_about_cinema' %}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>О сети кинотеатров</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'admin_cafe_bar' %}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Кафе-бар</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'admin_vip_hall' %}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>VIP-зал</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'admin_ads' %}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Реклама</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'admin_child_room' %}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Детская комната</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'admin_contact_list' %}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Контакты кинотеатров</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 {% endblock %}
             </ul>

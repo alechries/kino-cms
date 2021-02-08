@@ -57,5 +57,25 @@
 <h1 class="m-0">Общая информация страниц сайта</h1>
 {% endblock %}
 {% block main_content %}
+<div>
+    <br/><h5>Главная страница</h5>
+    <b>Номер телефона 1:</b> {{ main_page.tel_number1 }} <br/>
+    <b>Номер телефона 2:</b> {{ main_page.tel_number2 }} <br/>
+    <br/><br/><h5>О сети кинотеатров</h5>
+    <b>Название:</b> {{ about_cinema.cinema_name}} <br/>
+    <b>Описание:</b> {{ about_cinema.cinema_description}} <br/>
+    <br/><br/><h5>Кафе-бар</h5>
+    <b>Название:</b> {{ cafe_bar.cafebar_name}} <br/>
+    <b>Описание:</b> {{ cafe_bar.cafebar_description}} <br/>
+    <br/><br/><h5>VIP-зал</h5>
+    <b>Название:</b> {{ vip_hall.hall_name}} <br/>
+    <b>Описание:</b> {{ vip_hall.hall_description}} <br/>
+    <br/><br/><h5>Реклама</h5>
+    <b>Название:</b> {{ advertising.adv_name}} <br/>
+    <b>Описание:</b> {{ advertising.adv_description}} <br/>
+    <br/><br/><h5>Контакты</h5>
+    <b>Название:</b> {{ advertising.adv_name}} <br/>
+    <b>Описание:</b> {{ advertising.adv_description}} <br/>
 
+</div>
 {% endblock %}
