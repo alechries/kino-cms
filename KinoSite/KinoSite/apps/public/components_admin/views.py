@@ -59,15 +59,33 @@ def banner(request):
     return render(request, 'adminLte/banner/banner_list.html', {'main_slide': main_slide, 'news_promo': news_promo, 'background_banner': background_banner})
 
 
-def film_edit_form(request, pk=None):
-    instance = get_object_or_404(models.Film, pk=pk) if pk else None
+def session_form(request, pk=None):
+    session = get_object_or_404(models.FilmSession, pk=pk) if pk else None
     return services.form_template(
         request=request,
-        instance=instance,
+        instance=session,
+        form_class=forms.SessionForm,
+        redirect_url_name='admin_film_form',
+        template_file_name='adminLte/film/session_form.html',
+    )
+
+
+def session_delete(request, pk):
+    services.Delete.model_object(models.FilmSession, pk)
+    return redirect('admin_film_list')
+
+
+def film_edit_form(request, pk=None):
+    film = get_object_or_404(models.Film, pk=pk) if pk else None
+    session = models.FilmSession.objects.filter(film=film)
+    print(session)
+    return services.form_template(
+        request=request,
+        instance=film,
         form_class=forms.FilmForm,
         redirect_url_name='admin_film_list',
         template_file_name='adminLte/film/film_form.html',
-        context={'image1': models.Film.image1}
+        context={'image1': models.Film.image1, 'session': session}
     )
 
 

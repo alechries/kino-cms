@@ -1,6 +1,7 @@
 from .. import models
 from django.forms import Form, ModelForm, TextInput, DateInput, FileInput, URLInput, CheckboxInput, Textarea, \
-    EmailField, CharField, PasswordInput, ImageField, ModelChoiceField, URLField, ChoiceField, TimeField, BooleanField, RadioSelect, NumberInput
+    EmailField, CharField, PasswordInput, ImageField, ModelChoiceField, URLField, ChoiceField, TimeField, BooleanField, RadioSelect, NumberInput, \
+    TimeInput
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
@@ -98,6 +99,28 @@ class FilmForm(ModelForm):
                 'id': "FilmFirstNightDate",
         }),
 
+        }
+
+
+class SessionForm(ModelForm):
+    class Meta:
+        model = models.FilmSession
+        hall = ModelChoiceField(queryset=models.CinemaHall.objects.all(),  empty_label=None, to_field_name="hall")
+        film = ModelChoiceField(queryset=models.Film.objects.all(),  empty_label=None, to_field_name="film")
+        fields = ['hall', 'date', 'time', 'film']
+        widgets= {
+            'date': DateInput(format=('%Y-%m-%d'), attrs={
+                'type': "date",
+                'placeholder': "Введите дату показа",
+                'class': "form-control",
+                'id': "FilmSessionDate",
+            }),
+            'time': TimeInput(format=('%H:%M'), attrs={
+                'type': "time",
+                'placeholder': "Введите время показа",
+                'class': "form-control",
+                'id': "FilmSessionTime",
+            }),
         }
 
 

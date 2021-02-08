@@ -1,0 +1,50 @@
+{% extends 'adminLte/base.html' %}
+{% load crispy_forms_tags %}
+{% block film %}
+    <li class="nav-item">
+        <a href="{% url 'admin_film_list' %}" class="nav-link active">
+              <i class="fas fa-film"></i>
+              <p>
+                  Фильмы
+              </p>
+        </a>
+    </li>
+{% endblock %}
+{% block navbar_item %}
+<a class="btn btn-success" href="{% url 'admin_film_form' %}">Добавить фильм</a>
+{% endblock %}
+{% block content_title %}
+    <h1 class="m-0">Сессия фильма</h1>
+{% endblock %}
+{% block main_content %}
+    <div class="features flex-fill">
+        <div class="row">
+            <div class="container">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group col-md-3" style="padding-left: 0px">
+                        <label><h4>Название фильма</h4></label>
+                        {{ form.film|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3" style="padding-left: 0px">
+                        <label><h4>Название зала</h4></label>
+                        {{ form.hall|as_crispy_field }}
+                    </div>
+                    <div class="col-lg-4 my-3 pl-0">
+                        <label for="FilmSessionDate"><h4>Дата показа</h4></label>
+                        {{ form.date }}
+                    </div>
+                    <div class="col-lg-4 my-3 pl-0">
+                        <label for="FilmSessionTime"><h4>Время показа</h4></label>
+                        {{ form.time }}
+                    </div>
+                    <div class="container my-5">
+                        <button class="btn btn-success" type="submit">Сохранить</button>
+                        <a class="btn btn-danger" href="{% url 'admin_film_list' %}" role="button">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
