@@ -81,6 +81,7 @@ urlpatterns = [
     path('admin/main/page', services.admin_views_proxy(admin_views.main_pages), name='admin_main_page'),
     path('admin/about/cinema', services.admin_views_proxy(admin_views.about_cinema), name='admin_about_cinema'),
     path('admin/users/list', services.admin_views_proxy(admin_views.users_list), name='admin_users_list'),
+    path('admin/user/change_password/<int:pk>', services.admin_views_proxy(admin_views.user_change_password, have_pk=True), name='admin_user_change_password'),
     path('admin/user/form', services.admin_views_proxy(admin_views.user_form), name='admin_user_form'),
     path('admin/user/form/<int:pk>', services.admin_views_proxy(admin_views.user_form, have_pk=True), name='admin_user_edit'),
     path('admin/user/delete/<int:pk>', services.admin_views_proxy(admin_views.user_delete, have_pk=True), name='admin_user_delete'),

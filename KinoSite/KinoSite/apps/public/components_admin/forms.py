@@ -1,6 +1,6 @@
 from .. import models
 from django.forms import Form, ModelForm, TextInput, DateInput, FileInput, URLInput, CheckboxInput, Textarea, \
-    EmailField, CharField, PasswordInput, ImageField, ModelChoiceField, URLField, ChoiceField, TimeField, BooleanField, RadioSelect, NumberInput
+    EmailField, CharField, PasswordInput, ModelChoiceField,  RadioSelect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
@@ -593,7 +593,7 @@ class UserForm(ModelForm):
             'password': TextInput(attrs={
                 'class': "form-control",
                 'id': "InputPassword",
-                'placeholder': "Введите пароль",
+                'type': "Password",
             }),
             'card_number': TextInput(attrs={
                 'class': "form-control",
@@ -607,6 +607,16 @@ class UserForm(ModelForm):
                 'class': 'custom-control-input  custom-control-label',
             })
         }
+
+
+class UserPasswordForm(Form):
+
+    password = CharField(widget=TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Новый пароль',
+                'id': 'PasswordInput',
+                'type': 'Password'
+            }))
 
 
 class MainSlideForm(ModelForm):
