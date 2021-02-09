@@ -94,5 +94,9 @@ def about_mobile_app(request):
     return render(request, 'public/about/mobile-app.html')
 
 
+def about_child_room(request):
+    return render(request, 'public/about/child-room.html')
+
+
 def about_contacts(request):
     return render(request, 'public/about/contacts.html')
