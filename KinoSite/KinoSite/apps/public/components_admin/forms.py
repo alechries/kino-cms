@@ -88,11 +88,7 @@ class FilmForm(ModelForm):
                 'class': 'form-control',
                 'id': 'FilmDuration',
             }),
-            'trailer_link': TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите ссылку. Пример: https://www.youtube.com/watch...',
-                'id': 'TrailerName',
-            }),
+
             'first_night': DateInput(format=('%Y-%m-%d'), attrs={
                 'type': "date",
                 'placeholder': "Введите дату премьеры",

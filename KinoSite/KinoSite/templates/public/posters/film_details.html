@@ -1,6 +1,13 @@
 {% extends 'public/base.html' %}
 {% block content %}
-<div class="card" style="border: 0px; height: 420px">
-    <iframe width="auto" height="420" src="https://www.youtube-nocookie.com/embed/a6dvhHPyFIw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
+{% load embed_video_tags %}
+
+
+    {% for el in film %}
+    {% video el.trailer_link '100%x520'%}
+        <div class="card">
+            <h1>{{ el.title }}</h1>
+        </div>
+    {% endfor %}
+
 {% endblock %}

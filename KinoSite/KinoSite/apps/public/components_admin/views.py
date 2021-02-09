@@ -65,7 +65,7 @@ def session_form(request, pk=None):
         request=request,
         instance=session,
         form_class=forms.SessionForm,
-        redirect_url_name='admin_film_form',
+        redirect_url_name='admin_film_list',
         template_file_name='adminLte/film/session_form.html',
     )
 

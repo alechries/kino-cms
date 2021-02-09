@@ -2,6 +2,7 @@ from django.db import models
 from django.dispatch import receiver
 from django.contrib.auth.models import User as DjangoUser, AbstractBaseUser, PermissionsMixin, AbstractUser
 from solo.models import SingletonModel
+from embed_video.fields import EmbedVideoField
 import os
 from . import services
 
@@ -135,7 +136,7 @@ class Film(models.Model):
     image3 = models.ImageField('Третее изображение', upload_to='images/film_images/')
     image4 = models.ImageField('Четвёртое изображение', upload_to='images/film_images/')
     image5 = models.ImageField('Пятое изображение', upload_to='images/film_images/')
-    trailer_link = models.URLField('Ссылка на трейлер')
+    trailer_link = EmbedVideoField('')
     two_d = models.BooleanField('2Д', null=False)
     three_d = models.BooleanField('3Д', null=False)
     i_max = models.BooleanField('I_MAX', null=False)

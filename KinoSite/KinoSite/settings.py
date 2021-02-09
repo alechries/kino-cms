@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'grappelli',
     'solo',
+    'embed_video',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -70,6 +71,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'KinoSite.wsgi.application'
 
