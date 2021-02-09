@@ -78,7 +78,6 @@ def session_delete(request, pk):
 def film_edit_form(request, pk=None):
     film = get_object_or_404(models.Film, pk=pk) if pk else None
     session = models.FilmSession.objects.filter(film=film)
-    print(session)
     return services.form_template(
         request=request,
         instance=film,
