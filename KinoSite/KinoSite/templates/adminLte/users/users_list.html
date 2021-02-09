@@ -10,10 +10,20 @@
     </li>
 {% endblock %}
 {% block navbar_item %}
-<a class="btn btn-success" href="{% url 'admin_user_form' %}">Добавить пользователя</a>
+    <a class="btn btn-success" href="{% url 'admin_user_form' %}">Добавить пользователя</a>
 {% endblock %}
 {% block content_title %}
-    <h1 class="m-0">Список пользователей</h1>
+<div class="container">
+    <div class="col-md-6 d-flex justify-content-end">
+        <p style="font-size: 28px">Список пользователей</p>
+    </div>
+    <div>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'admin_user_search' %}">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+</div>
 {% endblock %}
 {% block main_content %}
 {% if users %}

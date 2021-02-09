@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 from .. import services, models
 from os import remove as remove_file
 from datetime import date
+from django.db.models import Q
 
 
 def admin_index(request):
@@ -77,15 +78,32 @@ def session_delete(request, pk):
 
 def film_edit_form(request, pk=None):
     film = get_object_or_404(models.Film, pk=pk) if pk else None
-    session = models.FilmSession.objects.filter(film=film)
-    return services.form_template(
-        request=request,
-        instance=film,
-        form_class=forms.FilmForm,
-        redirect_url_name='admin_film_list',
-        template_file_name='adminLte/film/film_form.html',
-        context={'image1': models.Film.image1, 'session': session}
-    )
+    if film:
+        session = models.FilmSession.objects.filter(film=film)
+        return services.form_template(
+            request=request,
+            instance=film,
+            form_class=forms.FilmForm,
+            redirect_url_name='admin_film_list',
+            template_file_name='adminLte/film/film_form.html',
+            context={'main_image': models.Film.get_absolute_image(film),
+                     'image1': models.Film.get_image1(film),
+                     'image2': models.Film.get_image2(film),
+                     'image3': models.Film.get_image3(film),
+                     'image4': models.Film.get_image4(film),
+                     'image5': models.Film.get_image5(film),
+                     'session': session}
+        )
+    else:
+        session = models.FilmSession.objects.filter(film=film)
+        return services.form_template(
+            request=request,
+            instance=film,
+            form_class=forms.FilmForm,
+            redirect_url_name='admin_film_list',
+            template_file_name='adminLte/film/film_form.html',
+            context={'session': session}
+        )
 
 
 def film_list(request):
@@ -291,6 +309,18 @@ def users_list(request):
                                  limit=6,
                                  template='adminLte/users/users_list.html',
                                  )
+
+@login_required
+def user_search(request):
+    search_query = request.GET.get('search','')
+    if search_query:
+        user = models.User.objects.filter(Q(username__icontains=search_query) | Q(email__icontains=search_query))
+    else:
+        user = models.User.objects.all()
+
+    return render(request, 'adminLte/users/users_list.html', {'users': user})
+
+
 
 
 def user_form(request, pk=None):

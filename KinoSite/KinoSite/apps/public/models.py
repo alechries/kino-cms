@@ -150,6 +150,21 @@ class Film(models.Model):
     def get_absolute_image(self):
         return os.path.join('/media', self.main_image.name)
 
+    def get_image1(self):
+        return os.path.join('/media', self.image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.image5.name)
+
     def get_absolute_url(self):
         return f'film/list'
 
