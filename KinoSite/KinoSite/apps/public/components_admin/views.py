@@ -86,13 +86,12 @@ def film_edit_form(request, pk=None):
             form_class=forms.FilmForm,
             redirect_url_name='admin_film_list',
             template_file_name='adminLte/film/film_form.html',
-            context={'main_image': models.Film.get_absolute_image(film),
-                     'image1': models.Film.get_image1(film),
-                     'image2': models.Film.get_image2(film),
-                     'image3': models.Film.get_image3(film),
-                     'image4': models.Film.get_image4(film),
-                     'image5': models.Film.get_image5(film),
-                     'session': session}
+            context={'main_image': models.Film.get_absolute_image(film),'session': session},
+            media_context={'image1': models.Film.get_image1(film),
+                           'image2': models.Film.get_image2(film),
+                           'image3': models.Film.get_image3(film),
+                           'image4': models.Film.get_image4(film),
+                           'image5': models.Film.get_image5(film),}
         )
     else:
         session = models.FilmSession.objects.filter(film=film)

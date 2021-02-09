@@ -27,12 +27,12 @@
                         <label for="FilmTextInput"><h4>Описание фильма</h4></label>
                         {{ form.description }}
                     </div>
+                    <label><h4>Постер фильма</h4></label>
                     <div class="card col-md-4">
                         <img src="">
                         <div class="form-group" style="text-align: center">
-                            <label for="FilmPoster"><h4>Постер фильма</h4></label>
                             {% if main_image %}
-                                <img src="{{ main_image }}" class="card-img-top" alt="film_image">
+                                <img src="{{ main_image }}" class="card-img-top" alt="film_image" style="padding-top: 7px; padding-bottom: 7px">
                             {% endif %}
                             {{ form.main_image }}
                         </div>

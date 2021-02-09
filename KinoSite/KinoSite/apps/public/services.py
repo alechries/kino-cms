@@ -17,10 +17,12 @@ def delete_file_with_instance(instance):
         delete_file_with_path(instance.path)
 
 
-def form_template(request, instance: django_models.Model, form_class, redirect_url_name: str, template_file_name: str, context=None):
+def form_template(request, instance: django_models.Model, form_class, redirect_url_name: str, template_file_name: str, context=None, media_context=None):
     if context is None:
         context = {}
     form = form_class(request.POST or None, request.FILES or None, instance=instance or None)
+    if media_context is not None:
+        context.update(media_context)
     if request.method == 'POST' and form.is_valid():
         form.save()
         return redirect(redirect_url_name)
