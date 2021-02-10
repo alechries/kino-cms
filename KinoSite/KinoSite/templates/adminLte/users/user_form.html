@@ -114,7 +114,10 @@
                              <div class="col-md-10">
                                  <label for="InputPassword">Пароль</label><br/>
                                  {% if user_pk %}
-                                    <a class="btn btn-secondary" href="{% url 'admin_user_change_password' pk=user_pk %}" role="button">Поменять пароль</a>
+                                    <fieldset disabled>
+                                        {{form.password}}
+                                     </fieldset>
+                                    <a class="btn btn-secondary" href="{% url 'admin_user_change_password' pk=user_pk %}" role="button" style="margin-top: 7px">Поменять пароль</a>
                                  {% else %}
                                     {{form.password}}
                                  {% endif %}
