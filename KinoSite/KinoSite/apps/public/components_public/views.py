@@ -8,7 +8,9 @@ def index(request):
     full_date_now = datetime.date.today()
     background_banner = models.BackgroundBanner.get_solo()
     films_today = models.Film.objects.filter(first_night__lte=now)
+    print(films_today)
     future_film = models.Film.objects.filter(first_night__gt=now)
+    print(future_film)
     return render(request, 'public/index.html', {'background_banner': background_banner,
                                                  'films_today': films_today,
                                                  'future_film': future_film,
