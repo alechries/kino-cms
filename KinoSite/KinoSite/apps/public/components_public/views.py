@@ -39,7 +39,10 @@ def posters_films_list(request):
 
 def posters_films_details(request, pk):
     film = models.Film.objects.filter(id=pk)
-    return render(request, 'public/posters/film_details.html', {'film': film})
+    background_banner = models.BackgroundBanner.get_solo()
+    return render(request, 'public/posters/film_details.html', {'film': film,
+                                                                'background_banner': background_banner,
+                                                                })
 
 
 def timetable_films_sessions_list(request):
