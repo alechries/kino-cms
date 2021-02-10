@@ -32,9 +32,11 @@
                         <img src="">
                         <div class="form-group" style="text-align: center">
                             {% if main_image %}
-                                <img src="{{ main_image }}" class="card-img-top" alt="film_image" style="padding-top: 7px; padding-bottom: 7px">
+                                <img src="{{ main_image }}" class="card-img-top" alt="film_image" style="padding-top: 7px;">
                             {% endif %}
-                            {{ form.main_image }}
+                            <div style="padding-top:8px;">
+                                {{ form.main_image }}
+                            </div>
                         </div>
                     </div>
                     <label for="FilmGallery"><h4>Галерея фильма</h4></label>

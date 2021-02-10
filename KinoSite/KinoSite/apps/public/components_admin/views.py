@@ -78,7 +78,8 @@ def session_delete(request, pk):
 
 def film_edit_form(request, pk=None):
     film = get_object_or_404(models.Film, pk=pk) if pk else None
-    media_context ={}
+    session = models.FilmSession.objects.filter(film=film)
+    media_context = {}
     if film:
         media_context = {'main_image': models.Film.get_absolute_image(film),
                          'image1': models.Film.get_image1(film),
@@ -86,16 +87,14 @@ def film_edit_form(request, pk=None):
                          'image3': models.Film.get_image3(film),
                          'image4': models.Film.get_image4(film),
                          'image5': models.Film.get_image5(film), }
-
-    session = models.FilmSession.objects.filter(film=film)
     return services.form_template(
-        request=request,
-        instance=film,
-        form_class=forms.FilmForm,
-        redirect_url_name='admin_film_list',
-        template_file_name='adminLte/film/film_form.html',
-        context={'session': session},
-        media_context=media_context
+            request=request,
+            instance=film,
+            form_class=forms.FilmForm,
+            redirect_url_name='admin_film_list',
+            template_file_name='adminLte/film/film_form.html',
+            context={'session': session},
+            media_context=media_context
         )
 
 
@@ -307,7 +306,7 @@ def users_list(request):
 def user_search(request):
     search_query = request.GET.get('search','')
     if search_query:
-        user = models.User.objects.filter(Q(username__icontains=search_query) | Q(email__icontains=search_query) | Q(city__icontains=search_query) | Q(first_name__icontains=search_query))
+        user = models.User.objects.filter(Q(username__icontains=search_query) | Q(email__icontains=search_query))
     else:
         user = models.User.objects.all()
 
