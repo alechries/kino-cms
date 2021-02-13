@@ -76,6 +76,7 @@ urlpatterns = [
     path('admin/pages/vip/hall', services.admin_views_proxy(admin_views.vip_hall), name='admin_vip_hall'),
     path('admin/pages/ads', services.admin_views_proxy(admin_views.ads), name='admin_ads'),
     path('admin/pages/child/room', services.admin_views_proxy(admin_views.child_room), name='admin_child_room'),
+    path('admin/pages/mobile/app', services.admin_views_proxy(admin_views.mobile_app), name='admin_mobile_app'),
     path('admin/pages/contact/list', services.admin_views_proxy(admin_views.contact_list), name='admin_contact_list'),
     path('admin/pages/contact/form', services.admin_views_proxy(admin_views.contact_form), name='admin_contact_form'),
     path('admin/pages/contact/edit/<int:pk>', services.admin_views_proxy(admin_views.contact_form, have_pk=True), name='admin_contact_edit'),

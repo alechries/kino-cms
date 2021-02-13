@@ -392,3 +392,22 @@ class BackgroundBanner(SingletonModel):
     def get_absolute_image(self):
         return os.path.join('/media/', self.banner_image.name)
 
+
+class MobileApp(SingletonModel):
+    app_name = models.CharField(max_length=255, verbose_name='Название мобильного приложения')
+    app_description = models.TextField(verbose_name='Описание мобильного приложения')
+    app_main_image = models.ImageField(verbose_name='Логотип мобильного приложения', upload_to='images/mobile_app/logo/')
+    app_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/mobile_app/')
+    app_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/mobile_app/')
+    app_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/mobile_app/')
+    app_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/mobile_app/')
+    app_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/mobile_app/')
+    app_google = models.URLField(verbose_name='Ссылка на Android-приложение', null=True)
+    app_apple = models.URLField(verbose_name='Ссылка на IOS-приложение', null=True)
+#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+
+    def file_list(self):
+        return [self.app_main_image, self.app_image1, self.app_image1, self.app_image2, self.app_image3, self.app_image4, self.app_image5]
+
+    def __str__(self):
+        return self.app_name

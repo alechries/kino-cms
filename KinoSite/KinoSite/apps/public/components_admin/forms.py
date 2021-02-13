@@ -214,7 +214,6 @@ class CinemaHallForm(ModelForm):
             })}
 
 
-
 class NewsForm(ModelForm):
     class Meta:
         model = models.News
@@ -707,4 +706,46 @@ class BackgroundBannerForm(ModelForm):
                 'class': 'form-control-file',
                 'id': 'BannerImage',
             }),
+        }
+
+
+class MobileAppForm(ModelForm):
+    class Meta:
+        model = models.MobileApp
+        fields = ['app_name', 'app_description', 'app_main_image', 'app_image1',
+                  'app_image2', 'app_image3', 'app_image4', 'app_image5',
+                  'app_google', 'app_apple']
+
+        widgets = {
+            'app_name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите название мобильного приложение',
+                'id': 'NameInput',
+            }),
+            'app_description': Textarea(attrs={
+                'class': 'form-control',
+                'id': 'TextInput',
+                'rows': '5',
+                'placeholder': 'Введите описание мобильного приложение',
+            }),
+            'app_main_image': FileInput(attrs={
+                'class': 'form-control-file',
+                'id': 'Poster',
+            }),
+            'app_image1': FileInput(attrs={
+                'class': 'form-control-file col pl-0'
+            }),
+            'app_image2': FileInput(attrs={
+                'class': 'form-control-file col'
+            }),
+            'app_image3': FileInput(attrs={
+                'class': 'form-control-file col'
+            }),
+            'app_image4': FileInput(attrs={
+                'class': 'form-control-file col'
+            }),
+            'app_image5': FileInput(attrs={
+                'class': 'form-control-file col'
+            }),
+
         }

@@ -272,6 +272,17 @@ def child_room(request):
     )
 
 
+def mobile_app(request):
+    solo: models.MobileApp = models.MobileApp.get_solo()
+    return services.form_template(
+        request=request,
+        instance=solo,
+        form_class=forms.MobileAppForm,
+        redirect_url_name='admin_pages_list',
+        template_file_name='adminLte/pages/mobile_app.html',
+    )
+
+
 def contact_list(request):
     contacts = services.Get.model_list(models.Contact)
     return render(request, 'adminLte/pages/contact_list.html', {'contacts': contacts})
@@ -302,7 +313,7 @@ def users_list(request):
                                  template='adminLte/users/users_list.html',
                                  )
 
-@login_required
+
 def user_search(request):
     search_query = request.GET.get('search','')
     if search_query:
@@ -311,8 +322,6 @@ def user_search(request):
         user = models.User.objects.all()
 
     return render(request, 'adminLte/users/users_list.html', {'users': user})
-
-
 
 
 def user_form(request, pk=None):
