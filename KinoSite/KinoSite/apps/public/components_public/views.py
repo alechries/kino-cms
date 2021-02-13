@@ -51,7 +51,15 @@ def account_logout_view(request):
 
 
 def account_registration_view(request):
-    return render(request, 'public/account/registration.html')
+    form = g_forms.RegisterForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        return redirect('public_views.index')
+    return render(request, 'public/account/registration.html', context={'form': g_forms.RegisterForm()})
 
 
 def posters_films_list_view(request):
