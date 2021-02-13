@@ -8,22 +8,6 @@ from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 
 
-class LoginForm(Form):
-    class Meta:
-        model = User
-
-    username = CharField(widget=TextInput(attrs={
-                'type': 'text',
-                'class': 'form-control',
-                'placeholder': 'Username',
-            }))
-    password = CharField(widget=TextInput(attrs={
-                'type': 'password',
-                'class': 'form-control',
-                'placeholder': 'Password',
-            }))
-
-
 class FilmForm(ModelForm):
     class Meta:
         model = models.Film
