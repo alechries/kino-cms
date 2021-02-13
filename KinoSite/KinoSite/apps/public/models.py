@@ -4,7 +4,7 @@ from django.contrib.auth.models import User as DjangoUser, AbstractBaseUser, Per
 from solo.models import SingletonModel
 from embed_video.fields import EmbedVideoField
 import os
-from . import services
+from . import services, utils
 
 
 ############################################################
@@ -16,7 +16,7 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     try:
         for file in instance.file_list():
             if file:
-                services.delete_file_with_instance(file)
+                utils.delete_file_with_instance(file)
     except AttributeError:
         pass
 
@@ -35,7 +35,7 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
         new_files = instance.file_list()
         for index, new_file in enumerate(new_files):
             if not new_file == old_files[index]:
-                services.delete_file_with_instance(old_files[index])
+                utils.delete_file_with_instance(old_files[index])
     except AttributeError:
         pass
 
