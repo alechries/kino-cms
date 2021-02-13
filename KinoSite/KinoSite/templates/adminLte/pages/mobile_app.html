@@ -33,7 +33,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{% url 'admin_ads' %}" class="nav-link active">
+            <a href="{% url 'admin_ads' %}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Реклама</p>
             </a>
@@ -45,7 +45,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{% url 'admin_mobile_app' %}" class="nav-link">
+            <a href="{% url 'admin_mobile_app' %}" class="nav-link active">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Мобильное приложение</p>
             </a>
@@ -60,7 +60,7 @@
 </li>
 {% endblock %}
 {% block content_title %}
-<h1 class="m-0">О сети кинотеатров</h1>
+<h1 class="m-0">Мобильное приложение</h1>
 {% endblock %}
 {% block main_content %}
  <div class="features flex-fill">
@@ -70,33 +70,33 @@
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-row col-md-4" style="padding-left: 0px">
-                         <label for="AdvNameInput"><h4>Название рекламы</h4></label>
-                        {{ form.adv_name }}
+                         <label for="NameInput"><h4>Название мобильного приложение</h4></label>
+                        {{ form.app_name }}
                     </div>
                     <div class="form-group">
-                        <label for="AdvTextInput"><h4>Описание рекламы</h4></label>
-                        {{ form.adv_description }}
+                        <label for="TextInput"><h4>Описание мобильного приложение</h4></label>
+                        {{ form.app_description }}
                     </div>
                     <div class="form-group">
-                        <label for="AdvMainImage"><h4>Главная картинка</h4></label>
-                        {{ form.adv_main_image }}
+                        <label for="Poster"><h4>Главная картинка</h4></label>
+                        {{ form.app_main_image }}
                     </div>
-                    <label for="AdvGallery"><h4>Галерея картинок</h4></label>
-                        <div class="row" id="AdvGallery">
+                    <label for="Gallery"><h4>Галерея картинок</h4></label>
+                        <div class="row" id="CafeBarGallery">
                             <div class="col">
-                                {{ form.adv_image1 }}
+                                {{ form.app_image1 }}
                             </div>
                             <div class="col">
-                                 {{ form.adv_image2 }}
+                                 {{ form.app_image2 }}
                             </div>
                             <div class="col">
-                                 {{ form.adv_image3 }}
+                                 {{ form.app_image3 }}
                             </div>
                             <div class="col">
-                                 {{ form.adv_image4 }}
+                                 {{ form.app_image4 }}
                             </div>
                             <div class="col">
-                                 {{ form.adv_image5 }}
+                                 {{ form.app_image5 }}
                             </div>
                         </div>
                     <div class="container my-5">
