@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from .. import models
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from .. import models, forms as g_forms
 import datetime
 
 
@@ -23,12 +24,30 @@ def account_cabinet_view(request):
 
 
 def account_login_view(request):
-    return render(request, 'public/account/login.html')
+    if request.method == 'POST':
+        form = g_forms.LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(request,
+                                username=form.cleaned_data['username'],
+                                password=form.cleaned_data['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('public_views.index')
+                else:
+                    _message = 'User is not active'
+            else:
+                _message = 'User does not exist'
+        else:
+            _message = 'Data is incorrect'
+    else:
+        _message = 'Please, Sign in'
+    return render(request, 'public/account/login.html', {'form': g_forms.LoginForm(), 'message': _message})
 
 
 def account_logout_view(request):
-    # сделать редирект на главную страницу
-    return render(request, 'public/base.html')
+    logout(request)
+    return redirect('index')
 
 
 def account_registration_view(request):

@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import FilmForm, LoginForm, NewsForm, UserForm, MainSlideForm
 from . import forms
+from .. import forms as g_forms
 from django.core.mail import send_mail
 from .. import services, models, utils
 from os import remove as remove_file
@@ -28,7 +28,7 @@ def admin_index_view(request):
 
 def account_login_view(request):
     if request.method == 'POST':
-        form = forms.LoginForm(request.POST)
+        form = g_forms.LoginForm(request.POST)
         if form.is_valid():
             user = authenticate(request,
                                 username=form.cleaned_data['username'],
@@ -45,7 +45,7 @@ def account_login_view(request):
             _message = 'Data is incorrect'
     else:
         _message = 'Please, Sign in'
-    return render(request, 'adminLte/account/login.html', {'form': forms.LoginForm(), 'message': _message})
+    return render(request, 'adminLte/account/login.html', {'form': g_forms.LoginForm(), 'message': _message})
 
 
 def account_logout_view(request):
