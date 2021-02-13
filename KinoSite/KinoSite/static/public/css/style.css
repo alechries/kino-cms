@@ -31,3 +31,9 @@ hr {
 .row{
     --bs-gutter-x: 0rem;
 }
+
+.login-area {
+    display: flex;
+    justify-content: center;
+    margin: 70px 0;
+}
