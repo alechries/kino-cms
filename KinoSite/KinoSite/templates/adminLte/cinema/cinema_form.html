@@ -33,30 +33,83 @@
                     </div>
                     <div class="form-group">
                         <label for="CinemaLogoInput"><h4>Логотип кинотеатра</h4></label>
-                        {{ form.cinema_logo }}
+                        <div class="card col-md-4">
+                            <div class="card-body" style="padding: 0px">
+                                 {% if logo %}
+                                        <img src="{{ logo }}" class="card-img-top" alt="film_image" style="padding-top:7px;">
+                                    {% endif %}
+                                <div style="padding: 7px">
+                                    {{ form.cinema_logo }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="CinemaUpperBannerInput"><h4>Верхний баннер кинотеатра</h4></label>
-                        {{ form.cinema_upper_banner }}
-                    </div>
-                    <label for="FilmGallery"><h4>Галерея кинотеатра</h4></label>
-                    <div class="row" id="FilmGallery">
-                        <div class="col">
-                            {{ form.cinema_image1 }}
-                        </div>
-                        <div class="col">
-                            {{ form.cinema_image2 }}
-                        </div>
-                        <div class="col">
-                            {{ form.cinema_image3 }}
-                        </div>
-                        <div class="col">
-                            {{ form.cinema_image4 }}
-                        </div>
-                        <div class="col">
-                            {{ form.cinema_image5 }}
+                        <div class="card col-md-4">
+                            <div class="card-body" style="padding: 0px">
+                                 {% if upper_banner %}
+                                        <img src="{{ upper_banner }}" class="card-img-top" alt="film_image" style="padding-top:7px;">
+                                    {% endif %}
+                                <div style="padding: 7px">
+                                    {{ form.cinema_upper_banner }}
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <label><h4>Галерея кинотеатра</h4></label>
+                    <div class="container d-flex justify-content-between">
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image1 %}
+                                        <img src="{{ image1 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.cinema_image1 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image2 %}
+                                        <img src="{{ image2 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.cinema_image2 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image3 %}
+                                        <img src="{{ image3 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.cinema_image3 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image4 %}
+                                        <img src="{{ image4 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.cinema_image4 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image5 %}
+                                        <img src="{{ image5 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.cinema_image5 }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <label for="HallsList"><h4>Залы кинотеатра</h4></label>
                     <div class="row" id="HallsList">
                         {% for hall in halls %}

@@ -99,6 +99,27 @@ class Cinema(models.Model):
     cinema_image5 = models.ImageField('Пятое изображение', upload_to='images/cinema/')
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
+    def get_logo_image(self):
+        return os.path.join('/media', self.cinema_logo.name)
+
+    def get_upper_banner(self):
+        return os.path.join('/media', self.cinema_upper_banner.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.cinema_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.cinema_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.cinema_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.cinema_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.cinema_image5.name)
+
     def __str__(self):
         return self.cinema_name
 
@@ -119,6 +140,28 @@ class CinemaHall(models.Model):
     hall_image5 = models.ImageField('Пятое изображение', upload_to='images/hall/')
     hall_scheme = models.ImageField(verbose_name='Схема зала', upload_to='images/hall/logo/')
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+
+    def get_scheme(self):
+        return os.path.join('/media', self.hall_scheme.name)
+
+    def get_upper_banner(self):
+        return os.path.join('/media', self.hall_upper_banner.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.hall_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.hall_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.hall_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.hall_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.hall_image5.name)
+
 
     def __str__(self):
         return self.hall_name
@@ -204,6 +247,21 @@ class News(models.Model):
     def get_absolute_image(self):
         return os.path.join('/media', self.news_main_image.name)
 
+    def get_image1(self):
+        return os.path.join('/media', self.news_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.news_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.news_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.news_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.news_image5.name)
+
     def get_absolute_url(self):
         return f'news/list'
 
@@ -232,6 +290,24 @@ class Promotion(models.Model):
 
     def __str__(self):
         return self.promo_name
+
+    def get_absolute_image(self):
+        return os.path.join('/media', self.promo_main_image.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.promo_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.promo_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.promo_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.promo_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.promo_image5.name)
 
     def file_list(self):
         return [self.promo_main_image, self.promo_image1, self.promo_image2, self.promo_image3, self.promo_image4, self.promo_image5]

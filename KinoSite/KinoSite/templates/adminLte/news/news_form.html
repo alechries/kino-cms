@@ -38,26 +38,68 @@
                         <label for="NewsTextInput"><h4>Описание новости</h4></label>
                         {{ form.news_description }}
                     </div>
-                    <div class="form-group">
-                        <label for="NewsMainImage"><h4>Главная картинка</h4></label>
-                        {{ form.news_main_image }}
+                    <label><h4>Постер новости</h4></label>
+                    <div class="card col-md-4">
+                        <div class="form-group" style="text-align: center">
+                            {% if main_image %}
+                                <img src="{{ main_image }}" class="card-img-top" alt="film_image" style="padding-top: 7px;">
+                            {% endif %}
+                                <div style="padding-top:8px;">
+                                {{ form.news_main_image }}
+                            </div>
+                        </div>
                     </div>
-                    <label for="NewsGallery"><h4>Галерея картинок</h4></label>
-                        <div class="row" id="NewsGallery">
-                            <div class="col">
-                                {{ form.news_image1 }}
+                    <label for="FilmGallery"><h4>Галерея новости</h4></label>
+                        <div class="container d-flex justify-content-between" id="FilmGallery">
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image1 %}
+                                        <img src="{{ image1 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.news_image1 }}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col">
-                                 {{ form.news_image2 }}
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image2 %}
+                                        <img src="{{ image2 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.news_image2 }}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col">
-                                 {{ form.news_image3 }}
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image3 %}
+                                        <img src="{{ image3 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.news_image3 }}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col">
-                                 {{ form.news_image4 }}
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image4 %}
+                                        <img src="{{ image4 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.news_image4 }}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col">
-                                 {{ form.news_image5 }}
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image5 %}
+                                        <img src="{{ image5 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.news_image5 }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     <div class="col-lg-6 my-3 pl-0">

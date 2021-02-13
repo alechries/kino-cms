@@ -174,7 +174,7 @@ class CinemaHallForm(ModelForm):
                 'placeholder': 'Введите описание кинотеатра',
             }),
             'hall_scheme': FileInput(attrs={
-                'class': 'form-control-file col-md-3 pl-0',
+                'class': 'form-control-file col pl-0',
                 'id': 'HallSchemeInput',
             }),
             'hall_upper_banner': FileInput(attrs={
