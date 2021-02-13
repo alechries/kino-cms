@@ -3,7 +3,7 @@ from .. import models
 import datetime
 
 
-def index(request):
+def index_view(request):
     now = datetime.date.today()
     full_date_now = datetime.date.today()
     background_banner = models.BackgroundBanner.get_solo()
@@ -18,28 +18,28 @@ def index(request):
                                                  })
 
 
-def account_cabinet(request):
+def account_cabinet_view(request):
     return render(request, 'public/account/cabinet.html')
 
 
-def account_login(request):
+def account_login_view(request):
     return render(request, 'public/account/login.html')
 
 
-def account_logout(request):
+def account_logout_view(request):
     # сделать редирект на главную страницу
     return render(request, 'public/base.html')
 
 
-def account_registration(request):
+def account_registration_view(request):
     return render(request, 'public/account/registration.html')
 
 
-def posters_films_list(request):
+def posters_films_list_view(request):
     return render(request, 'public/posters/films_list.html')
 
 
-def posters_films_details(request, pk):
+def posters_films_details_view(request, pk):
     film = models.Film.objects.filter(id=pk)
     background_banner = models.BackgroundBanner.get_solo()
     return render(request, 'public/posters/film_details.html', {'film': film,
@@ -47,61 +47,61 @@ def posters_films_details(request, pk):
                                                                 })
 
 
-def timetable_films_sessions_list(request):
+def timetable_films_sessions_list_view(request):
     return render(request, 'public/timetable/films-sessions-list.html')
 
 
-def timetable_reservation(request, pk):
+def timetable_reservation_view(request, pk):
     return render(request, 'public/timetable/reservation.html')
 
 
-def cinema_list(request):
+def cinema_list_view(request):
     return render(request, 'public/cinema/list.html')
 
 
-def cinema_details(request, pk):
+def cinema_details_view(request, pk):
     return render(request, 'public/cinema/details.html')
 
 
-def cinema_hall_details(request, pk):
+def cinema_hall_details_view(request, pk):
     return render(request, 'public/cinema/hall_details.html')
 
 
-def promotion_list(request):
+def promotion_list_view(request):
     return render(request, 'public/promotion/list.html')
 
 
-def promotion_details(request, pk):
+def promotion_details_view(request, pk):
     return render(request, 'public/promotion/details.html')
 
 
-def about_cinema(request):
+def about_cinema_view(request):
     return render(request, 'public/about/cinema.html')
 
 
-def about_news(request):
+def about_news_view(request):
     return render(request, 'public/about/news.html')
 
 
-def about_cafe_bar(request):
+def about_cafe_bar_view(request):
     return render(request, 'public/about/cafe-bar.html')
 
 
-def about_vip_hall(request):
+def about_vip_hall_view(request):
     return render(request, 'public/about/vip-hall.html')
 
 
-def about_advertising(request):
+def about_advertising_view(request):
     return render(request, 'public/about/advertising.html')
 
 
-def about_mobile_app(request):
+def about_mobile_app_view(request):
     return render(request, 'public/about/mobile-app.html')
 
 
-def about_child_room(request):
+def about_child_room_view(request):
     return render(request, 'public/about/child-room.html')
 
 
-def about_contacts(request):
+def about_contacts_view(request):
     return render(request, 'public/about/contacts.html')
