@@ -110,9 +110,12 @@
                                 </div>
                             </div>
                         </div>
+                    <div class="container my-5">
+                        <a class="btn btn-success" href="{% url 'admin_hall_form' %}" role="button">Добавить зал</a>
+                    </div>
+                    {% for hall in halls %}
                     <label for="HallsList"><h4>Залы кинотеатра</h4></label>
                     <div class="row" id="HallsList">
-                        {% for hall in halls %}
                         <div class="card m-3" style="width: 10rem;">
                             <div class="card-body">
                                 <h5 class="card-title">{{ hall.hall_name }}</h5>
