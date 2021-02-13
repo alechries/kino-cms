@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import FilmForm, LoginForm, NewsForm, UserForm, MainSlideForm
 from . import forms
 from django.core.mail import send_mail
-from .. import services, models
+from .. import services, models, utils
 from os import remove as remove_file
 from datetime import date
 from django.db.models import Q
@@ -62,7 +62,7 @@ def banner(request):
 
 def session_form(request, pk=None):
     session = get_object_or_404(models.FilmSession, pk=pk) if pk else None
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=session,
         form_class=forms.SessionForm,
@@ -87,7 +87,7 @@ def film_edit_form(request, pk=None):
                          'image3': models.Film.get_image3(film),
                          'image4': models.Film.get_image4(film),
                          'image5': models.Film.get_image5(film), }
-    return services.form_template(
+    return utils.form_template(
             request=request,
             instance=film,
             form_class=forms.FilmForm,
@@ -100,7 +100,7 @@ def film_edit_form(request, pk=None):
 
 def film_list(request):
     films = services.Get.model_list(models.Film)
-    return services.content_page(request=request,
+    return utils.content_page(request=request,
                                  posts_key='film',
                                  posts=films,
                                  limit=8,
@@ -121,7 +121,7 @@ def cinema_list(request):
 def cinema_form(request, pk=None):
     cinema = get_object_or_404(models.Cinema, pk=pk) if pk else None
     halls = models.CinemaHall.objects.filter(cinema=cinema)
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=cinema,
         context={'halls': halls},
@@ -138,7 +138,7 @@ def cinema_delete(request, pk):
 
 def hall_form(request, pk=None):
     cinema_hall = get_object_or_404(models.CinemaHall, pk=pk) if pk else None
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=cinema_hall,
         form_class=forms.CinemaHallForm,
@@ -154,7 +154,7 @@ def hall_delete(request, pk):
 
 def news_form(request, pk=None):
     news = get_object_or_404(models.News, pk=pk) if pk else None
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=news,
         form_class=forms.NewsForm,
@@ -180,7 +180,7 @@ def promotion_list(request):
 
 def promotion_form(request, pk=None):
     promotion = get_object_or_404(models.Promotion, pk=pk) if pk else None
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=promotion,
         form_class=forms.PromotionForm,
@@ -208,7 +208,7 @@ def pages_list(request):
 
 def main_pages(request):
     solo: models.MainPage = models.MainPage.get_solo()
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.MainPageForm,
@@ -219,7 +219,7 @@ def main_pages(request):
 
 def about_cinema(request):
     solo: models.AboutCinema = models.AboutCinema.get_solo()
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.AboutCinemaForm,
@@ -230,7 +230,7 @@ def about_cinema(request):
 
 def cafe_bar(request):
     solo: models.CafeBar = models.CafeBar.get_solo()
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.CafeBarForm,
@@ -241,7 +241,7 @@ def cafe_bar(request):
 
 def vip_hall(request):
     solo: models.VipHall = models.VipHall.get_solo()
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.VipHallForm,
@@ -252,7 +252,7 @@ def vip_hall(request):
 
 def ads(request):
     solo: models.Advertising = models.Advertising.get_solo()
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.AdvertisingForm,
@@ -263,7 +263,7 @@ def ads(request):
 
 def child_room(request):
     solo: models.ChildRoom = models.ChildRoom.get_solo()
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.ChildRoomForm,
@@ -274,7 +274,7 @@ def child_room(request):
 
 def mobile_app(request):
     solo: models.MobileApp = models.MobileApp.get_solo()
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.MobileAppForm,
@@ -290,7 +290,7 @@ def contact_list(request):
 
 def contact_form(request, pk=None):
     contact = get_object_or_404(models.Contact, pk=pk) if pk else None
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=contact,
         form_class=forms.ContactForm,
@@ -306,7 +306,7 @@ def contact_delete(request, pk):
 
 def users_list(request):
     users = services.Get.model_list(models.User)
-    return services.content_page(request=request,
+    return utils.content_page(request=request,
                                  posts_key='users',
                                  posts=users,
                                  limit=6,
@@ -326,7 +326,7 @@ def user_search(request):
 
 def user_form(request, pk=None):
     user = get_object_or_404(models.User, pk=pk) if pk else None
-    return services.form_template(
+    return utils.form_template(
             request=request,
             instance=user,
             form_class=forms.UserForm,
@@ -368,7 +368,7 @@ def mailing(request):
 
 def main_slide_form(request, pk=None):
     main_slide = get_object_or_404(models.MainSlide, pk=pk) if pk else None
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=main_slide,
         form_class=forms.MainSlideForm,
@@ -385,7 +385,7 @@ def main_slide_delete(request, pk):
 
 def news_promo_slide_form(request, pk=None):
     promo_slide = get_object_or_404(models.NewsPromoSlide, pk=pk) if pk else None
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=promo_slide,
         form_class=forms.NewsPromoSlideForm,
@@ -402,7 +402,7 @@ def news_promo_slide_delete(request, pk):
 
 def background_banner_form(request):
     solo: models.BackgroundBanner = models.BackgroundBanner.get_solo()
-    return services.form_template(
+    return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.BackgroundBannerForm,
