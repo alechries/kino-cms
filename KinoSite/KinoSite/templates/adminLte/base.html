@@ -206,7 +206,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                {% elif request.path == '/admin/pages/child/room' %} menu-open
                {% elif request.path == '/admin/pages/mobile/app' %} menu-open
                {% endif %}">
-                    <a href="{% url 'admin_pages_list' %}" class="nav-link {% if request.path == '/admin/pages/' %} active {% endif %}">
+                    <a href="{% url 'admin_pages_list' %}" class="nav-link
+                    {% if request.path == '/admin/pages/main/info' %} active
+                    {% elif request.path == '/admin/pages/list' %} active
+                    {% elif request.path == '/admin/pages/about_cinema' %} active
+                    {% elif request.path == '/admin/pages/cafe/bar' %} active
+                    {% elif request.path == '/admin/pages/vip/hall' %} active
+                    {% elif request.path == '/admin/pages/ads' %} active
+                    {% elif request.path == '/admin/pages/child/room' %} active
+                    {% elif request.path == '/admin/pages/mobile/app' %} active
+                    {% endif %}">
                         <i class="fas fa-pager"></i>
                         <p>
                             Страницы
