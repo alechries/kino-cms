@@ -197,13 +197,65 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
                 {% endblock %}
                 {% block page %}
-                <li class="nav-item">
-                    <a href="{% url 'admin_pages_list' %}" class="nav-link">
+               <li class="nav-item menu {% if request.path == '/admin/pages/main/info' %} menu-open
+               {% elif request.path == '/admin/pages/list' %} menu-open
+               {% elif request.path == '/admin/pages/about_cinema' %} menu-open
+               {% elif request.path == '/admin/pages/cafe/bar' %} menu-open
+               {% elif request.path == '/admin/pages/vip/hall' %} menu-open
+               {% elif request.path == '/admin/pages/ads' %} menu-open
+               {% elif request.path == '/admin/pages/child/room' %} menu-open
+               {% elif request.path == '/admin/pages/mobile/app' %} menu-open
+               {% endif %}">
+                    <a href="{% url 'admin_pages_list' %}" class="nav-link {% if request.path == '/admin/pages/' %} active {% endif %}">
                         <i class="fas fa-pager"></i>
                         <p>
                             Страницы
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'admin_main_info' %}" class="nav-link {% if request.path == '/admin/pages/main/info' %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Главная страница</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'admin_about_cinema' %}" class="nav-link {% if request.path == '/admin/pages/about_cinema' %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>О сети кинотеатров</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'admin_cafe_bar' %}" class="nav-link {% if request.path == '/admin/pages/cafe/bar' %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Кафе-бар</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'admin_vip_hall' %}" class="nav-link {% if request.path == '/admin/pages/vip/hall' %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>VIP-зал</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'admin_ads' %}" class="nav-link {% if request.path == '/admin/pages/ads' %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Реклама</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'admin_child_room' %}" class="nav-link {% if request.path == '/admin/pages/child/room' %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Детская комната</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'admin_mobile_app' %}" class="nav-link {% if request.path == '/admin/pages/mobile/app' %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Мобильное приложение</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 {% endblock %}
             </ul>
