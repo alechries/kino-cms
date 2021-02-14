@@ -70,13 +70,15 @@
                 {% endfor %}
             </tbody>
 </table>
-<div class="pagination_block">
-{% include "adminLte/pagination.html" with page=users %}
-</div>
 {% else %}
 <div>
     <h3>Список пользователей пуст. Вы можете добавить<a href="{%url 'admin_user_form'%}"> здесь</a></h3>
 </div>
 {% endif %}
 
+{% endblock %}
+{% block pagination %}
+<div class="pagination_block">
+{% include "adminLte/pagination.html" with page=users %}
+</div>
 {% endblock %}
