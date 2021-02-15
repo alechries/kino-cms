@@ -119,7 +119,11 @@ def about_news_view(request):
 
 
 def about_cafe_bar_view(request):
-    return render(request, 'public/about/cafe-bar.html')
+    background_banner = models.BackgroundBanner.get_solo()
+    cafe = models.CafeBar.get_solo()
+    return render(request, 'public/about/cafe-bar.html', {'cafe': cafe,
+                                                          'background_banner': background_banner,
+                                                          })
 
 
 def about_vip_hall_view(request):
