@@ -79,7 +79,7 @@ def posters_films_details_view(request, pk):
 
 
 def timetable_films_sessions_list_view(request):
-    return render(request, 'public/timetable/films-sessions-list.html')
+    return render(request, 'public/timetable/films-sessions-cinema_list.html')
 
 
 def timetable_reservation_view(request, pk):
@@ -87,7 +87,7 @@ def timetable_reservation_view(request, pk):
 
 
 def cinema_list_view(request):
-    return render(request, 'public/cinema/list.html')
+    return render(request, 'public/cinema/cinema_list.html')
 
 
 def cinema_details_view(request, pk):
@@ -99,7 +99,7 @@ def cinema_hall_details_view(request, pk):
 
 
 def promotion_list_view(request):
-    return render(request, 'public/promotion/list.html')
+    return render(request, 'public/promotion/cinema_list.html')
 
 
 def promotion_details_view(request, pk):
@@ -107,7 +107,11 @@ def promotion_details_view(request, pk):
 
 
 def about_cinema_view(request):
-    return render(request, 'public/about/cinema.html')
+    cinemas = models.Cinema.objects.all()
+    background_banner = models.BackgroundBanner.get_solo()
+    return render(request, 'public/about/cinema.html', {'cinemas': cinemas,
+                                                        'background_banner': background_banner,
+                                                        })
 
 
 def about_news_view(request):
