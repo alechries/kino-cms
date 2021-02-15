@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .components_public import views as public_views
+from .components_public import cinema_list as public_views
 from .components_admin import views as admin_views
 from django.urls import path
 from . import utils
