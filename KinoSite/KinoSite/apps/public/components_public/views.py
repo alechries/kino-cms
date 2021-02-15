@@ -131,7 +131,11 @@ def about_vip_hall_view(request):
 
 
 def about_advertising_view(request):
-    return render(request, 'public/about/advertising.html')
+    background_banner = models.BackgroundBanner.get_solo()
+    adv = models.Advertising.get_solo()
+    return render(request, 'public/about/advertising.html', {'background_banner': background_banner,
+                                                             'adv': adv,
+                                                             })
 
 
 def about_mobile_app_view(request):

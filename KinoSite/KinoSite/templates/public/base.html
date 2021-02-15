@@ -17,7 +17,7 @@
     <title>Cinema</title>
   </head>
   <body>
-  <div class="background-image" style="background: url({{ background_banner.get_absolute_image }} ) no-repeat; background-size: 100%; background-attachment: fixed;">
+  <div class="background-image" style="background: url({{ background_banner.get_absolute_image }}) no-repeat; background-size: 100%; background-attachment: fixed;">
     <div class="container" style="padding-top: 40px">
       <div class="row justify-content-between">
         <div class="col-md-3">
@@ -90,7 +90,7 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin: 0px">
                     <a class="dropdown-item" href="#">Новости</a>
-                    <a class="dropdown-item" href="#">Реклама</a>
+                    <a class="dropdown-item" href="{% url 'about_advertising' %}">Реклама</a>
                     <a class="dropdown-item" href="#">Кафе</a>
                     <a class="dropdown-item" href="{% url 'about_vip-hall' %}">Vip-зал</a>
                     <a class="dropdown-item" href="#">Мобильные приложения</a>

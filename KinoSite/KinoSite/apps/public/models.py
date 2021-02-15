@@ -418,6 +418,24 @@ class Advertising(SingletonModel):
     adv_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/adv/')
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
+    def get_absolute_image(self):
+        return os.path.join('/media', self.adv_main_image.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.adv_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.adv_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.adv_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.adv_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.adv_image5.name)
+
     def file_list(self):
         return [self.adv_main_image, self.adv_image1, self.adv_image2, self.adv_image3, self.adv_image4, self.adv_image5]
 
