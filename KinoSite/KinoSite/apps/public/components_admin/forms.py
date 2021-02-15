@@ -14,7 +14,7 @@ class FilmForm(ModelForm):
         fields = ['title', 'description', 'main_image', 'image1',
                   'image2', 'image3', 'image4', 'image5', 'trailer_link',
                   'two_d', 'three_d', 'i_max', 'duration', 'first_night',
-                  'original_title', 'country', 'director', 'language']
+                  'original_title', 'country', 'director', 'language', 'type']
 
         widgets = {
             'title': TextInput(attrs={

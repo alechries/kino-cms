@@ -10,11 +10,8 @@
                         <h1>{{ el.title }}</h1>
                     </div>
                     <div class="col">
-                        <h4>Аниме</h4>
+                        <h4>{{ el.type }}</h4>
                     </div>
-                </div>
-                <div class="col-md-5">
-                    <a class="btn btn-outline-success">Купить билет</a>
                 </div>
             </div>
         </div>
@@ -23,45 +20,53 @@
                 <div class="col-lg-4">
                     <div class="col">
                         <h4>Оригинальное название</h4>
-                        <h4>{film.original.name}</h4>
+                        <h4>{{ el.original_title }}</h4>
                     </div>
                     <div class="col">
                         <h4>Дубляж</h4>
-                        <h4>{film.language}</h4>
+                        <h4>{{ el.language }}</h4>
                     </div>
                     <div class="col">
                         <h4>Страна</h4>
-                        <h4>{film.country}</h4>
+                        <h4>{{ el.country }}</h4>
                     </div>
                     <div class="col">
                         <h4>Режиссер</h4>
-                        <h4>{film.director}</h4>
+                        <h4>{{el.director }}</h4>
                     </div>
                     <div class="col">
                         <h4>Продолжительность</h4>
-                        <h4>{film.duration}</h4>
+                        <h4>{{ el.duration }}</h4>
                     </div>
                     <div class="col">
                         <h4>Дата премьеры</h4>
-                        <h4>{film.release_date}</h4>
+                        <h4>{{ el.first_night }}</h4>
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 430px; width: 830px; background-color: #808080">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 430px; width: 830px;">
                       <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
                       </ol>
                       <div class="carousel-inner">
                         <div class="carousel-item active">
-                          <img class="d-block" src="..." alt="Первый слайд">
+                          <img class="d-block" src="{{ el.get_image1 }}" alt="Первый слайд" height="430" width="830">
                         </div>
                         <div class="carousel-item">
-                          <img class="d-block w-100" src="..." alt="Второй слайд">
+                          <img class="d-block w-100" src="{{ el.get_image2 }}" alt="Второй слайд" height="430" width="830">
                         </div>
                         <div class="carousel-item">
-                          <img class="d-block w-100" src="..." alt="Третий слайд">
+                          <img class="d-block w-100" src="{{ el.get_image3 }}" alt="Третий слайд" height="430" width="830">
+                        </div>
+                        <div class="carousel-item">
+                          <img class="d-block w-100" src="{{ el.get_image4 }}" alt="Третий слайд" height="430" width="830">
+                        </div>
+                        <div class="carousel-item">
+                          <img class="d-block w-100" src="{{ el.get_image5 }}" alt="Третий слайд" height="430" width="830">
                         </div>
                       </div>
                       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -81,11 +86,7 @@
                 <h4>Описание</h4>
             </div>
             <p>
-                Убив вепря, юный принц Аситака навлек на себя смертельное проклятие.
-                Старая знахарка предсказала, что только он сам способен изменить свою судьбу, и отважный воин отправился в опасное путешествие.
-                Так он оказался в загадочной стране, где люди под предводительством злой госпожи Эбоси воевали с обитателями леса: духами, демонами и гигантскими существами, каких Аситака раньше никогда не видел.
-                И была с ними принцесса Мононоке — повелительница зверей и дочь волчицы.
-                Теперь судьба всех зависит только от одного воина — принца Аситаки.
+               {{ el.description }}
             </p>
         </div>
         <div class="container d-flex justify-content-around" style="margin-top: 40px">
