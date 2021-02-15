@@ -171,8 +171,16 @@ class CinemaHall(models.Model):
 
 
 class Film(models.Model):
+    LANGUAGE = (
+        ('UA', 'Украинский'),
+        ('ENG', 'Английский'),
+        ('RUS', 'Русский')
+    )
     title = models.CharField('Название фильма', max_length=255)
+    original_title = models.CharField('Оригинальное название', max_length=255, null=True)
+    country = models.CharField('Название страны', max_length=255, null=True)
     description = models.TextField('Описание фильма')
+    director = models.CharField('Продюссер', max_length=255, null=True)
     main_image = models.ImageField(upload_to='images/film_poster')
     image1 = models.ImageField('Первое изображение', upload_to='images/film_images')
     image2 = models.ImageField('Второе изображение', upload_to='images/film_images/')
@@ -184,7 +192,8 @@ class Film(models.Model):
     three_d = models.BooleanField('3Д', null=False)
     i_max = models.BooleanField('I_MAX', null=False)
     duration = models.CharField('Длительность фильма', max_length=55)
-    first_night = models.DateField(verbose_name='Дата премьеры')
+    first_night = models.DateField('Дата премьеры')
+    language = models.CharField('', choices=LANGUAGE, max_length=55, null=True)
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def __str__(self):
