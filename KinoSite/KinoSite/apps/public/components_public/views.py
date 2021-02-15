@@ -87,7 +87,11 @@ def timetable_reservation_view(request, pk):
 
 
 def cinema_list_view(request):
-    return render(request, 'public/cinema/cinema_list.html')
+    cinemas = models.Cinema.objects.all()
+    background_banner = models.BackgroundBanner.get_solo()
+    return render(request, 'public/cinema/cinema_list.html',{'cinemas': cinemas,
+                                                             'background_banner': background_banner,
+                                                             })
 
 
 def cinema_details_view(request, pk):
@@ -107,11 +111,7 @@ def promotion_details_view(request, pk):
 
 
 def about_cinema_view(request):
-    cinemas = models.Cinema.objects.all()
-    background_banner = models.BackgroundBanner.get_solo()
-    return render(request, 'public/about/cinema.html', {'cinemas': cinemas,
-                                                        'background_banner': background_banner,
-                                                        })
+    return render(request, 'public/about/cinema.html')
 
 
 def about_news_view(request):
@@ -123,7 +123,11 @@ def about_cafe_bar_view(request):
 
 
 def about_vip_hall_view(request):
-    return render(request, 'public/about/vip-hall.html')
+    background_banner = models.BackgroundBanner.get_solo()
+    vip_hall = models.VipHall.get_solo()
+    return render(request, 'public/about/vip-hall.html', {'vip_hall': vip_hall,
+                                                          'background_banner': background_banner,
+                                                          })
 
 
 def about_advertising_view(request):
