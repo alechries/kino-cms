@@ -44,3 +44,7 @@ hr {
     justify-content: center;
     margin: 70px 0;
 }
+
+.input-group-text{
+    display: block;
+}
