@@ -382,6 +382,24 @@ class VipHall(SingletonModel):
     hall_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/vip_hall/')
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
+    def get_absolute_image(self):
+        return os.path.join('/media', self.hall_main_image.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.hall_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.hall_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.hall_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.hall_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.hall_image5.name)
+
     def file_list(self):
         return [self.hall_main_image, self.hall_image1, self.hall_image2, self.hall_image3, self.hall_image4, self.hall_image5]
 
