@@ -13,13 +13,29 @@ class FilmForm(ModelForm):
         model = models.Film
         fields = ['title', 'description', 'main_image', 'image1',
                   'image2', 'image3', 'image4', 'image5', 'trailer_link',
-                  'two_d', 'three_d', 'i_max', 'duration', 'first_night']
+                  'two_d', 'three_d', 'i_max', 'duration', 'first_night',
+                  'original_title', 'country', 'director', 'language']
 
         widgets = {
             'title': TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Введите название фильма',
                 'id': 'FilmNameInput',
+            }),
+            'original_title': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите оригинальное название фильма',
+                'id': 'FilmOriginalNameInput',
+            }),
+            'country': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите страну создания',
+                'id': 'FilmCountryInput',
+            }),
+            'director': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите режиссера',
+                'id': 'FilmDirectorInput',
             }),
             'description': Textarea(attrs={
                 'class': 'form-control',
