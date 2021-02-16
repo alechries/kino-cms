@@ -641,8 +641,7 @@ class MobileAppForm(ModelForm):
     class Meta:
         model = models.MobileApp
         fields = ['app_name', 'app_description', 'app_main_image', 'app_image1',
-                  'app_image2', 'app_image3', 'app_image4', 'app_image5',
-                  'app_google', 'app_apple']
+                  'app_image2', 'app_image3', 'app_image4', 'app_image5',]
 
         widgets = {
             'app_name': TextInput(attrs={
