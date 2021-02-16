@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from .. import models, forms as g_forms
+from .. import models, forms as g_forms, utils
 import datetime
 
 
@@ -20,7 +20,18 @@ def index_view(request):
 
 
 def account_cabinet_view(request):
-    return render(request, 'public/account/cabinet.html')
+    user = request.user
+    if user.is_authenticated:
+        return utils.form_template(
+            request=request,
+            instance=user,
+            form_class=g_forms.UserForm,
+            redirect_url_name='account_cabinet',
+            template_file_name='public/account/cabinet.html',
+            context={'user_pk': user.id}
+        )
+    else:
+        return redirect('account_login')
 
 
 def account_login_view(request):
@@ -145,6 +156,12 @@ def about_mobile_app_view(request):
 
 
 def about_child_room_view(request):
+    background_banner = models.BackgroundBanner.get_solo()
+    child_room = models.ChildRoom.get_solo()
+    return render(request, 'public/about/vip-hall.html', {'child_room': child_room,
+                                                          'background_banner': background_banner,
+                                                          })
+
     return render(request, 'public/about/child-room.html')
 
 
