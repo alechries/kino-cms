@@ -64,8 +64,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         -->
                 <div class="info">
+                    <a class="d-block text-uppercase text-secondary" href="{% url 'public_views.index' %}"><strong>ПЕРЕЙТИ НА САЙТ</strong></a>
+                </div>
+                <div class="info">
                     <a class="d-block text-uppercase text-secondary"><strong>{{ user.username }}</strong></a>
-
                 </div>
                 <div class="info">
                     <a href="{% url 'admin_logout' %}" class="fas fa fa-sign-in-alt mr-2 text-danger"></a>
