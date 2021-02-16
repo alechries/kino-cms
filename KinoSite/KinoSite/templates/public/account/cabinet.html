@@ -1,10 +1,134 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'public/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="features flex-fill">
+        <div class="row m-3">
+            <div class="container">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col" style="margin-right: 30px">
+                            <div class="col-md-10">
+                                <label for="InputFirstName">Имя</label>
+                                {{ form.first_name }}
+                            </div>
+                        </div>
+                        <div class="col" style="margin-right: 30px">
+                            <label for="InputLanguage">Язык</label>
+                            <div class="row" id="InputLanguage">
+                                 <div class="form-group">
+                                    {% for cho, choice in form.language.field.widget.choices %}
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input id="id_{{form.language.name}}_{{ forloop.counter0 }}" name="{{form.language.name}}" type="{{form.language.field.widget.input_type}}" value="{{cho}}" class="custom-control-input"
+                                        {% ifequal form.language.value cho %}
+                                            checked="checked"
+                                        {% endifequal %}/>
+                                        <label for="id_{{form.language.name}}_{{ forloop.counter0 }}" class="custom-control-label">{{ choice }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" style="margin-right: 30px">
+                            <div class="col-md-10">
+                                <label for="InputLastName">Фамилия</label>
+                                {{ form.last_name }}
+                            </div>
+                        </div>
+                        <div class="col" style="margin-right: 30px">
+                            <label for="InputGender">Пол</label>
+                            <div class="row" id="InputGender">
+                                <div class="form-group">
+                                    {% for cho, choice in form.gender.field.widget.choices %}
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input id="id_{{form.gender.name}}_{{ forloop.counter0 }}" name="{{form.gender.name}}" type="{{form.gender.field.widget.input_type}}" value="{{cho}}" class="custom-control-input"
+                                        {% ifequal form.gender.value cho %}
+                                            checked="checked"
+                                        {% endifequal %}/>
+                                        <label for="id_{{form.gender.name}}_{{ forloop.counter0 }}" class="custom-control-label">{{ choice }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                         <div class="col" style="margin-right: 30px">
+                             <div class="col-md-10">
+                                 <label for="InputUsername">Псевдоним</label>
+                                 {{form.username}}
+                             </div>
+                         </div>
+                         <div class="col" style="margin-right: 30px">
+                             <div class="col-md-10">
+                                 <label for="InputPhone">Телефон</label>
+                                 {{ form.phone }}
+                             </div>
+                         </div>
+                    </div>
+                    <div class="row">
+                         <div class="col" style="margin-right: 30px">
+                            <div class="col-md-10">
+                                <label for="InputEmail">Email</label>
+                                {{form.email}}
+                            </div>
+                        </div>
+                        <div class="col" style="margin-right: 30px">
+                            <div class="col-md-10">
+                                <label for="InputDate">Дата рождения</label>
+                                {{form.date_of_birth}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                         <div class="col" style="margin-right: 30px">
+                             <div class="col-md-10">
+                                 <label for="InputAddress">Адрес</label>
+                                 {{form.address}}
+                             </div>
+                         </div>
+                         <div class="col" style="margin-right: 30px">
+                             <div class="col-md-10">
+                                 <label for="InputCity">Город</label><br/>
+                                 {{form.city|as_crispy_field}}
+                             </div>
+                         </div>
+                    </div>
+                    <div class="row">
+                         <div class="col" style="margin-right: 30px">
+                             <div class="col-md-10">
+                                 <label for="InputPassword">Пароль</label><br/>
+                                 {% if user_pk %}
+                                    <fieldset disabled>
+                                        {{form.password}}
+                                     </fieldset>
+                                    <a class="btn btn-secondary" href="{% url 'admin_user_change_password' pk=user_pk %}" role="button" style="margin-top: 7px">Поменять пароль</a>
+                                 {% else %}
+                                    {{form.password}}
+                                 {% endif %}
+                             </div>
+                         </div>
+                         <div class="col" style="margin-right: 30px">
+                             <div class="col-md-10">
+                             </div>
+                         </div>
+                    </div>
+                    <div class="row">
+                         <div class="col-6">
+                             <div class="col-md-10">
+                                 <label for="InputCardNumber">Номер карты</label>
+                                 {{form.card_number}}
+                             </div>
+                         </div>
+                    </div>
+                    <div class="container my-5">
+                        <button class="btn btn-success" type="submit">Сохранить</button>
+                        <a class="btn btn-danger" href="{% url 'admin_users_list' %}" role="button">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
