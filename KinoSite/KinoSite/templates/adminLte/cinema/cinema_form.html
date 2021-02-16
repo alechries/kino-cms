@@ -110,7 +110,18 @@
                                 </div>
                             </div>
                         </div>
+                    <!-- Ввод слаг-филда
+                    <div class="col-lg-4 my-3 pl-0">
+                        <label for="SlugName"><h4>Отображение ссылки</h4></label>
+                        <input type="text" placeholder="введите slug" class="form-control" id="SlugName">
+                    </div>
+                    -->
                     <div class="container my-5">
+                        <button class="btn btn-success" type="submit">Сохранить</button>
+                        <a class="btn btn-danger" href="{% url 'admin_cinema_list' %}" role="button">Отмена</a>
+                    </div>
+                </form>
+                <div class="container my-5">
                         <a class="btn btn-success" href="{% url 'admin_hall_form' %}" role="button">Добавить зал</a>
                     </div>
                     {% for hall in halls %}
@@ -135,17 +146,6 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <!-- Ввод слаг-филда
-                    <div class="col-lg-4 my-3 pl-0">
-                        <label for="SlugName"><h4>Отображение ссылки</h4></label>
-                        <input type="text" placeholder="введите slug" class="form-control" id="SlugName">
-                    </div>
-                    -->
-                    <div class="container my-5">
-                        <button class="btn btn-success" type="submit">Сохранить</button>
-                        <a class="btn btn-danger" href="{% url 'admin_cinema_list' %}" role="button">Отмена</a>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
