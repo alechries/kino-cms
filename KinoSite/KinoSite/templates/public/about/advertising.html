@@ -1,7 +1,7 @@
 {% extends 'public/base.html' %}
 {% block content %}
 
-<img src="{{ adv.adv.get_absolute_image }}" style="max-height: 500px; max-width: 100%">
+<img src="{{ adv.get_absolute_image }}" style="max-height: 500px; max-width: 100%">
 <div class="container">
     <h1 style="text-align: center; margin-top: 30px">Реклама</h1>
     <p>{{ adv.adv_description }}</p>
