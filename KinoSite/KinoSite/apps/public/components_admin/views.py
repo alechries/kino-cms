@@ -120,7 +120,17 @@ def cinema_list_view(request):
 
 def cinema_form_view(request, pk=None):
     cinema = get_object_or_404(models.Cinema, pk=pk) if pk else None
+    media_context = {}
     halls = models.CinemaHall.objects.filter(cinema=cinema)
+    if cinema:
+        media_context = {'logo': models.Cinema.get_logo_image(cinema),
+                         'upper_banner': models.Cinema.get_upper_banner(cinema),
+                         'image1': models.Cinema.get_image1(cinema),
+                         'image2': models.Cinema.get_image2(cinema),
+                         'image3': models.Cinema.get_image3(cinema),
+                         'image4': models.Cinema.get_image4(cinema),
+                         'image5': models.Cinema.get_image5(cinema),
+                         }
     return utils.form_template(
         request=request,
         instance=cinema,
@@ -128,6 +138,7 @@ def cinema_form_view(request, pk=None):
         form_class=forms.CinemaForm,
         redirect_url_name='admin_cinema_list',
         template_file_name='adminLte/cinema/cinema_form.html',
+        media_context=media_context,
     )
 
 
@@ -138,12 +149,23 @@ def cinema_delete_view(request, pk):
 
 def hall_form_view(request, pk=None):
     cinema_hall = get_object_or_404(models.CinemaHall, pk=pk) if pk else None
+    media_context = {}
+    if cinema_hall:
+        media_context = {'scheme': models.CinemaHall.get_scheme(cinema_hall),
+                         'upper_banner': models.CinemaHall.get_upper_banner(cinema_hall),
+                         'image1': models.CinemaHall.get_image1(cinema_hall),
+                         'image2': models.CinemaHall.get_image2(cinema_hall),
+                         'image3': models.CinemaHall.get_image3(cinema_hall),
+                         'image4': models.CinemaHall.get_image4(cinema_hall),
+                         'image5': models.CinemaHall.get_image5(cinema_hall),
+                         }
     return utils.form_template(
         request=request,
         instance=cinema_hall,
         form_class=forms.CinemaHallForm,
         redirect_url_name='admin_cinema_list',
         template_file_name='adminLte/cinema/hall_form.html',
+        media_context=media_context
     )
 
 
@@ -154,12 +176,22 @@ def hall_delete_view(request, pk):
 
 def news_form_view(request, pk=None):
     news = get_object_or_404(models.News, pk=pk) if pk else None
+    media_context = {}
+    if news:
+        media_context = {'main_image': models.News.get_absolute_image(news),
+                         'image1': models.News.get_image1(news),
+                         'image2': models.News.get_image2(news),
+                         'image3': models.News.get_image3(news),
+                         'image4': models.News.get_image4(news),
+                         'image5': models.News.get_image5(news),
+                         }
     return utils.form_template(
         request=request,
         instance=news,
         form_class=forms.NewsForm,
         redirect_url_name='admin_news_list',
         template_file_name='adminLte/news/news_form.html',
+        media_context=media_context
     )
 
 
@@ -180,12 +212,22 @@ def promotion_list_view(request):
 
 def promotion_form_view(request, pk=None):
     promotion = get_object_or_404(models.Promotion, pk=pk) if pk else None
+    media_context = {}
+    if promotion:
+        media_context = {'main_image': models.Promotion.get_absolute_image(promotion),
+                         'image1': models.Promotion.get_image1(promotion),
+                         'image2': models.Promotion.get_image2(promotion),
+                         'image3': models.Promotion.get_image3(promotion),
+                         'image4': models.Promotion.get_image4(promotion),
+                         'image5': models.Promotion.get_image5(promotion),
+                         }
     return utils.form_template(
         request=request,
         instance=promotion,
         form_class=forms.PromotionForm,
         redirect_url_name='admin_promotion_list',
         template_file_name='adminLte/promotion/promotion_form.html',
+        media_context=media_context
     )
 
 
@@ -368,12 +410,16 @@ def mailing_view(request):
 
 def main_slide_form_view(request, pk=None):
     main_slide = get_object_or_404(models.MainSlide, pk=pk) if pk else None
+    media_context = {}
+    if main_slide:
+        media_context = {'slide_image': models.MainSlide.get_absolute_image(main_slide)}
     return utils.form_template(
         request=request,
         instance=main_slide,
         form_class=forms.MainSlideForm,
         redirect_url_name='admin_banner_list',
         template_file_name='adminLte/banner/main_slide_form.html',
+        media_context=media_context
 
     )
 
@@ -385,13 +431,16 @@ def main_slide_delete_view(request, pk):
 
 def news_promo_slide_form_view(request, pk=None):
     promo_slide = get_object_or_404(models.NewsPromoSlide, pk=pk) if pk else None
+    media_context = {}
+    if promo_slide:
+        media_context = {'slide_image': models.NewsPromoSlide.get_absolute_image(promo_slide)}
     return utils.form_template(
         request=request,
         instance=promo_slide,
         form_class=forms.NewsPromoSlideForm,
         redirect_url_name='admin_banner_list',
         template_file_name='adminLte/banner/news_promo_slide_form.html',
-
+        media_context=media_context
     )
 
 
@@ -402,10 +451,13 @@ def news_promo_slide_delete_view(request, pk):
 
 def background_banner_form_view(request):
     solo: models.BackgroundBanner = models.BackgroundBanner.get_solo()
+    media_context = {'main_slide': models.BackgroundBanner.get_absolute_image(solo)}
+    print(media_context)
     return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.BackgroundBannerForm,
         redirect_url_name='admin_banner_list',
         template_file_name='adminLte/banner/background_banner_form.html',
+        media_context=media_context
     )

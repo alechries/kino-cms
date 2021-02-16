@@ -99,6 +99,27 @@ class Cinema(models.Model):
     cinema_image5 = models.ImageField('Пятое изображение', upload_to='images/cinema/')
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
+    def get_logo_image(self):
+        return os.path.join('/media', self.cinema_logo.name)
+
+    def get_upper_banner(self):
+        return os.path.join('/media', self.cinema_upper_banner.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.cinema_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.cinema_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.cinema_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.cinema_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.cinema_image5.name)
+
     def __str__(self):
         return self.cinema_name
 
@@ -120,6 +141,28 @@ class CinemaHall(models.Model):
     hall_scheme = models.ImageField(verbose_name='Схема зала', upload_to='images/hall/logo/')
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
+    def get_scheme(self):
+        return os.path.join('/media', self.hall_scheme.name)
+
+    def get_upper_banner(self):
+        return os.path.join('/media', self.hall_upper_banner.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.hall_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.hall_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.hall_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.hall_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.hall_image5.name)
+
+
     def __str__(self):
         return self.hall_name
 
@@ -128,8 +171,22 @@ class CinemaHall(models.Model):
 
 
 class Film(models.Model):
+    LANGUAGE = (
+        ('Украинский', 'Украинский'),
+        ('Английски', 'Английский'),
+        ('Русский', 'Русский')
+    )
+    TYPE = (
+        ('Аниме', 'Аниме'),
+        ('Мультфильм', 'Мультфильм'),
+        ('Фильм','Фильм')
+    )
+
     title = models.CharField('Название фильма', max_length=255)
+    original_title = models.CharField('Оригинальное название', max_length=255, null=True)
+    country = models.CharField('Название страны', max_length=255, null=True)
     description = models.TextField('Описание фильма')
+    director = models.CharField('Продюссер', max_length=255, null=True)
     main_image = models.ImageField(upload_to='images/film_poster')
     image1 = models.ImageField('Первое изображение', upload_to='images/film_images')
     image2 = models.ImageField('Второе изображение', upload_to='images/film_images/')
@@ -141,7 +198,9 @@ class Film(models.Model):
     three_d = models.BooleanField('3Д', null=False)
     i_max = models.BooleanField('I_MAX', null=False)
     duration = models.CharField('Длительность фильма', max_length=55)
-    first_night = models.DateField(verbose_name='Дата премьеры')
+    first_night = models.DateField('Дата премьеры')
+    language = models.CharField('', choices=LANGUAGE, max_length=55, null=True)
+    type = models.CharField('', choices=TYPE, max_length=55, null=True)
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def __str__(self):
@@ -204,6 +263,21 @@ class News(models.Model):
     def get_absolute_image(self):
         return os.path.join('/media', self.news_main_image.name)
 
+    def get_image1(self):
+        return os.path.join('/media', self.news_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.news_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.news_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.news_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.news_image5.name)
+
     def get_absolute_url(self):
         return f'news/list'
 
@@ -232,6 +306,24 @@ class Promotion(models.Model):
 
     def __str__(self):
         return self.promo_name
+
+    def get_absolute_image(self):
+        return os.path.join('/media', self.promo_main_image.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.promo_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.promo_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.promo_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.promo_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.promo_image5.name)
 
     def file_list(self):
         return [self.promo_main_image, self.promo_image1, self.promo_image2, self.promo_image3, self.promo_image4, self.promo_image5]
@@ -272,6 +364,24 @@ class CafeBar(SingletonModel):
     cafebar_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/cafe_bar/')
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
+    def get_absolute_image(self):
+        return os.path.join('/media', self.cafebar_main_image.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.cafebar_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.cafebar_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.cafebar_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.cafebar_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.cafebar_image5.name)
+
     def file_list(self):
         return [self.cafebar_main_image, self.cafebar_image1, self.cafebar_image2, self.cafebar_image3, self.cafebar_image4, self.cafebar_image5]
 
@@ -290,6 +400,24 @@ class VipHall(SingletonModel):
     hall_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/vip_hall/')
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
+    def get_absolute_image(self):
+        return os.path.join('/media', self.hall_main_image.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.hall_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.hall_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.hall_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.hall_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.hall_image5.name)
+
     def file_list(self):
         return [self.hall_main_image, self.hall_image1, self.hall_image2, self.hall_image3, self.hall_image4, self.hall_image5]
 
@@ -307,6 +435,24 @@ class Advertising(SingletonModel):
     adv_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/adv/')
     adv_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/adv/')
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+
+    def get_absolute_image(self):
+        return os.path.join('/media', self.adv_main_image.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.adv_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.adv_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.adv_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.adv_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.adv_image5.name)
 
     def file_list(self):
         return [self.adv_main_image, self.adv_image1, self.adv_image2, self.adv_image3, self.adv_image4, self.adv_image5]

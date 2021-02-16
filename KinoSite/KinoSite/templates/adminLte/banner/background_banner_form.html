@@ -18,10 +18,15 @@
             <div class="container">
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <label for="BannerImage"><h4>Фоновое изображение</h4></label>
-                        {{ form.banner_image }}
-                    </div>
+                    <div class="card col-md-4">
+                        <div class="form-group">
+                            {% if main_slide %}
+                                <img src="{{ main_slide }}" class="card-img-top" alt="film_image" style="padding-top: 7px;">
+                            {% endif %}
+                            <label for="BannerImage"><h4>Фоновое изображение</h4></label>
+                            {{ form.banner_image }}
+                        </div>
+                        </div>
                     <div class="container my-5">
                         <button class="btn btn-success" type="submit">Сохранить</button>
                     </div>

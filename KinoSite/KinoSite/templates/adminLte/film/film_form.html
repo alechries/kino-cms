@@ -23,13 +23,32 @@
                         <label for="FilmNameInput"><h4>Название фильма</h4></label>
                         {{ form.title }}
                     </div>
+                    <div class="form-group col-md-4" style="padding-left: 0px">
+                        <label for="FilmOriginalNameInput"><h4>Оригинальное название фильма</h4></label>
+                        {{ form.original_title }}
+                    </div>
+                    <div class="form-group col-md-4" style="padding-left: 0px">
+                        <label><h4>Язык дубляжа</h4></label>
+                        {{ form.language|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4" style="padding-left: 0px">
+                        <label><h4>Тип</h4></label>
+                        {{ form.type|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4" style="padding-left: 0px">
+                        <label for="FilmDirectorInput"><h4>Режиссер</h4></label>
+                        {{ form.director }}
+                    </div>
+                    <div class="form-group col-md-4" style="padding-left: 0px">
+                        <label for="FilmCountryInput"><h4>Страна производства</h4></label>
+                        {{ form.country }}
+                    </div>
                     <div class="form-group">
                         <label for="FilmTextInput"><h4>Описание фильма</h4></label>
                         {{ form.description }}
                     </div>
                     <label><h4>Постер фильма</h4></label>
                     <div class="card col-md-4">
-                        <img src="">
                         <div class="form-group" style="text-align: center">
                             {% if main_image %}
                                 <img src="{{ main_image }}" class="card-img-top" alt="film_image" style="padding-top: 7px;">

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .. import models, forms as g_forms
 import datetime
@@ -65,15 +65,19 @@ def posters_films_list_view(request):
 
 
 def posters_films_details_view(request, pk):
-    film = models.Film.objects.filter(id=pk)
+    film = get_object_or_404(models.Film, pk=pk)
+    sessions = models.FilmSession.objects.filter(film=film)
+
+    print(sessions)
     background_banner = models.BackgroundBanner.get_solo()
     return render(request, 'public/posters/film_details.html', {'film': film,
                                                                 'background_banner': background_banner,
+                                                                'sessions': sessions
                                                                 })
 
 
 def timetable_films_sessions_list_view(request):
-    return render(request, 'public/timetable/films-sessions-list.html')
+    return render(request, 'public/timetable/films-sessions-cinema_list.html')
 
 
 def timetable_reservation_view(request, pk):
@@ -81,7 +85,11 @@ def timetable_reservation_view(request, pk):
 
 
 def cinema_list_view(request):
-    return render(request, 'public/cinema/list.html')
+    cinemas = models.Cinema.objects.all()
+    background_banner = models.BackgroundBanner.get_solo()
+    return render(request, 'public/cinema/cinema_list.html',{'cinemas': cinemas,
+                                                             'background_banner': background_banner,
+                                                             })
 
 
 def cinema_details_view(request, pk):
@@ -93,7 +101,7 @@ def cinema_hall_details_view(request, pk):
 
 
 def promotion_list_view(request):
-    return render(request, 'public/promotion/list.html')
+    return render(request, 'public/promotion/cinema_list.html')
 
 
 def promotion_details_view(request, pk):
@@ -109,15 +117,27 @@ def about_news_view(request):
 
 
 def about_cafe_bar_view(request):
-    return render(request, 'public/about/cafe-bar.html')
+    background_banner = models.BackgroundBanner.get_solo()
+    cafe = models.CafeBar.get_solo()
+    return render(request, 'public/about/cafe-bar.html', {'cafe': cafe,
+                                                          'background_banner': background_banner,
+                                                          })
 
 
 def about_vip_hall_view(request):
-    return render(request, 'public/about/vip-hall.html')
+    background_banner = models.BackgroundBanner.get_solo()
+    vip_hall = models.VipHall.get_solo()
+    return render(request, 'public/about/vip-hall.html', {'vip_hall': vip_hall,
+                                                          'background_banner': background_banner,
+                                                          })
 
 
 def about_advertising_view(request):
-    return render(request, 'public/about/advertising.html')
+    background_banner = models.BackgroundBanner.get_solo()
+    adv = models.Advertising.get_solo()
+    return render(request, 'public/about/advertising.html', {'background_banner': background_banner,
+                                                             'adv': adv,
+                                                             })
 
 
 def about_mobile_app_view(request):

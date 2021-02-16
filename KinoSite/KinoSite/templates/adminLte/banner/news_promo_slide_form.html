@@ -18,9 +18,14 @@
             <div class="container">
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <label for="MainSlideImage"><h4>Изображение слайда</h4></label>
-                        {{ form.slide_image }}
+                    <div class="card col-md-4">
+                        <div class="form-group" style="text-align: center">
+                            <label for="MainSlideImage"><h4>Изображение слайда</h4></label>
+                            {% if slide_image %}
+                                <img src="{{ slide_image }}" class="card-img-top" alt="film_image" style="padding-bottom: 7px;">
+                            {% endif %}
+                            {{ form.slide_image }}
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="MainSlideURL"><h4>Ссылка слайда</h4></label>

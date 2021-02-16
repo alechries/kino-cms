@@ -19,39 +19,33 @@
 {% endblock %}
 {% block main_content %}
             <div class="card m-3" style="width: 16rem;">
-                <img src="{{ background_banner.get_absolute_image }}" class="card-img-top" alt="main banner image">
+                <img src="{{ background_banner.get_absolute_image }}" class="card-img-top" alt="main banner image" style="max-height: 350px">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Сквозное изображение на сайте</li>
                         </ul>
-                    <div class="card-footer  ml-0 ">
-                        <div class="row mx-auto">
-                            <form method="get">
-                                <a href="{% url 'background_banner_form'%}" class="btn btn-primary btn-lg btn-block">Редактировать фон</a>
-                            </form>
-                            <div class="ml-auto">
+                    <div class="card-footer">
+                        <div class="row" style="padding-bottom: 2px">
+                            <a href="{% url 'background_banner_form' %}" class="btn btn-block btn-outline-info">Редактировать</a>
                         </div>
                     </div>
-                </div>
             </div>
         {% for el in main_slide %}
             <div class="card m-3" style="width: 16rem">
                 <img src="{{ el.get_absolute_image }}" class="card-img-top" alt="main banner image">
-                    <div class="card-body" style="padding: 10px">
-                        <h5 class="card-title">{{ el.slide_text }}</h5>
-                    </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><a class="card-title" href="{{ el.slide_url }}">Ссылка на рекламу</a></li>
-                            <li class="list-group-item">Тип: Баннер на главной</li>
-                        </ul>
-                    <div class="card-footer  ml-0 ">
-                        <div class="row mx-auto">
-                            <form method="get">
-                                <a href="{% url 'admin_main_slide_edit' pk=el.pk%}" class="btn btn-primary">Редактировать</a>
-                            </form>
-                            <div class="ml-auto">
-                                <form method="post">
-                                    <a href="{% url 'admin_main_slide_delete' pk=el.pk%}" class="btn btn-danger">Удалить</a>
-                                </form>
+                <div class="card-body" style="padding: 10px">
+                    <h5 class="card-title">{{ el.slide_text }}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a class="card-title" href="{{ el.slide_url }}">Ссылка на рекламу</a></li>
+                    <li class="list-group-item">Тип: Баннер на главной</li>
+                </ul>
+                <div class="card-footer">
+                    <div class="col">
+                        <div class="row" style="padding-bottom: 2px">
+                            <a href="{% url 'admin_main_slide_edit' pk=el.pk%}" class="btn btn-block btn-outline-info">Редактировать</a>
+                        </div>
+                        <div class="row">
+                            <a href="{% url 'admin_main_slide_delete' pk=el.pk%}" class="btn btn-block btn-outline-danger">Удалить</a>
                         </div>
                     </div>
                 </div>
@@ -67,17 +61,16 @@
                             <li class="list-group-item"><a class="card-title" href="{{ el.slide_url }}">Ссылка на рекламу</a></li>
                             <li class="list-group-item">Тип: баннер новостей, акций </li>
                         </ul>
-                    <div class="card-footer  ml-0 ">
-                        <div class="row mx-auto">
-                            <form method="get">
-                                <a href="{% url 'admin_news_promo_slide_edit' pk=el.pk%}" class="btn btn-primary">Редактировать</a>
-                            </form>
-                            <div class="ml-auto">
-                                <form method="post">
-                                    <a href="{% url 'admin_news_promo_slide_delete' pk=el.pk%}" class="btn btn-danger">Удалить</a>
-                                </form>
+                    <div class="card-footer">
+                    <div class="col">
+                        <div class="row" style="padding-bottom: 2px">
+                            <a href="{% url 'admin_news_promo_slide_edit' pk=el.pk%}" class="btn btn-block btn-outline-info">Редактировать</a>
+                        </div>
+                        <div class="row">
+                            <a href="{% url 'admin_news_promo_slide_delete' pk=el.pk%}" class="btn btn-block btn-outline-danger">Удалить</a>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         {% endfor %}

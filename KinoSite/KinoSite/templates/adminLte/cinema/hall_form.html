@@ -34,30 +34,83 @@
                     </div>
                     <div class="form-group">
                         <label for="HallSchemeInput"><h4>Схема зала</h4></label>
-                        {{ form.hall_scheme }}
+                        <div class="card col-md-4">
+                            <div class="card-body" style="padding: 0px">
+                                {% if scheme %}
+                                    <img src="{{ scheme }}" class="card-img-top" alt="film_image" style="padding-top:7px;">
+                                {% endif %}
+                                <div style="padding: 7px;">
+                                    {{ form.hall_scheme }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="HallUpperBannerInput"><h4>Верхний баннер зала</h4></label>
-                        {{ form.hall_upper_banner }}
-                    </div>
-                    <label for="FilmGallery"><h4>Галерея зала</h4></label>
-                    <div class="row" id="FilmGallery">
-                        <div class="col">
-                            {{ form.hall_image1 }}
-                        </div>
-                        <div class="col">
-                            {{ form.hall_image2 }}
-                        </div>
-                        <div class="col">
-                            {{ form.hall_image3 }}
-                        </div>
-                        <div class="col">
-                            {{ form.hall_image4 }}
-                        </div>
-                        <div class="col">
-                            {{ form.hall_image5 }}
+                        <div class="card col-md-4">
+                            <div class="card-body" style="padding: 0px">
+                                {% if upper_banner %}
+                                    <img src="{{ upper_banner }}" class="card-img-top" alt="film_image" style="padding-top:7px;">
+                                {% endif %}
+                                <div style="padding: 7px;">
+                                    {{ form.hall_upper_banner }}
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <label><h4>Галерея зала</h4></label>
+                    <div class="container d-flex justify-content-between">
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image1 %}
+                                        <img src="{{ image1 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.hall_image1 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image2 %}
+                                        <img src="{{ image2 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.hall_image2 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image3 %}
+                                        <img src="{{ image3 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.hall_image3 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image4 %}
+                                        <img src="{{ image4 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.hall_image4 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card col-md-2">
+                                <div class="card-body" style="padding: 0px">
+                                    {% if image5 %}
+                                        <img src="{{ image5 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
+                                    {% endif %}
+                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                        {{ form.hall_image5 }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <!-- Ввод слаг-филда
                     <div class="col-lg-4 my-3 pl-0">
                         <label for="SlugName"><h4>Отображение ссылки</h4></label>

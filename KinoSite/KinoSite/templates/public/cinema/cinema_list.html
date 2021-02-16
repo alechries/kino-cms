@@ -1,0 +1,24 @@
+{% extends 'public/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row d-flex justify-content-center" style="margin-top: 20px">
+        <h2>Наши кинотеатры</h2>
+    </div>
+    <div class="content-wrapper">
+        <div class="row d-flex justify-content-center">
+            {% for cinema in cinemas %}
+            <div class="card" style="height: 20rem; width: 27rem; margin: 1rem; margin-left: 3rem; margin-right: 3rem">
+                <a href="{% url 'cinema_details' pk=cinema.pk %}"><img src="{{ cinema.get_logo_image }}" style="height: 20rem; width: 27rem;"></a>
+            <div class="d-flex justify-content-center">
+                <p>{{ cinema.cinema_name }}</p>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="container" style="height: 50px">
+
+</div>
+
+{% endblock %}
