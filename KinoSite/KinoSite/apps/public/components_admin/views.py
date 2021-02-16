@@ -371,7 +371,7 @@ def user_form_view(request, pk=None):
     return utils.form_template(
             request=request,
             instance=user,
-            form_class=forms.UserForm,
+            form_class=g_forms.UserForm,
             redirect_url_name='admin_users_list',
             template_file_name='adminLte/users/user_form.html',
             context={'user_pk': pk}
@@ -379,7 +379,7 @@ def user_form_view(request, pk=None):
 
 
 def user_change_password_view(request, pk):
-    form = forms.UserPasswordForm(request.POST or None)
+    form = g_forms.UserPasswordForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
         user = services.Get.model_object(models.User, pk)
         password = form.cleaned_data['password']
