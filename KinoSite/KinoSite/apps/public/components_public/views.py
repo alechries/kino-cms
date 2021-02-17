@@ -135,7 +135,11 @@ def promotion_details_view(request, pk):
 
 
 def about_cinema_view(request):
-    return render(request, 'public/about/cinema.html')
+    background_banner = models.BackgroundBanner.get_solo()
+    cinema = models.AboutCinema.get_solo()
+    return render(request, 'public/about/cinema.html', {'cinema': cinema,
+                                                        'background_banner': background_banner
+                                                        })
 
 
 def about_news_view(request):
