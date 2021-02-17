@@ -152,7 +152,10 @@ def about_advertising_view(request):
 
 
 def about_mobile_app_view(request):
-    return render(request, 'public/about/mobile-app.html')
+    app = models.MobileApp.get_solo()
+    background_banner = models.BackgroundBanner.get_solo()
+    return render(request, 'public/about/mobile-app.html', {'background_banner': background_banner,
+                                                            'app': app})
 
 
 def about_child_room_view(request):

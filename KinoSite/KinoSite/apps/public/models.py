@@ -552,6 +552,24 @@ class MobileApp(SingletonModel):
     app_apple = models.URLField(verbose_name='Ссылка на IOS-приложение', null=True)
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
+    def get_absolute_image(self):
+        return os.path.join('/media', self.app_main_image.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.app_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.app_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.app_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.app_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.app_image5.name)
+
     def file_list(self):
         return [self.app_main_image, self.app_image1, self.app_image1, self.app_image2, self.app_image3, self.app_image4, self.app_image5]
 

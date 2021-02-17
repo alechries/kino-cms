@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'public/base.html' %}
+{% block content %}
 
-</body>
-</html>
+<img src="{{ app.get_absolute_image }}" style="max-height: 500px; max-width: 100%">
+<div class="container">
+    <h1 style="text-align: center; margin-top: 30px">Мобильное приложение</h1>
+    <p>{{ app.app_description }}</p>
+</div>
+<div class="container d-flex justify-content-center">
+    <div class="col">
+        <img src="{{ app.get_image1 }}" width="100%">
+    </div>
+    <div class="col">
+        <img src="{{ app.get_image2 }}" width="100%">
+    </div>
+    <div class="col">
+        <img src="{{ app.get_image3 }}" width="100%">
+    </div>
+    <div class="col">
+        <img src="{{ app.get_image4 }}" width="100%">
+    </div>
+</div>
+<div class="container col-lg-6 d-flex justify-content-center" style="margin-top: 30px">
+    <div class="col">
+        <img src="../../../static/img/google-play-icon-png-3.png" width="100%">
+    </div>
+    <div class="col">
+        <img src="../../../static/img/Apple+Store+Icon+New.png" width="100%">
+    </div>
+</div>
+
+{% endblock %}
