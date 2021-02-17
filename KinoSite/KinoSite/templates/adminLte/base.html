@@ -210,7 +210,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                {% elif request.path == '/admin/pages/contact/form' %} menu-open
                {% elif request.path == '/admin/pages/mobile/app' %} menu-open
                {% endif %}">
-                    <a href="{% url 'admin_pages_list' %}" class="nav-link
+                    <a class="nav-link
                     {% if request.path == '/admin/pages/main/info' %} active
                     {% elif request.path == '/admin/pages/list' %} active
                     {% elif request.path == '/admin/pages/about_cinema' %} active
