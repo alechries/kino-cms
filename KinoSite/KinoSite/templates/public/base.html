@@ -74,7 +74,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Афиша</a>
+                  <a class="nav-link" href="{% url 'posters_films_list' %}">Афиша</a>
                 </li>
                 <li class="nav-item active">
                   <a class="nav-link" href="#">Расписание</a>
@@ -83,14 +83,14 @@
                   <a class="nav-link" href="{% url 'cinema_list' %}">Кинотеатры</a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Акции</span></a>
+                  <a class="nav-link" href="{% url 'promotion_list' %}">Акции</span></a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="https://www.google.com/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     О кинотеатре
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin: 0px">
-                    <a class="dropdown-item" href="#">Новости</a>
+                    <a class="dropdown-item" href="{% url 'about_news' %}">Новости</a>
                     <a class="dropdown-item" href="{% url 'about_advertising' %}">Реклама</a>
                     <a class="dropdown-item" href="{% url 'about_cafe-bar' %}">Кафе</a>
                     <a class="dropdown-item" href="{% url 'about_vip-hall' %}">Vip-зал</a>

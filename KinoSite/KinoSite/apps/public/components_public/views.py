@@ -72,7 +72,11 @@ def account_registration_view(request):
 
 
 def posters_films_list_view(request):
-    return render(request, 'public/posters/films_list.html')
+    films = models.Film.objects.all().order_by('first_night')
+    background_banner = models.BackgroundBanner.get_solo()
+    return render(request, 'public/posters/films_list.html', {'films': films,
+                                                              'background_banner': background_banner,
+                                                              })
 
 
 def posters_films_details_view(request, pk):
@@ -112,7 +116,12 @@ def cinema_hall_details_view(request, pk):
 
 
 def promotion_list_view(request):
-    return render(request, 'public/promotion/cinema_list.html')
+    promo_banners = models.NewsPromoSlide.objects.all()
+    promotions = models.Promotion.objects.filter(promo_status='ON')
+    background_banner = models.BackgroundBanner.get_solo()
+    return render(request, 'public/promotion/promotions_list.html', {'promotions': promotions,
+                                                                     'promo_banners': promo_banners,
+                                                                     'background_banner': background_banner})
 
 
 def promotion_details_view(request, pk):
