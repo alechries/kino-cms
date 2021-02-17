@@ -1,7 +1,12 @@
 
- .a {
+ a {
      color: white;
  }
+
+ h4{
+    color: white !important;
+ }
+
  nav.navbar .dropdown:hover > .dropdown-menu {
  display: block;
 }
@@ -49,7 +54,7 @@ hr {
     display: block;
 }
 .card{
-    background-color: #353434;
-    color: white;
+    background-color: #353434 !important;
+    color: white !important;
     border: 1px solid rgb(0 0 0);
 }
