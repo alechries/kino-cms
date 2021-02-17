@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'public/base.html' %}
+{% block content %}
+{% for el in promo_banners %}
+<img src="{{ el.get_absolute_image }}" style="max-height: 500px; max-width: 100%">
+{% endfor %}
+{% for el in promotion %}
+<div class="container" style="height: auto">
+    <div class="card" style="border: none">
+        <div class="container d-flex" style="align-items: center">
+            <div class="col-lg-4">
+                <img src="{{el.get_absolute_image}}" style="max-height: 300px; width: 100%">
+            </div>
+            <div class="col-lg-8" style="vertical-align: center">
+                <div class="col d-flex justify-content-center" style="margin-top: 20px">
+                    <h4>{{ el.promo_name }}</h4>
+                </div>
+                <div class="col">
+                    <p>{{ el.promo_description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
