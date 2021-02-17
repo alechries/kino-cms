@@ -486,6 +486,9 @@ class Contact(models.Model):
     contact_logo = models.ImageField(verbose_name='Лого', upload_to='images/contact/logo/')
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
+    def get_absolute_image(self):
+        return os.path.join('/media', self.contact_logo.name)
+
     def file_list(self):
         return [self.contact_logo, ]
 
