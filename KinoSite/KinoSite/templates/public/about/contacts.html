@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'public/base.html' %}
+{% load easy_maps_tags %}
+{% block content %}
+{% for el in contacts %}
+<div class="container" style="height: auto; margin-top: 10px">
+    <h3 style="text-align: center">Контакты кинотеатров</h3>
+    <div class="card" style="border: none">
+        <div class="container d-flex justify-content-between" style="align-items: center">
+            <div class="col-lg-4">
+                <img src="{{el.get_absolute_image}}" style="max-height: 300px; width: 100%">
+            </div>
+            <div class="col-lg-7" style="vertical-align: center">
+                <div class="col d-flex justify-content-center" style="margin-top: 20px">
+                    <h4>{{ el.contact_cinema }}</h4>
+                </div>
+                <div class="col">
+                    <p><h5>Адрес кинотеатра</h5>{{ el.contact_address }}</p>
+                </div>
+                <div class="col">
+                    <h5>Карта</h5>
+                    <a href="{{ el.contact_location }}">Ссылка на карту</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

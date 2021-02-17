@@ -169,4 +169,8 @@ def about_child_room_view(request):
 
 
 def about_contacts_view(request):
-    return render(request, 'public/about/contacts.html')
+    background_banner = models.BackgroundBanner.get_solo()
+    contacts = models.Contact.objects.all()
+    return render(request, 'public/about/contacts.html', {'background_banner': background_banner,
+                                                          'contacts': contacts,
+                                                          })
