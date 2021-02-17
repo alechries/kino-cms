@@ -25,6 +25,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'easy_maps',
     'crispy_forms',
     'grappelli',
     'solo',
@@ -145,3 +146,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'dimadjangosendemail@gmail.com'
 EMAIL_HOST_PASSWORD = '15s1s45f2s21te'
 EMAIL_USE_TLS = True
+
+#google map
+EASY_MAPS_GOOGLE_KEY = 'AIzaSyAMPq6gbs7dfX-AMgFtCvTpjK8ltHErwcY'
