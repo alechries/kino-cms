@@ -9,6 +9,9 @@ def index_view(request):
     full_date_now = datetime.date.today()
     background_banner = models.BackgroundBanner.get_solo()
     films_today = models.Film.objects.filter(first_night__lte=now)
+    promo_banners = models.NewsPromoSlide.objects.all()
+    film_now = models.Film.objects.all()[1:3]
+    first_film_now = models.Film.objects.all()[0]
     print(films_today)
     future_film = models.Film.objects.filter(first_night__gt=now)
     print(future_film)
@@ -16,6 +19,9 @@ def index_view(request):
                                                  'films_today': films_today,
                                                  'future_film': future_film,
                                                  'date_now': full_date_now,
+                                                 'promo_banners': promo_banners,
+                                                 'film_now': film_now,
+                                                 'first_film_now': first_film_now,
                                                  })
 
 
@@ -143,7 +149,13 @@ def about_cinema_view(request):
 
 
 def about_news_view(request):
-    return render(request, 'public/about/news.html')
+    background_banner = models.BackgroundBanner.get_solo()
+    promo_banners = models.NewsPromoSlide.objects.all()
+    news = models.News.objects.filter(news_status='ON')
+    return render(request, 'public/about/news.html', {'background_banner': background_banner,
+                                                      'promo_banners': promo_banners,
+                                                      'news': news,
+                                                      })
 
 
 def about_cafe_bar_view(request):
