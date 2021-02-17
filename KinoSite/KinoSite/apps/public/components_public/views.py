@@ -143,7 +143,13 @@ def about_cinema_view(request):
 
 
 def about_news_view(request):
-    return render(request, 'public/about/news.html')
+    background_banner = models.BackgroundBanner.get_solo()
+    promo_banners = models.NewsPromoSlide.objects.all()
+    news = models.News.objects.filter(news_status='ON')
+    return render(request, 'public/about/news.html', {'background_banner': background_banner,
+                                                      'promo_banners': promo_banners,
+                                                      'news': news,
+                                                      })
 
 
 def about_cafe_bar_view(request):
