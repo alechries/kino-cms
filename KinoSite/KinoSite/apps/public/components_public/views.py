@@ -125,7 +125,13 @@ def promotion_list_view(request):
 
 
 def promotion_details_view(request, pk):
-    return render(request, 'public/promotion/details.html')
+    promotion = models.Promotion.objects.filter(id=pk)
+    promo_banners = models.NewsPromoSlide.objects.all()
+    background_banner = models.BackgroundBanner.get_solo()
+    return render(request, 'public/promotion/promotion.html',{'promotion': promotion,
+                                                              'background_banner': background_banner,
+                                                              'promo_banners': promo_banners,
+                                                              })
 
 
 def about_cinema_view(request):
