@@ -346,6 +346,24 @@ class AboutCinema(SingletonModel):
     cinema_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/about/')
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
+    def get_absolute_image(self):
+        return os.path.join('/media', self.cinema_main_image.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.cinema_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.cinema_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.cinema_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.cinema_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.cinema_image5.name)
+
     def file_list(self):
         return [self.cinema_main_image, self.cinema_image1, self.cinema_image2, self.cinema_image3, self.cinema_image4, self.cinema_image5]
 
