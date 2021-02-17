@@ -20,7 +20,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Icon -->
     <link rel="shortcut icon" href="{% static 'public/img/logo.ico' %}" type="image/ico" />
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
     {% block body %}
     <!-- Navbar -->
@@ -86,7 +86,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </a>
 
         <!-- Sidebar -->
-        <div class="sidebar">
+        <div class="sidebar overflow-auto">
             <!-- Sidebar user panel (optional) -->
             <!--
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
