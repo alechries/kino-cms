@@ -12,7 +12,7 @@ urlpatterns = [
     ###############
     path('', public_views.index_view, name='public_views.index'),
     path('account/cabinet', public_views.account_cabinet_view, name='account_cabinet'),
-    path('account/login', public_views.account_login_view, name='account_login'),
+    path('account/login', public_views.account_login_view_decorator(redirect_to='account_cabinet'), name='account_login'),
     path('account/logout', public_views.account_logout_view, name='account_logout'),
     path('account/register', public_views.account_registration_view, name='account_register'),
     path('posters/films/list', public_views.posters_films_list_view, name='posters_films_list'),

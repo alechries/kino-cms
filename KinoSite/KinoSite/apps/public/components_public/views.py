@@ -40,26 +40,28 @@ def account_cabinet_view(request):
         return redirect('account_login')
 
 
-def account_login_view(request):
-    if request.method == 'POST':
-        form = g_forms.LoginForm(request.POST)
-        if form.is_valid():
-            user = authenticate(request,
-                                username=form.cleaned_data['username'],
-                                password=form.cleaned_data['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('public_views.index')
+def account_login_view_decorator(redirect_to):
+    def account_login_view(request):
+        if request.method == 'POST':
+            form = g_forms.LoginForm(request.POST)
+            if form.is_valid():
+                user = authenticate(request,
+                                    username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password'])
+                if user is not None:
+                    if user.is_active:
+                        login(request, user)
+                        return redirect(redirect_to)
+                    else:
+                        _message = 'User is not active'
                 else:
-                    _message = 'User is not active'
+                    _message = 'User does not exist'
             else:
-                _message = 'User does not exist'
+                _message = 'Data is incorrect'
         else:
-            _message = 'Data is incorrect'
-    else:
-        _message = 'Please, Sign in'
-    return render(request, 'public/account/login.html', {'form': g_forms.LoginForm(), 'message': _message})
+            _message = 'Please, Sign in'
+        return render(request, 'public/account/login.html', {'form': g_forms.LoginForm(), 'message': _message})
+    return account_login_view
 
 
 def account_logout_view(request):
