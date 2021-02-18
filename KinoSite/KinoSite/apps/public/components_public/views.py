@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from .. import models, forms as g_forms, utils
+from .. import models, forms as g_forms, utils, services
 import datetime
 
 
@@ -73,9 +73,19 @@ def account_registration_view(request):
     form = g_forms.RegisterForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
         user = form.save()
-        login(request, user)  # , backend='django.contrib.auth.backends.ModelBackend'
+        login(request, user)
         return redirect('public_views.index')
     return render(request, 'public/account/registration.html', context={'form': g_forms.RegisterForm()})
+
+
+def user_change_password_view(request):
+    form = g_forms.UserPasswordForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        user = request.user
+        password = form.cleaned_data['password']
+        services.Change.user_password(user, password)
+        return redirect('account_cabinet')
+    return render(request, 'public/account/change_password.html', context={'form': form})
 
 
 def posters_films_list_view(request):

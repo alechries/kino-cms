@@ -104,7 +104,7 @@
                                     <fieldset disabled>
                                         {{form.password}}
                                      </fieldset>
-                                    <a class="btn btn-secondary" href="{% url 'admin_user_change_password' pk=user_pk %}" role="button" style="margin-top: 7px">Поменять пароль</a>
+                                    <a class="btn btn-secondary" href="{% url 'account_change_password' %}" role="button" style="margin-top: 7px">Поменять пароль</a>
                                  {% else %}
                                     {{form.password}}
                                  {% endif %}
