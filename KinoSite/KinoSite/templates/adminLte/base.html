@@ -19,6 +19,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
     <!-- Icon -->
     <link rel="shortcut icon" href="{% static 'public/img/logo.ico' %}" type="image/ico" />
+    {% block head %}
+    {% endblock %}
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

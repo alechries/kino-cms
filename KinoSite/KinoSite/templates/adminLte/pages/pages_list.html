@@ -9,19 +9,19 @@
     <b>Номер телефона 2:</b> {{ main_page.tel_number2 }} <br/>
     <br/><br/><h5>О сети кинотеатров</h5>
     <b>Название:</b> {{ about_cinema.cinema_name}} <br/>
-    <b>Описание:</b> {{ about_cinema.cinema_description}} <br/>
+    <b>Описание:</b> {{ about_cinema.cinema_description | safe }} <br/>
     <br/><br/><h5>Кафе-бар</h5>
     <b>Название:</b> {{ cafe_bar.cafebar_name}} <br/>
-    <b>Описание:</b> {{ cafe_bar.cafebar_description}} <br/>
+    <b>Описание:</b> {{ cafe_bar.cafebar_description | safe }} <br/>
     <br/><br/><h5>VIP-зал</h5>
     <b>Название:</b> {{ vip_hall.hall_name}} <br/>
-    <b>Описание:</b> {{ vip_hall.hall_description}} <br/>
+    <b>Описание:</b> {{ vip_hall.hall_description | safe }} <br/>
     <br/><br/><h5>Реклама</h5>
     <b>Название:</b> {{ advertising.adv_name}} <br/>
-    <b>Описание:</b> {{ advertising.adv_description}} <br/>
+    <b>Описание:</b> {{ advertising.adv_description | safe }} <br/>
     <br/><br/><h5>Детская комната</h5>
-    <b>Название:</b> {{ child_room.room_name}} <br/>
-    <b>Описание:</b> {{ child_room.room_description}} <br/>
+    <b>Название:</b> {{ child_room.room_name }} <br/>
+    <b>Описание:</b> {{ child_room.room_description | safe }} <br/>
 
 </div>
 {% endblock %}

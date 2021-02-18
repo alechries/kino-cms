@@ -1,4 +1,8 @@
 {% extends 'adminLte/base.html' %}
+{% block head %}
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>tinymce.init({selector:'#CinemaDescriptionInput'});</script>
+{% endblock %}
 {% block cinema %}
     <li class="nav-item">
         <a href="{% url 'admin_cinema_list' %}" class="nav-link active">
@@ -75,7 +79,7 @@
                                         <img src="{{ image2 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
                                     {% endif %}
                                     <div style="padding-top:8px; padding-bottom: 8px">
-                                        {{ form.cinema_image2 }}
+                                        {{ form.cinema_image2}}
                                     </div>
                                 </div>
                             </div>

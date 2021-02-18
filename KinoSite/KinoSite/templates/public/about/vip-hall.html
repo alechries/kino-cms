@@ -3,7 +3,7 @@
 <img src="{{ vip_hall.get_absolute_image }}" style="max-height: 500px; max-width: 100%">
 <div class="container">
     <h1 style="text-align: center; margin-top: 30px">VIP-Зал</h1>
-    <p>{{ vip_hall.hall_description }}</p>
+    <p>{{ vip_hall.hall_description | safe }}</p>
     <h2 style="text-align: center; margin-top: 30px">Фотогалерея</h2>
 </div>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 480px; width: 100%;">
