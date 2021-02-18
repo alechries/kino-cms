@@ -15,6 +15,7 @@ urlpatterns = [
     path('account/login', public_views.account_login_view_decorator(redirect_to='account_cabinet'), name='account_login'),
     path('account/logout', public_views.account_logout_view, name='account_logout'),
     path('account/register', public_views.account_registration_view, name='account_register'),
+    path('account/change_password', public_views.user_change_password_view, name='account_change_password'),
     path('posters/films/list', public_views.posters_films_list_view, name='posters_films_list'),
     path('posters/films/details/<int:pk>/', public_views.posters_films_details_view, name='posters_films_details'),
     path('timetable/films/sessions/list', public_views.timetable_films_sessions_list_view, name='timetable_films_sessions_list'),
