@@ -73,7 +73,7 @@ def account_registration_view(request):
     form = g_forms.RegisterForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
         user = form.save()
-        login(request, user)  # , backend='django.contrib.auth.backends.ModelBackend'
+        login(request, user)
         return redirect('public_views.index')
     return render(request, 'public/account/registration.html', context={'form': g_forms.RegisterForm()})
 
