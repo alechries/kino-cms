@@ -4,7 +4,7 @@
 <img src="{{ app.get_absolute_image }}" style="max-height: 500px; max-width: 100%">
 <div class="container">
     <h1 style="text-align: center; margin-top: 30px">Мобильное приложение</h1>
-    <p>{{ app.app_description }}</p>
+    <p>{{ app.app_description | safe }}</p>
 </div>
 <div class="container d-flex justify-content-center">
     <div class="col">

@@ -1,5 +1,9 @@
 {% extends 'adminLte/base.html' %}
 {% load crispy_forms_tags %}
+{% block head %}
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>tinymce.init({selector:'#FilmTextInput'});</script>
+{% endblock %}
 {% block film %}
     <li class="nav-item">
         <a href="{% url 'admin_film_list' %}" class="nav-link active">

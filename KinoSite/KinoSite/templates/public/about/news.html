@@ -10,7 +10,7 @@
                 <p><img src="{{ el.get_absolute_image }}" class="card-img-top" alt="film_image" height="340"></p>
                 <div class="card-body" style="padding: 0px;">
                     <h5 class="card-title" style="text-align: center">{{ el.news_name }}</h5>
-                    <p>{{ el.news_description }}</p>
+                    <p>{{ el.news_description | safe }}</p>
                 </div>
             </div>
             {% endfor %}
