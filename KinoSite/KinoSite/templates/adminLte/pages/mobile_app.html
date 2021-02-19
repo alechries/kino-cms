@@ -43,6 +43,14 @@
                                  {{ form.app_image5 }}
                             </div>
                         </div>
+                    <div class="form-row col-md-4">
+                        <label><h4>Ссылка в PlayMarket</h4></label>
+                        {{ form.app_google }}
+                    </div>
+                    <div class="form-row col-md-4">
+                        <label><h4>Ссылка в AppStore</h4></label>
+                        {{ form.app_apple }}
+                    </div>
                     <div class="container my-5">
                         <button class="btn btn-success" type="submit">Сохранить</button>
                         {% for msg in messages %}
