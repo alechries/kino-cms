@@ -27,22 +27,6 @@ def form_template(request, instance: django_models.Model, form_class, redirect_u
     return render(request, template_file_name, context)
 
 
-def admin_views_proxy(func, have_pk=False):
-    def proxy(request, pk=None):
-        u = request.user
-        if u.is_authenticated:
-            if u.is_superuser:
-                if not have_pk:
-                    return func(request)
-                else:
-                    return func(request, pk)
-            else:
-                return redirect('public_index')
-        else:
-            return redirect('admin_login')
-    return proxy
-
-
 def content_page(request, posts_key, posts, limit: int, template: str):
     paginator = Paginator(posts, limit)
     page = request.GET.get('page')
