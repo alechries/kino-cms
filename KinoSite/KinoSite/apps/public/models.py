@@ -183,9 +183,9 @@ class Film(models.Model):
     )
 
     title = models.CharField('Название фильма', max_length=255)
-    original_title = models.CharField('Оригинальное название', max_length=255, null=True)
+    original_title = models.CharField('Оригинальное название', max_length=255, null=True, blank=True)
     country = models.CharField('Название страны', max_length=255, null=True)
-    description = models.TextField('Описание фильма')
+    description = models.TextField('Описание фильма', blank=True)
     director = models.CharField('Продюссер', max_length=255, null=True)
     main_image = models.ImageField(upload_to='images/film_poster')
     image1 = models.ImageField('Первое изображение', upload_to='images/film_images')
