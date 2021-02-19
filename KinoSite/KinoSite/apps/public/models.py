@@ -88,7 +88,7 @@ class User(AbstractUser):
 
 class Cinema(models.Model):
     cinema_name = models.CharField(max_length=255, verbose_name='Название кинотеатра')
-    cinema_description = models.TextField(verbose_name='Описание конотеатра')
+    cinema_description = models.TextField(verbose_name='Описание конотеатра', blank=True)
     cinema_condition = models.TextField(verbose_name='Условия кинотеатра')
     cinema_logo = models.ImageField(verbose_name='Логотип кинотеатра', upload_to='images/cinema/logo/')
     cinema_upper_banner = models.ImageField('Верхний баннер кинотеатра', upload_to='images/cinema/upper_banner/')
@@ -130,7 +130,7 @@ class Cinema(models.Model):
 class CinemaHall(models.Model):
     cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, verbose_name='')  # пустой verbose_name, конфликт с crispy forms
     hall_name = models.CharField(max_length=255, verbose_name='')
-    hall_description = models.TextField(verbose_name='Описание зала')
+    hall_description = models.TextField(verbose_name='Описание зала', blank=True)
     cinema_scheme = models.ImageField(verbose_name='Схема кинотеатра', upload_to='images/hall/logo/')
     hall_upper_banner = models.ImageField('Верхний баннер кинотеатра', upload_to='images/hall/upper_banner/')
     hall_image1 = models.ImageField('Первое изображение', upload_to='images/hall/')
@@ -245,7 +245,7 @@ class News(models.Model):
     )
 
     news_name = models.CharField(max_length=255, verbose_name='Название новости')
-    news_description = models.TextField(verbose_name='Описание новости')
+    news_description = models.TextField(verbose_name='Описание новости', blank=True)
     news_main_image = models.ImageField(verbose_name='Логотип новости', upload_to='images/news/logo/')
     news_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/news/')
     news_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/news/')
@@ -292,7 +292,7 @@ class Promotion(models.Model):
     )
 
     promo_name = models.CharField(max_length=255, verbose_name='Название акции')
-    promo_description = models.TextField(verbose_name='Описание акции')
+    promo_description = models.TextField(verbose_name='Описание акции', blank=True)
     promo_main_image = models.ImageField(verbose_name='Логотип акции', upload_to='images/promotion/logo/')
     promo_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/promotion/')
     promo_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/promotion/')
@@ -337,7 +337,7 @@ class MainPage(SingletonModel):
 
 class AboutCinema(SingletonModel):
     cinema_name = models.CharField(max_length=255, verbose_name='Название сети кинотеатров')
-    cinema_description = models.TextField(verbose_name='Описание сети кинотеатров')
+    cinema_description = models.TextField(verbose_name='Описание сети кинотеатров', blank=True)
     cinema_main_image = models.ImageField(verbose_name='Логотип сети кинотеатров', upload_to='images/about/logo/')
     cinema_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/about/')
     cinema_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/about/')
@@ -373,7 +373,7 @@ class AboutCinema(SingletonModel):
 
 class CafeBar(SingletonModel):
     cafebar_name = models.CharField(max_length=255, verbose_name='Название кафе-бара')
-    cafebar_description = models.TextField(verbose_name='Описание кафе-бара')
+    cafebar_description = models.TextField(verbose_name='Описание кафе-бара', blank=True)
     cafebar_main_image = models.ImageField(verbose_name='Логотип кафе-бара', upload_to='images/cafe_bar/logo/')
     cafebar_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/cafe_bar/')
     cafebar_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/cafe_bar/')
@@ -409,7 +409,7 @@ class CafeBar(SingletonModel):
 
 class VipHall(SingletonModel):
     hall_name = models.CharField(max_length=255, verbose_name='Название VIP-зала')
-    hall_description = models.TextField(verbose_name='Описание VIP-зала')
+    hall_description = models.TextField(verbose_name='Описание VIP-зала', blank=True)
     hall_main_image = models.ImageField(verbose_name='Логотип VIP-зала', upload_to='images/vip_hall/logo/')
     hall_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/vip_hall/')
     hall_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/vip_hall/')
@@ -445,7 +445,7 @@ class VipHall(SingletonModel):
 
 class Advertising(SingletonModel):
     adv_name = models.CharField(max_length=255, verbose_name='Название рекламы')
-    adv_description = models.TextField(verbose_name='Описание рекламы')
+    adv_description = models.TextField(verbose_name='Описание рекламы', blank=True)
     adv_main_image = models.ImageField(verbose_name='Логотип рекламы', upload_to='images/adv/logo/')
     adv_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/adv/')
     adv_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/adv/')
@@ -481,7 +481,7 @@ class Advertising(SingletonModel):
 
 class ChildRoom(SingletonModel):
     room_name = models.CharField(max_length=255, verbose_name='Название детской комнаты')
-    room_description = models.TextField(verbose_name='Описание детской комнаты')
+    room_description = models.TextField(verbose_name='Описание детской комнаты', blank=True)
     room_main_image = models.ImageField(verbose_name='Логотип детской комнаты', upload_to='images/child_room/logo/')
     room_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/child_room/')
     room_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/child_room/')
@@ -562,7 +562,7 @@ class BackgroundBanner(SingletonModel):
 
 class MobileApp(SingletonModel):
     app_name = models.CharField(max_length=255, verbose_name='Название мобильного приложения')
-    app_description = models.TextField(verbose_name='Описание мобильного приложения')
+    app_description = models.TextField(verbose_name='Описание мобильного приложения', blank=True)
     app_main_image = models.ImageField(verbose_name='Логотип мобильного приложения', upload_to='images/mobile_app/logo/')
     app_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/mobile_app/')
     app_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/mobile_app/')
