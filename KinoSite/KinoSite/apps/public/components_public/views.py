@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from .. import models, forms as g_forms, utils
+from .. import models, forms as g_forms, utils, services
 import datetime
 
 
@@ -48,26 +48,28 @@ def account_cabinet_view(request):
         return redirect('account_login')
 
 
-def account_login_view(request):
-    if request.method == 'POST':
-        form = g_forms.LoginForm(request.POST)
-        if form.is_valid():
-            user = authenticate(request,
-                                username=form.cleaned_data['username'],
-                                password=form.cleaned_data['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('public_views.index')
+def account_login_view_decorator(redirect_to):
+    def account_login_view(request):
+        if request.method == 'POST':
+            form = g_forms.LoginForm(request.POST)
+            if form.is_valid():
+                user = authenticate(request,
+                                    username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password'])
+                if user is not None:
+                    if user.is_active:
+                        login(request, user)
+                        return redirect(redirect_to)
+                    else:
+                        _message = 'User is not active'
                 else:
-                    _message = 'User is not active'
+                    _message = 'User does not exist'
             else:
-                _message = 'User does not exist'
+                _message = 'Data is incorrect'
         else:
-            _message = 'Data is incorrect'
-    else:
-        _message = 'Please, Sign in'
-    return render(request, 'public/account/login.html', {'form': g_forms.LoginForm(), 'message': _message})
+            _message = 'Please, Sign in'
+        return render(request, 'public/account/login.html', {'form': g_forms.LoginForm(), 'message': _message})
+    return account_login_view
 
 
 def account_logout_view(request):
@@ -78,11 +80,20 @@ def account_logout_view(request):
 def account_registration_view(request):
     form = g_forms.RegisterForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
-        user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-        login(request, user)  # , backend='django.contrib.auth.backends.ModelBackend'
-        form.save()
+        user = form.save()
+        login(request, user)
         return redirect('public_views.index')
     return render(request, 'public/account/registration.html', context={'form': g_forms.RegisterForm()})
+
+
+def user_change_password_view(request):
+    form = g_forms.UserPasswordForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        user = request.user
+        password = form.cleaned_data['password']
+        services.Change.user_password(user, password)
+        return redirect('account_cabinet')
+    return render(request, 'public/account/change_password.html', context={'form': form})
 
 
 def posters_films_list_view(request):
