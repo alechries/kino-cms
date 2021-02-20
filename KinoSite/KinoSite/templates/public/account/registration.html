@@ -10,6 +10,14 @@
                 <form action="{% url 'account_register' %}" method="post">
                     {% csrf_token %}
                     <div class="input-group mb-3">
+                        {{ form.email }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
                         {{ form.first_name }}
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -22,22 +30,6 @@
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        {{ form.username }}
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        {{ form.email }}
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
                             </div>
                         </div>
                     </div>

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from . import forms
 from .. import forms as g_forms
 from django.core.mail import send_mail
-from .. import services, models, utils
+from .. import services, models, utils, auth
 from os import remove as remove_file
 from datetime import date
 from django.db.models import Q
@@ -30,9 +30,7 @@ def account_login_view(request):
     if request.method == 'POST':
         form = g_forms.LoginForm(request.POST)
         if form.is_valid():
-            user = authenticate(request,
-                                username=form.cleaned_data['username'],
-                                password=form.cleaned_data['password'])
+            user = auth.EmailAuthBackend.authenticate(email=form.cleaned_data['email'], password=form.cleaned_data['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)
