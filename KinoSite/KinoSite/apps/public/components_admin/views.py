@@ -450,7 +450,6 @@ def news_promo_slide_delete_view(request, pk):
 def background_banner_form_view(request):
     solo: models.BackgroundBanner = models.BackgroundBanner.get_solo()
     media_context = {'main_slide': models.BackgroundBanner.get_absolute_image(solo)}
-    print(media_context)
     return utils.form_template(
         request=request,
         instance=solo,
