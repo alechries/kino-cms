@@ -10,10 +10,10 @@ class LoginForm(Form):
     class Meta:
         model = models.User
 
-    username = CharField(widget=TextInput(attrs={
+    email = CharField(widget=TextInput(attrs={
         'type': 'text',
         'class': 'form-control',
-        'placeholder': 'Username',
+        'placeholder': 'Email',
     }))
     password = CharField(widget=TextInput(attrs={
         'type': 'password',
@@ -68,10 +68,15 @@ class UserForm(ModelForm):
             'id': "InputPassword2",
             'placeholder': "Введите пароль",
         })
-        fields = ['first_name', 'last_name', 'phone', 'username', 'email', 'address', 'password', 'card_number',
+        fields = ['first_name', 'last_name', 'phone', 'email', 'address', 'password', 'card_number',
                   'language', 'gender', 'city', 'date_of_birth', 'gender']
 
         widgets = {
+            'email': TextInput(attrs={
+                'class': "form-control",
+                'id': "InputEmail",
+                'type': "email",
+            }),
             'first_name': TextInput(attrs={
                 'class': "form-control",
                 'id': "InputFirstName",
@@ -80,18 +85,9 @@ class UserForm(ModelForm):
                 'class': "form-control",
                 'id': "InputLastName",
             }),
-            'username': TextInput(attrs={
-                'class': "form-control",
-                'id': "InputUsername",
-            }),
             'phone': TextInput(attrs={
                 'class': "form-control",
                 'id': "InputPhone",
-            }),
-            'email': TextInput(attrs={
-                'class': "form-control",
-                'id': "InputEmail",
-                'type': "email",
             }),
             'date_of_birth': DateInput(format=('%Y-%m-%d'), attrs={
                 'type': "date",

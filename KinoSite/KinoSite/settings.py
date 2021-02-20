@@ -54,6 +54,9 @@ MIDDLEWARE = [
     'public.middleware.admin_access',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'public.auth.EmailAuthBackend'
+]
 
 ROOT_URLCONF = 'KinoSite.urls'
 
