@@ -1,5 +1,6 @@
 {% extends 'public/base.html' %}
 {% block content %}
+<h1 style="text-align: center; margin-top: 30px">Акции и скидки</h1>
 {% for el in promo_banners %}
 <img src="{{ el.get_absolute_image }}" style="max-height: 500px; max-width: 100%">
 {% endfor %}
