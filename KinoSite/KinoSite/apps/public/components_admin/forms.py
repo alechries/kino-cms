@@ -641,7 +641,7 @@ class MobileAppForm(ModelForm):
     class Meta:
         model = models.MobileApp
         fields = ['app_name', 'app_description', 'app_main_image', 'app_image1',
-                  'app_image2', 'app_image3', 'app_image4', 'app_image5',]
+                  'app_image2', 'app_image3', 'app_image4', 'app_image5', 'app_apple', 'app_google']
 
         widgets = {
             'app_name': TextInput(attrs={
@@ -673,6 +673,16 @@ class MobileAppForm(ModelForm):
             }),
             'app_image5': FileInput(attrs={
                 'class': 'form-control-file col'
+            }),
+            'app_apple': URLInput(attrs={
+                'class': 'form-control',
+                'id': 'MainSlideURL',
+                'placeholder': 'Введите ссылку на приложение из AppStore',
+            }),
+            'app_google': URLInput(attrs={
+                'class': 'form-control',
+                'id': 'MainSlideURL',
+                'placeholder': 'Введите ссылку на приложение из PlayMarket',
             }),
 
         }
