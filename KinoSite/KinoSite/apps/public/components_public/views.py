@@ -20,9 +20,7 @@ def index_view(request):
         first_film_now = models.Film.objects.all()[0]
     else:
         film_now = models.Film.objects.all()
-    print(films_today)
     future_film = models.Film.objects.filter(first_night__gt=now)
-    print(future_film)
     return render(request, 'public/index.html', {'background_banner': background_banner,
                                                  'films_today': films_today,
                                                  'future_film': future_film,
@@ -108,7 +106,6 @@ def posters_films_details_view(request, pk):
     film = get_object_or_404(models.Film, pk=pk)
     sessions = models.FilmSession.objects.filter(film=film)
 
-    print(sessions)
     background_banner = models.BackgroundBanner.get_solo()
     return render(request, 'public/posters/film_details.html', {'film': film,
                                                                 'background_banner': background_banner,
