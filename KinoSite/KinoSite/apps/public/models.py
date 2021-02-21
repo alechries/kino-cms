@@ -402,12 +402,25 @@ class Promotion(models.Model):
 
 
 class MainPage(SingletonModel):
+    STATUS = (
+        ('ON', 'Active'),
+        ('OFF', 'Inactive'),
+    )
+
+    status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
     tel_number1 = models.IntegerField(verbose_name='Номер телефона', null=True)
     tel_number2 = models.IntegerField(verbose_name='Номер телефона', null=True)
+    created_date = models.DateField(default=timezone.now)
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
 
 class AboutCinema(SingletonModel):
+    STATUS = (
+        ('ON', 'Active'),
+        ('OFF', 'Inactive'),
+    )
+
+    status = models.CharField(verbose_name='', max_length=3, choices=STATUS)
     cinema_name = models.CharField(max_length=255, verbose_name='Название сети кинотеатров')
     cinema_description = models.TextField(verbose_name='Описание сети кинотеатров', blank=True)
     cinema_main_image = models.ImageField(verbose_name='Логотип сети кинотеатров', upload_to='images/about/logo/')
@@ -416,6 +429,8 @@ class AboutCinema(SingletonModel):
     cinema_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/about/')
     cinema_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/about/')
     cinema_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/about/')
+    created_date = models.DateField(default=timezone.now)
+    status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_absolute_image(self):
@@ -444,6 +459,11 @@ class AboutCinema(SingletonModel):
 
 
 class CafeBar(SingletonModel):
+    STATUS = (
+        ('ON', 'Active'),
+        ('OFF', 'Inactive'),
+    )
+
     cafebar_name = models.CharField(max_length=255, verbose_name='Название кафе-бара')
     cafebar_description = models.TextField(verbose_name='Описание кафе-бара', blank=True)
     cafebar_main_image = models.ImageField(verbose_name='Логотип кафе-бара', upload_to='images/cafe_bar/logo/')
@@ -452,6 +472,8 @@ class CafeBar(SingletonModel):
     cafebar_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/cafe_bar/')
     cafebar_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/cafe_bar/')
     cafebar_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/cafe_bar/')
+    created_date = models.DateField(default=timezone.now)
+    status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_absolute_image(self):
@@ -480,6 +502,12 @@ class CafeBar(SingletonModel):
 
 
 class VipHall(SingletonModel):
+    STATUS = (
+        ('ON', 'Active'),
+        ('OFF', 'Inactive'),
+    )
+
+    status = models.CharField(verbose_name='', max_length=3, choices=STATUS)
     hall_name = models.CharField(max_length=255, verbose_name='Название VIP-зала')
     hall_description = models.TextField(verbose_name='Описание VIP-зала', blank=True)
     hall_main_image = models.ImageField(verbose_name='Логотип VIP-зала', upload_to='images/vip_hall/logo/')
@@ -488,6 +516,8 @@ class VipHall(SingletonModel):
     hall_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/vip_hall/')
     hall_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/vip_hall/')
     hall_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/vip_hall/')
+    created_date = models.DateField(default=timezone.now)
+    status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_absolute_image(self):
@@ -516,6 +546,12 @@ class VipHall(SingletonModel):
 
 
 class Advertising(SingletonModel):
+    STATUS = (
+        ('ON', 'Active'),
+        ('OFF', 'Inactive'),
+    )
+
+    status = models.CharField(verbose_name='', max_length=3, choices=STATUS)
     adv_name = models.CharField(max_length=255, verbose_name='Название рекламы')
     adv_description = models.TextField(verbose_name='Описание рекламы', blank=True)
     adv_main_image = models.ImageField(verbose_name='Логотип рекламы', upload_to='images/adv/logo/')
@@ -524,6 +560,8 @@ class Advertising(SingletonModel):
     adv_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/adv/')
     adv_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/adv/')
     adv_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/adv/')
+    created_date = models.DateField(default=timezone.now)
+    status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_absolute_image(self):
@@ -552,6 +590,12 @@ class Advertising(SingletonModel):
 
 
 class ChildRoom(SingletonModel):
+    STATUS = (
+        ('ON', 'Active'),
+        ('OFF', 'Inactive'),
+    )
+
+    status = models.CharField(verbose_name='', max_length=3, choices=STATUS)
     room_name = models.CharField(max_length=255, verbose_name='Название детской комнаты')
     room_description = models.TextField(verbose_name='Описание детской комнаты', blank=True)
     room_main_image = models.ImageField(verbose_name='Логотип детской комнаты', upload_to='images/child_room/logo/')
@@ -560,6 +604,8 @@ class ChildRoom(SingletonModel):
     room_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/child_room/')
     room_image4 = models.ImageField(verbose_name='Четвёртое изображение', upload_to='images/child_room/')
     room_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/child_room/')
+    created_date = models.DateField(default=timezone.now)
+    status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def file_list(self):
@@ -570,10 +616,18 @@ class ChildRoom(SingletonModel):
 
 
 class Contact(models.Model):
+    STATUS = (
+        ('ON', 'Active'),
+        ('OFF', 'Inactive'),
+    )
+
+    status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
     contact_cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, verbose_name='', null=True)  # пустой verbose_name, конфликт с crispy forms
     contact_address = models.TextField(verbose_name='Адрес кинотеатра')
     contact_location = models.CharField(verbose_name='Координаты для карты', max_length=255)
     contact_logo = models.ImageField(verbose_name='Лого', upload_to='images/contact/logo/')
+    created_date = models.DateField(default=timezone.now)
+
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_absolute_image(self):
@@ -587,6 +641,7 @@ class Contact(models.Model):
 
 
 class MainSlide(models.Model):
+
     slide_text = models.TextField(verbose_name='Текст слайда')
     slide_image = models.ImageField(verbose_name='Изображение слайда', upload_to='images/main_slide/')
     slide_url = models.URLField(verbose_name='Ссылка слайда')
@@ -633,6 +688,12 @@ class BackgroundBanner(SingletonModel):
 
 
 class MobileApp(SingletonModel):
+    STATUS = (
+        ('ON', 'Active'),
+        ('OFF', 'Inactive'),
+    )
+
+    status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
     app_name = models.CharField(max_length=255, verbose_name='Название мобильного приложения')
     app_description = models.TextField(verbose_name='Описание мобильного приложения', blank=True)
     app_main_image = models.ImageField(verbose_name='Логотип мобильного приложения', upload_to='images/mobile_app/logo/')
@@ -643,6 +704,7 @@ class MobileApp(SingletonModel):
     app_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/mobile_app/')
     app_google = models.URLField(verbose_name='Ссылка на Android-приложение', null=True)
     app_apple = models.URLField(verbose_name='Ссылка на IOS-приложение', null=True)
+    created_date = models.DateField(default=timezone.now)
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_absolute_image(self):

@@ -1,6 +1,6 @@
 
 {% extends 'adminLte/base.html' %}
- 
+{% load crispy_forms_tags %}
 
 {% block page_main %}
 <a href="{% url 'admin_main_info' %}" class="nav-link active">
@@ -16,11 +16,16 @@
             <div class="container">
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-
-                    <div class="col-lg-3 my-3 pl-0">
-                        <label for="TelNumber1Input"><h4>Телефоны</h4></label>
-                        {{ form.tel_number1 }}
+                    <div class="form-row d-flex justify-content-between">
+                        <div class="form-group col-md-4" style="padding-left: 0px">
+                             <label for="TelNumber1Input"><h4>Телефоны</h4></label>
+                            {{ form.tel_number1 }}
                         {{ form.tel_number2 }}
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><h4>Статус страницы</h4></label>
+                            {{ form.status|as_crispy_field }}
+                        </div>
                     </div>
                     <div class="container my-5">
                         <button class="btn btn-success" type="submit">Сохранить</button>

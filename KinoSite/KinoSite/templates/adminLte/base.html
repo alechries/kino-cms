@@ -219,6 +219,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     {% elif request.path == '/admin/pages/ads' %} active
                     {% elif request.path == '/admin/pages/child/room' %} active
                     {% elif request.path == '/admin/pages/contact/list' %} active
+                    {% elif request.path == '/admin/pages/contact/form' %} active
                     {% elif request.path == '/admin/pages/mobile/app' %} active
                     {% endif %}">
                         <i class="fas fa-pager"></i>
@@ -270,7 +271,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'admin_contact_list' %}" class="nav-link {% if request.path == '/admin/pages/contact/list' %} active {% endif %}">
+                            <a href="{% url 'admin_contact_list' %}" class="nav-link {% if request.path == '/admin/pages/contact/list' %} active {% elif request.path == '/admin/pages/contact/form' %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Контакты</p>
                             </a>

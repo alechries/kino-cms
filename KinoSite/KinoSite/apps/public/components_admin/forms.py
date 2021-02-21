@@ -321,7 +321,7 @@ class PromotionForm(ModelForm):
 class MainPageForm(ModelForm):
     class Meta:
         model = models.MainPage
-        fields = ['tel_number1', 'tel_number2']
+        fields = ['tel_number1', 'tel_number2', 'status']
         widgets = {
             'tel_number1': TextInput(attrs={
                 'class': 'form-control',
@@ -341,7 +341,7 @@ class AboutCinemaForm(ModelForm):
         model = models.AboutCinema
 
         fields = ['cinema_name', 'cinema_description', 'cinema_main_image', 'cinema_image1', 'cinema_image2',
-                  'cinema_image3', 'cinema_image4', 'cinema_image5']
+                  'cinema_image3', 'cinema_image4', 'cinema_image5', 'status']
 
         widgets = {
             'cinema_name': TextInput(attrs={
@@ -382,7 +382,7 @@ class CafeBarForm(ModelForm):
         model = models.CafeBar
 
         fields = ['cafebar_name', 'cafebar_description', 'cafebar_main_image', 'cafebar_image1', 'cafebar_image2',
-                  'cafebar_image3', 'cafebar_image4', 'cafebar_image5']
+                  'cafebar_image3', 'cafebar_image4', 'cafebar_image5', 'status']
 
         widgets = {
             'cafebar_name': TextInput(attrs={
@@ -423,7 +423,7 @@ class VipHallForm(ModelForm):
         model = models.VipHall
 
         fields = ['hall_name', 'hall_description', 'hall_main_image', 'hall_image1', 'hall_image2',
-                  'hall_image3', 'hall_image4', 'hall_image5']
+                  'hall_image3', 'hall_image4', 'hall_image5', 'status']
 
         widgets = {
             'hall_name': TextInput(attrs={
@@ -464,7 +464,7 @@ class AdvertisingForm(ModelForm):
         model = models.Advertising
 
         fields = ['adv_name', 'adv_description', 'adv_main_image', 'adv_image1', 'adv_image2',
-                  'adv_image3', 'adv_image4', 'adv_image5']
+                  'adv_image3', 'adv_image4', 'adv_image5', 'status']
 
         widgets = {
             'adv_name': TextInput(attrs={
@@ -505,7 +505,7 @@ class ChildRoomForm(ModelForm):
         model = models.ChildRoom
 
         fields = ['room_name', 'room_description', 'room_main_image', 'room_image1', 'room_image2',
-                  'room_image3', 'room_image4', 'room_image5']
+                  'room_image3', 'room_image4', 'room_image5', 'status']
 
         widgets = {
             'room_name': TextInput(attrs={
@@ -545,7 +545,7 @@ class ContactForm(ModelForm):
     class Meta:
         model = models.Contact
         contact_cinema = ModelChoiceField(queryset=models.Cinema.objects.all(), empty_label=None, to_field_name="cinema_name")
-        fields = ['contact_cinema', 'contact_address', 'contact_location', 'contact_logo']
+        fields = ['contact_cinema', 'contact_address', 'contact_location', 'contact_logo', 'status']
 
         widgets = {
             'contact_address': Textarea(attrs={
@@ -641,7 +641,7 @@ class MobileAppForm(ModelForm):
     class Meta:
         model = models.MobileApp
         fields = ['app_name', 'app_description', 'app_main_image', 'app_image1',
-                  'app_image2', 'app_image3', 'app_image4', 'app_image5', 'app_apple', 'app_google']
+                  'app_image2', 'app_image3', 'app_image4', 'app_image5', 'app_apple', 'app_google', 'status']
 
         widgets = {
             'app_name': TextInput(attrs={

@@ -1,5 +1,6 @@
 {% extends 'adminLte/base.html' %}
 {% block scripts %}
+{% load crispy_forms_tags %}
 <script>tinymce.init({selector:'#CafeBarTextInput'});</script>
 {% endblock %}
 {% block content_title %}
@@ -12,9 +13,15 @@
 
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="form-row col-md-4" style="padding-left: 0px">
-                         <label for="CafeBarNameInput"><h4>Название кофе-бара</h4></label>
-                        {{ form.cafebar_name }}
+                    <div class="form-row d-flex justify-content-between">
+                        <div class="form-group col-md-4" style="padding-left: 0px">
+                             <label for="CafeBarNameInput"><h4>Название кафе-бара</h4></label>
+                            {{ form.cafebar_name }}
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><h4>Статус страницы</h4></label>
+                            {{ form.status|as_crispy_field }}
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="CafeBarTextInput"><h4>Описание кофе-бара</h4></label>

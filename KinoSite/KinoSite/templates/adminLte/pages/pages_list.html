@@ -3,25 +3,107 @@
 <h1 class="m-0">Общая информация страниц сайта</h1>
 {% endblock %}
 {% block main_content %}
-<div>
-    <br/><h5>Главная страница</h5>
-    <b>Номер телефона 1:</b> {{ main_page.tel_number1 }} <br/>
-    <b>Номер телефона 2:</b> {{ main_page.tel_number2 }} <br/>
-    <br/><br/><h5>О сети кинотеатров</h5>
-    <b>Название:</b> {{ about_cinema.cinema_name}} <br/>
-    <b>Описание:</b> {{ about_cinema.cinema_description | safe }} <br/>
-    <br/><br/><h5>Кафе-бар</h5>
-    <b>Название:</b> {{ cafe_bar.cafebar_name}} <br/>
-    <b>Описание:</b> {{ cafe_bar.cafebar_description | safe }} <br/>
-    <br/><br/><h5>VIP-зал</h5>
-    <b>Название:</b> {{ vip_hall.hall_name}} <br/>
-    <b>Описание:</b> {{ vip_hall.hall_description | safe }} <br/>
-    <br/><br/><h5>Реклама</h5>
-    <b>Название:</b> {{ advertising.adv_name}} <br/>
-    <b>Описание:</b> {{ advertising.adv_description | safe }} <br/>
-    <br/><br/><h5>Детская комната</h5>
-    <b>Название:</b> {{ child_room.room_name }} <br/>
-    <b>Описание:</b> {{ child_room.room_description | safe }} <br/>
-
-</div>
+<table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Дата создания</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Главная страница</th>
+                    <td>{{ main_page.created_date }}</td>
+                    <td>{{ main_page.status }}</td>
+                    <td style="width: 115px">
+                        <a class="btn btn-secondary" href="{% url 'admin_main_info' %}" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                            </svg>
+                            <span class="visually-hidden"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                     <th scope="row">О кинотеатре</th>
+                    <td>{{ about_cinema.created_date }}</td>
+                    <td>{{ about_cinema.status }}</td>
+                    <td style="width: 115px">
+                        <a class="btn btn-secondary" href="{% url 'admin_about_cinema' %}" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                            </svg>
+                            <span class="visually-hidden"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Кафе - Бар</th>
+                    <td>{{ cafe_bar.created_date }}</td>
+                    <td>{{ cafe_bar.status }}</td>
+                    <td style="width: 115px">
+                        <a class="btn btn-secondary" href="{% url 'admin_cafe_bar' %}" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                            </svg>
+                            <span class="visually-hidden"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Vip - зал</th>
+                    <td>{{ vip_hall.created_date }}</td>
+                    <td>{{ vip_hall.status }}</td>
+                    <td style="width: 115px">
+                        <a class="btn btn-secondary" href="{% url 'admin_vip_hall' %}" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                            </svg>
+                            <span class="visually-hidden"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Реклама</th>
+                    <td>{{ advertising.created_date }}</td>
+                    <td>{{ advertising.status }}</td>
+                    <td style="width: 115px">
+                        <a class="btn btn-secondary" href="{% url 'admin_ads' %}" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                            </svg>
+                            <span class="visually-hidden"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Детская комната</th>
+                    <td>{{ child_room.created_date }}</td>
+                    <td>{{ child_room.status }}</td>
+                    <td style="width: 115px">
+                        <a class="btn btn-secondary" href="{% url 'admin_child_room' %}" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                            </svg>
+                            <span class="visually-hidden"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Контакты</th>
+                    <td> ----- </td>
+                    <td> ----- </td>
+                    <td style="width: 115px">
+                        <a class="btn btn-secondary" href="{% url 'admin_contact_list' %}" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                            </svg>
+                            <span class="visually-hidden"></span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+</table>
 {% endblock %}

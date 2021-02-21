@@ -1,5 +1,7 @@
 {% extends 'adminLte/base.html' %}
- 
+{% block scripts %}
+<script>tinymce.init({selector:'#ContactAddressInput'});</script>
+{% endblock %}
 {% load crispy_forms_tags %}
 {% block content_title %}
 <h1 class="m-0">Форма контактов</h1>
@@ -11,9 +13,15 @@
 
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="form-group col-md-3" style="padding-left: 0px">
-                        <label for="CinemaInput"><h4>Название кинотеатра</h4></label>
-                        {{ form.contact_cinema|as_crispy_field }}
+                    <div class="form-row d-flex justify-content-between">
+                        <div class="form-group col-md-4" style="padding-left: 0px">
+                             <label for="CinemaInput"><h4>Название кинотеатра</h4></label>
+                            {{ form.contact_cinema|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><h4>Статус страницы</h4></label>
+                            {{ form.status|as_crispy_field }}
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="ContactAddressInput"><h4>Адрес кинотеатра</h4></label>
