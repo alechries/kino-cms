@@ -33,7 +33,10 @@
                     </div>
                     <div class="form-group">
                         <label for="ContactMainImage"><h4>Главная картинка</h4></label>
-                        {{ form.contact_logo }}
+                        <div class="fileUpload btn btn-secondary">
+                            <span>Загрузить</span>
+                            {{ form.contact_logo }}
+                        </div>
                     </div>
                     <div class="container my-5">
                         <button class="btn btn-success" type="submit">Сохранить</button>

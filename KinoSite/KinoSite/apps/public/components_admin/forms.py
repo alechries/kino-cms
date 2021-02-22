@@ -44,7 +44,7 @@ class FilmForm(ModelForm):
                 'placeholder': 'Введите описание фильма',
             }),
             'main_image': FileInput(attrs={
-                'class': 'form-control-file',
+                'class': 'upload',
                 'id': 'FilmPoster',
             }),
             'image1': FileInput(attrs={
@@ -146,27 +146,27 @@ class CinemaForm(ModelForm):
                 'placeholder': 'Введите условия кинотеатра',
             }),
             'cinema_logo': FileInput(attrs={
-                'class': 'form-control-file col pl-0',
+                'class': 'upload',
                 'id': 'CinemaLogoInput',
             }),
             'cinema_upper_banner': FileInput(attrs={
-                'class': 'form-control-file col pl-0',
+                'class': 'upload',
                 'id': 'CinemaUpperBannerInput',
             }),
             'cinema_image1': FileInput(attrs={
-                'class': 'form-control-file col pl-0'
+                'class': 'upload',
             }),
             'cinema_image2': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'cinema_image3': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'cinema_image4': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'cinema_image5': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             })}
 
 
@@ -190,27 +190,27 @@ class CinemaHallForm(ModelForm):
                 'placeholder': 'Введите описание кинотеатра',
             }),
             'hall_scheme': FileInput(attrs={
-                'class': 'form-control-file col pl-0',
+                'class': 'upload',
                 'id': 'HallSchemeInput',
             }),
             'hall_upper_banner': FileInput(attrs={
-                'class': 'form-control-file col pl-0',
+                'class': 'upload',
                 'id': 'HallUpperBannerInput',
             }),
             'hall_image1': FileInput(attrs={
-                'class': 'form-control-file col pl-0'
+                'class': 'upload',
             }),
             'hall_image2': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'hall_image3': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'hall_image4': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'hall_image5': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             })}
 
 
@@ -234,23 +234,23 @@ class NewsForm(ModelForm):
                 'placeholder': 'Введите описание новости',
             }),
             'news_main_image': FileInput(attrs={
-                'class': 'form-control-file',
+                'class': 'upload',
                 'id': 'NewsMainImage',
             }),
             'news_image1': FileInput(attrs={
-                'class': 'form-control-file col pl-0'
+                'class': 'upload',
             }),
             'news_image2': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'news_image3': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'news_image4': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'news_image5': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'news_url': URLInput(attrs={
                 'class': 'form-control',
@@ -286,23 +286,23 @@ class PromotionForm(ModelForm):
                 'placeholder': 'Введите описание акции',
             }),
             'promo_main_image': FileInput(attrs={
-                'class': 'form-control-file',
+                'class': 'upload',
                 'id': 'PromotionMainImage',
             }),
             'promo_image1': FileInput(attrs={
-                'class': 'form-control-file col pl-0'
+                'class': 'upload',
             }),
             'promo_image2': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'promo_image3': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'promo_image4': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'promo_image5': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'promo_url': URLInput(attrs={
                 'class': 'form-control',
@@ -356,23 +356,23 @@ class AboutCinemaForm(ModelForm):
                 'placeholder': 'Введите описание сети кинотеатров',
             }),
             'cinema_main_image': FileInput(attrs={
-                'class': 'form-control-file',
+                'class': 'upload',
                 'id': 'AboutMainImage',
             }),
             'cinema_image1': FileInput(attrs={
-                'class': 'form-control-file col pl-0'
+                'class': 'upload',
             }),
             'cinema_image2': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'cinema_image3': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'cinema_image4': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'cinema_image5': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
         }
 
@@ -397,23 +397,23 @@ class CafeBarForm(ModelForm):
                 'placeholder': 'Введите описание кафе-бара',
             }),
             'cafebar_main_image': FileInput(attrs={
-                'class': 'form-control-file',
+                'class': 'upload',
                 'id': 'CafeBarMainImage',
             }),
             'cafebar_image1': FileInput(attrs={
-                'class': 'form-control-file col pl-0'
+                'class': 'upload',
             }),
             'cafebar_image2': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'cafebar_image3': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'cafebar_image4': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'cafebar_image5': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
         }
 
@@ -438,23 +438,23 @@ class VipHallForm(ModelForm):
                 'placeholder': 'Введите описание VIP-зала',
             }),
             'hall_main_image': FileInput(attrs={
-                'class': 'form-control-file',
+                'class': 'upload',
                 'id': 'VipHallMainImage',
             }),
             'hall_image1': FileInput(attrs={
-                'class': 'form-control-file col pl-0'
+                'class': 'upload',
             }),
             'hall_image2': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'hall_image3': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'hall_image4': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'hall_image5': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
         }
 
@@ -479,23 +479,23 @@ class AdvertisingForm(ModelForm):
                 'placeholder': 'Введите описание рекламы',
             }),
             'adv_main_image': FileInput(attrs={
-                'class': 'form-control-file',
+                'class': 'upload',
                 'id': 'AdvMainImage',
             }),
             'adv_image1': FileInput(attrs={
-                'class': 'form-control-file col pl-0'
+                'class': 'upload',
             }),
             'adv_image2': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'adv_image3': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'adv_image4': FileInput(attrs={
-                'class': 'form-control-file col3'
+                'class': 'upload',
             }),
             'adv_image5': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
         }
 
@@ -520,23 +520,23 @@ class ChildRoomForm(ModelForm):
                 'placeholder': 'Введите описание детской комнаты',
             }),
             'room_main_image': FileInput(attrs={
-                'class': 'form-control-file',
+                'class': 'upload',
                 'id': 'RoomMainImage',
             }),
             'room_image1': FileInput(attrs={
-                'class': 'form-control-file col pl-0'
+                'class': 'upload',
             }),
             'room_image2': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'room_image3': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'room_image4': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'room_image5': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
         }
 
@@ -560,7 +560,7 @@ class ContactForm(ModelForm):
                 'id': 'ContactCoordInput',
             }),
             'contact_logo': FileInput(attrs={
-                'class': 'form-control-file',
+                'class': 'upload',
                 'id': 'ContactMainImage',
             })
         }
@@ -573,7 +573,7 @@ class MainSlideForm(ModelForm):
 
         widgets = {
             'slide_image': FileInput(attrs={
-                'class': 'form-control-file',
+                'class': 'upload',
                 'id': 'MainSlideImage',
             }),
             'slide_text': Textarea(attrs={
@@ -602,7 +602,7 @@ class NewsPromoSlideForm(ModelForm):
 
         widgets = {
             'slide_image': FileInput(attrs={
-                'class': 'form-control-file',
+                'class': 'upload',
                 'id': 'MainSlideImage',
             }),
             'slide_text': Textarea(attrs={
@@ -631,7 +631,7 @@ class BackgroundBannerForm(ModelForm):
 
         widgets = {
             'banner_image': FileInput(attrs={
-                'class': 'form-control-file',
+                'class': 'upload',
                 'id': 'BannerImage',
             }),
         }
@@ -656,23 +656,23 @@ class MobileAppForm(ModelForm):
                 'placeholder': 'Введите описание мобильного приложение',
             }),
             'app_main_image': FileInput(attrs={
-                'class': 'form-control-file',
+                'class': 'upload',
                 'id': 'Poster',
             }),
             'app_image1': FileInput(attrs={
-                'class': 'form-control-file col pl-0'
+                'class': 'upload',
             }),
             'app_image2': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'app_image3': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'app_image4': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'app_image5': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'app_apple': URLInput(attrs={
                 'class': 'form-control',

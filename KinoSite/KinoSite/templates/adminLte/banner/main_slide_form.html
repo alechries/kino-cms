@@ -24,7 +24,10 @@
                                 <img src="{{ slide_image }}" class="card-img-top" alt="film_image" style="padding-top: 7px;">
                             {% endif %}
                             <label for="MainSlideImage"><h4>Изображение слайда</h4></label>
-                            {{ form.slide_image }}
+                            <div class="fileUpload btn btn-secondary">
+                                <span>Загрузить</span>
+                                {{ form.slide_image }}
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
