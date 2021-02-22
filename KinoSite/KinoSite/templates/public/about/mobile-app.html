@@ -1,23 +1,23 @@
 {% extends 'public/base.html' %}
 {% block content %}
 
-<img src="{{ app.get_absolute_image }}" style="max-height: 500px; max-width: 100%">
+<img src="{{ app.app_main_image.url }}" style="max-height: 500px; max-width: 100%">
 <div class="container">
     <h1 style="text-align: center; margin-top: 30px">Мобильное приложение</h1>
     <p>{{ app.app_description | safe }}</p>
 </div>
 <div class="container d-flex justify-content-center">
     <div class="col">
-        <img src="{{ app.get_image1 }}" width="100%">
+        <img src="{{ app.app_image1.url }}" width="100%">
     </div>
     <div class="col">
-        <img src="{{ app.get_image2 }}" width="100%">
+        <img src="{{ app.app_image2.url }}" width="100%">
     </div>
     <div class="col">
-        <img src="{{ app.get_image3 }}" width="100%">
+        <img src="{{ app.app_image3.url}}" width="100%">
     </div>
     <div class="col">
-        <img src="{{ app.get_image4 }}" width="100%">
+        <img src="{{ app.app_image4.url }}" width="100%">
     </div>
 </div>
 <div class="container col-lg-6 d-flex justify-content-center" style="margin-top: 30px">

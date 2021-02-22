@@ -18,20 +18,20 @@
         <h1 class="m-0">Список баннеров</h1>
 {% endblock %}
 {% block main_content %}
-            <div class="card m-3" style="width: 16rem;">
-                <img src="{{ background_banner.get_absolute_image }}" class="card-img-top" alt="main banner image" style="max-height: 350px">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Сквозное изображение на сайте</li>
-                        </ul>
-                    <div class="card-footer">
-                        <div class="row" style="padding-bottom: 2px">
-                            <a href="{% url 'background_banner_form' %}" class="btn btn-block btn-outline-info">Редактировать</a>
-                        </div>
+            <div class="card m-3" style="width: 16rem; height: 100%">
+                <img src="{{ background_banner.banner_image.url }}" class="card-img-top" alt="main banner image" style="max-height: 350px">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Сквозное изображение на сайте</li>
+                </ul>
+                <div class="card-footer">
+                    <div class="row" style="padding-bottom: 2px">
+                        <a href="{% url 'background_banner_form' %}" class="btn btn-block btn-outline-info">Редактировать</a>
                     </div>
+                </div>
             </div>
         {% for el in main_slide %}
-            <div class="card m-3" style="width: 16rem">
-                <img src="{{ el.get_absolute_image }}" class="card-img-top" alt="main banner image">
+            <div class="card m-3" style="width: 16rem; height: 100%">
+                <img src="{{ el.slide_image.url }}" class="card-img-top" alt="main banner image">
                 <div class="card-body" style="padding: 10px">
                     <h5 class="card-title">{{ el.slide_text }}</h5>
                 </div>
@@ -52,8 +52,8 @@
             </div>
         {% endfor %}
         {% for el in news_promo %}
-            <div class="card m-3" style="width: 16rem">
-                <img src="{{ el.get_absolute_image }}" class="card-img-top" alt="main banner image">
+            <div class="card m-3" style="width: 16rem;  height: 100%">
+                <img src="{{ el.slide_image.url }}" class="card-img-top" alt="main banner image">
                     <div class="card-body" style="padding: 10px">
                         <h5 class="card-title">{{ el.slide_text }}</h5>
                     </div>
@@ -70,7 +70,6 @@
                             <a href="{% url 'admin_news_promo_slide_delete' pk=el.pk%}" class="btn btn-block btn-outline-danger">Удалить</a>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         {% endfor %}

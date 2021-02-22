@@ -1,14 +1,14 @@
 {% extends 'public/base.html' %}
 {% block content %}
 {% for el in promo_banners %}
-<img src="{{ el.get_absolute_image }}" style="max-height: 500px; max-width: 100%">
+<img src="{{ el.promo_main_image.url }}" style="max-height: 500px; max-width: 100%">
 {% endfor %}
 {% for el in promotion %}
 <div class="container" style="height: auto">
     <div class="card" style="border: none">
         <div class="container d-flex" style="align-items: center">
             <div class="col-lg-4">
-                <img src="{{el.get_absolute_image}}" style="max-height: 300px; width: 100%">
+                <img src="{{ el.promo_main_image.url }}" style="max-height: 300px; width: 100%">
             </div>
             <div class="col-lg-8" style="vertical-align: center">
                 <div class="col d-flex justify-content-center" style="margin-top: 20px">

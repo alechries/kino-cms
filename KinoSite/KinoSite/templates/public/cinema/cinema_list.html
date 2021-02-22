@@ -8,7 +8,7 @@
         <div class="row d-flex justify-content-center">
             {% for cinema in cinemas %}
             <div class="card" style="height: 20rem; width: 27rem; margin: 1rem; margin-left: 3rem; margin-right: 3rem">
-                <a href="{% url 'cinema_details' pk=cinema.pk %}"><img src="{{ cinema.get_logo_image }}" style="height: 20rem; width: 27rem;"></a>
+                <a href="{% url 'cinema_details' pk=cinema.pk %}"><img src="{{ cinema.cinema_logo.url }}" style="height: 20rem; width: 27rem;"></a>
             <div class="d-flex justify-content-center">
                 <p>{{ cinema.cinema_name }}</p>
             </div>

@@ -1,7 +1,7 @@
 {% extends 'public/base.html' %}
 {% block content %}
 
-<img src="{{ adv.get_absolute_image }}" style="max-height: 500px; max-width: 100%">
+<img src="{{ adv.adv_main_image.url }}" style="max-height: 500px; max-width: 100%">
 <div class="container">
     <h1 style="text-align: center; margin-top: 30px">Реклама</h1>
     <p>{{ adv.adv_description | safe }}</p>
@@ -17,19 +17,19 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block" src="{{ adv.get_image1 }}" alt="Первый слайд" style="height: 480px; width: 100%">
+            <img class="d-block" src="{{ adv.adv_image1.url }}" alt="Первый слайд" style="height: 480px; width: 100%">
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="{{ adv.get_image2 }}" alt="Второй слайд" style="height: 480px; width: 100%">
+            <img class="d-block w-100" src="{{ adv.adv_image2.url }}" alt="Второй слайд" style="height: 480px; width: 100%">
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="{{ adv.get_image3 }}" alt="Третий слайд" style="height: 480px; width: 100%">
+            <img class="d-block w-100" src="{{ adv.adv_image3.url }}" alt="Третий слайд" style="height: 480px; width: 100%">
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="{{ adv.get_image4 }}" alt="Третий слайд" style="height: 480px; width: 100%">
+            <img class="d-block w-100" src="{{ adv.adv_image4.url }}" alt="Третий слайд" style="height: 480px; width: 100%">
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="{{ adv.get_image5 }}" alt="Третий слайд" style="height: 480px; width: 100%">
+            <img class="d-block w-100" src="{{ adv.adv_image5.url }}" alt="Третий слайд" style="height: 480px; width: 100%">
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
