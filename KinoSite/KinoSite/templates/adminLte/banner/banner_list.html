@@ -19,7 +19,7 @@
 {% endblock %}
 {% block main_content %}
             <div class="card m-3" style="width: 16rem; height: 100%">
-                <img src="{{ background_banner.banner_image.url }}" class="card-img-top" alt="main banner image" style="max-height: 350px">
+                {% if background_banner.banner_image %}<img src="{{ background_banner.banner_image.url }}" class="card-img-top" alt="main banner image" style="max-height: 350px"> {% endif %}
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Сквозное изображение на сайте</li>
                 </ul>
