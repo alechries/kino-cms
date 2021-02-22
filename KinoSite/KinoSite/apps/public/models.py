@@ -161,7 +161,7 @@ class User(CustomAbstractUser):
 class Cinema(models.Model):
     cinema_name = models.CharField(max_length=255, verbose_name='Название кинотеатра')
     cinema_description = models.TextField(verbose_name='Описание конотеатра', blank=True)
-    cinema_condition = models.TextField(verbose_name='Условия кинотеатра')
+    cinema_condition = models.TextField(verbose_name='Условия кинотеатра', blank=True)
     cinema_logo = models.ImageField(verbose_name='Логотип кинотеатра', upload_to='images/cinema/logo/')
     cinema_upper_banner = models.ImageField('Верхний баннер кинотеатра', upload_to='images/cinema/upper_banner/')
     cinema_image1 = models.ImageField('Первое изображение', upload_to='images/cinema/')
@@ -623,7 +623,7 @@ class Contact(models.Model):
 
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
     contact_cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, verbose_name='', null=True)  # пустой verbose_name, конфликт с crispy forms
-    contact_address = models.TextField(verbose_name='Адрес кинотеатра')
+    contact_address = models.TextField(verbose_name='Адрес кинотеатра', blank=True)
     contact_location = models.CharField(verbose_name='Координаты для карты', max_length=255)
     contact_logo = models.ImageField(verbose_name='Лого', upload_to='images/contact/logo/')
     created_date = models.DateField(default=timezone.now)
