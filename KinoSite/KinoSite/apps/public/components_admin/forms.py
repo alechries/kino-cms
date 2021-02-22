@@ -48,19 +48,19 @@ class FilmForm(ModelForm):
                 'id': 'FilmPoster',
             }),
             'image1': FileInput(attrs={
-                'class': 'form-control-file col pl-0'
+                'class': 'upload',
             }),
             'image2': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'image3': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'image4': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'image5': FileInput(attrs={
-                'class': 'form-control-file col'
+                'class': 'upload',
             }),
             'two_d': CheckboxInput(attrs={
                 'name': 'two_d',
