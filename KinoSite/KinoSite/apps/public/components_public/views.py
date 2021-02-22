@@ -74,7 +74,7 @@ def account_login_view_decorator(redirect_to):
 
 def account_logout_view(request):
     logout(request)
-    return redirect('index')
+    return redirect('public_views.index')
 
 
 def account_registration_view(request):
