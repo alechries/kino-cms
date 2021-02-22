@@ -84,15 +84,16 @@ class FilmForm(ModelForm):
                 'value': 'True',
             }),
             'duration': TextInput(attrs={
+                'class': 'form-control col-md-7',
                 'placeholder': 'Пример: 1 час 53 минуты',
-                'class': 'form-control',
+                'type': 'time',
                 'id': 'FilmDuration',
             }),
 
             'first_night': DateInput(format=('%Y-%m-%d'), attrs={
                 'type': "date",
                 'placeholder': "Введите дату премьеры",
-                'class': "form-control",
+                'class': "form-control col-md-5",
                 'id': "FilmFirstNightDate",
         }),
 
