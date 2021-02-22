@@ -1,6 +1,6 @@
 {% extends 'public/base.html' %}
 {% block content %}
-<img src="{{ vip_hall.get_absolute_image }}" style="max-height: 500px; max-width: 100%">
+<img src="{{ child_room.room_main_image.url }}" style="max-height: 500px; max-width: 100%">
 <div class="container">
     <h1 style="text-align: center; margin-top: 30px">Детская комната</h1>
     <p>{{ child_room.room_description | safe }}</p>
@@ -19,7 +19,7 @@
             <img class="d-block" src="{{ child_room.room_image1.url }}" alt="Первый слайд" style="height: 480px; width: 100%">
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="{{ child_room.room_image2.url }}" alt="Второй слайд" style="height: 480px; width: 100%">
+            <img class="d-bloc  k w-100" src="{{ child_room.room_image2.url }}" alt="Второй слайд" style="height: 480px; width: 100%">
         </div>
         <div class="carousel-item">
             <img class="d-block w-100" src="{{ child_room.room_image3.url }}" alt="Третий слайд" style="height: 480px; width: 100%">
