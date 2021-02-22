@@ -11,6 +11,7 @@ def index_view(request):
     films_today = models.Film.objects.filter(first_night__lte=now)
     promo_banners = models.NewsPromoSlide.objects.all()
     n = models.Film.objects.all().count()
+    telephone = models.MainPage.get_solo()
     first_film_now = {}
     if n > 1:
         film_now = models.Film.objects.all()[1:n]
@@ -22,6 +23,7 @@ def index_view(request):
         film_now = models.Film.objects.all()
     future_film = models.Film.objects.filter(first_night__gt=now)
     return render(request, 'public/index.html', {'background_banner': background_banner,
+                                                 'telephone': telephone,
                                                  'films_today': films_today,
                                                  'future_film': future_film,
                                                  'date_now': full_date_now,

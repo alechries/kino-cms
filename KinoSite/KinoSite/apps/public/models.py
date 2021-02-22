@@ -408,8 +408,8 @@ class MainPage(SingletonModel):
     )
 
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
-    tel_number1 = models.IntegerField(verbose_name='Номер телефона', null=True)
-    tel_number2 = models.IntegerField(verbose_name='Номер телефона', null=True)
+    tel_number1 = models.CharField(verbose_name='Номер телефона', null=True, max_length=155)
+    tel_number2 = models.CharField(verbose_name='Номер телефона', null=True, max_length=155)
     created_date = models.DateField(default=timezone.now)
 #    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
