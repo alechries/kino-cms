@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .. import models, forms as g_forms, utils, services, auth
 import datetime
-
+from django.contrib.auth.forms import UserCreationForm
 
 def index_view(request):
     now = datetime.date.today()

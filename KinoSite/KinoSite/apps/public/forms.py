@@ -1,9 +1,13 @@
-from django.forms import Form, ModelForm, TextInput, CharField
-from django.contrib.auth import get_user_model
 from . import models
-from django.forms import Form, ModelForm, TextInput, DateInput, FileInput, URLInput, CheckboxInput, Textarea, \
-    EmailField, CharField, RadioSelect, \
-    TimeInput
+from django.forms import Form, ModelForm, TextInput, DateInput, CharField, RadioSelect
+from django import forms
+from django.contrib.auth import (
+    authenticate, get_user_model, password_validation,
+)
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext, gettext_lazy as _
+from django.contrib.auth import forms as django_forms
 
 
 class LoginForm(Form):
@@ -23,41 +27,65 @@ class LoginForm(Form):
 
 
 class RegisterForm(ModelForm):
+    """
+      A form that creates a user, with no privileges, from the given username and
+      password.
+      """
+    error_messages = {
+        'password_mismatch': _('The two password fields didn’t match.'),
+    }
+    password1 = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    password2 = forms.CharField(
+        label=_("Password confirmation"),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        strip=False,
+        help_text=_("Enter the same password as before, for verification."),
+    )
+
     class Meta:
         model = models.User
-        fields = ['first_name', 'last_name', 'username', 'email', 'password', 'retype_password']
+        fields = ("email", "first_name", "last_name")
+        field_classes = {
+            'email': django_forms.UsernameField
+        }
 
-    first_name = CharField(widget=TextInput(attrs={
-        'type': 'text',
-        'class': 'form-control',
-        'placeholder': 'Имя',
-    }))
-    last_name = CharField(widget=TextInput(attrs={
-        'type': 'text',
-        'class': 'form-control',
-        'placeholder': 'Фамилия',
-    }))
-    username = CharField(widget=TextInput(attrs={
-        'class': "form-control",
-        'type': "text",
-        'placeholder': 'Никнейм для авторизации',
-    }))
-    email = CharField(widget=TextInput(attrs={
-        'class': "form-control",
-        'id': "InputEmail",
-        'type': "email",
-        'placeholder': 'Электронная почта',
-    }))
-    password = CharField(widget=TextInput(attrs={
-        'type': 'password',
-        'class': 'form-control',
-        'placeholder': 'Пароль',
-    }))
-    retype_password = CharField(widget=TextInput(attrs={
-        'type': 'password',
-        'class': 'form-control',
-        'placeholder': 'Повторите пароль',
-    }))
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self._meta.model.USERNAME_FIELD in self.fields:
+            self.fields[self._meta.model.USERNAME_FIELD].widget.attrs['autofocus'] = True
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise ValidationError(
+                self.error_messages['password_mismatch'],
+                code='password_mismatch',
+            )
+        return password2
+
+    def _post_clean(self):
+        super()._post_clean()
+        # Validate the password after self.instance is updated with form data
+        # by super().
+        password = self.cleaned_data.get('password2')
+        if password:
+            try:
+                password_validation.validate_password(password, self.instance)
+            except ValidationError as error:
+                self.add_error('password2', error)
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password1"])
+        if commit:
+            user.save()
+        return user
 
 
 class UserForm(ModelForm):
