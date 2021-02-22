@@ -53,9 +53,7 @@ def account_login_view_decorator(redirect_to):
         if request.method == 'POST':
             form = g_forms.LoginForm(request.POST)
             if form.is_valid():
-                user = user = auth.EmailAuthBackend.authenticate(request,
-                                    email=form.cleaned_data['email'],
-                                    password=form.cleaned_data['password'])
+                user = auth.EmailAuthBackend.authenticate(email=form.cleaned_data['email'], password=form.cleaned_data['password'])
                 if user is not None:
                     if user.is_active:
                         login(request, user)
