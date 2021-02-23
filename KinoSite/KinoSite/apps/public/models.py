@@ -50,14 +50,13 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 # MODELS
 
 
-#class SEO(models.Model):
-#    seo_url = models.URLField(verbose_name='SEO ссылка')
-#    seo_title = models.CharField(verbose_name='Title', max_length=255)
-#    seo_keywords = models.CharField(verbose_name='Keywords', max_length=255)
-#    seo_description = models.TextField(verbose_name='Description')
-#
-#    def __str__(self):
-#        return self.seo_title
+class SEO(models.Model):
+    seo_title = models.CharField(verbose_name='Title', max_length=255)
+    seo_keywords = models.CharField(verbose_name='Keywords', max_length=255)
+    seo_description = models.TextField(verbose_name='Description')
+
+    def __str__(self):
+        return self.seo_title
 
 
 class CustomAbstractUser(AbstractBaseUser, PermissionsMixin):
@@ -169,7 +168,7 @@ class Cinema(models.Model):
     cinema_image3 = models.ImageField('Третее изображение', upload_to='images/cinema/')
     cinema_image4 = models.ImageField('Четвёртое изображение', upload_to='images/cinema/')
     cinema_image5 = models.ImageField('Пятое изображение', upload_to='images/cinema/')
-#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_logo_image(self):
         return os.path.join('/media', self.cinema_logo.name)
@@ -211,7 +210,7 @@ class CinemaHall(models.Model):
     hall_image4 = models.ImageField('Четвёртое изображение', upload_to='images/hall/')
     hall_image5 = models.ImageField('Пятое изображение', upload_to='images/hall/')
     hall_scheme = models.ImageField(verbose_name='Схема зала', upload_to='images/hall/logo/')
-#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_scheme(self):
         return os.path.join('/media', self.hall_scheme.name)
@@ -273,7 +272,7 @@ class Film(models.Model):
     first_night = models.DateField('Дата премьеры')
     language = models.CharField('', choices=LANGUAGE, max_length=55, null=True)
     type = models.CharField('', choices=TYPE, max_length=55, null=True)
-#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def __str__(self):
         return self.title
@@ -328,7 +327,7 @@ class News(models.Model):
     news_url = models.URLField(verbose_name='Ссылка на видео', null=True)
     news_published_date = models.DateField(verbose_name='Дата публикации новости')
     news_status = models.CharField(verbose_name='', max_length=3, choices=STATUS) #пустой вербоус нейм, конфликт с crispy forms
-#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def __str__(self):
         return self.news_name
@@ -375,7 +374,7 @@ class Promotion(models.Model):
     promo_url = models.URLField(verbose_name='Ссылка на акцию', null=True)
     promo_published_date = models.DateField(verbose_name='Дата публикации акции')
     promo_status = models.CharField(verbose_name='',  max_length=3, choices=STATUS) #пустой вербоус нейм, конфликт с crispy forms
-#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def __str__(self):
         return self.promo_name
@@ -412,7 +411,7 @@ class MainPage(SingletonModel):
     tel_number1 = models.CharField(verbose_name='Номер телефона', null=True, max_length=155)
     tel_number2 = models.CharField(verbose_name='Номер телефона', null=True, max_length=155)
     created_date = models.DateField(default=timezone.now)
-#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
 
 class AboutCinema(SingletonModel):
@@ -432,7 +431,7 @@ class AboutCinema(SingletonModel):
     cinema_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/about/')
     created_date = models.DateField(default=timezone.now)
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
-#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_absolute_image(self):
         return os.path.join('/media', self.cinema_main_image.name)
@@ -475,7 +474,7 @@ class CafeBar(SingletonModel):
     cafebar_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/cafe_bar/')
     created_date = models.DateField(default=timezone.now)
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
-#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_absolute_image(self):
         return os.path.join('/media', self.cafebar_main_image.name)
@@ -519,7 +518,7 @@ class VipHall(SingletonModel):
     hall_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/vip_hall/')
     created_date = models.DateField(default=timezone.now)
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
-#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_absolute_image(self):
         return os.path.join('/media', self.hall_main_image.name)
@@ -563,7 +562,7 @@ class Advertising(SingletonModel):
     adv_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/adv/')
     created_date = models.DateField(default=timezone.now)
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
-#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_absolute_image(self):
         return os.path.join('/media', self.adv_main_image.name)
@@ -607,7 +606,7 @@ class ChildRoom(SingletonModel):
     room_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/child_room/')
     created_date = models.DateField(default=timezone.now)
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
-#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def file_list(self):
         return [self.room_main_image, self.room_image1, self.room_image1, self.room_image2, self.room_image3, self.room_image4, self.room_image5]
@@ -628,8 +627,7 @@ class Contact(models.Model):
     contact_location = models.CharField(verbose_name='Координаты для карты', max_length=255)
     contact_logo = models.ImageField(verbose_name='Лого', upload_to='images/contact/logo/')
     created_date = models.DateField(default=timezone.now)
-
-#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_absolute_image(self):
         return os.path.join('/media', self.contact_logo.name)
@@ -706,7 +704,7 @@ class MobileApp(SingletonModel):
     app_google = models.URLField(verbose_name='Ссылка на Android-приложение', null=True)
     app_apple = models.URLField(verbose_name='Ссылка на IOS-приложение', null=True)
     created_date = models.DateField(default=timezone.now)
-#    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
+    seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок')
 
     def get_absolute_image(self):
         return os.path.join('/media', self.app_main_image.name)
