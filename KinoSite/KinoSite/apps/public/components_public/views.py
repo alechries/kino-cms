@@ -136,8 +136,13 @@ def cinema_list_view(request):
 def cinema_details_view(request, pk):
     cinema = get_object_or_404(models.Cinema, pk=pk)
     background_banner = models.BackgroundBanner.get_solo()
+    cinema_hall = models.CinemaHall.objects.filter(cinema=cinema)
+    hall_count = cinema_hall.count()
+    print(hall_count)
     return render(request, 'public/cinema/details.html', {'cinema': cinema,
                                                           'background_banner': background_banner,
+                                                          'cinema_hall': cinema_hall,
+                                                          'hall_count': hall_count,
                                                           })
 
 
