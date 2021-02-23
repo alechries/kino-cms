@@ -307,7 +307,8 @@ class FilmSession(models.Model):
     film = models.ForeignKey(Film, on_delete=models.CASCADE, verbose_name='')
     hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE, verbose_name='')
     date = models.DateField('Дата сеанса', null=True)
-    time = models.TimeField('время сеанса', null=True)
+    time = models.TimeField('Время сеанса', null=True)
+    price = models.IntegerField('Стоимость', null=True)
 
 
 class News(models.Model):

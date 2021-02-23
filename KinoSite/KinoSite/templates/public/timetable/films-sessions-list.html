@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'public/base.html' %}
+{% block content %}
+{% for el in promo_banners %}
+<img src="{{ el.promo_main_image.url }}" style="max-height: 500px; max-width: 100%">
+{% endfor %}
+<table class="table text-light" style="text-align-last: center;">
+    <thead>
+    <tr>
+        <th scope="col">ФИЛЬМ</th>
+        <th scope="col">ЗАЛ</th>
+        <th scope="col">ЦЕНА</th>
+        <th scope="col">ДАТА</th>
+        <th scope="col">ВРЕМЯ</th>
+        <th scope="col">БРОНЬ</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for el in sessions %}
+    <tr>
+        <td>{{ el.film.title }}</td>
+        <td>{{ el.hall.hall_name  }}</td>
+        <td>{{ el.price }}</td>
+        <td>{{ el.date }}</td>
+        <td>{{ el.time }}</td>
+        <td>Кнопка</td>
+    </tr>
+    {% endfor %}
 
-</body>
-</html>
+    </tbody>
+</table>
+{% endblock %}
