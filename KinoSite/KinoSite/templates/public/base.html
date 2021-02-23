@@ -60,8 +60,10 @@
               </ul>
             </div>
             <div class="col-md-4">
+              {% if telephone.tel_number1 %}
               <h4>{{ telephone.tel_number1 }}</h4>
               <h4>{{ telephone.tel_number2 }}</h4>
+              {% endif %}
             </div>
           </div>
         </div>
