@@ -14,6 +14,7 @@
                     <h4>{{ el.contact_cinema }}</h4>
                 </div>
                 <div class="col">
+                    {% easy_map "{{el.contact_location}}" 400 400 %}
                     <p><h5>Адрес кинотеатра</h5>{{ el.contact_address }}</p>
                 </div>
                 <div class="col">
