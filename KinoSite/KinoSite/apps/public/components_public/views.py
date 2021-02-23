@@ -130,7 +130,11 @@ def cinema_list_view(request):
 
 
 def cinema_details_view(request, pk):
-    return render(request, 'public/cinema/details.html')
+    cinema = get_object_or_404(models.Cinema, pk=pk)
+    background_banner = models.BackgroundBanner.get_solo()
+    return render(request, 'public/cinema/details.html', {'cinema': cinema,
+                                                          'background_banner': background_banner,
+                                                          })
 
 
 def cinema_hall_details_view(request, pk):
