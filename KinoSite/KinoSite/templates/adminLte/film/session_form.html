@@ -38,6 +38,10 @@
                         <label for="FilmSessionTime"><h4>Время показа</h4></label>
                         {{ form.time }}
                     </div>
+                    <div class="col-lg-4 my-3 pl-0">
+                        <label for=""><h4>Стоимость</h4></label>
+                        {{ form.price }}
+                    </div>
                     <div class="container my-5">
                         <button class="btn btn-success" type="submit">Сохранить</button>
                         <a class="btn btn-danger" href="{% url 'admin_film_list' %}" role="button">Отмена</a>

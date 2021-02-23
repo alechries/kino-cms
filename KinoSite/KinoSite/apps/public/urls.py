@@ -41,6 +41,7 @@ urlpatterns = [
     ##############
     # ADMIN URLS #
     ##############
+
     path('admin/', admin_views.admin_index_view, name='admin_index'),
     path('admin/account/login', admin_views.account_login_view, name='admin_login'),
     path('admin/account/logout', admin_views.account_logout_view, name='admin_logout'),

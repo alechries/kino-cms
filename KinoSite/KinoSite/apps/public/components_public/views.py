@@ -114,7 +114,11 @@ def posters_films_details_view(request, pk):
 
 
 def timetable_films_sessions_list_view(request):
-    return render(request, 'public/timetable/films-sessions-cinema_list.html')
+    context = {
+        # 'sessions': models.FilmSession.objects.filter(date=datetime.date.today())
+        'sessions': models.FilmSession.objects.all()
+    }
+    return render(request, 'public/timetable/films-sessions-list.html', context)
 
 
 def timetable_reservation_view(request, pk):
