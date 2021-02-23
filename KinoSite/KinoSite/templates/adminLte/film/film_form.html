@@ -51,12 +51,13 @@
                         {{ form.description }}
                     </div>
                     <label><h4>Постер фильма</h4></label>
-                    <div class="card col-md-4">
+                    <div class="card col-md-2">
                         <div class="form-group" style="text-align: center">
                             {% if main_image %}
                                 <img src="{{ main_image }}" class="card-img-top" alt="film_image" style="padding-top: 7px;">
                             {% endif %}
-                            <div style="padding-top:8px;">
+                            <div class="fileUpload btn btn-secondary">
+                                <span>Загрузить</span>
                                 {{ form.main_image }}
                             </div>
                         </div>
@@ -68,7 +69,8 @@
                                     {% if image1 %}
                                         <img src="{{ image1 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
                                     {% endif %}
-                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                    <div class="fileUpload btn btn-secondary">
+                                        <span>Загрузить</span>
                                         {{ form.image1 }}
                                     </div>
                                 </div>
@@ -78,7 +80,8 @@
                                     {% if image2 %}
                                         <img src="{{ image2 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
                                     {% endif %}
-                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                    <div class="fileUpload btn btn-secondary">
+                                        <span>Загрузить</span>
                                         {{ form.image2 }}
                                     </div>
                                 </div>
@@ -88,7 +91,8 @@
                                     {% if image3 %}
                                         <img src="{{ image3 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
                                     {% endif %}
-                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                    <div class="fileUpload btn btn-secondary">
+                                        <span>Загрузить</span>
                                         {{ form.image3 }}
                                     </div>
                                 </div>
@@ -98,7 +102,8 @@
                                     {% if image4 %}
                                         <img src="{{ image4 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
                                     {% endif %}
-                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                    <div class="fileUpload btn btn-secondary">
+                                        <span>Загрузить</span>
                                         {{ form.image4 }}
                                     </div>
                                 </div>
@@ -108,7 +113,8 @@
                                     {% if image5 %}
                                         <img src="{{ image5 }}" class="card-img-top" alt="film_image" style="padding-top:7px">
                                     {% endif %}
-                                    <div style="padding-top:8px; padding-bottom: 8px">
+                                    <div class="fileUpload btn btn-secondary">
+                                        <span>Загрузить</span>
                                         {{ form.image5 }}
                                     </div>
                                 </div>

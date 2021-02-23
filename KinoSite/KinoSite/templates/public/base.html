@@ -22,7 +22,8 @@
     <div class="container" style="padding-top: 40px">
       <div class="row justify-content-between">
         <div class="col-md-3">
-          <a href="{% url 'public_views.index' %}" style="text-decoration: none"><h1>LOGO</h1></a>
+          <a href="{% url 'public_views.index' %}" style="text-decoration: none">
+            <img src="{% static 'public/img/logo.ico' %}" width="70"/></a>
         </div>
         <div class="col-md-8">
           <div class="container d-flex" style="padding: 0px">
@@ -74,7 +75,7 @@
         <div class="col-md-8">
           <nav class="navbar navbar-expand-lg" style="margin-top: .5rem;margin-bottom: .5rem; padding: 0px;background: rgba(19, 19, 19, 0.8);">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav">
+              <ul class="navbar-nav" style="margin: 0 20px">
                 <li class="nav-item active">
                   <a class="nav-link" href="{% url 'posters_films_list' %}">Афиша</a>
                 </li>
@@ -101,6 +102,14 @@
                     <a class="dropdown-item" href="{% url 'about_contacts' %}">Контакты</a>
                   </div>
                 </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'account_cabinet' %}">Кабинет</span></a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item active">
+                  <a class="fas fa fa-sign-in-alt mr-2 text-danger" href="{% url 'account_logout' %}"></a>
+                </li>
+                {% endif %}
               </ul>
             </div>
           </nav>

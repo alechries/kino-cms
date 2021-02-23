@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .. import models, forms as g_forms, utils, services, auth
 import datetime
-
+from django.contrib.auth.forms import UserCreationForm
 
 def index_view(request):
     now = datetime.date.today()
@@ -53,9 +53,7 @@ def account_login_view_decorator(redirect_to):
         if request.method == 'POST':
             form = g_forms.LoginForm(request.POST)
             if form.is_valid():
-                user = user = auth.EmailAuthBackend.authenticate(request,
-                                    email=form.cleaned_data['email'],
-                                    password=form.cleaned_data['password'])
+                user = auth.EmailAuthBackend.authenticate(email=form.cleaned_data['email'], password=form.cleaned_data['password'])
                 if user is not None:
                     if user.is_active:
                         login(request, user)
@@ -74,7 +72,7 @@ def account_login_view_decorator(redirect_to):
 
 def account_logout_view(request):
     logout(request)
-    return redirect('index')
+    return redirect('public_views.index')
 
 
 def account_registration_view(request):

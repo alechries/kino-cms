@@ -29,23 +29,31 @@
                     </div>
                     <div class="form-group">
                         <label for="RoomMainImage"><h4>Главная картинка</h4></label>
-                        {{ form.room_main_image }}
+                        <div class="fileUpload btn btn-secondary">
+                            <span>Загрузить</span>
+                            {{ form.room_main_image }}
+                        </div>
                     </div>
                     <label for="RoomGallery"><h4>Галерея картинок</h4></label>
                         <div class="row" id="RoomGallery">
-                            <div class="col">
+                            <div class="fileUpload btn btn-secondary">
+                                <span>Загрузить</span>
                                 {{ form.room_image1 }}
                             </div>
-                            <div class="col">
+                            <div class="fileUpload btn btn-secondary">
+                                <span>Загрузить</span>
                                  {{ form.room_image2 }}
                             </div>
-                            <div class="col">
+                            <div class="fileUpload btn btn-secondary">
+                                <span>Загрузить</span>
                                  {{ form.room_image3 }}
                             </div>
-                            <div class="col">
+                            <div class="fileUpload btn btn-secondary">
+                                <span>Загрузить</span>
                                  {{ form.room_image4 }}
                             </div>
-                            <div class="col">
+                            <div class="fileUpload btn btn-secondary">
+                                <span>Загрузить</span>
                                  {{ form.room_image5 }}
                             </div>
                         </div>
