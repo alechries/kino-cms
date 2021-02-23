@@ -1,5 +1,5 @@
 from . import models
-from django.forms import Form, ModelForm, TextInput, DateInput, CharField, RadioSelect
+from django.forms import Form, ModelForm, TextInput, DateInput, CharField, RadioSelect, PasswordInput
 from django import forms
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
@@ -37,12 +37,12 @@ class RegisterForm(ModelForm):
     password1 = forms.CharField(
         label=_("Password"),
         strip=False,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'placeholder': 'Пароль'}),
         help_text=password_validation.password_validators_help_text_html(),
     )
     password2 = forms.CharField(
         label=_("Password confirmation"),
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'placeholder': 'Повтор пароля'}),
         strip=False,
         help_text=_("Enter the same password as before, for verification."),
     )
@@ -52,6 +52,18 @@ class RegisterForm(ModelForm):
         fields = ("email", "first_name", "last_name")
         field_classes = {
             'email': django_forms.UsernameField
+        }
+        widgets = {
+            'email': TextInput(attrs={
+                'type': "email",
+                'placeholder': "Почта",
+            }),
+            'first_name': TextInput(attrs={
+                'placeholder': "Имя",
+            }),
+            'last_name': TextInput(attrs={
+                'placeholder': "Фамилия",
+            }),
         }
 
     def __init__(self, *args, **kwargs):
