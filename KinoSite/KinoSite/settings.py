@@ -2,6 +2,7 @@ import os
 import sys
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -154,3 +155,6 @@ EMAIL_USE_TLS = True
 
 #google map
 EASY_MAPS_GOOGLE_MAPS_API_KEY  = 'AIzaSyAMPq6gbs7dfX-AMgFtCvTpjK8ltHErwcY'
+
+
+

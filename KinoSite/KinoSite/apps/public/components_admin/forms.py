@@ -3,6 +3,7 @@ from django.forms import Form, ModelForm, TextInput, DateInput, FileInput, URLIn
     EmailField, CharField, PasswordInput, ImageField, ModelChoiceField, URLField, ChoiceField, TimeField, BooleanField, RadioSelect, NumberInput, \
     TimeInput
 
+from easy_maps.widgets import AddressWithMapWidget
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from crispy_forms.helper import FormHelper
@@ -560,7 +561,7 @@ class ContactForm(ModelForm):
                 'rows': '5',
                 'placeholder': 'Введите адрес кинотеатра',
             }),
-            'contact_location': TextInput(attrs={
+            'contact_location': AddressWithMapWidget(attrs={
                 'class': 'form-control',
                 'placeholder': 'Введите координаты карты',
                 'id': 'ContactCoordInput',

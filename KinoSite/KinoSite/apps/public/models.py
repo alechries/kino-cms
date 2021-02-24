@@ -638,7 +638,7 @@ class Contact(models.Model):
         return [self.contact_logo, ]
 
     def __str__(self):
-        return self.contact_cinema
+        return self.contact_location
 
 
 class MainSlide(models.Model):
