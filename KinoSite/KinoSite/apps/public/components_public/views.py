@@ -189,7 +189,10 @@ def promotion_details_view(request, pk):
 
 def about_cinema_view(request):
     background_banner = models.BackgroundBanner.get_solo()
-    cinema = models.AboutCinema.get_solo()
+    cinema = {}
+    row = models.AboutCinema.get_solo()
+    if row.cinema_description:
+        cinema = row
     return render(request, 'public/about/cinema.html', {'cinema': cinema,
                                                         'background_banner': background_banner,
                                                         'link': models.MobileApp.get_solo()
