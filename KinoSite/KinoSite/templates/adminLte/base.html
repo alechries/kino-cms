@@ -210,6 +210,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                {% elif request.path == '/admin/pages/contact/list' %} menu-open
                {% elif request.path == '/admin/pages/contact/form' %} menu-open
                {% elif request.path == '/admin/pages/mobile/app' %} menu-open
+               {% elif request.path == '/admin/pages/contact/edit' %} menu-open
                {% endif %}">
                     <a class="nav-link
                     {% if request.path == '/admin/pages/main/info' %} active
@@ -271,12 +272,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <p>Детская комната</p>
                             </a>
                         </li>
+                        {% block contact_nav %}
                         <li class="nav-item">
                             <a href="{% url 'admin_contact_list' %}" class="nav-link {% if request.path == '/admin/pages/contact/list' %} active {% elif request.path == '/admin/pages/contact/form' %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Контакты</p>
                             </a>
                         </li>
+                        {% endblock %}
                         <li class="nav-item">
                             <a href="{% url 'admin_mobile_app' %}" class="nav-link {% if request.path == '/admin/pages/mobile/app' %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>

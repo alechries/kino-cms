@@ -2,9 +2,9 @@
 {% load easy_maps_tags %}
 {% block content %}
 {% if contacts %}
-    {% for el in contacts %}
     <div class="container" style="height: auto; margin-top: 10px">
         <h3 style="text-align: center">Контакты кинотеатров</h3>
+        {% for el in contacts %}
         <div class="card" style="border: none">
             <div class="container d-flex justify-content-between" style="align-items: center">
                 <div class="col-lg-4">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 {% endif %}
 {% endblock %}
