@@ -1,4 +1,5 @@
 {% extends 'public/base.html' %}
+{% load static %}
 {% block content %}
 
 <img src="{{ app.app_main_image.url }}" style="max-height: 500px; max-width: 100%">
@@ -20,13 +21,6 @@
         <img src="{{ app.app_image4.url }}" width="100%">
     </div>
 </div>
-<div class="container col-lg-6 d-flex justify-content-center" style="margin-top: 30px">
-    <div class="col">
-        <img src="../../../static/img/google-play-icon-png-3.png" width="100%">
-    </div>
-    <div class="col">
-        <img src="../../../static/img/Apple+Store+Icon+New.png" width="100%">
-    </div>
-</div>
+
 
 {% endblock %}
