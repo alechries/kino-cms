@@ -126,8 +126,10 @@
             <nav role="navigation" class="navbar navbar-fixed-bottom">
               <div class="row-md-4" style="padding-left: 20px">
                 <h2>Мобильные приложения</h2>
-                <a href="https://google.com.ua"><img src="{% static 'img/Apple+Store+Icon+New.png' %}" height="100%" width="220"></a>
-                <a href="https://google.com.ua"><img src="{% static 'img/google-play-icon-png-3.png' %}" height="100%" width="220"></a>
+                {% if link %}
+                <a href="{{ link.app_apple }}"><img src="{% static 'img/apple.png' %}" height="100%" width="200"></a>
+                <a href="{{ link.google_apple }}"><img src="{% static 'img/google.png' %}" height="100%" width="220"></a>
+                {% endif %}
                 <h5 style="padding-top: 10px">Разработка сайтов AVADA-MEDIA </h5>
               </div>
               <div class="col-md-4">

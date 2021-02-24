@@ -22,6 +22,8 @@ def index_view(request):
     else:
         film_now = models.Film.objects.all()
     future_film = models.Film.objects.filter(first_night__gt=now)
+    link = models.MobileApp.get_solo()
+
     return render(request, 'public/index.html', {'background_banner': background_banner,
                                                  'telephone': telephone,
                                                  'films_today': films_today,
@@ -30,10 +32,12 @@ def index_view(request):
                                                  'promo_banners': promo_banners,
                                                  'film_now': film_now,
                                                  'first_film_now': first_film_now,
+                                                 'link': link,
                                                  })
 
 
 def account_cabinet_view(request):
+    link = models.MobileApp.get_solo()
     user = request.user
     if user.is_authenticated:
         return utils.form_template(
@@ -42,7 +46,8 @@ def account_cabinet_view(request):
             form_class=g_forms.UserForm,
             redirect_url_name='account_cabinet',
             template_file_name='public/account/cabinet.html',
-            context={'user_pk': user.id}
+            context={'user_pk': user.id,
+                     'link': link}
         )
     else:
         return redirect('account_login')
@@ -76,47 +81,56 @@ def account_logout_view(request):
 
 
 def account_registration_view(request):
+    link = models.MobileApp.get_solo()
     form = g_forms.RegisterForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
         user = form.save()
         login(request, user)
         return redirect('public_views.index')
-    return render(request, 'public/account/registration.html', context={'form': g_forms.RegisterForm()})
+    return render(request, 'public/account/registration.html', context={'form': g_forms.RegisterForm(),
+                                                                        'link': link})
 
 
 def user_change_password_view(request):
     form = g_forms.UserPasswordForm(request.POST or None)
+    link = models.MobileApp.get_solo()
     if request.method == 'POST' and form.is_valid():
         user = request.user
         password = form.cleaned_data['password']
         services.Change.user_password(user, password)
         return redirect('account_cabinet')
-    return render(request, 'public/account/change_password.html', context={'form': form})
+    return render(request, 'public/account/change_password.html', context={'form': form,
+                                                                           'link': link})
 
 
 def posters_films_list_view(request):
+    link = models.MobileApp.get_solo()
     films = models.Film.objects.all().order_by('first_night')
     background_banner = models.BackgroundBanner.get_solo()
     return render(request, 'public/posters/films_list.html', {'films': films,
                                                               'background_banner': background_banner,
+                                                              'link': link,
                                                               })
 
 
 def posters_films_details_view(request, pk):
+    link = models.MobileApp.get_solo()
     film = get_object_or_404(models.Film, pk=pk)
     sessions = models.FilmSession.objects.filter(film=film)
 
     background_banner = models.BackgroundBanner.get_solo()
     return render(request, 'public/posters/film_details.html', {'film': film,
                                                                 'background_banner': background_banner,
-                                                                'sessions': sessions
+                                                                'sessions': sessions,
+                                                                'link': link,
                                                                 })
 
 
 def timetable_films_sessions_list_view(request):
     context = {
         # 'sessions': models.FilmSession.objects.filter(date=datetime.date.today())
-        'sessions': models.FilmSession.objects.all()
+        'sessions': models.FilmSession.objects.all(),
+        'link': models.MobileApp.get_solo()
     }
     return render(request, 'public/timetable/films-sessions-list.html', context)
 
@@ -130,6 +144,7 @@ def cinema_list_view(request):
     background_banner = models.BackgroundBanner.get_solo()
     return render(request, 'public/cinema/cinema_list.html',{'cinemas': cinemas,
                                                              'background_banner': background_banner,
+                                                             'link': models.MobileApp.get_solo(),
                                                              })
 
 
@@ -138,11 +153,11 @@ def cinema_details_view(request, pk):
     background_banner = models.BackgroundBanner.get_solo()
     cinema_hall = models.CinemaHall.objects.filter(cinema=cinema)
     hall_count = cinema_hall.count()
-    print(hall_count)
     return render(request, 'public/cinema/details.html', {'cinema': cinema,
                                                           'background_banner': background_banner,
                                                           'cinema_hall': cinema_hall,
                                                           'hall_count': hall_count,
+                                                          'link': models.MobileApp.get_solo(),
                                                           })
 
 
@@ -156,7 +171,9 @@ def promotion_list_view(request):
     background_banner = models.BackgroundBanner.get_solo()
     return render(request, 'public/promotion/promotions_list.html', {'promotions': promotions,
                                                                      'promo_banners': promo_banners,
-                                                                     'background_banner': background_banner})
+                                                                     'background_banner': background_banner,
+                                                                     'link': models.MobileApp.get_solo()
+                                                                     })
 
 
 def promotion_details_view(request, pk):
@@ -166,6 +183,7 @@ def promotion_details_view(request, pk):
     return render(request, 'public/promotion/promotion.html',{'promotion': promotion,
                                                               'background_banner': background_banner,
                                                               'promo_banners': promo_banners,
+                                                              'link': models.MobileApp.get_solo(),
                                                               })
 
 
@@ -173,7 +191,8 @@ def about_cinema_view(request):
     background_banner = models.BackgroundBanner.get_solo()
     cinema = models.AboutCinema.get_solo()
     return render(request, 'public/about/cinema.html', {'cinema': cinema,
-                                                        'background_banner': background_banner
+                                                        'background_banner': background_banner,
+                                                        'link': models.MobileApp.get_solo()
                                                         })
 
 
@@ -184,6 +203,7 @@ def about_news_view(request):
     return render(request, 'public/about/news.html', {'background_banner': background_banner,
                                                       'promo_banners': promo_banners,
                                                       'news': news,
+                                                      'link': models.MobileApp.get_solo(),
                                                       })
 
 
@@ -192,6 +212,7 @@ def about_cafe_bar_view(request):
     cafe = models.CafeBar.get_solo()
     return render(request, 'public/about/cafe-bar.html', {'cafe': cafe,
                                                           'background_banner': background_banner,
+                                                          'link': models.MobileApp.get_solo(),
                                                           })
 
 
@@ -200,6 +221,7 @@ def about_vip_hall_view(request):
     vip_hall = models.VipHall.get_solo()
     return render(request, 'public/about/vip-hall.html', {'vip_hall': vip_hall,
                                                           'background_banner': background_banner,
+                                                          'link': models.MobileApp.get_solo(),
                                                           })
 
 
@@ -208,6 +230,7 @@ def about_advertising_view(request):
     adv = models.Advertising.get_solo()
     return render(request, 'public/about/advertising.html', {'background_banner': background_banner,
                                                              'adv': adv,
+                                                             'link': models.MobileApp.get_solo(),
                                                              })
 
 
@@ -215,7 +238,9 @@ def about_mobile_app_view(request):
     app = models.MobileApp.get_solo()
     background_banner = models.BackgroundBanner.get_solo()
     return render(request, 'public/about/mobile-app.html', {'background_banner': background_banner,
-                                                            'app': app})
+                                                            'app': app,
+                                                            'link': models.MobileApp.get_solo(),
+                                                            })
 
 
 def about_child_room_view(request):
@@ -223,6 +248,7 @@ def about_child_room_view(request):
     child_room = models.ChildRoom.get_solo()
     return render(request, 'public/about/child-room.html', {'child_room': child_room,
                                                             'background_banner': background_banner,
+                                                            'link': models.MobileApp.get_solo(),
                                                              })
 
 
@@ -235,4 +261,5 @@ def about_contacts_view(request):
 
     return render(request, 'public/about/contacts.html', {'background_banner': background_banner,
                                                           'contacts': contacts,
+                                                          'link': models.MobileApp.get_solo(),
                                                           })
