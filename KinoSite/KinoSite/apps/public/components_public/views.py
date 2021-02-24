@@ -39,6 +39,7 @@ def index_view(request):
 def account_cabinet_view(request):
     link = models.MobileApp.get_solo()
     user = request.user
+    background_banner = models.BackgroundBanner.get_solo()
     if user.is_authenticated:
         return utils.form_template(
             request=request,
@@ -47,6 +48,7 @@ def account_cabinet_view(request):
             redirect_url_name='account_cabinet',
             template_file_name='public/account/cabinet.html',
             context={'user_pk': user.id,
+                     'background_banner': background_banner,
                      'link': link}
         )
     else:
