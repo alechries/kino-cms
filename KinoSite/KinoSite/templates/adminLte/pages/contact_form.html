@@ -107,6 +107,14 @@
                             {{ form.contact_logo }}
                         </div>
                     </div>
+                    <label><h4>SEO</h4></label>
+                    <div class="col-md-3">
+                        {% if instance_seo_id %}
+                        <a href="{% url 'admin_seo' pk=instance_seo_id%}" class="btn btn-secondary">Настроить</a>
+                        {% else %}
+                        В данный момент нельзя настроить SEO. Сохраните изменения и попробуйте снова.
+                        {% endif %}
+                    </div>
                     <div class="container my-5">
                         <button class="btn btn-success" type="submit">Сохранить</button>
                         <a class="btn btn-danger" href="{% url 'admin_contact_list' %}" role="button">Отмена</a>

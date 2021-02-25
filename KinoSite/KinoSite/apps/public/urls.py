@@ -98,4 +98,5 @@ urlpatterns = [
     path('admin/user/delete/<int:pk>', admin_views.user_delete_view, name='admin_user_delete'),
     path('admin/mailing/choose', admin_views.user_choose_view, name='admin_user_choose'),
     path('admin/mailing', admin_views.mailing_view, name='admin_mailing'),
+    path('admin/seo/form/<int:pk>', admin_views.seo_form_view_decorator('admin_index'), name='admin_seo'),
 ]
