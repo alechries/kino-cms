@@ -36,7 +36,6 @@ class SEOForm(ModelForm):
         }
 
 
-
 class FilmForm(ModelForm):
     class Meta:
         model = models.Film
@@ -114,8 +113,9 @@ class FilmForm(ModelForm):
             }),
             'duration': TextInput(attrs={
                 'class': 'form-control col-md-7',
-                'placeholder': 'Пример: 1 час 53 минуты',
-                'type': 'time',
+                'placeholder': 'Пример: 1.53',
+                'type': "number",
+                'step': "0.01",
                 'id': 'FilmDuration',
             }),
 

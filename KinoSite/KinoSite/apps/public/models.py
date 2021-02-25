@@ -281,7 +281,7 @@ class Film(models.Model):
     two_d = models.BooleanField('2Д', null=False)
     three_d = models.BooleanField('3Д', null=False)
     i_max = models.BooleanField('I_MAX', null=False)
-    duration = models.CharField('Длительность фильма', max_length=55)
+    duration = models.FloatField('Длительность фильма')
     first_night = models.DateField('Дата премьеры')
     language = models.CharField('', choices=LANGUAGE, max_length=55, null=True)
     type = models.CharField('', choices=TYPE, max_length=55, null=True)
