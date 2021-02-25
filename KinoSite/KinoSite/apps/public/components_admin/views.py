@@ -76,9 +76,13 @@ def session_delete_view(request, pk):
 
 def film_edit_form_view(request, pk=None):
     film = get_object_or_404(models.Film, pk=pk) if pk else None
+
     session = models.FilmSession.objects.filter(film=film)
     media_context = {}
+    instance_seo_id = None
     if film:
+        if film.seo:
+            instance_seo_id = film.seo.id
         media_context = {'main_image': models.Film.get_absolute_image(film),
                          'image1': models.Film.get_image1(film),
                          'image2': models.Film.get_image2(film),
@@ -91,7 +95,7 @@ def film_edit_form_view(request, pk=None):
             form_class=forms.FilmForm,
             redirect_url_name='admin_film_list',
             template_file_name='adminLte/film/film_form.html',
-            context={'session': session},
+            context={'session': session, 'instance_seo_id': instance_seo_id},
             media_context=media_context
         )
 
@@ -120,7 +124,10 @@ def cinema_form_view(request, pk=None):
     cinema = get_object_or_404(models.Cinema, pk=pk) if pk else None
     media_context = {}
     halls = models.CinemaHall.objects.filter(cinema=cinema)
+    instance_seo_id = None
     if cinema:
+        if cinema.seo:
+            instance_seo_id = cinema.seo.id
         media_context = {'logo': models.Cinema.get_logo_image(cinema),
                          'upper_banner': models.Cinema.get_upper_banner(cinema),
                          'image1': models.Cinema.get_image1(cinema),
@@ -132,7 +139,7 @@ def cinema_form_view(request, pk=None):
     return utils.form_template(
         request=request,
         instance=cinema,
-        context={'halls': halls},
+        context={'halls': halls, 'instance_seo_id': instance_seo_id},
         form_class=forms.CinemaForm,
         redirect_url_name='admin_cinema_list',
         template_file_name='adminLte/cinema/cinema_form.html',
@@ -148,7 +155,10 @@ def cinema_delete_view(request, pk):
 def hall_form_view(request, pk=None):
     cinema_hall = get_object_or_404(models.CinemaHall, pk=pk) if pk else None
     media_context = {}
+    instance_seo_id = None
     if cinema_hall:
+        if cinema_hall.seo:
+            instance_seo_id = cinema_hall.seo.id
         media_context = {'scheme': models.CinemaHall.get_scheme(cinema_hall),
                          'upper_banner': models.CinemaHall.get_upper_banner(cinema_hall),
                          'image1': models.CinemaHall.get_image1(cinema_hall),
@@ -163,7 +173,8 @@ def hall_form_view(request, pk=None):
         form_class=forms.CinemaHallForm,
         redirect_url_name='admin_cinema_list',
         template_file_name='adminLte/cinema/hall_form.html',
-        media_context=media_context
+        media_context=media_context,
+        context={'instance_seo_id': instance_seo_id}
     )
 
 
@@ -175,7 +186,10 @@ def hall_delete_view(request, pk):
 def news_form_view(request, pk=None):
     news = get_object_or_404(models.News, pk=pk) if pk else None
     media_context = {}
+    instance_seo_id = None
     if news:
+        if news.seo:
+            instance_seo_id = news.seo.id
         media_context = {'main_image': models.News.get_absolute_image(news),
                          'image1': models.News.get_image1(news),
                          'image2': models.News.get_image2(news),
@@ -189,7 +203,8 @@ def news_form_view(request, pk=None):
         form_class=forms.NewsForm,
         redirect_url_name='admin_news_list',
         template_file_name='adminLte/news/news_form.html',
-        media_context=media_context
+        media_context=media_context,
+        context={'instance_seo_id': instance_seo_id}
     )
 
 
@@ -211,7 +226,10 @@ def promotion_list_view(request):
 def promotion_form_view(request, pk=None):
     promotion = get_object_or_404(models.Promotion, pk=pk) if pk else None
     media_context = {}
+    instance_seo_id = None
     if promotion:
+        if promotion.seo:
+            instance_seo_id = promotion.seo.id
         media_context = {'main_image': models.Promotion.get_absolute_image(promotion),
                          'image1': models.Promotion.get_image1(promotion),
                          'image2': models.Promotion.get_image2(promotion),
@@ -225,7 +243,8 @@ def promotion_form_view(request, pk=None):
         form_class=forms.PromotionForm,
         redirect_url_name='admin_promotion_list',
         template_file_name='adminLte/promotion/promotion_form.html',
-        media_context=media_context
+        media_context=media_context,
+        context={'instance_seo_id': instance_seo_id}
     )
 
 
@@ -248,78 +267,120 @@ def pages_list_view(request):
 
 def main_pages_view(request):
     solo: models.MainPage = models.MainPage.get_solo()
+    instance_seo_id = None
+    if solo:
+        if solo.seo:
+            instance_seo_id = solo.seo.id
+
     return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.MainPageForm,
         redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/main_page.html',
+        context={'instance_seo_id': instance_seo_id}
     )
 
 
 def about_cinema_view(request):
     solo: models.AboutCinema = models.AboutCinema.get_solo()
+    instance_seo_id = None
+    if solo:
+        if solo.seo:
+            instance_seo_id = solo.seo.id
+
     return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.AboutCinemaForm,
         redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/about_cinema.html',
+        context={'instance_seo_id': instance_seo_id}
     )
 
 
 def cafe_bar_view(request):
     solo: models.CafeBar = models.CafeBar.get_solo()
+    instance_seo_id = None
+    if solo:
+        if solo.seo:
+            instance_seo_id = solo.seo.id
+
     return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.CafeBarForm,
         redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/cafe_bar.html',
+        context={'instance_seo_id': instance_seo_id}
     )
 
 
 def vip_hall_view(request):
     solo: models.VipHall = models.VipHall.get_solo()
+    instance_seo_id = None
+    if solo:
+        if solo.seo:
+            instance_seo_id = solo.seo.id
+
     return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.VipHallForm,
         redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/vip_room.html',
+        context={'instance_seo_id': instance_seo_id}
     )
 
 
 def ads_view(request):
     solo: models.Advertising = models.Advertising.get_solo()
+    instance_seo_id = None
+    if solo:
+        if solo.seo:
+            instance_seo_id = solo.seo.id
+
     return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.AdvertisingForm,
         redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/ads.html',
+        context={'instance_seo_id': instance_seo_id}
     )
 
 
 def child_room_view(request):
     solo: models.ChildRoom = models.ChildRoom.get_solo()
+    instance_seo_id = None
+    if solo:
+        if solo.seo:
+            instance_seo_id = solo.seo.id
+
     return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.ChildRoomForm,
         redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/child_room.html',
+        context={'instance_seo_id': instance_seo_id}
     )
 
 
 def mobile_app_view(request):
     solo: models.MobileApp = models.MobileApp.get_solo()
+    instance_seo_id = None
+    if solo:
+        if solo.seo:
+            instance_seo_id = solo.seo.id
+
     return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.MobileAppForm,
         redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/mobile_app.html',
+        context={'instance_seo_id': instance_seo_id}
     )
 
 
@@ -330,12 +391,18 @@ def contact_list_view(request):
 
 def contact_form_view(request, pk=None):
     contact = get_object_or_404(models.Contact, pk=pk) if pk else None
+    instance_seo_id = None
+    if contact:
+        if contact.seo:
+            instance_seo_id = contact.seo.id
+
     return utils.form_template(
         request=request,
         instance=contact,
         form_class=forms.ContactForm,
         redirect_url_name='admin_index',
         template_file_name='adminLte/pages/contact_form.html',
+        context={'instance_seo_id': instance_seo_id}
     )
 
 
@@ -458,3 +525,16 @@ def background_banner_form_view(request):
         template_file_name='adminLte/banner/background_banner_form.html',
         media_context=media_context
     )
+
+
+def seo_form_view_decorator(redirect_to):
+    def seo_form_view(request, pk):
+        seo = get_object_or_404(models.SEO, pk=pk) if pk else None
+        return utils.form_template(
+            request=request,
+            instance=(seo if seo else models.SEO),
+            form_class=forms.SEOForm,
+            redirect_url_name=redirect_to,
+            template_file_name='adminLte/seo_form.html',
+        )
+    return seo_form_view
