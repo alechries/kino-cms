@@ -27,11 +27,15 @@
                         <label for="RoomTextInput"><h4>Описание детской комнаты</h4></label>
                         {{ form.room_description }}
                     </div>
-                    <div class="form-group">
-                        <label for="RoomMainImage"><h4>Главная картинка</h4></label>
-                        <div class="fileUpload btn btn-secondary">
-                            <span>Загрузить</span>
-                            {{ form.room_main_image }}
+                    <label><h4>Главная картинка</h4></label>
+                    <div class="card col-md-2">
+                        <div class="card-body" style="padding: 0px">
+                            <div class="form-group">
+                                <div class="fileUpload btn btn-secondary">
+                                    <span>Загрузить</span>
+                                    {{ form.room_main_image }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <label for="RoomGallery"><h4>Галерея картинок</h4></label>

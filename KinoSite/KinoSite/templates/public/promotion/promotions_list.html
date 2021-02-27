@@ -1,6 +1,8 @@
 {% extends 'public/base.html' %}
 {% block content %}
 <h1 style="text-align: center; margin-top: 30px">Акции и скидки</h1>
+<div class="container" style="margin-top: 10px">
+
 {% for el in promo_banners %}
 <img src="{{ el.promo_main_image.url }}" style="max-height: 500px; max-width: 100%">
 {% endfor %}
@@ -11,11 +13,12 @@
                 <p><a href="{% url 'promotion_details' pk=el.pk %}"><img src="{{ el.promo_main_image.url }}" class="card-img-top" alt="film_image" height="340"></a></p>
                 <div class="card-body" style="padding: 0px;">
                     <h5 class="card-title" style="text-align: center">{{ el.promo_name }}</h5>
-                    <p>{{ el.promo_description }}</p>
+                    <p>{{ el.promo_description | safe }}</p>
                 </div>
             </div>
             {% endfor %}
         </div>
 
     </div>
+</div>
 {% endblock %}

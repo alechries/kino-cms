@@ -27,11 +27,15 @@
                         <label for="TextInput"><h4>Описание мобильного приложение</h4></label>
                         {{ form.app_description }}
                     </div>
-                    <div class="form-group">
-                        <label for="Poster"><h4>Главная картинка</h4></label>
-                        <div class="fileUpload btn btn-secondary">
-                            <span>Загрузить</span>
-                            {{ form.app_main_image }}
+                    <label><h4>Главная картинка</h4></label>
+                    <div class="card col-md-2">
+                        <div class="card-body" style="padding: 0px">
+                            <div class="form-group">
+                                <div class="fileUpload btn btn-secondary">
+                                    <span>Загрузить</span>
+                                    {{ form.app_main_image }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <label for="Gallery"><h4>Галерея картинок</h4></label>

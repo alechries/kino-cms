@@ -27,11 +27,15 @@
                         <label for="AboutTextInput"><h4>Описание сети кинотеатров</h4></label>
                         {{ form.cinema_description }}
                     </div>
-                    <div class="form-group">
-                        <label for="AboutMainImage"><h4>Главная картинка</h4></label>
-                        <div class="fileUpload btn btn-secondary">
-                           <span>Загрузить</span>
-                            {{ form.cinema_main_image }}
+                    <labe><h4>Главная картинка</h4></label>
+                    <div class="card col-md-2">
+                        <div class="card-body" style="padding: 0px">
+                            <div class="form-group">
+                                <div class="fileUpload btn btn-secondary">
+                                   <span>Загрузить</span>
+                                    {{ form.cinema_main_image }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <label for="AboutGallery"><h4>Галерея картинок</h4></label>
