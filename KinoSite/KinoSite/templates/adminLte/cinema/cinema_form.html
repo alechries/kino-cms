@@ -121,6 +121,14 @@
                                 </div>
                             </div>
                         </div>
+                    <label><h4>SEO</h4></label>
+                    <div class="col-md-3">
+                        {% if instance_seo_id %}
+                        <a href="{% url 'admin_seo' pk=instance_seo_id%}" class="btn btn-secondary">Настроить</a>
+                        {% else %}
+                        В данный момент нельзя настроить SEO. Сохраните изменения и попробуйте снова.
+                        {% endif %}
+                    </div>
                     <!-- Ввод слаг-филда
                     <div class="col-lg-4 my-3 pl-0">
                         <label for="SlugName"><h4>Отображение ссылки</h4></label>

@@ -11,6 +11,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.validators import UnicodeUsernameValidator
+from abc import ABC, abstractmethod
 
 
 ############################################################
@@ -51,9 +52,9 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 
 
 class SEO(models.Model):
-    seo_title = models.CharField(verbose_name='Title', max_length=255)
-    seo_keywords = models.CharField(verbose_name='Keywords', max_length=255)
-    seo_description = models.TextField(verbose_name='Description')
+    seo_title = models.TextField(verbose_name='Title', max_length=255, null=True)
+    seo_keywords = models.TextField(verbose_name='Keywords', max_length=255, null=True)
+    seo_description = models.TextField(verbose_name='Description', max_length=255, null=True)
 
     def __str__(self):
         return self.seo_title
@@ -150,7 +151,7 @@ class User(CustomAbstractUser):
     card_number = models.CharField(verbose_name='Номер карты', max_length=255)
     language = models.CharField(verbose_name='Язык', max_length=1, choices=LANGUAGE, default=R)
     gender = models.CharField(verbose_name='Пол', max_length=1, choices=GENDER, default=M)
-    city = models.CharField(verbose_name='', choices=CITY, max_length=4) #пустой вербоус нейм, конфликт с crispy forms
+    city = models.CharField(verbose_name='', choices=CITY, max_length=4)  # пустой вербоус нейм, конфликт с crispy forms
     date_of_birth = models.DateField(verbose_name='Дата рождения', null=True)
 
     def __str__(self):
@@ -169,6 +170,11 @@ class Cinema(models.Model):
     cinema_image4 = models.ImageField('Четвёртое изображение', upload_to='images/cinema/')
     cinema_image5 = models.ImageField('Пятое изображение', upload_to='images/cinema/')
     seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок', null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.seo:
+            self.seo = SEO.objects.create()
+        super(Cinema, self).save(*args, **kwargs)
 
     def get_logo_image(self):
         return os.path.join('/media', self.cinema_logo.name)
@@ -195,11 +201,13 @@ class Cinema(models.Model):
         return self.cinema_name
 
     def file_list(self):
-        return [self.cinema_logo, self.cinema_upper_banner, self.cinema_image1, self.cinema_image2, self.cinema_image3, self.cinema_image4, self.cinema_image5]
+        return [self.cinema_logo, self.cinema_upper_banner, self.cinema_image1, self.cinema_image2, self.cinema_image3,
+                self.cinema_image4, self.cinema_image5]
 
 
 class CinemaHall(models.Model):
-    cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, verbose_name='')  # пустой verbose_name, конфликт с crispy forms
+    cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE,
+                               verbose_name='')  # пустой verbose_name, конфликт с crispy forms
     hall_name = models.CharField(max_length=255, verbose_name='')
     hall_description = models.TextField(verbose_name='Описание зала', blank=True)
     cinema_scheme = models.ImageField(verbose_name='Схема кинотеатра', upload_to='images/hall/logo/')
@@ -211,6 +219,11 @@ class CinemaHall(models.Model):
     hall_image5 = models.ImageField('Пятое изображение', upload_to='images/hall/')
     hall_scheme = models.ImageField(verbose_name='Схема зала', upload_to='images/hall/logo/')
     seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок', null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.seo:
+            self.seo = SEO.objects.create()
+        super(CinemaHall, self).save(*args, **kwargs)
 
     def get_scheme(self):
         return os.path.join('/media', self.hall_scheme.name)
@@ -233,12 +246,12 @@ class CinemaHall(models.Model):
     def get_image5(self):
         return os.path.join('/media', self.hall_image5.name)
 
-
     def __str__(self):
         return self.hall_name
 
     def file_list(self):
-        return [self.hall_upper_banner, self.hall_image1, self.hall_image2, self.hall_image3, self.hall_image4, self.hall_image5, self.hall_scheme]
+        return [self.hall_upper_banner, self.hall_image1, self.hall_image2, self.hall_image3, self.hall_image4,
+                self.hall_image5, self.hall_scheme]
 
 
 class Film(models.Model):
@@ -250,7 +263,7 @@ class Film(models.Model):
     TYPE = (
         ('Аниме', 'Аниме'),
         ('Мультфильм', 'Мультфильм'),
-        ('Фильм','Фильм')
+        ('Фильм', 'Фильм')
     )
 
     title = models.CharField('Название фильма', max_length=255)
@@ -268,11 +281,16 @@ class Film(models.Model):
     two_d = models.BooleanField('2Д', null=False)
     three_d = models.BooleanField('3Д', null=False)
     i_max = models.BooleanField('I_MAX', null=False)
-    duration = models.CharField('Длительность фильма', max_length=55)
+    duration = models.FloatField('Длительность фильма')
     first_night = models.DateField('Дата премьеры')
     language = models.CharField('', choices=LANGUAGE, max_length=55, null=True)
     type = models.CharField('', choices=TYPE, max_length=55, null=True)
     seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок', null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.seo:
+            self.seo = SEO.objects.create()
+        super(Film, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -327,8 +345,15 @@ class News(models.Model):
     news_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/news/')
     news_url = models.URLField(verbose_name='Ссылка на видео', null=True)
     news_published_date = models.DateField(verbose_name='Дата публикации новости')
-    news_status = models.CharField(verbose_name='', max_length=3, choices=STATUS) #пустой вербоус нейм, конфликт с crispy forms
+    news_status = models.CharField(verbose_name='', max_length=3,
+                                   choices=STATUS)  # пустой вербоус нейм, конфликт с crispy forms
     seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок', null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.seo:
+            self.seo = SEO.objects.create()
+        super(News, self).save(*args, **kwargs)
+
 
     def __str__(self):
         return self.news_name
@@ -355,7 +380,8 @@ class News(models.Model):
         return f'news/list'
 
     def file_list(self):
-        return [self.news_main_image, self.news_image1, self.news_image2, self.news_image3, self.news_image4, self.news_image5]
+        return [self.news_main_image, self.news_image1, self.news_image2, self.news_image3, self.news_image4,
+                self.news_image5]
 
 
 class Promotion(models.Model):
@@ -374,7 +400,8 @@ class Promotion(models.Model):
     promo_image5 = models.ImageField(verbose_name='Пятое изображение', upload_to='images/promotion/')
     promo_url = models.URLField(verbose_name='Ссылка на акцию', null=True)
     promo_published_date = models.DateField(verbose_name='Дата публикации акции')
-    promo_status = models.CharField(verbose_name='',  max_length=3, choices=STATUS) #пустой вербоус нейм, конфликт с crispy forms
+    promo_status = models.CharField(verbose_name='', max_length=3,
+                                    choices=STATUS)  # пустой вербоус нейм, конфликт с crispy forms
     seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок', null=True)
 
     def __str__(self):
@@ -399,7 +426,8 @@ class Promotion(models.Model):
         return os.path.join('/media', self.promo_image5.name)
 
     def file_list(self):
-        return [self.promo_main_image, self.promo_image1, self.promo_image2, self.promo_image3, self.promo_image4, self.promo_image5]
+        return [self.promo_main_image, self.promo_image1, self.promo_image2, self.promo_image3, self.promo_image4,
+                self.promo_image5]
 
 
 class MainPage(SingletonModel):
@@ -413,6 +441,11 @@ class MainPage(SingletonModel):
     tel_number2 = models.CharField(verbose_name='Номер телефона', null=True, max_length=155)
     created_date = models.DateField(default=timezone.now)
     seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок', null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.seo:
+            self.seo = SEO.objects.create()
+        super(MainPage, self).save(*args, **kwargs)
 
 
 class AboutCinema(SingletonModel):
@@ -434,6 +467,11 @@ class AboutCinema(SingletonModel):
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
     seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок', null=True)
 
+    def save(self, *args, **kwargs):
+        if not self.seo:
+            self.seo = SEO.objects.create()
+        super(AboutCinema, self).save(*args, **kwargs)
+
     def get_absolute_image(self):
         return os.path.join('/media', self.cinema_main_image.name)
 
@@ -453,7 +491,8 @@ class AboutCinema(SingletonModel):
         return os.path.join('/media', self.cinema_image5.name)
 
     def file_list(self):
-        return [self.cinema_main_image, self.cinema_image1, self.cinema_image2, self.cinema_image3, self.cinema_image4, self.cinema_image5]
+        return [self.cinema_main_image, self.cinema_image1, self.cinema_image2, self.cinema_image3, self.cinema_image4,
+                self.cinema_image5]
 
     def __str__(self):
         return self.cinema_name
@@ -477,6 +516,11 @@ class CafeBar(SingletonModel):
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
     seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок', null=True)
 
+    def save(self, *args, **kwargs):
+        if not self.seo:
+            self.seo = SEO.objects.create()
+        super(CafeBar, self).save(*args, **kwargs)
+
     def get_absolute_image(self):
         return os.path.join('/media', self.cafebar_main_image.name)
 
@@ -496,7 +540,8 @@ class CafeBar(SingletonModel):
         return os.path.join('/media', self.cafebar_image5.name)
 
     def file_list(self):
-        return [self.cafebar_main_image, self.cafebar_image1, self.cafebar_image2, self.cafebar_image3, self.cafebar_image4, self.cafebar_image5]
+        return [self.cafebar_main_image, self.cafebar_image1, self.cafebar_image2, self.cafebar_image3,
+                self.cafebar_image4, self.cafebar_image5]
 
     def __str__(self):
         return self.cafebar_name
@@ -521,6 +566,11 @@ class VipHall(SingletonModel):
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
     seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок', null=True)
 
+    def save(self, *args, **kwargs):
+        if not self.seo:
+            self.seo = SEO.objects.create()
+        super(VipHall, self).save(*args, **kwargs)
+
     def get_absolute_image(self):
         return os.path.join('/media', self.hall_main_image.name)
 
@@ -540,7 +590,8 @@ class VipHall(SingletonModel):
         return os.path.join('/media', self.hall_image5.name)
 
     def file_list(self):
-        return [self.hall_main_image, self.hall_image1, self.hall_image2, self.hall_image3, self.hall_image4, self.hall_image5]
+        return [self.hall_main_image, self.hall_image1, self.hall_image2, self.hall_image3, self.hall_image4,
+                self.hall_image5]
 
     def __str__(self):
         return self.hall_name
@@ -565,6 +616,11 @@ class Advertising(SingletonModel):
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
     seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок', null=True)
 
+    def save(self, *args, **kwargs):
+        if not self.seo:
+            self.seo = SEO.objects.create()
+        super(Advertising, self).save(*args, **kwargs)
+
     def get_absolute_image(self):
         return os.path.join('/media', self.adv_main_image.name)
 
@@ -584,7 +640,8 @@ class Advertising(SingletonModel):
         return os.path.join('/media', self.adv_image5.name)
 
     def file_list(self):
-        return [self.adv_main_image, self.adv_image1, self.adv_image2, self.adv_image3, self.adv_image4, self.adv_image5]
+        return [self.adv_main_image, self.adv_image1, self.adv_image2, self.adv_image3, self.adv_image4,
+                self.adv_image5]
 
     def __str__(self):
         return self.adv_name
@@ -609,8 +666,14 @@ class ChildRoom(SingletonModel):
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
     seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок', null=True)
 
+    def save(self, *args, **kwargs):
+        if not self.seo:
+            self.seo = SEO.objects.create()
+        super(ChildRoom, self).save(*args, **kwargs)
+
     def file_list(self):
-        return [self.room_main_image, self.room_image1, self.room_image1, self.room_image2, self.room_image3, self.room_image4, self.room_image5]
+        return [self.room_main_image, self.room_image1, self.room_image1, self.room_image2, self.room_image3,
+                self.room_image4, self.room_image5]
 
     def __str__(self):
         return self.room_name
@@ -623,12 +686,18 @@ class Contact(models.Model):
     )
 
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
-    contact_cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, verbose_name='', null=True)  # пустой verbose_name, конфликт с crispy forms
+    contact_cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, verbose_name='',
+                                       null=True)  # пустой verbose_name, конфликт с crispy forms
     contact_address = models.TextField(verbose_name='Адрес кинотеатра', blank=True)
     contact_location = models.CharField(verbose_name='Координаты для карты', max_length=255)
     contact_logo = models.ImageField(verbose_name='Лого', upload_to='images/contact/logo/')
     created_date = models.DateField(default=timezone.now)
     seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок', null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.seo:
+            self.seo = SEO.objects.create()
+        super(Contact, self).save(*args, **kwargs)
 
     def get_absolute_image(self):
         return os.path.join('/media', self.contact_logo.name)
@@ -641,7 +710,6 @@ class Contact(models.Model):
 
 
 class MainSlide(models.Model):
-
     slide_text = models.TextField(verbose_name='Текст слайда')
     slide_image = models.ImageField(verbose_name='Изображение слайда', upload_to='images/main_slide/')
     slide_url = models.URLField(verbose_name='Ссылка слайда')
@@ -649,7 +717,6 @@ class MainSlide(models.Model):
 
     def get_absolute_image(self):
         return os.path.join('/media', self.slide_image.name)
-
 
     def file_list(self):
         return [self.slide_image, ]
@@ -696,7 +763,8 @@ class MobileApp(SingletonModel):
     status = models.CharField(verbose_name='', max_length=3, choices=STATUS, null=True)
     app_name = models.CharField(max_length=255, verbose_name='Название мобильного приложения')
     app_description = models.TextField(verbose_name='Описание мобильного приложения', blank=True)
-    app_main_image = models.ImageField(verbose_name='Логотип мобильного приложения', upload_to='images/mobile_app/logo/')
+    app_main_image = models.ImageField(verbose_name='Логотип мобильного приложения',
+                                       upload_to='images/mobile_app/logo/')
     app_image1 = models.ImageField(verbose_name='Первое изображение', upload_to='images/mobile_app/')
     app_image2 = models.ImageField(verbose_name='Второе изображение', upload_to='images/mobile_app/')
     app_image3 = models.ImageField(verbose_name='Третее изображение', upload_to='images/mobile_app/')
@@ -706,6 +774,11 @@ class MobileApp(SingletonModel):
     app_apple = models.URLField(verbose_name='Ссылка на IOS-приложение', null=True)
     created_date = models.DateField(default=timezone.now)
     seo = models.ForeignKey(SEO, on_delete=models.CASCADE, verbose_name='SEO блок', null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.seo:
+            self.seo = SEO.objects.create()
+        super(MobileApp, self).save(*args, **kwargs)
 
     def get_absolute_image(self):
         return os.path.join('/media', self.app_main_image.name)
@@ -726,7 +799,8 @@ class MobileApp(SingletonModel):
         return os.path.join('/media', self.app_image5.name)
 
     def file_list(self):
-        return [self.app_main_image, self.app_image1, self.app_image1, self.app_image2, self.app_image3, self.app_image4, self.app_image5]
+        return [self.app_main_image, self.app_image1, self.app_image1, self.app_image2, self.app_image3,
+                self.app_image4, self.app_image5]
 
     def __str__(self):
         return self.app_name

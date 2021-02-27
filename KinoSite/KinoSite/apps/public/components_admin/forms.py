@@ -3,10 +3,37 @@ from django.forms import Form, ModelForm, TextInput, DateInput, FileInput, URLIn
     EmailField, CharField, PasswordInput, ImageField, ModelChoiceField, URLField, ChoiceField, TimeField, BooleanField, RadioSelect, NumberInput, \
     TimeInput
 
+
 from easy_maps.widgets import AddressWithMapWidget
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from crispy_forms.helper import FormHelper
+
+
+class SEOForm(ModelForm):
+    class Meta:
+        model = models.SEO
+        fields = ['seo_title', 'seo_keywords', 'seo_description']
+        widgets = {
+            'seo_title': Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите заголовок',
+                'rows': '5',
+                'id': 'TitleInput',
+            }),
+            'seo_keywords': Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите ключевые слова',
+                'rows': '5',
+                'id': 'KeywordsInput',
+            }),
+            'seo_description': Textarea(attrs={
+                'class': 'form-control',
+                'id': 'DescriptionInput',
+                'rows': '5',
+                'placeholder': 'Введите описание',
+            }),
+        }
 
 
 class FilmForm(ModelForm):
@@ -86,8 +113,9 @@ class FilmForm(ModelForm):
             }),
             'duration': TextInput(attrs={
                 'class': 'form-control col-md-7',
-                'placeholder': 'Пример: 1 час 53 минуты',
-                'type': 'time',
+                'placeholder': 'Пример: 1.53',
+                'type': "number",
+                'step': "0.01",
                 'id': 'FilmDuration',
             }),
 
