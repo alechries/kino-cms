@@ -308,6 +308,7 @@ class FilmSession(models.Model):
     date = models.DateField('Дата сеанса', null=True)
     time = models.TimeField('Время сеанса', null=True)
     price = models.IntegerField('Стоимость', null=True)
+    vip_price = models.IntegerField('Стоимость вип билета', null=True)
 
 
 class News(models.Model):

@@ -106,7 +106,7 @@ class SessionForm(ModelForm):
         model = models.FilmSession
         hall = ModelChoiceField(queryset=models.CinemaHall.objects.all(),  empty_label=None, to_field_name="hall")
         film = ModelChoiceField(queryset=models.Film.objects.all(),  empty_label=None, to_field_name="film")
-        fields = ['hall', 'date', 'time', 'film', 'price']
+        fields = ['hall', 'date', 'time', 'film', 'price', 'vip_price']
         widgets= {
             'date': DateInput(format=('%Y-%m-%d'), attrs={
                 'type': "date",
@@ -125,6 +125,11 @@ class SessionForm(ModelForm):
                 'class': "form-control",
                 'id': "FilmSessionPrice",
             }),
+            'vip_price': NumberInput(attrs={
+                'placeholder': "Введите стоимость показа в вип-зале",
+                'class': "form-control",
+            }),
+
         }
 
 
