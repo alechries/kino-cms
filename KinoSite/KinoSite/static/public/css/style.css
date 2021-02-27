@@ -58,3 +58,24 @@ hr {
     color: white !important;
     border: 1px solid rgb(0 0 0);
 }
+
+.icon-google {
+    fill: white;
+}
+.icon-google:hover {
+    fill: #EA4335;
+}
+
+.icon-facebook {
+    fill: white;
+}
+.icon-facebook:hover {
+    fill: #4267B2;
+}
+
+.icon-twitter {
+    fill: white;
+}
+.icon-twitter:hover {
+    fill: rgb(0, 172, 238);
+}
