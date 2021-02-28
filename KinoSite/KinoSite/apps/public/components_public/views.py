@@ -130,6 +130,7 @@ def posters_films_details_view(request, pk):
 
 def timetable_films_sessions_list_view(request):
     context = {
+        'background_banner': models.BackgroundBanner.get_solo(),
         # 'sessions': models.FilmSession.objects.filter(date=datetime.date.today())
         'sessions': models.FilmSession.objects.all(),
         'link': models.MobileApp.get_solo()
