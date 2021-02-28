@@ -16,19 +16,22 @@
 <div class="row">
     <div class="col-lg-5 col-6">
         <!-- small card -->
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>{{ films_was_count }}</h3>
-                <p>Фильмы в прокате</p>
+        <a href="{% url 'admin_film_list' %}">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ films_was_count }}</h3>
+                    <p>Фильмы в прокате</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-film"></i>
+                </div>
             </div>
-            <div class="icon">
-                <i class="fas fa-film"></i>
-            </div>
-        </div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-5 col-6">
         <!-- small card -->
+        <a href="{% url 'admin_film_list' %}">
         <div class="small-box bg-info">
             <div class="inner">
                 <h3>{{ films_will_count }}</h3>
@@ -38,10 +41,12 @@
                 <i class="fas fa-film"></i>
             </div>
         </div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-5 col-6">
         <!-- small card -->
+        <a href="{% url 'admin_cinema_list' %}">
         <div class="small-box bg-success">
             <div class="inner">
                 <h3>{{ cinema_count }}</h3>
@@ -51,10 +56,12 @@
                 <i class="ion fa-video"></i>
             </div>
         </div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-5 col-6">
         <!-- small card -->
+        <a href="{% url 'admin_cinema_list' %}">
         <div class="small-box bg-success">
             <div class="inner">
                 <h3>{{ cinema_hall_count }}</h3>
@@ -64,10 +71,12 @@
                 <i class="fas fa-video"></i>
             </div>
         </div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-5 col-6">
         <!-- small card -->
+        <a href="{% url 'admin_news_list' %}">
         <div class="small-box bg-danger">
             <div class="inner">
                 <h3>{{ news_was_count }}</h3>
@@ -77,10 +86,12 @@
                 <i class="fas fa-newspaper"></i>
             </div>
         </div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-5 col-6">
         <!-- small card -->
+        <a href="{% url 'admin_news_list' %}">
         <div class="small-box bg-danger">
             <div class="inner">
                 <h3>{{ news_will_count }}</h3>
@@ -90,10 +101,12 @@
                 <i class="fas fa-newspaper"></i>
             </div>
         </div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-5 col-6">
         <!-- small card -->
+        <a href="{% url 'admin_promotion_list' %}">
         <div class="small-box bg-danger">
             <div class="inner">
                 <h3>{{ promo_count }}</h3>
@@ -103,10 +116,12 @@
                 <i class="fas fa-percent"></i>
             </div>
         </div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-5 col-6">
         <!-- small card -->
+        <a href="{% url 'admin_users_list' %}">
         <div class="small-box bg-warning">
             <div class="inner">
                 <h3>{{ user_count }}</h3>
@@ -116,6 +131,7 @@
                 <i class="fas fa-users"></i>
             </div>
         </div>
+        </a>
     </div>
 </div>
 <!-- /.row -->

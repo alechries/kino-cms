@@ -68,13 +68,13 @@
                         </div>
                     </div>
                     <div class="row">
-                         <div class="col" style="margin-right: 30px">
-                             <div class="col-md-10">
-                                 <label for="InputUsername">Псевдоним</label>
-                                 {{form.username}}
-                             </div>
-                         </div>
-                         <div class="col" style="margin-right: 30px">
+                         <div class="col" style="margin-right: 30px; margin-top: 20px;">
+                            <div class="col-md-10">
+                                <label for="InputEmail">Email</label>
+                                {{form.email}}
+                            </div>
+                        </div>
+                         <div class="col" style="margin-right: 30px; margin-top: 20px;">
                              <div class="col-md-10">
                                  <label for="InputPhone">Телефон</label>
                                  {{ form.phone }}
@@ -82,13 +82,13 @@
                          </div>
                     </div>
                     <div class="row">
-                         <div class="col" style="margin-right: 30px">
-                            <div class="col-md-10">
-                                <label for="InputEmail">Email</label>
-                                {{form.email}}
-                            </div>
-                        </div>
-                        <div class="col" style="margin-right: 30px">
+                         <div class="col" style="margin-right: 30px; margin-top: 20px;">
+                             <div class="col-md-10">
+                                 <label for="InputAddress">Адрес</label>
+                                 {{form.address}}
+                             </div>
+                         </div>
+                        <div class="col" style="margin-right: 30px; margin-top: 20px;">
                             <div class="col-md-10">
                                 <label for="InputDate">Дата рождения</label>
                                 {{form.date_of_birth}}
@@ -96,21 +96,7 @@
                         </div>
                     </div>
                     <div class="row">
-                         <div class="col" style="margin-right: 30px">
-                             <div class="col-md-10">
-                                 <label for="InputAddress">Адрес</label>
-                                 {{form.address}}
-                             </div>
-                         </div>
-                         <div class="col" style="margin-right: 30px">
-                             <div class="col-md-10">
-                                 <label for="InputCity">Город</label><br/>
-                                 {{form.city|as_crispy_field}}
-                             </div>
-                         </div>
-                    </div>
-                    <div class="row">
-                         <div class="col" style="margin-right: 30px">
+                         <div class="col" style="margin-right: 30px; margin-top: 20px;">
                              <div class="col-md-10">
                                  <label for="InputPassword">Пароль</label><br/>
                                  {% if user_pk %}
@@ -123,16 +109,22 @@
                                  {% endif %}
                              </div>
                          </div>
-                         <div class="col" style="margin-right: 30px">
+                         <div class="col" style="margin-right: 30px; margin-top: 20px;">
                              <div class="col-md-10">
+                                 <label for="InputCity">Город</label><br/>
+                                 {{form.city|as_crispy_field}}
                              </div>
                          </div>
                     </div>
                     <div class="row">
-                         <div class="col-6">
-                             <div class="col-md-10">
+                         <div class="col">
+                             <div class="col" style="margin-right: 30px; margin-top: 20px;">
                                  <label for="InputCardNumber">Номер карты</label>
                                  {{form.card_number}}
+                             </div>
+                         </div>
+                         <div class="col" style="margin-right: 30px; margin-top: 20px;">
+                             <div class="col-md-10">
                              </div>
                          </div>
                     </div>
