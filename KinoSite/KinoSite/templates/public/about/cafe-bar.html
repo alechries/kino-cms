@@ -3,7 +3,9 @@
 <img src="{{ cafe.cafebar_main_image.url }}" style="max-height: 500px; max-width: 100%">
 <div class="container">
     <h1 style="text-align: center; margin-top: 30px">Кафе-бар</h1>
-    <p>{{ cafe.cafebar_description | safe }}</p>
+    <div class="about-text-area">
+        <p>{{ cafe.cafebar_description | safe }}</p>
+    </div>
     <h2 style="text-align: center; margin-top: 30px">Фотогалерея</h2>
 </div>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 480px; width: 100%;">

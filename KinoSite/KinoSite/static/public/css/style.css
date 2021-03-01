@@ -93,3 +93,8 @@ hr {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.about-text-area {
+    margin-left: 15%;
+    margin-right: 15%;
+}
