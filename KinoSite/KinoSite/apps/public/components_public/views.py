@@ -10,29 +10,27 @@ def index_view(request):
     background_banner = models.BackgroundBanner.get_solo()
     films_today = models.Film.objects.filter(first_night__lte=now)
     promo_banners = models.NewsPromoSlide.objects.all()
-    n = models.Film.objects.all().count()
     telephone = models.MainPage.get_solo()
-    first_film_now = {}
-    if n > 1:
-        film_now = models.Film.objects.all()[1:n]
-        first_film_now = models.Film.objects.all()[0]
-    elif n == 1:
-        film_now = models.Film.objects.all()
-        first_film_now = models.Film.objects.all()[0]
-    else:
-        film_now = models.Film.objects.all()
     future_film = models.Film.objects.filter(first_night__gt=now)
+    n =models.Film.objects.all().count()
+    if n <= 6:
+        films = models.Film.objects.all()
+    else:
+        films = models.Film.objects.all()[:6]
     link = models.MobileApp.get_solo()
-
+    ads = {}
+    row = models.Advertising.get_solo()
+    if row.adv_name:
+        ads = row
     return render(request, 'public/index.html', {'background_banner': background_banner,
                                                  'telephone': telephone,
                                                  'films_today': films_today,
                                                  'future_film': future_film,
                                                  'date_now': full_date_now,
                                                  'promo_banners': promo_banners,
-                                                 'film_now': film_now,
-                                                 'first_film_now': first_film_now,
                                                  'link': link,
+                                                 'films':films,
+                                                 'ads':ads,
                                                  })
 
 
@@ -73,7 +71,8 @@ def account_login_view_decorator(redirect_to):
                 _message = 'Data is incorrect'
         else:
             _message = 'Please, Sign in'
-        return render(request, 'public/account/login.html', {'form': g_forms.LoginForm(), 'message': _message})
+        return render(request, 'public/account/login.html', {'form': g_forms.LoginForm(), 'message': _message,
+                                                             'background_banner': models.BackgroundBanner.get_solo()})
     return account_login_view
 
 

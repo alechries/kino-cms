@@ -804,3 +804,18 @@ class MobileApp(SingletonModel):
 
     def __str__(self):
         return self.app_name
+
+
+class ContextualAdvertising(SingletonModel):
+    link = models.URLField('Ссылка рекламы', null=True)
+    horizontal_adv = models.ImageField('Горизонтальная реклама', upload_to='images/ContextualAdvertising/')
+    vertical_adv = models.ImageField('Вертикальная реклама', upload_to='images/ContextualAdvertising/')
+
+    def get_horizontal_img(self):
+        return os.path.join('/media', self.horizontal_adv.name)
+
+    def get_vertical_img(self):
+        return os.path.join('/media', self.vertical_adv.name)
+
+    def __str__(self):
+        return self.link

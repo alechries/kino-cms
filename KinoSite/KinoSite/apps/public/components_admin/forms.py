@@ -726,3 +726,23 @@ class MobileAppForm(ModelForm):
             }),
 
         }
+
+class ContextualAdvertisingForm(ModelForm):
+    class Meta:
+        model = models.ContextualAdvertising
+        fields = ['link', 'horizontal_adv', 'vertical_adv']
+
+        widgets = {
+            'link': URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите ссылку рекламы',
+            }),
+            'horizontal_adv': FileInput(attrs={
+                'class': 'upload',
+            }),
+            'vertical_adv': Textarea(attrs={
+                'class': "form-control",
+                'rows': '5',
+            }),
+
+        }
