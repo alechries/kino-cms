@@ -538,3 +538,15 @@ def seo_form_view_decorator(redirect_to):
             template_file_name='adminLte/seo_form.html',
         )
     return seo_form_view
+
+def contextual_advertising_form_view(request):
+    solo: models.ContextualAdvertising = models.ContextualAdvertising.get_solo()
+    media_context = {'horizontal_adv': models.ContextualAdvertising.get_horizontal_img(solo)}
+    return utils.form_template(
+        request=request,
+        instance=solo,
+        form_class=forms.ContextualAdvertisingForm,
+        redirect_url_name='admin_banner_list',
+        template_file_name='adminLte/banner/contextual_adv_view.html',
+        media_context=media_context
+    )
