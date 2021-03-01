@@ -18,29 +18,27 @@
             <div class="container">
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <div class="form-group">
+                        <label><h4>Рекламная ссылка</h4></label>
+                        {{ form.link }}
+                    </div>
                     <div class="card col-md-4">
                         <div class="form-group">
-                            {% if slide_image %}
-                                <img src="{{ slide_image }}" class="card-img-top" alt="film_image" style="padding-top: 7px;">
-                            {% endif %}
-                            <label for="MainSlideImage"><h4>Изображение слайда</h4></label>
+                            <label><h4>Горизонтальная реклама</h4></label>
                             <div class="fileUpload btn btn-secondary">
                                 <span>Загрузить</span>
-                                {{ form.slide_image }}
+                                {{ form.horizontal_adv }}
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="MainSlideURL"><h4>Ссылка слайда</h4></label>
-                        {{ form.slide_url }}
-                    </div>
-                    <div class="form-group">
-                        <label for="MainSlideText"><h4>Текст слайда</h4></label>
-                        {{ form.slide_text }}
-                    </div>
-                    <div class="form-group">
-                        <label for="NewsPromoNumber"><h4>Скорость вращения (сек)</h4></label>
-                        {{ form.slide_timer }}
+                    <div class="card col-md-4">
+                        <div class="form-group">
+                            <label><h4>Вертикальная реклама</h4></label>
+                            <div class="fileUpload btn btn-secondary">
+                                <span>Загрузить</span>
+                                {{ form.vertical_adv }}
+                            </div>
+                        </div>
                     </div>
                     <!-- Ввод слаг-филда
                     <div class="col-lg-4 my-3 pl-0">

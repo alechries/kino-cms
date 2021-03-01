@@ -727,6 +727,7 @@ class MobileAppForm(ModelForm):
 
         }
 
+
 class ContextualAdvertisingForm(ModelForm):
     class Meta:
         model = models.ContextualAdvertising
@@ -740,9 +741,8 @@ class ContextualAdvertisingForm(ModelForm):
             'horizontal_adv': FileInput(attrs={
                 'class': 'upload',
             }),
-            'vertical_adv': Textarea(attrs={
-                'class': "form-control",
-                'rows': '5',
+            'vertical_adv': FileInput(attrs={
+                'class': 'upload',
             }),
 
         }

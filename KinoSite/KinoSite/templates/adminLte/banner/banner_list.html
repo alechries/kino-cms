@@ -12,7 +12,8 @@
 {% block navbar_item %}
 <a class="btn btn-success" style="margin-right: 20px" href="{% url 'background_banner_form' %}">Редактировать сквозной баннер</a>
 <a class="btn btn-success" style="margin-right: 20px" href="{% url 'admin_main_slide_form' %}">Добавить баннер на главной</a>
-<a class="btn btn-success" href="{% url 'admin_news_promo_slide_form' %}">Добавить баннер новости, акции</a>
+<a class="btn btn-success" style="margin-right: 20px" href="{% url 'admin_news_promo_slide_form' %}">Добавить баннер новости, акции</a>
+<a class="btn btn-success" href="{% url 'admin_contextual_advertising_form' %}">Реклама</a>
 {% endblock %}
 {% block content_title %}
         <h1 class="m-0">Список баннеров</h1>
