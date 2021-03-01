@@ -37,3 +37,7 @@ def content_page(request, posts_key, posts, limit: int, template: str):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
     return render(request, template, {posts_key: posts, 'page': page})
+
+
+def public_template(request):
+    pass

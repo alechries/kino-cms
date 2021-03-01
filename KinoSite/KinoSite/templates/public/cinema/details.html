@@ -3,10 +3,13 @@
 <img src="{{ cinema.cinema_logo.url }}" style="max-height: 500px; max-width: 100%" alt="img">
 <div class="container d-flex">
     <div class="col-md-2" style="margin-right: 10px; margin-top: 20px">
+        <div class="row">
+            <a href="{{ads.link}}"><img src="{{ads.get_vertical_img}}" style="height: 100%; width: 100%"></a>
+        </div>
         <h5>Количество залов: {{ hall_count }}</h5>
         <div class="list-group">
             {% for el in cinema_hall %}
-            <a href="#" class="list-group-item list-group-item-action">{{el.hall_name}}</a>
+            <a href="{% url 'cinema_hall_details' pk=el.pk %}" class="list-group-item list-group-item-action">{{el.hall_name}}</a>
             {% endfor %}
         </div>
     </div>
@@ -14,9 +17,9 @@
         <h1 style="text-align: center; margin-top: 30px">Кинотеатр {{ cinema.cinema_name }} </h1>
         <p>{{ cinema.cinema_description | safe }}</p>
         <p>{{ cinema.cinema_condition | safe }}</p>
-        <h2 style="text-align: center; margin-top: 30px">Фотогалерея</h2>
     </div>
 </div>
+<h2 style="text-align: center; margin-top: 30px">Фотогалерея</h2>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 480px; width: 100%;">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

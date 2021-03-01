@@ -24,4 +24,9 @@
         {% endfor %}
     </div>
 {% endif %}
+{% if ads %}
+<div class="container" style="margin-bottom: 10px; padding: 0px; height: 200px; margin-top: 10px">
+    <a href="{{ads.link}}"><img src="{{ ads.get_horizontal_img }}" class="img-fluid mx-auto d-block" style="height: 100%; width: 100%"></a>
+</div>
+{% endif %}
 {% endblock %}

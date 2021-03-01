@@ -1,0 +1,58 @@
+{% extends 'adminLte/base.html' %}
+{% block banner %}
+<li class="nav-item">
+    <a href="{% url 'admin_banner_list' %}" class="nav-link active">
+        <i class="fas fa-sliders-h"></i>
+        <p>
+            Баннеры \ Слайды
+        </p>
+    </a>
+</li>
+{% endblock %}
+{% block content_title %}
+    <h1 class="m-0">Форма добавления контекстной рекламы на сайте</h1>
+{% endblock %}
+{% block main_content %}
+    <div class="features flex-fill">
+        <div class="row m-3">
+            <div class="container">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label><h4>Рекламная ссылка</h4></label>
+                        {{ form.link }}
+                    </div>
+                    <div class="card col-md-4">
+                        <div class="form-group">
+                            <label><h4>Горизонтальная реклама</h4></label>
+                            <div class="fileUpload btn btn-secondary">
+                                <span>Загрузить</span>
+                                {{ form.horizontal_adv }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card col-md-4">
+                        <div class="form-group">
+                            <label><h4>Вертикальная реклама</h4></label>
+                            <div class="fileUpload btn btn-secondary">
+                                <span>Загрузить</span>
+                                {{ form.vertical_adv }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ввод слаг-филда
+                    <div class="col-lg-4 my-3 pl-0">
+                        <label for="SlugName"><h4>Отображение ссылки</h4></label>
+                        <input type="text" placeholder="введите slug" class="form-control" id="SlugName">
+                    </div>
+                    -->
+                    <div class="container my-5">
+                        <button class="btn btn-success" type="submit">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

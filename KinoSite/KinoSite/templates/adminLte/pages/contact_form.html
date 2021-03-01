@@ -100,11 +100,15 @@
                         <label for="ContactCoordInput"><h4>Координаты кинотеатра на карте</h4></label>
                         {{ form.contact_location }}
                     </div>
-                    <div class="form-group">
-                        <label for="ContactMainImage"><h4>Главная картинка</h4></label>
-                        <div class="fileUpload btn btn-secondary">
-                            <span>Загрузить</span>
-                            {{ form.contact_logo }}
+                    <label><h4>Главная картинка</h4></label>
+                    <div class="card col-md-2">
+                        <div class="card-body" style="padding: 0px">
+                            <div class="form-group">
+                                <div class="fileUpload btn btn-secondary">
+                                    <span>Загрузить</span>
+                                    {{ form.contact_logo }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <label><h4>SEO</h4></label>

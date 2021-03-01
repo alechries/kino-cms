@@ -53,6 +53,7 @@ urlpatterns = [
     path('admin/banner/news_promo_slide/form/<int:pk>', admin_views.news_promo_slide_form_view, name='admin_news_promo_slide_edit'),
     path('admin/banner/news_promo_slide/delete/<int:pk>', admin_views.news_promo_slide_delete_view, name='admin_news_promo_slide_delete'),
     path('admin/banner/background/form', admin_views.background_banner_form_view, name='background_banner_form'),
+    path('admin/banner/adv/form', admin_views.contextual_advertising_form_view, name='admin_contextual_advertising_form'),
     path('admin/film/list', admin_views.film_list_view, name='admin_film_list'),
     path('admin/film/delete/<int:pk>', admin_views.film_delete_view, name='admin_film_delete'),
     path('admin/film/form', admin_views.film_edit_form_view, name='admin_film_form'),

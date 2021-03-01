@@ -1,6 +1,8 @@
 {% extends 'public/base.html' %}
 {% block content %}
 <h1 style="text-align: center; margin-top: 30px">Акции и скидки</h1>
+<div class="container" style="margin-top: 10px">
+
 {% for el in promo_banners %}
 <img src="{{ el.promo_main_image.url }}" style="max-height: 500px; max-width: 100%">
 {% endfor %}
@@ -18,4 +20,10 @@
         </div>
 
     </div>
+</div>
+{% if ads %}
+<div class="container" style="margin-bottom: 10px; padding: 0px; height: 200px; margin-top: 10px">
+    <a href="{{ads.link}}"><img src="{{ ads.get_horizontal_img }}" class="img-fluid mx-auto d-block" style="height: 100%; width: 100%"></a>
+</div>
+{% endif %}
 {% endblock %}
