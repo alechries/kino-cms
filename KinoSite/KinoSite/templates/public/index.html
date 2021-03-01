@@ -98,8 +98,11 @@
     {% endfor %}
 {% endif %}
 {% if ads %}
-<div class="container" style="margin-bottom: 30px; padding: 0px; height: 200px">
-    <img src="{{ ads.get_absolute_image }}" class="img-fluid mx-auto d-block" style="height: 100%; width: 100%">
+<!--
+Реклама
+-->
+<div class="container" style="margin-bottom: 10px; padding: 0px; height: 200px">
+    <a href="{{ads.link}}"><img src="{{ ads.get_horizontal_img }}" class="img-fluid mx-auto d-block" style="height: 100%; width: 100%"></a>
 </div>
 {% endif %}
     <!-- Контекстная реклама???

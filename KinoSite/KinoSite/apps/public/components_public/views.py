@@ -19,8 +19,8 @@ def index_view(request):
         films = models.Film.objects.all()[:6]
     link = models.MobileApp.get_solo()
     ads = {}
-    row = models.Advertising.get_solo()
-    if row.adv_name:
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
         ads = row
     return render(request, 'public/index.html', {'background_banner': background_banner,
                                                  'telephone': telephone,
@@ -108,9 +108,14 @@ def posters_films_list_view(request):
     link = models.MobileApp.get_solo()
     films = models.Film.objects.all().order_by('first_night')
     background_banner = models.BackgroundBanner.get_solo()
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
     return render(request, 'public/posters/films_list.html', {'films': films,
                                                               'background_banner': background_banner,
                                                               'link': link,
+                                                              'ads': ads,
                                                               })
 
 
@@ -118,20 +123,29 @@ def posters_films_details_view(request, pk):
     link = models.MobileApp.get_solo()
     film = get_object_or_404(models.Film, pk=pk)
     sessions = models.FilmSession.objects.filter(film=film)
-
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
     background_banner = models.BackgroundBanner.get_solo()
     return render(request, 'public/posters/film_details.html', {'film': film,
                                                                 'background_banner': background_banner,
                                                                 'sessions': sessions,
                                                                 'link': link,
+                                                                'ads': ads
                                                                 })
 
 
 def timetable_films_sessions_list_view(request):
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
     context = {
         'background_banner': models.BackgroundBanner.get_solo(),
         # 'sessions': models.FilmSession.objects.filter(date=datetime.date.today())
         'sessions': models.FilmSession.objects.all(),
+        'ads': ads,
         'link': models.MobileApp.get_solo()
     }
     return render(request, 'public/timetable/films-sessions-list.html', context)
@@ -143,10 +157,15 @@ def timetable_reservation_view(request, pk):
 
 def cinema_list_view(request):
     cinemas = models.Cinema.objects.all()
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
     background_banner = models.BackgroundBanner.get_solo()
     return render(request, 'public/cinema/cinema_list.html',{'cinemas': cinemas,
                                                              'background_banner': background_banner,
                                                              'link': models.MobileApp.get_solo(),
+                                                             'ads': ads,
                                                              })
 
 
@@ -154,27 +173,47 @@ def cinema_details_view(request, pk):
     cinema = get_object_or_404(models.Cinema, pk=pk)
     background_banner = models.BackgroundBanner.get_solo()
     cinema_hall = models.CinemaHall.objects.filter(cinema=cinema)
-    hall_count = cinema_hall.count()
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
     return render(request, 'public/cinema/details.html', {'cinema': cinema,
                                                           'background_banner': background_banner,
                                                           'cinema_hall': cinema_hall,
-                                                          'hall_count': hall_count,
+                                                          'hall_count': cinema_hall.count(),
                                                           'link': models.MobileApp.get_solo(),
+                                                          'ads': ads,
                                                           })
 
 
 def cinema_hall_details_view(request, pk):
-    return render(request, 'public/cinema/hall_details.html')
+    hall = get_object_or_404(models.CinemaHall, pk=pk)
+    sessions = models.FilmSession.objects.filter(hall=hall)
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
+    return render(request, 'public/cinema/hall_details.html', {'hall': hall,
+                                                               'background_banner': models.BackgroundBanner.get_solo(),
+                                                               'sessions': sessions,
+                                                               'sessions_count': sessions.count(),
+                                                               'ads': ads,
+                                                               })
 
 
 def promotion_list_view(request):
     promo_banners = models.NewsPromoSlide.objects.all()
     promotions = models.Promotion.objects.filter(promo_status='ON')
     background_banner = models.BackgroundBanner.get_solo()
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
     return render(request, 'public/promotion/promotions_list.html', {'promotions': promotions,
                                                                      'promo_banners': promo_banners,
                                                                      'background_banner': background_banner,
-                                                                     'link': models.MobileApp.get_solo()
+                                                                     'link': models.MobileApp.get_solo(),
+                                                                     'ads': ads,
                                                                      })
 
 
@@ -182,10 +221,15 @@ def promotion_details_view(request, pk):
     promotion = models.Promotion.objects.filter(id=pk)
     promo_banners = models.NewsPromoSlide.objects.all()
     background_banner = models.BackgroundBanner.get_solo()
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
     return render(request, 'public/promotion/promotion.html',{'promotion': promotion,
                                                               'background_banner': background_banner,
                                                               'promo_banners': promo_banners,
                                                               'link': models.MobileApp.get_solo(),
+                                                              'ads': ads,
                                                               })
 
 
@@ -205,55 +249,85 @@ def about_news_view(request):
     background_banner = models.BackgroundBanner.get_solo()
     promo_banners = models.NewsPromoSlide.objects.all()
     news = models.News.objects.filter(news_status='ON')
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
     return render(request, 'public/about/news.html', {'background_banner': background_banner,
                                                       'promo_banners': promo_banners,
                                                       'news': news,
                                                       'link': models.MobileApp.get_solo(),
+                                                      'ads': ads
                                                       })
 
 
 def about_cafe_bar_view(request):
     background_banner = models.BackgroundBanner.get_solo()
     cafe = models.CafeBar.get_solo()
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
     return render(request, 'public/about/cafe-bar.html', {'cafe': cafe,
                                                           'background_banner': background_banner,
                                                           'link': models.MobileApp.get_solo(),
+                                                          'ads': ads,
                                                           })
 
 
 def about_vip_hall_view(request):
     background_banner = models.BackgroundBanner.get_solo()
     vip_hall = models.VipHall.get_solo()
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
     return render(request, 'public/about/vip-hall.html', {'vip_hall': vip_hall,
                                                           'background_banner': background_banner,
                                                           'link': models.MobileApp.get_solo(),
+                                                          'ads': ads,
                                                           })
 
 
 def about_advertising_view(request):
     background_banner = models.BackgroundBanner.get_solo()
     adv = models.Advertising.get_solo()
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
     return render(request, 'public/about/advertising.html', {'background_banner': background_banner,
                                                              'adv': adv,
                                                              'link': models.MobileApp.get_solo(),
+                                                             'ads': ads,
                                                              })
 
 
 def about_mobile_app_view(request):
     app = models.MobileApp.get_solo()
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
     background_banner = models.BackgroundBanner.get_solo()
     return render(request, 'public/about/mobile-app.html', {'background_banner': background_banner,
                                                             'app': app,
                                                             'link': models.MobileApp.get_solo(),
+                                                            'ads': ads
                                                             })
 
 
 def about_child_room_view(request):
     background_banner = models.BackgroundBanner.get_solo()
     child_room = models.ChildRoom.get_solo()
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
     return render(request, 'public/about/child-room.html', {'child_room': child_room,
                                                             'background_banner': background_banner,
                                                             'link': models.MobileApp.get_solo(),
+                                                            'ads': ads,
                                                              })
 
 
@@ -263,8 +337,11 @@ def about_contacts_view(request):
     row = models.Contact.objects.filter(status='ON')
     if row :
         contacts = row
-
+    row_ads = models.ContextualAdvertising.get_solo()
+    if row_ads.link:
+        ads = row_ads
     return render(request, 'public/about/contacts.html', {'background_banner': background_banner,
                                                           'contacts': contacts,
                                                           'link': models.MobileApp.get_solo(),
+                                                          'ads': ads
                                                           })
