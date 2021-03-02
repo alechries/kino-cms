@@ -111,11 +111,11 @@ class FilmForm(ModelForm):
                 'id': 'inlineCheckbox3',
                 'value': 'True',
             }),
-            'duration': TextInput(attrs={
+            'duration': NumberInput(attrs={
                 'class': 'form-control col-md-7',
-                'placeholder': 'Пример: 1.53',
+                'placeholder': 'Пример: 25 минут',
                 'type': "number",
-                'step': "0.01",
+                'step': "1",
                 'id': 'FilmDuration',
             }),
 

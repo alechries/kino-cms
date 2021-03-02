@@ -281,7 +281,7 @@ class Film(models.Model):
     two_d = models.BooleanField('2Д', null=False)
     three_d = models.BooleanField('3Д', null=False)
     i_max = models.BooleanField('I_MAX', null=False)
-    duration = models.FloatField('Длительность фильма')
+    duration = models.IntegerField('Длительность фильма (минуты)')
     first_night = models.DateField('Дата премьеры')
     language = models.CharField('', choices=LANGUAGE, max_length=55, null=True)
     type = models.CharField('', choices=TYPE, max_length=55, null=True)
@@ -318,6 +318,18 @@ class Film(models.Model):
 
     def file_list(self):
         return [self.main_image, self.image1, self.image2, self.image3, self.image4, self.image5]
+
+    def get_string_duration(self):
+        d = self.duration
+        r = ""
+        h = d // 60
+        m = d % 60
+
+        if h > 0:
+            r += f"{h} часов"
+        if m > 0:
+            r += f"{m} минут"
+        return r if r else "Не указанно"
 
 
 class FilmSession(models.Model):
