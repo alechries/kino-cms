@@ -13,7 +13,7 @@ urlpatterns = [
     ###############
 
     path('', public_views.index_view, name='public_views.index'),
-    path('favico.ico', RedirectView.as_view(url='/static/public/img/logo.ico', permanent=True)),
+    path('favicon.ico', RedirectView.as_view(url='/static/public/img/logo.ico', permanent=True)),
     path('account/cabinet', public_views.account_cabinet_view, name='account_cabinet'),
     path('account/login', public_views.account_login_view_decorator(redirect_to='account_cabinet'), name='account_login'),
     path('account/logout', public_views.account_logout_view, name='account_logout'),
