@@ -11,7 +11,6 @@ def index_view(request):
     background_banner = models.BackgroundBanner.get_solo()
     films_today = models.Film.objects.filter(first_night__lte=now)
     promo_banners = models.NewsPromoSlide.objects.all()
-    telephone = models.MainPage.get_solo()
     future_film = models.Film.objects.filter(first_night__gt=now)
     n =models.Film.objects.all().count()
     if n <= 6:
@@ -24,7 +23,7 @@ def index_view(request):
     if row.link:
         ads = row
     return render(request, 'public/index.html', {'background_banner': background_banner,
-                                                 'telephone': telephone,
+                                                 'telephone': models.MainPage.get_solo(),
                                                  'films_today': films_today,
                                                  'future_film': future_film,
                                                  'date_now': full_date_now,
@@ -48,7 +47,8 @@ def account_cabinet_view(request):
             template_file_name='public/account/cabinet.html',
             context={'user_pk': user.id,
                      'background_banner': background_banner,
-                     'link': link}
+                     'link': link,
+                     'telephone': models.MainPage.get_solo(),}
         )
     else:
         return redirect('account_login')
@@ -79,7 +79,7 @@ def account_login_view_decorator(redirect_to):
 
 def account_logout_view(request):
     logout(request)
-    return redirect('public_views.index')
+    return redirect('public_views.index', {'telephone': models.MainPage.get_solo(),})
 
 
 def account_registration_view(request):
@@ -90,7 +90,8 @@ def account_registration_view(request):
         login(request, user)
         return redirect('public_views.index')
     return render(request, 'public/account/registration.html', context={'form': g_forms.RegisterForm(),
-                                                                        'link': link})
+                                                                        'link': link,
+                                                                        'telephone': models.MainPage.get_solo(),})
 
 
 def user_change_password_view(request):
@@ -102,7 +103,8 @@ def user_change_password_view(request):
         services.Change.user_password(user, password)
         return redirect('account_cabinet')
     return render(request, 'public/account/change_password.html', context={'form': form,
-                                                                           'link': link})
+                                                                           'link': link,
+                                                                           'telephone': models.MainPage.get_solo(),})
 
 
 def posters_films_list_view(request):
@@ -117,6 +119,7 @@ def posters_films_list_view(request):
                                                               'background_banner': background_banner,
                                                               'link': link,
                                                               'ads': ads,
+                                                              'telephone': models.MainPage.get_solo(),
                                                               })
 
 
@@ -133,7 +136,8 @@ def posters_films_details_view(request, pk):
                                                                 'background_banner': background_banner,
                                                                 'sessions': sessions,
                                                                 'link': link,
-                                                                'ads': ads
+                                                                'ads': ads,
+                                                                'telephone': models.MainPage.get_solo(),
                                                                 })
 
 
@@ -147,7 +151,8 @@ def timetable_films_sessions_list_view(request):
         # 'sessions': models.FilmSession.objects.filter(date=datetime.date.today())
         'sessions': models.FilmSession.objects.all(),
         'ads': ads,
-        'link': models.MobileApp.get_solo()
+        'link': models.MobileApp.get_solo(),
+        'telephone': models.MainPage.get_solo(),
     }
     return render(request, 'public/timetable/films-sessions-list.html', context)
 
@@ -162,6 +167,7 @@ def timetable_reservation_view(request, pk):
         'session': session,
         'ads': ads,
         'background_banner': models.BackgroundBanner.get_solo(),
+        'telephone': models.MainPage.get_solo(),
     })
 
 
@@ -176,6 +182,7 @@ def cinema_list_view(request):
                                                              'background_banner': background_banner,
                                                              'link': models.MobileApp.get_solo(),
                                                              'ads': ads,
+                                                             'telephone': models.MainPage.get_solo(),
                                                              })
 
 
@@ -193,6 +200,7 @@ def cinema_details_view(request, pk):
                                                           'hall_count': cinema_hall.count(),
                                                           'link': models.MobileApp.get_solo(),
                                                           'ads': ads,
+                                                          'telephone': models.MainPage.get_solo(),
                                                           })
 
 
@@ -208,6 +216,7 @@ def cinema_hall_details_view(request, pk):
                                                                'sessions': sessions,
                                                                'sessions_count': sessions.count(),
                                                                'ads': ads,
+                                                               'telephone': models.MainPage.get_solo(),
                                                                })
 
 
@@ -224,6 +233,7 @@ def promotion_list_view(request):
                                                                      'background_banner': background_banner,
                                                                      'link': models.MobileApp.get_solo(),
                                                                      'ads': ads,
+                                                                     'telephone': models.MainPage.get_solo(),
                                                                      })
 
 
@@ -240,6 +250,7 @@ def promotion_details_view(request, pk):
                                                               'promo_banners': promo_banners,
                                                               'link': models.MobileApp.get_solo(),
                                                               'ads': ads,
+                                                              'telephone': models.MainPage.get_solo(),
                                                               })
 
 
@@ -251,7 +262,8 @@ def about_cinema_view(request):
         cinema = row
     return render(request, 'public/about/cinema.html', {'cinema': cinema,
                                                         'background_banner': background_banner,
-                                                        'link': models.MobileApp.get_solo()
+                                                        'link': models.MobileApp.get_solo(),
+                                                        'telephone': models.MainPage.get_solo(),
                                                         })
 
 
@@ -267,7 +279,8 @@ def about_news_view(request):
                                                       'promo_banners': promo_banners,
                                                       'news': news,
                                                       'link': models.MobileApp.get_solo(),
-                                                      'ads': ads
+                                                      'ads': ads,
+                                                      'telephone': models.MainPage.get_solo(),
                                                       })
 
 
@@ -282,6 +295,7 @@ def about_cafe_bar_view(request):
                                                           'background_banner': background_banner,
                                                           'link': models.MobileApp.get_solo(),
                                                           'ads': ads,
+                                                          'telephone': models.MainPage.get_solo(),
                                                           })
 
 
@@ -296,6 +310,7 @@ def about_vip_hall_view(request):
                                                           'background_banner': background_banner,
                                                           'link': models.MobileApp.get_solo(),
                                                           'ads': ads,
+                                                          'telephone': models.MainPage.get_solo(),
                                                           })
 
 
@@ -310,6 +325,7 @@ def about_advertising_view(request):
                                                              'adv': adv,
                                                              'link': models.MobileApp.get_solo(),
                                                              'ads': ads,
+                                                             'telephone': models.MainPage.get_solo(),
                                                              })
 
 
@@ -323,7 +339,8 @@ def about_mobile_app_view(request):
     return render(request, 'public/about/mobile-app.html', {'background_banner': background_banner,
                                                             'app': app,
                                                             'link': models.MobileApp.get_solo(),
-                                                            'ads': ads
+                                                            'ads': ads,
+                                                            'telephone': models.MainPage.get_solo(),
                                                             })
 
 
@@ -338,6 +355,7 @@ def about_child_room_view(request):
                                                             'background_banner': background_banner,
                                                             'link': models.MobileApp.get_solo(),
                                                             'ads': ads,
+                                                            'telephone': models.MainPage.get_solo(),
                                                              })
 
 
@@ -348,12 +366,14 @@ def about_contacts_view(request):
     if row :
         contacts = row
     row_ads = models.ContextualAdvertising.get_solo()
+    ads = {}
     if row_ads.link:
         ads = row_ads
     return render(request, 'public/about/contacts.html', {'background_banner': background_banner,
                                                           'contacts': contacts,
                                                           'link': models.MobileApp.get_solo(),
-                                                          'ads': ads
+                                                          'ads': ads,
+                                                          'telephone': models.MainPage.get_solo(),
                                                           })
 
 
