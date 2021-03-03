@@ -19,7 +19,7 @@
                     <h4>{{ el.contact_cinema }}</h4>
                 </div>
                 <div class="col">
-                    <p><h5>Адрес кинотеатра</h5>{{ el.contact_address }}</p>
+                    <p><h5>Адрес кинотеатра</h5>{{ el.contact_address | safe }}</p>
                 </div>
                 <div class="col">
                     <p><h5>Координаты для карты</h5>{{ el.contact_location }}</p>
