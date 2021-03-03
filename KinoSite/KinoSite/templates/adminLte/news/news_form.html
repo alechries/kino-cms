@@ -24,6 +24,13 @@ handleFileSelectSet('NewsImage4', 'output5')
     </li>
 {% endblock %}
 {% block content_title %}
+{% if alerts %}
+{% for alert in alerts %}
+<div class="alert alert-success" role="alert">
+    {{ alert }}
+</div>
+{% endfor %}
+{% endif %}
 <h1 class="m-0">Форма новостей</h1>
 {% endblock %}
 {% block main_content %}
