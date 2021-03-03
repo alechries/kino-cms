@@ -13,7 +13,7 @@ from crispy_forms.helper import FormHelper
 class SEOForm(ModelForm):
     class Meta:
         model = models.SEO
-        fields = ['seo_title', 'seo_keywords', 'seo_description']
+        fields = ['seo_title', 'seo_keywords', 'seo_description', 'seo_url']
         widgets = {
             'seo_title': Textarea(attrs={
                 'class': 'form-control',
@@ -32,6 +32,11 @@ class SEOForm(ModelForm):
                 'id': 'DescriptionInput',
                 'rows': '5',
                 'placeholder': 'Введите описание',
+            }),
+            'seo_url': URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите ссылку',
+                'id': 'URLInput',
             }),
         }
 

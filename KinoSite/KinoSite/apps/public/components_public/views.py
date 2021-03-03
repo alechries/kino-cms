@@ -354,3 +354,11 @@ def about_contacts_view(request):
                                                           'link': models.MobileApp.get_solo(),
                                                           'ads': ads
                                                           })
+
+
+def search_view(request):
+    return render(request, 'public/search.html', {'background_banner': models.BackgroundBanner.get_solo(),
+                                                          'tel': models.MainPage.get_solo(),
+                                                          'link': models.MobileApp.get_solo(),
+                                                          'ads': models.Advertising.get_solo(),
+                                                          })
