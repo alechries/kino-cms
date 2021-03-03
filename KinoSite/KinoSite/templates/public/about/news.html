@@ -7,11 +7,11 @@
         <div class="row d-flex justify-content-start" style="--bs-gutter-x: 0rem;margin: 60px;">
             {% for el in news %}
             <div class="card d-flex" style="width: 22rem; height: auto; margin-bottom: 28px; margin-left: auto; margin-right: auto; border: none">
-                <p><img src="{{ el.news_main_image.url }}" class="card-img-top" alt="film_image" height="340"></p>
-                <div class="card-body box" style="padding: 0px;">
+                <a href="{{el.news_url}}"><img src="{{ el.news_main_image.url }}" class="card-img-top" alt="film_image" height="340"></a>
+                <a href="{{el.news_url}}" style="text-decoration: none; color: white"><div class="card-body box" style="padding: 0px;">
                     <h5 class="card-title" style="text-align: center">{{ el.news_name }}</h5>
                     {{ el.news_description | safe }}
-                </div>
+                </div></a>
             </div>
             {% endfor %}
         </div>
