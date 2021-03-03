@@ -15,7 +15,7 @@ $.each(cinemaHall1.row, function(row, numberOfSeats) {
   //собираем зал с проходами между рядами
   cinemaHallMap += cinemaHallRow + '<div class="passageBetween">&nbsp;</div>';
 });
-
+cinemaHallMap += '<div class="screen">&nbsp;</div>'
 //заполняем в html зал номер 1
 $('.zal1').html(cinemaHallMap);
 // тут по клику определяем что место выкуплено
