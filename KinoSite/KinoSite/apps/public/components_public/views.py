@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .. import models, forms as g_forms, utils, services, auth
+from django.db.models import Q
 import datetime
 from django.contrib.auth.forms import UserCreationForm
 
@@ -357,8 +358,23 @@ def about_contacts_view(request):
 
 
 def search_view(request):
-    return render(request, 'public/search.html', {'background_banner': models.BackgroundBanner.get_solo(),
-                                                          'tel': models.MainPage.get_solo(),
-                                                          'link': models.MobileApp.get_solo(),
-                                                          'ads': models.Advertising.get_solo(),
-                                                          })
+    search_query = request.GET.get('search', '')
+    if search_query:
+        seos = models.SEO.objects.filter(
+            Q(seo_title__icontains=search_query) |
+            Q(seo_keywords__icontains=search_query) |
+            Q(seo_description__icontains=search_query))
+    else:
+        seos = models.SEO.objects.all()
+
+    return utils.content_page(request=request,
+                       posts_key='seos',
+                       posts=seos,
+                       limit=8,
+                       template='public/search.html',
+                       context={
+                           'background_banner': models.BackgroundBanner.get_solo(),
+                           'tel': models.MainPage.get_solo(),
+                           'link': models.MobileApp.get_solo(),
+                           'ads': models.Advertising.get_solo(), }
+                       )

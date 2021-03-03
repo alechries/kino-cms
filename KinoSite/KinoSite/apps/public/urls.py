@@ -36,6 +36,7 @@ urlpatterns = [
     path('about/mobile-app', public_views.about_mobile_app_view, name='about_mobile-app'),
     path('about/contacts', public_views.about_contacts_view, name='about_contacts'),
     path('about/child_room', public_views.about_child_room_view, name='about_child_room'),
+    path('search/', public_views.search_view, name='search'),
 
 
     ##############
