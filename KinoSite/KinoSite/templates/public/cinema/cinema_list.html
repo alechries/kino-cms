@@ -7,11 +7,11 @@
     <div class="content-wrapper">
         <div class="row d-flex justify-content-center">
             {% for cinema in cinemas %}
-            <div class="card" style="height: 20rem; width: 27rem; margin: 1rem; margin-left: 3rem; margin-right: 3rem">
-                <a href="{% url 'cinema_details' pk=cinema.pk %}"><img src="{{ cinema.cinema_logo.url }}" style="height: 20rem; width: 27rem;"></a>
-            <div class="d-flex justify-content-center">
-                <p>{{ cinema.cinema_name }}</p>
-            </div>
+            <div class="card col-md-4" style="height: 20rem; width: 27rem; margin: 1rem; margin-left: 3rem; margin-right: 3rem">
+                <div class="container" style="position: relative">
+                    <a href="{% url 'cinema_details' pk=cinema.pk %}"><img src="{{ cinema.cinema_logo.url }}" style="height: 20rem; width: 100%;"></a>
+                    <div class="bottom-left" style="bottom: 8px; left: 16px; position: absolute; background: rgba(19, 19, 19, 0.8)"><p style="margin: 10px">{{ cinema.cinema_name }}</p></div>
+                </div>
             </div>
             {% endfor %}
         </div>
