@@ -1,7 +1,18 @@
 {% extends 'adminLte/base.html' %}
+{% load static %}
 {% block scripts %}
-<script>tinymce.init({selector:'#CinemaDescriptionInput'});</script>
-<script>tinymce.init({selector:'#CinemaConditionInput'});</script>
+<script src="{% static 'admin/js/filepreview.js' %}"></script>
+<script>
+tinymce.init({selector:'#CinemaDescriptionInput'});
+tinymce.init({selector:'#CinemaConditionInput'});
+handleFileSelectSet('CinemaLogoInput', 'output')
+handleFileSelectSet('CinemaUpperBannerInput', 'output1')
+handleFileSelectSet('CinemaUpperImage', 'output2')
+handleFileSelectSet('CinemaUpperImage1', 'output3')
+handleFileSelectSet('CinemaUpperImage2', 'output4')
+handleFileSelectSet('CinemaUpperImage3', 'output5')
+handleFileSelectSet('CinemaUpperImage4', 'output6')
+</script>
 {% endblock %}
 {% block cinema %}
     <li class="nav-item">
@@ -46,6 +57,9 @@
                                     <span>Загрузить</span>
                                     {{ form.cinema_logo }}
                                 </div>
+                                <div class="row">
+                                    <span id="output"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -59,6 +73,9 @@
                                 <div class="fileUpload btn btn-secondary">
                                     <span>Загрузить</span>
                                     {{ form.cinema_upper_banner }}
+                                </div>
+                                <div class="row">
+                                    <span id="output1"></span>
                                 </div>
                             </div>
                         </div>
@@ -74,6 +91,9 @@
                                         <span>Загрузить</span>
                                         {{ form.cinema_image1 }}
                                     </div>
+                                    <div class="row">
+                                        <span id="output2"></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card col-md-2">
@@ -84,6 +104,9 @@
                                     <div class="fileUpload btn btn-secondary">
                                         <span>Загрузить</span>
                                         {{ form.cinema_image2}}
+                                    </div>
+                                    <div class="row">
+                                        <span id="output3"></span>
                                     </div>
                                 </div>
                             </div>
@@ -96,6 +119,9 @@
                                         <span>Загрузить</span>
                                         {{ form.cinema_image3 }}
                                     </div>
+                                    <div class="row">
+                                        <span id="output4"></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card col-md-2">
@@ -107,6 +133,9 @@
                                         <span>Загрузить</span>
                                         {{ form.cinema_image4 }}
                                     </div>
+                                    <div class="row">
+                                        <span id="output5"></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card col-md-2">
@@ -117,6 +146,9 @@
                                     <div class="fileUpload btn btn-secondary">
                                         <span>Загрузить</span>
                                         {{ form.cinema_image5 }}
+                                    </div>
+                                    <div class="row">
+                                        <span id="output6"></span>
                                     </div>
                                 </div>
                             </div>
