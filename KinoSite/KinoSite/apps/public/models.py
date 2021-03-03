@@ -340,6 +340,9 @@ class FilmSession(models.Model):
     price = models.IntegerField('Стоимость', null=True)
     vip_price = models.IntegerField('Стоимость вип билета', null=True)
 
+    def __str__(self):
+        return str(self.film.id)
+
 
 class News(models.Model):
     STATUS = (

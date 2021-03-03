@@ -22,7 +22,9 @@
         <td>{{ el.price }}</td>
         <td>{{ el.date }}</td>
         <td>{{ el.time }}</td>
-        <td>Кнопка</td>
+        <td>
+            <a class="btn btn-outline-success" style="color: white" href="{% url 'timetable_reservation' pk=el.pk %}">Купить</a>
+        </td>
     </tr>
     {% endfor %}
 

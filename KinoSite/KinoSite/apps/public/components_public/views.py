@@ -152,7 +152,16 @@ def timetable_films_sessions_list_view(request):
 
 
 def timetable_reservation_view(request, pk):
-    return render(request, 'public/timetable/reservation.html')
+    session = models.FilmSession.objects.filter(id=pk)
+    ads = {}
+    row = models.ContextualAdvertising.get_solo()
+    if row.link:
+        ads = row
+    return render(request, 'public/timetable/reservation.html',{
+        'session': session,
+        'ads': ads,
+        'background_banner': models.BackgroundBanner.get_solo(),
+    })
 
 
 def cinema_list_view(request):

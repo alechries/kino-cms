@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'public/base.html' %}
+{% load static %}
+{% block content %}
+{% for el in session %}
+<img src="{{ el.hall.get_upper_banner }}" style="max-height: 500px; max-width: 100%" alt="img">
+<div class="container d-flex">
+    <div class="col-md-2" style="margin-right: 10px; margin-top: 20px">
+        <div class="row" style="margin-bottom: 15px">
+            <img src="{{el.film.get_absolute_image}}">
+        </div>
+        <div class="row">
+            <a href="{{ads.link}}"><img src="{{ads.get_vertical_img}}" style="height: 100%; width: 100%"></a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <h1 style=" margin-top: 30px">{{el.film.title}} </h1>
+        <p>{{ hall.hall_description | safe }}</p>
+        <div class="container d-flex justify-content-center">
+            <div class="row">
+                <div class='cinemaHall zal1'></div>
+                <div class='result'></div>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                <script src="{% static 'admin/js/hall_scheme.js' %}" defer></script>
+            </div>
+    </div>
+    </div>
 
-</body>
-</html>
+</div>
+
+{% endfor %}
+{% endblock %}

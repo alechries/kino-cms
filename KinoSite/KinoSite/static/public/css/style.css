@@ -98,3 +98,32 @@ hr {
     margin-left: 15%;
     margin-right: 15%;
 }
+.cinemaHall {
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+}
+.seat {
+    height: 20px;
+    width: 20px;
+    margin-right: 4px;
+    background-color: #999999;
+    display: inline-block;
+    cursor: pointer;
+}
+.passageBetween {
+    height: 2px;
+    width: 100%;
+    display: block;
+}
+.bay {
+    background-color: green;
+}
+.result {
+    font-size: medium;
+    display: inline-block;
+    width: 140px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-right: 5px;
+}
