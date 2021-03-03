@@ -15,11 +15,13 @@
     <div class="col-md-10">
         <h1 style=" margin-top: 30px">{{el.film.title}} </h1>
         <p>{{ hall.hall_description | safe }}</p>
-        <div class="container" style="margin: auto">
-            <div class='cinemaHall zal1'></div>
-            <div class='result'></div>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-            <script src="{% static 'admin/js/hall_scheme.js' %}" defer></script>
+        <div class="container d-flex justify-content-center">
+            <div class="row">
+                <div class='cinemaHall zal1'></div>
+                <div class='result'></div>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                <script src="{% static 'admin/js/hall_scheme.js' %}" defer></script>
+            </div>
     </div>
     </div>
 

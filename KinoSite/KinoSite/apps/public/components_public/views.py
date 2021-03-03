@@ -160,6 +160,7 @@ def timetable_reservation_view(request, pk):
     return render(request, 'public/timetable/reservation.html',{
         'session': session,
         'ads': ads,
+        'background_banner': models.BackgroundBanner.get_solo(),
     })
 
 
