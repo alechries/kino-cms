@@ -272,6 +272,7 @@ def main_pages_view(request):
         if solo.seo:
             instance_seo_id = solo.seo.id
 
+
     return utils.form_template(
         request=request,
         instance=solo,
@@ -285,9 +286,17 @@ def main_pages_view(request):
 def about_cinema_view(request):
     solo: models.AboutCinema = models.AboutCinema.get_solo()
     instance_seo_id = None
+    media_context = {}
     if solo:
         if solo.seo:
             instance_seo_id = solo.seo.id
+        media_context = {'main_image': models.AboutCinema.get_absolute_image(solo),
+                         'image1': models.AboutCinema.get_image1(solo),
+                         'image2': models.AboutCinema.get_image2(solo),
+                         'image3': models.AboutCinema.get_image3(solo),
+                         'image4': models.AboutCinema.get_image4(solo),
+                         'image5': models.AboutCinema.get_image5(solo),
+                         }
 
     return utils.form_template(
         request=request,
@@ -295,16 +304,26 @@ def about_cinema_view(request):
         form_class=forms.AboutCinemaForm,
         redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/about_cinema.html',
-        context={'instance_seo_id': instance_seo_id}
+        media_context=media_context,
+        context={'instance_seo_id': instance_seo_id,
+                 }
     )
 
 
 def cafe_bar_view(request):
     solo: models.CafeBar = models.CafeBar.get_solo()
     instance_seo_id = None
+    media_context = {}
     if solo:
         if solo.seo:
             instance_seo_id = solo.seo.id
+        media_context = {'main_image': models.CafeBar.get_absolute_image(solo),
+                         'image1': models.CafeBar.get_image1(solo),
+                         'image2': models.CafeBar.get_image2(solo),
+                         'image3': models.CafeBar.get_image3(solo),
+                         'image4': models.CafeBar.get_image4(solo),
+                         'image5': models.CafeBar.get_image5(solo),
+                         }
 
     return utils.form_template(
         request=request,
@@ -312,6 +331,7 @@ def cafe_bar_view(request):
         form_class=forms.CafeBarForm,
         redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/cafe_bar.html',
+        media_context=media_context,
         context={'instance_seo_id': instance_seo_id}
     )
 
@@ -319,9 +339,17 @@ def cafe_bar_view(request):
 def vip_hall_view(request):
     solo: models.VipHall = models.VipHall.get_solo()
     instance_seo_id = None
+    media_context = {}
     if solo:
         if solo.seo:
             instance_seo_id = solo.seo.id
+        media_context = {'main_image': models.VipHall.get_absolute_image(solo),
+                         'image1': models.VipHall.get_image1(solo),
+                         'image2': models.VipHall.get_image2(solo),
+                         'image3': models.VipHall.get_image3(solo),
+                         'image4': models.VipHall.get_image4(solo),
+                         'image5': models.VipHall.get_image5(solo),
+                         }
 
     return utils.form_template(
         request=request,
@@ -329,6 +357,7 @@ def vip_hall_view(request):
         form_class=forms.VipHallForm,
         redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/vip_room.html',
+        media_context=media_context,
         context={'instance_seo_id': instance_seo_id}
     )
 
@@ -336,15 +365,24 @@ def vip_hall_view(request):
 def ads_view(request):
     solo: models.Advertising = models.Advertising.get_solo()
     instance_seo_id = None
+    media_context = {}
     if solo:
         if solo.seo:
             instance_seo_id = solo.seo.id
+        media_context = {'main_image': models.Advertising.get_absolute_image(solo),
+                         'image1': models.Advertising.get_image1(solo),
+                         'image2': models.Advertising.get_image2(solo),
+                         'image3': models.Advertising.get_image3(solo),
+                         'image4': models.Advertising.get_image4(solo),
+                         'image5': models.Advertising.get_image5(solo),
+                         }
 
     return utils.form_template(
         request=request,
         instance=solo,
         form_class=forms.AdvertisingForm,
         redirect_url_name='admin_pages_list',
+        media_context=media_context,
         template_file_name='adminLte/pages/ads.html',
         context={'instance_seo_id': instance_seo_id}
     )
@@ -353,9 +391,17 @@ def ads_view(request):
 def child_room_view(request):
     solo: models.ChildRoom = models.ChildRoom.get_solo()
     instance_seo_id = None
+    media_context = {}
     if solo:
         if solo.seo:
             instance_seo_id = solo.seo.id
+        media_context = {'main_image': models.ChildRoom.get_absolute_image(solo),
+                         'image1': models.ChildRoom.get_image1(solo),
+                         'image2': models.ChildRoom.get_image2(solo),
+                         'image3': models.ChildRoom.get_image3(solo),
+                         'image4': models.ChildRoom.get_image4(solo),
+                         'image5': models.ChildRoom.get_image5(solo),
+                         }
 
     return utils.form_template(
         request=request,
@@ -363,6 +409,7 @@ def child_room_view(request):
         form_class=forms.ChildRoomForm,
         redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/child_room.html',
+        media_context=media_context,
         context={'instance_seo_id': instance_seo_id}
     )
 
@@ -370,9 +417,17 @@ def child_room_view(request):
 def mobile_app_view(request):
     solo: models.MobileApp = models.MobileApp.get_solo()
     instance_seo_id = None
+    media_context = {}
     if solo:
         if solo.seo:
             instance_seo_id = solo.seo.id
+        media_context = {'main_image': models.MobileApp.get_absolute_image(solo),
+                         'image1': models.MobileApp.get_image1(solo),
+                         'image2': models.MobileApp.get_image2(solo),
+                         'image3': models.MobileApp.get_image3(solo),
+                         'image4': models.MobileApp.get_image4(solo),
+                         'image5': models.MobileApp.get_image5(solo),
+                         }
 
     return utils.form_template(
         request=request,
@@ -380,6 +435,7 @@ def mobile_app_view(request):
         form_class=forms.MobileAppForm,
         redirect_url_name='admin_pages_list',
         template_file_name='adminLte/pages/mobile_app.html',
+        media_context=media_context,
         context={'instance_seo_id': instance_seo_id}
     )
 
@@ -392,9 +448,11 @@ def contact_list_view(request):
 def contact_form_view(request, pk=None):
     contact = get_object_or_404(models.Contact, pk=pk) if pk else None
     instance_seo_id = None
+    media_context = {}
     if contact:
         if contact.seo:
             instance_seo_id = contact.seo.id
+        media_context = {'main_image': models.Contact.get_absolute_image(contact)}
 
     return utils.form_template(
         request=request,
@@ -402,6 +460,7 @@ def contact_form_view(request, pk=None):
         form_class=forms.ContactForm,
         redirect_url_name='admin_index',
         template_file_name='adminLte/pages/contact_form.html',
+        media_context=media_context,
         context={'instance_seo_id': instance_seo_id}
     )
 

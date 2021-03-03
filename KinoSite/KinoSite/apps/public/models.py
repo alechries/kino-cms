@@ -690,6 +690,24 @@ class ChildRoom(SingletonModel):
     def __str__(self):
         return self.room_name
 
+    def get_absolute_image(self):
+        return os.path.join('/media', self.room_main_image.name)
+
+    def get_image1(self):
+        return os.path.join('/media', self.room_image1.name)
+
+    def get_image2(self):
+        return os.path.join('/media', self.room_image2.name)
+
+    def get_image3(self):
+        return os.path.join('/media', self.room_image3.name)
+
+    def get_image4(self):
+        return os.path.join('/media', self.room_image4.name)
+
+    def get_image5(self):
+        return os.path.join('/media', self.room_image5.name)
+
 
 class Contact(models.Model):
     STATUS = (

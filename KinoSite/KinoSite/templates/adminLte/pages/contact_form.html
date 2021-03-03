@@ -102,11 +102,17 @@
                     </div>
                     <label><h4>Главная картинка</h4></label>
                     <div class="card col-md-2">
-                        <div class="card-body" style="padding: 0px">
+                        <div class="form-group" style="text-align: center; margin-bottom: 0px">
                             <div class="form-group">
+                                {% if main_image %}
+                                    <img src="{{ main_image }}" class="card-img-top" alt="film_image" style="padding-top: 7px;">
+                                {% endif %}
                                 <div class="fileUpload btn btn-secondary">
-                                    <span>Загрузить</span>
+                                   <span>Загрузить</span>
                                     {{ form.contact_logo }}
+                                </div>
+                                <div class="row">
+                                    <span id="output"></span>
                                 </div>
                             </div>
                         </div>
