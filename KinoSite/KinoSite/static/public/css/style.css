@@ -111,13 +111,14 @@ hr {
     display: inline-block;
     cursor: pointer;
 }
+
 .passageBetween {
     height: 2px;
     width: 100%;
     display: block;
 }
 .screen{
-    height: 20px;
+    height: 30px;
     width: 100%;
     background-color: #00b44e;
 }
@@ -128,7 +129,7 @@ hr {
     font-size: medium;
     display: inline-block;
     width: 140px;
-    max-height: 200px;
+    max-height: 300px;
     overflow-y: auto;
     margin-right: 5px;
 }
