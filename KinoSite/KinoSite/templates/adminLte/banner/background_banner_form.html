@@ -1,4 +1,11 @@
 {% extends 'adminLte/base.html' %}
+{% load static %}
+{% block scripts %}
+<script src="{% static 'admin/js/filepreview.js' %}"></script>
+<script>
+handleFileSelectSet('BannerImage', 'output')
+</script>
+{% endblock %}
 {% block banner %}
 <li class="nav-item">
     <a href="{% url 'admin_banner_list' %}" class="nav-link active">
@@ -27,6 +34,9 @@
                             <div class="fileUpload btn btn-secondary">
                                 <span>Загрузить</span>
                                 {{ form.banner_image }}
+                            </div>
+                            <div class="row">
+                                <span id="output"></span>
                             </div>
                         </div>
                     </div>
