@@ -770,9 +770,10 @@ class ContextualAdvertisingForm(ModelForm):
             }),
             'horizontal_adv': FileInput(attrs={
                 'class': 'upload',
+                'id': 'h_adv',
             }),
             'vertical_adv': FileInput(attrs={
                 'class': 'upload',
+                'id': 'v_adv',
             }),
-
         }

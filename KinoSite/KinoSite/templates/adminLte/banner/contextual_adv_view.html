@@ -1,4 +1,12 @@
 {% extends 'adminLte/base.html' %}
+{% load static %}
+{% block scripts %}
+<script src="{% static 'admin/js/filepreview.js' %}"></script>
+<script>
+handleFileSelectSet('h_adv', 'output')
+handleFileSelectSet('v_adv', 'output1')
+</script>
+{% endblock %}
 {% block banner %}
 <li class="nav-item">
     <a href="{% url 'admin_banner_list' %}" class="nav-link active">
@@ -29,6 +37,9 @@
                                 <span>Загрузить</span>
                                 {{ form.horizontal_adv }}
                             </div>
+                            <div class="row">
+                                <span id="output"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="card col-md-4">
@@ -37,6 +48,9 @@
                             <div class="fileUpload btn btn-secondary">
                                 <span>Загрузить</span>
                                 {{ form.vertical_adv }}
+                            </div>
+                            <div class="row">
+                                <span id="output1"></span>
                             </div>
                         </div>
                     </div>
