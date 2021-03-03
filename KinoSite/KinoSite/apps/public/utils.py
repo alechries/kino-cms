@@ -28,7 +28,9 @@ def form_template(request, instance: django_models.Model, form_class, redirect_u
     return render(request, template_file_name, context)
 
 
-def content_page(request, posts_key, posts, limit: int, template: str):
+def content_page(request, posts_key, posts, limit: int, template: str, context=None):
+    if context is None:
+        context = {}
     paginator = Paginator(posts, limit)
     page = request.GET.get('page')
     try:
@@ -37,7 +39,8 @@ def content_page(request, posts_key, posts, limit: int, template: str):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    return render(request, template, {posts_key: posts, 'page': page})
+    context.update({posts_key: posts, 'page': page})
+    return render(request, template, context)
 
 
 def public_template(request):

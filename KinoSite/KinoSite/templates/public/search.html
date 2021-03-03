@@ -1,0 +1,16 @@
+{% extends 'public/base.html' %}
+{% block content %}
+{% for seo in seos %}
+{% if seo.seo_url %}<a href="{{ seo.seo_url }}" style="text-decoration: none;">{% endif %}
+    <div class="alert alert-secondary" role="alert">
+        <h4 class="alert-heading text-dark">{{ seo.seo_title }}</h4>
+        <p><b>Description:</b> {{ seo.seo_description }}</p>
+        <hr>
+        <p class="mb-0"><b>Keywords:</b> {{ seo.seo_keywords }}</p>
+    </div>
+{% if seo.seo_url %}</a>{% endif%}
+{% endfor %}
+<div class="pagination_block">
+    {% include "adminLte/pagination.html" with page=seos %}
+</div>
+{% endblock %}

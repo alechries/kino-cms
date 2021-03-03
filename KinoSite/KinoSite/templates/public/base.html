@@ -29,9 +29,9 @@
           <div class="container d-flex" style="padding: 0px">
             <div class="col-md-5">
               <div class="container">
-                <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="margin-top: 20px">
-                  <button class="btn btn-success" type="submit" style="margin-top: 20px">Search</button>
+                <form class="d-flex form-inline my-2 my-lg-0" action="{% url 'search' %}">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Что найти?" aria-label="Search" name="search">
+                  <button class="btn btn-success my-2 my-sm-0" type="submit">Поиск</button>
                 </form>
               </div>
             </div>
