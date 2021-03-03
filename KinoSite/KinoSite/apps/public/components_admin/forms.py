@@ -472,18 +472,23 @@ class CafeBarForm(ModelForm):
             }),
             'cafebar_image1': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image1',
             }),
             'cafebar_image2': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image2',
             }),
             'cafebar_image3': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image3',
             }),
             'cafebar_image4': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image4',
             }),
             'cafebar_image5': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image5',
             }),
         }
 
@@ -513,18 +518,23 @@ class VipHallForm(ModelForm):
             }),
             'hall_image1': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image1',
             }),
             'hall_image2': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image2',
             }),
             'hall_image3': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image3',
             }),
             'hall_image4': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image4',
             }),
             'hall_image5': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image5',
             }),
         }
 
@@ -554,18 +564,23 @@ class AdvertisingForm(ModelForm):
             }),
             'adv_image1': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image1',
             }),
             'adv_image2': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image2',
             }),
             'adv_image3': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image3',
             }),
             'adv_image4': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image4',
             }),
             'adv_image5': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image5',
             }),
         }
 
@@ -595,18 +610,23 @@ class ChildRoomForm(ModelForm):
             }),
             'room_image1': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image1',
             }),
             'room_image2': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image2',
             }),
             'room_image3': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image3',
             }),
             'room_image4': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image4',
             }),
             'room_image5': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image5',
             }),
         }
 
@@ -731,18 +751,23 @@ class MobileAppForm(ModelForm):
             }),
             'app_image1': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image1',
             }),
             'app_image2': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image2',
             }),
             'app_image3': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image3',
             }),
             'app_image4': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image4',
             }),
             'app_image5': FileInput(attrs={
                 'class': 'upload',
+                'id': 'Image5',
             }),
             'app_apple': URLInput(attrs={
                 'class': 'form-control',
