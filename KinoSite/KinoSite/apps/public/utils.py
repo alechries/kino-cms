@@ -28,7 +28,7 @@ def form_template(request, instance: django_models.Model, form_class, redirect_u
     return render(request, template_file_name, context)
 
 
-def content_page(request, posts_key, posts, limit: int, template: str, context):
+def content_page(request, posts_key, posts, limit: int, template: str, context=None):
     if context is None:
         context = {}
     paginator = Paginator(posts, limit)
