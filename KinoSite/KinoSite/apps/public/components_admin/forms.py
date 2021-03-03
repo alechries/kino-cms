@@ -200,18 +200,23 @@ class CinemaForm(ModelForm):
             }),
             'cinema_image1': FileInput(attrs={
                 'class': 'upload',
+                'id': 'CinemaUpperImage',
             }),
             'cinema_image2': FileInput(attrs={
                 'class': 'upload',
+                'id': 'CinemaUpperImage1',
             }),
             'cinema_image3': FileInput(attrs={
                 'class': 'upload',
+                'id': 'CinemaUpperImage2',
             }),
             'cinema_image4': FileInput(attrs={
                 'class': 'upload',
+                'id': 'CinemaUpperImage3',
             }),
             'cinema_image5': FileInput(attrs={
                 'class': 'upload',
+                'id': 'CinemaUpperImage4',
             })}
 
 
@@ -244,18 +249,23 @@ class CinemaHallForm(ModelForm):
             }),
             'hall_image1': FileInput(attrs={
                 'class': 'upload',
+                'id': 'HallImage1',
             }),
             'hall_image2': FileInput(attrs={
                 'class': 'upload',
+                'id': 'HallImage2',
             }),
             'hall_image3': FileInput(attrs={
                 'class': 'upload',
+                'id': 'HallImage3',
             }),
             'hall_image4': FileInput(attrs={
                 'class': 'upload',
+                'id': 'HallImage4',
             }),
             'hall_image5': FileInput(attrs={
                 'class': 'upload',
+                'id': 'HallImage5',
             })}
 
 
@@ -284,18 +294,23 @@ class NewsForm(ModelForm):
             }),
             'news_image1': FileInput(attrs={
                 'class': 'upload',
+                'id': 'NewsImage',
             }),
             'news_image2': FileInput(attrs={
                 'class': 'upload',
+                'id': 'NewsImage1',
             }),
             'news_image3': FileInput(attrs={
                 'class': 'upload',
+                'id': 'NewsImage2',
             }),
             'news_image4': FileInput(attrs={
                 'class': 'upload',
+                'id': 'NewsImage3',
             }),
             'news_image5': FileInput(attrs={
                 'class': 'upload',
+                'id': 'NewsImage4',
             }),
             'news_url': URLInput(attrs={
                 'class': 'form-control',
@@ -336,18 +351,23 @@ class PromotionForm(ModelForm):
             }),
             'promo_image1': FileInput(attrs={
                 'class': 'upload',
+                'id': 'PromoImage',
             }),
             'promo_image2': FileInput(attrs={
                 'class': 'upload',
+                'id': 'PromoImage1',
             }),
             'promo_image3': FileInput(attrs={
                 'class': 'upload',
+                'id': 'PromoImage2',
             }),
             'promo_image4': FileInput(attrs={
                 'class': 'upload',
+                'id': 'PromoImage3',
             }),
             'promo_image5': FileInput(attrs={
                 'class': 'upload',
+                'id': 'PromoImage4',
             }),
             'promo_url': URLInput(attrs={
                 'class': 'form-control',
