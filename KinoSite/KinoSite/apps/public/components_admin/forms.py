@@ -77,18 +77,23 @@ class FilmForm(ModelForm):
             }),
             'image1': FileInput(attrs={
                 'class': 'upload',
+                'id': 'FilmPoster1',
             }),
             'image2': FileInput(attrs={
                 'class': 'upload',
+                'id': 'FilmPoster2',
             }),
             'image3': FileInput(attrs={
                 'class': 'upload',
+                'id': 'FilmPoster3',
             }),
             'image4': FileInput(attrs={
                 'class': 'upload',
+                'id': 'FilmPoster4',
             }),
             'image5': FileInput(attrs={
                 'class': 'upload',
+                'id': 'FilmPoster5',
             }),
             'two_d': CheckboxInput(attrs={
                 'name': 'two_d',
@@ -401,18 +406,23 @@ class AboutCinemaForm(ModelForm):
             }),
             'cinema_image1': FileInput(attrs={
                 'class': 'upload',
+                'id': 'AboutMainImage1',
             }),
             'cinema_image2': FileInput(attrs={
                 'class': 'upload',
+                'id': 'AboutMainImage2',
             }),
             'cinema_image3': FileInput(attrs={
                 'class': 'upload',
+                'id': 'AboutMainImage3',
             }),
             'cinema_image4': FileInput(attrs={
                 'class': 'upload',
+                'id': 'AboutMainImage4',
             }),
             'cinema_image5': FileInput(attrs={
                 'class': 'upload',
+                'id': 'AboutMainImage5',
             }),
         }
 
