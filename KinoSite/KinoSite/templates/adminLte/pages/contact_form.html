@@ -85,6 +85,13 @@ handleFileSelectSet('ContactMainImage', 'output')
 </div>
 {% endfor %}
 {% endif %}
+{% if errors %}
+{% for error in errors %}
+<div class="alert alert-danger" role="alert">
+    {{ error }}
+</div>
+{% endfor %}
+{% endif %}
 <h1 class="m-0">Форма контактов</h1>
 {% endblock %}
 {% block main_content %}

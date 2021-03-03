@@ -55,6 +55,7 @@ class SEO(models.Model):
     seo_title = models.TextField(verbose_name='Title', max_length=255, null=True)
     seo_keywords = models.TextField(verbose_name='Keywords', max_length=255, null=True)
     seo_description = models.TextField(verbose_name='Description', max_length=255, null=True)
+    seo_url = models.URLField(verbose_name='URL', null=True)
 
     def __str__(self):
         return self.seo_title

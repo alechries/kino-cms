@@ -21,6 +21,13 @@ handleFileSelectSet('Image5', 'output5')
 </div>
 {% endfor %}
 {% endif %}
+{% if errors %}
+{% for error in errors %}
+<div class="alert alert-danger" role="alert">
+    {{ error }}
+</div>
+{% endfor %}
+{% endif %}
 <h1 class="m-0">Мобильное приложение</h1>
 {% endblock %}
 {% block main_content %}
