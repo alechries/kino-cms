@@ -18,6 +18,13 @@ handleFileSelectSet('v_adv', 'output1')
 </li>
 {% endblock %}
 {% block content_title %}
+{% if alerts %}
+{% for alert in alerts %}
+<div class="alert alert-success" role="alert">
+    {{ alert }}
+</div>
+{% endfor %}
+{% endif %}
     <h1 class="m-0">Форма добавления контекстной рекламы на сайте</h1>
 {% endblock %}
 {% block main_content %}

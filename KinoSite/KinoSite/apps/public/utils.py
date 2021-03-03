@@ -22,7 +22,8 @@ def form_template(request, instance: django_models.Model, form_class, redirect_u
         context.update(media_context)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        return redirect(redirect_url_name)
+        # return redirect(redirect_url_name)
+        context['alerts'] = ['Запись была сохранена успешно!', ]
     context['form'] = form
     return render(request, template_file_name, context)
 
